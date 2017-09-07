@@ -1,4 +1,4 @@
-<div class="form-group{{ $errors->has('nombree') ? ' has-error' : '' }}">
+                        <div class="form-group{{ $errors->has('nombree') ? ' has-error' : '' }}">
                             <label for="nombree" class="col-md-4 control-label">Nombre de la Empresa o Proveedor</label>
 
                             <div class="col-md-6">

@@ -32,14 +32,14 @@
                 <tbody>
                 	@foreach($proveedores as $proveedor)
                 	<tr>
-                		<td>{{ $proveedor->idproveedores }}</td>
+                		<td>{{ $proveedor->id }}</td>
                 		<td>{{ $proveedor->nombree }}</td>
                 		<td>{{ $proveedor->direccion }}</td>
                 		<td>{{ $proveedor->emaile }}</td>
                     <td>{{ $proveedor->telefonoe }}</td>
                 		<td>
-                			<a href="{{ url('/proveedores/edit'.$proveedor->idproveedor) }}" class="btn btn-warning">Editar</a> |
-                			<a class="btn btn-primary" href ="{{ url('proveedores/delete', $proveedor->idproveedor) }}" role="button" >Eliminar </a>
+                			<a href="{{ url('/proveedores/'.$proveedor->id.'/edit') }}" class="btn btn-warning">Editar</a> |
+                			<a class="btn btn-primary" href ="{{ url('proveedores/delete', $proveedor->id) }}" role="button" >Eliminar </a>
                     </td>
                 	</tr>
                 	@endforeach 

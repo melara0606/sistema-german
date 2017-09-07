@@ -59,7 +59,9 @@ class ProveedorController extends Controller
      */
     public function edit($id)
     {
-        //
+        $proveedor = Proveedor::find($id);
+
+        return view('proveedores.edit',compact('proveedor'));
     }
 
     /**
@@ -69,9 +71,11 @@ class ProveedorController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ProveedorRequest $request, $id)
     {
-        //
+        $proveedor = Proveedor::find($id);
+        $proveedor->fill($request->All());
+        $proveedor->save();
     }
 
     /**
