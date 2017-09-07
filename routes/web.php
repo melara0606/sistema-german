@@ -33,3 +33,5 @@ Route::get('usuarios/borrar/{id}','UsuariosController@borrar');
 
 Route::put('usuarios/destoy','UsuariosController@destroy');
 
+Route::Resource('proveedores','ProveedorController');
+

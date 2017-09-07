@@ -51,4 +51,9 @@
           </div>
           <!-- /.box -->
         </div>
+        <script>
+  $(function() {
+    $('#toggle-one').bootstrapToggle();
+  })
+</script>
 @endsection

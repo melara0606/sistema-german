@@ -68,7 +68,13 @@
 
                             <div class="col-md-6">
                                 <select name="cargo" id="cargo" class="form-control">
-                                    <option value="{{ $usuario->cargo }}">{{ $usuario->cargo }}</option>
+                                    @foreach($cargos as $cargo)
+                                        @if($cargo->idcargo == $usuario->cargo)
+                                            <option value="{{ $cargo->idcargo }}" selected>{{ $cargo->nombrecargo }}</option>
+                                        @else
+                                            <option value="{{ $cargo->idcargo }}" >{{ $cargo->nombrecargo }}</option>
+                                        @endif
+                                    @endforeach
                                 </select>
 
                                 @if ($errors->has('cargo'))

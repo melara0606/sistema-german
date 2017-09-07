@@ -17,6 +17,7 @@ class UsuariosController extends Controller
 
     public function registro()
     {
+        //$cargos =Cargo::all();
     	$cargos = Cargo::where('idcargo' , '!=', 1)->get();
     	return view('usuarios.registro')->with('cargos',$cargos);
     }
@@ -37,15 +38,17 @@ class UsuariosController extends Controller
     public function buscar($id)
     {
         $usuario = User::find($id);
-        return view('usuarios.modificar')->with('usuario',$usuario);
+        $cargos =Cargo::all();
+        //dd($cargos);
+        return view('usuarios.modificar',compact('usuario','cargos'));
     }
 
     public function update(ModificarUsuarioRequest $request)
     {
         $id = $request['id'];
         $usuario = User::find($id);
-        $usuario->name = $request['name'];
-        $usuario->username = $request['username'];
+        $usuario->fill($request->All());
+       //dd($request->all());
         $usuario->save();
 
         
