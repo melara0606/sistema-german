@@ -38,6 +38,7 @@ class ProveedorController extends Controller
     public function store(ProveedorRequest $request)
     {
         Proveedor::create($request->All());
+        return redirect('/proveedores');
     }
 
     /**
@@ -76,6 +77,8 @@ class ProveedorController extends Controller
         $proveedor = Proveedor::find($id);
         $proveedor->fill($request->All());
         $proveedor->save();
+
+        return redirect('/proveedores');
     }
 
     /**
