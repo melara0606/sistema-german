@@ -33,6 +33,7 @@ Route::get('usuarios/borrar/{id}','UsuariosController@borrar');
 
 Route::put('usuarios/destoy','UsuariosController@destroy');
 
+Route::delete('proveedores/restore/{id}','ProveedorController@restore')->name('proveedores.restore');
 Route::get('proveedores/eliminados','ProveedorController@eliminados');
 Route::Resource('proveedores','ProveedorController');
 

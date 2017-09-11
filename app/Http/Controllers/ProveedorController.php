@@ -105,4 +105,12 @@ class ProveedorController extends Controller
         return view('proveedores.eliminados', compact('proveedores'));
 
     }
+
+    public function restore($id)
+    {
+        $proveedor=Proveedor::withTrashed()->where('id', '=', $id)->first();
+        $proveedor->restore();
+
+        return redirect('/proveedores');
+    }
 }

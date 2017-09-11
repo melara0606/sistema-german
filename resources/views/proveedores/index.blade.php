@@ -17,6 +17,7 @@
             <div class="box-header">
               <h3 class="box-title">Listado</h3>
               	<a href="{{ url('/proveedores/create') }}" class="btn btn-primary">Agregar <span class="glyphicon glyphicon-plus-sign"></span></a>
+                <a href="{{ url('proveedores/eliminados') }}" class="btn btn-warning">Ver eliminados</a> 
             </div>
             <!-- /.box-header -->
             <div class="box-body table-responsive no-padding">
