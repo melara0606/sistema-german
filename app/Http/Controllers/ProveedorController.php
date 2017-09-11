@@ -49,7 +49,7 @@ class ProveedorController extends Controller
      */
     public function show($id)
     {
-        $proveedor = Proveedor::find($id);
+        $proveedor = Proveedor::findorFail($id);
 
         return view('proveedores.show',compact('proveedor'));
     }
@@ -96,6 +96,13 @@ class ProveedorController extends Controller
 
         return redirect('/proveedores');
         
+
+    }
+
+    public function eliminados()
+    {
+        $proveedores = Proveedor::onlyTrashed()->paginate(10);
+        return view('proveedores.eliminados', compact('proveedores'));
 
     }
 }
