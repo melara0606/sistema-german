@@ -1,8 +1,7 @@
 <?php
-use App\Proveedor;
 function cantprov()
 {
-	$proveedores = Proveedor::all();
+	$proveedores = App\Proveedor::all();
 	$count=$proveedores->count();
     return $count;
 }

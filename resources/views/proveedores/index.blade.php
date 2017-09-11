@@ -2,7 +2,7 @@
 
 @section('migasdepan')
 <h1>
-        Usuarios
+        Proveedores
         <small>Control de proveedores</small>
       </h1>
       <ol class="breadcrumb">
@@ -28,7 +28,7 @@
                   <th>Direción</th>
                   <th>Correo</th>
                   <th>Telefono</th>
-                  <th>Accion</th>
+                  <th colspan="3">Accion</th>
                 </thead>
                 <tbody>
                 	@foreach($proveedores as $proveedor)
@@ -38,8 +38,8 @@
                 		<td>{{ $proveedor->direccion }}</td>
                 		<td>{{ $proveedor->emaile }}</td>
                     <td>{{ $proveedor->telefonoe }}</td>
-                		<td>
-                    <a href="{{ url('proveedores/'.$proveedor->id) }}" class="btn btn-warning">Ver</a> |
+                		<td colspan="3">
+                    <a href="{{ url('proveedores/'.$proveedor->id) }}" class="btn btn-primary">Ver</a> |
                 			<a href="{{ url('/proveedores/'.$proveedor->id.'/edit') }}" class="btn btn-warning">Editar</a> |
                       {{ Form::open(['route' => ['proveedores.destroy', $proveedor->id ], 'method' => 'DELETE', 'class' => 'form-horizontal'])}}
                         <button class="btn btn-danger" type="submit">Eliminar</button>
