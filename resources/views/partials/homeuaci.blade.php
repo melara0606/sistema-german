@@ -47,9 +47,9 @@
           <!-- small box -->
           <div class="small-box bg-yellow">
             <div class="inner">
-              <h3>44</h3>
+              <h3>{{cantprov()}}</h3>
 
-              <p>User Registrations</p>
+              <p>Proveedores Registrados</p>
             </div>
             <div class="icon">
               <i class="ion ion-person-add"></i>
