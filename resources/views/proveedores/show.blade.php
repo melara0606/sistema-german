@@ -37,34 +37,39 @@
                         </div>
 
                         <div class="form-group{{ $errors->has('emaile') ? ' has-error' : '' }}">
-                            <label for="emaile" class="col-md-4 control-label">E-Mail Proveedor</label>
+                            <label for="emaile" class="col-md-4 control-label">E-Mail Proveedor: </label>
                             <label for="nombree" class="col-md-4 control-label">{{$proveedor->emaile}}</label><br>
                             
                         </div>
 
                         <div class="form-group{{ $errors->has('nombrer') ? ' has-error' : '' }}">
-                            <label for="nombrer" class="col-md-4 control-label">Nombre de Represetante</label>
+                            <label for="nombrer" class="col-md-4 control-label">Nombre de Represetante: </label>
                             <label for="nombree" class="col-md-4 control-label">{{$proveedor->nombrer}}</label><br>
                             
                         </div>
 
                         <div class="form-group{{ $errors->has('telfijor') ? ' has-error' : '' }}">
-                            <label for="telfijor" class="col-md-4 control-label">Telefono fijo Representante (si lo hay)</label>
+                            <label for="telfijor" class="col-md-4 control-label">Telefono fijo Representante (si lo hay): </label>
                             <label for="nombree" class="col-md-4 control-label">{{$proveedor->teldijor}}</label><br>
                             
                         </div>
 
                         <div class="form-group{{ $errors->has('celr') ? ' has-error' : '' }}">
-                            <label for="celr" class="col-md-4 control-label">Celular Representante</label>
+                            <label for="celr" class="col-md-4 control-label">Celular Representante: </label>
                             <label for="nombree" class="col-md-4 control-label">{{$proveedor->celr}}</label><br>
                            
                         </div>
 
                         <div class="form-group{{ $errors->has('emailr') ? ' has-error' : '' }}">
-                            <label for="emailr" class="col-md-4 control-label">Dirección</label>
+                            <label for="emailr" class="col-md-4 control-label">Dirección email del Representante:</label>
                             <label for="nombree" class="col-md-4 control-label">{{$proveedor->emailr}}</label><br>
                             
                         </div>
+
+                        <a href="{{ url('/proveedores/'.$proveedor->id.'/edit') }}" class="btn btn-warning">Editar</a> |
+                      {{ Form::open(['route' => ['proveedores.destroy', $proveedor->id ], 'method' => 'DELETE', 'class' => 'form-horizontal'])}}
+                        <button class="btn btn-danger" type="submit">Eliminar</button>
+                      {{ Form::close()}}
                 </div>
             </div>
         </div>
