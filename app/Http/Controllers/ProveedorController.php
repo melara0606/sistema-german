@@ -16,6 +16,8 @@ class ProveedorController extends Controller
     public function index()
     {
         $proveedores = Proveedor::paginate(10);
+        $count = $proveedores->count();
+       
         return view('proveedores.index', compact('proveedores'));
     }
 

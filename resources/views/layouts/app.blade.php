@@ -344,7 +344,7 @@
             <i class="fa fa-files-o"></i>
             <span>Proveedores</span>
             <span class="pull-right-container">
-              <span class="label label-primary pull-right">4</span>
+              <span class="label label-primary pull-right">{{cantprov()}}</span>
             </span>
           </a>
           <ul class="treeview-menu">
