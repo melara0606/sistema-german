@@ -49,7 +49,9 @@ class ProveedorController extends Controller
      */
     public function show($id)
     {
-        //
+        $proveedor = Proveedor::find($id);
+
+        return view('proveedores.show',compact('proveedor'));
     }
 
     /**
@@ -89,6 +91,11 @@ class ProveedorController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $proveedor=Proveedor::find($id);
+        $proveedor->delete();
+
+        return redirect('/proveedores');
+        
+
     }
 }

@@ -38,8 +38,13 @@
                 		<td>{{ $proveedor->emaile }}</td>
                     <td>{{ $proveedor->telefonoe }}</td>
                 		<td>
+                    <a href="{{ url('proveedores/'.$proveedor->id) }}" class="btn btn-warning">Ver</a> |
                 			<a href="{{ url('/proveedores/'.$proveedor->id.'/edit') }}" class="btn btn-warning">Editar</a> |
-                			<a class="btn btn-primary" href ="{{ url('proveedores/delete', $proveedor->id) }}" role="button" >Eliminar </a>
+                      {{ Form::open(['route' => ['proveedores.destroy', $proveedor->id ], 'method' => 'DELETE', 'class' => 'form-horizontal'])}}
+                        <button class="btn btn-danger" type="submit">Eliminar</button>
+                      {{ Form::close()}}
+                      {{-- {!! link_to_route('proveedores.destroy', 'ELiminar', [$proveedor->id]) !!}
+                			<a class="btn btn-primary" href ="{{ route('proveedores.destroy', $proveedor->id) }}" role="button" >Eliminar </a> --}}
                     </td>
                 	</tr>
                 	@endforeach 
