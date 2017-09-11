@@ -70,9 +70,9 @@
                                 <select name="cargo" id="cargo" class="form-control">
                                     @foreach($cargos as $cargo)
                                         @if($cargo->idcargo == $usuario->cargo)
-                                            <option value="{{ $cargo->idcargo }}" selected>{{ $cargo->nombrecargo }}</option>
+                                            <option value="{{ $cargo->idcargo }}" selected>{{ $cargo->cargo }}</option>
                                         @else
-                                            <option value="{{ $cargo->idcargo }}" >{{ $cargo->nombrecargo }}</option>
+                                            <option value="{{ $cargo->idcargo }}" >{{ $cargo->cargo }}</option>
                                         @endif
                                     @endforeach
                                 </select>

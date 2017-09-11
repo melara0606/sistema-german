@@ -71,7 +71,7 @@
                                 <select name="cargo" id="cargo" class="form-control">
                                     <option value="">Seleccione</option>
                                     @foreach($cargos as $cargo)
-                                        <option value="{{ $cargo->idcargo }}">{{ $cargo->nombrecargo }}</option>
+                                        <option value="{{ $cargo->idcargo }}">{{ $cargo->cargo }}</option>
                                     @endforeach
                                 </select>
 
