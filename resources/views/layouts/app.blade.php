@@ -44,7 +44,7 @@
     <!-- Logo -->
     <a href="{{ url('/home') }}" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
-      <span class="logo-mini"><b>A</b>LT</span>
+      <span class="logo-mini"><b>S</b>VZ</span>
       <!-- logo for regular state and mobile devices -->
       <span class="logo-lg"><b>SisVerapaz</span>
     </a>
@@ -428,7 +428,7 @@
             <li><a href="#"><i class="fa fa-circle-o"></i> Level One</a></li>
           </ul>
         </li>
-        <li><a href="documentation/index.html"><i class="fa fa-book"></i> <span>Documentation</span></a></li>
+        <li><a href="documentation/index.html"><i class="fa fa-book"></i> <span>Documentación</span></a></li>
         <li class="header">LABELS</li>
         <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>Important</span></a></li>
         <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>Warning</span></a></li>
