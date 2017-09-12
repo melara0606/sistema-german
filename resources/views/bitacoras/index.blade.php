@@ -22,7 +22,7 @@
             <div class="box-body table-responsive no-padding">
               <table class="table table-hover">
   				<thead>
-                  <th>ID</th>
+                  <th>Id</th>
                   <th>Fecha de actividad</th>
                   <th>Hora de la actividad</th>
                   <th>Accion</th>
