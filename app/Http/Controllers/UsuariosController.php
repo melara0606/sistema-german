@@ -16,7 +16,8 @@ class UsuariosController extends Controller
     
     public function index()
     {
-    	$usuarios = User::join('cargos','users.cargo','=', 'cargos.idcargo')->paginate(5);
+        $usuarios=User::paginate(10);
+    	//$usuarios = User::join('cargos','users.cargo','=', 'cargos.idcargo')->paginate(5);
     	return view('usuarios.index')->with('usuarios', $usuarios);
     }
 
@@ -77,5 +78,26 @@ class UsuariosController extends Controller
         $usuario->avatar = "hola.jpg";
         $usuario->save();
         return redirect('usuarios');
+    }
+
+    public function perfil()
+    {
+        return view('usuarios.perfil');
+    }
+
+    public function modificarperfil($id)
+    {
+        return view('usuarios.modificarperfil');
+    }
+
+    public function updateperfil(Request $request)
+    {
+        $id = $request['id'];
+        $usuario = User::find($id);
+        $usuario->fill($request->All());
+       //dd($request->all());
+        bitacora('Modificó su perfil');
+        $usuario->save();
+        return redirect('home/perfil');
     }
 }

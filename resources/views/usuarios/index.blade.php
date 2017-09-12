@@ -1,3 +1,4 @@
+<?php use App\Cargo; ?>
 @extends('layouts.app')
 
 @section('migasdepan')
@@ -36,7 +37,10 @@
                 		<td>{{ $user->name }}</td>
                 		<td>{{ $user->username }}</td>
                 		<td>{{ $user->email }}</td>
-                    <td>{{ $user->cargo }}</td>
+                    <?php 
+                     $nombre= Cargo::vercargo($user->cargo);
+                    ?>
+                    <td>{{ $nombre }}</td>
                 		<td>
                 			<a href="{{ url('/usuarios/'.$user->id) }}" class="btn btn-warning">Editar</a> |
                 			<a class="btn btn-primary" href ="{{ url('usuarios/borrar', $user->id) }}" role="button" >Eliminar </a>
@@ -51,9 +55,4 @@
           </div>
           <!-- /.box -->
         </div>
-        <script>
-  $(function() {
-    $('#toggle-one').bootstrapToggle();
-  })
-</script>
 @endsection

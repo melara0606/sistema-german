@@ -15,7 +15,7 @@ class AddIdcargoToUsersTable extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->integer('cargo')->unsigned();
-            $table->foreign('cargo')->references('idcargo')->on('cargos');
+            $table->foreign('cargo')->references('id')->on('cargos');
         });
     }
 

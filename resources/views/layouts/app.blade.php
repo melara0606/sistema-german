@@ -1,3 +1,6 @@
+<?php use App\Cargo; 
+$cargo=Cargo::vercargo(Auth::user()->cargo);
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -262,35 +265,25 @@
                 <img src="{{ asset('img/user2-160x160.jpg') }}" class="img-circle" alt="User Image">
 
                 <p>
-                  {{ Auth::user()->name }}  - Web Developer
+                  {{ Auth::user()->name }}  - {{ $cargo }}
                   <small>Member since Nov. 2012</small>
                 </p>
               </li>
               <!-- Menu Body -->
               <li class="user-body">
-                <div class="row">
-                  <div class="col-xs-4 text-center">
-                    <a href="#">Followers</a>
-                  </div>
-                  <div class="col-xs-4 text-center">
-                    <a href="#">Sales</a>
-                  </div>
-                  <div class="col-xs-4 text-center">
-                    <a href="#">Friends</a>
-                  </div>
-                </div>
+            
                 <!-- /.row -->
               </li>
               <!-- Menu Footer-->
               <li class="user-footer">
                 <div class="pull-left">
-                  <a href="#" class="btn btn-default btn-flat">Profile</a>
+                  <a href="{{ url('/home/perfil') }}" class="btn btn-default btn-flat">Perfil</a>
                 </div>
                 <div class="pull-right">
                   <a href="{{ route('logout') }}" class="btn btn-default btn-flat""
                                             onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                            Logout
+                                            Cerrar Sesión
                                         </a>
 
                                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
@@ -315,7 +308,7 @@
         </div>
         <div class="pull-left info">
           <p>{{ Auth::user()->name }} </p>
-          <a href="#"><i class="fa fa-circle text-success"></i> En l</a>
+          <a href="#"><i class="fa fa-circle text-success"></i> En línea</a>
         </div>
       </div>
      <!-- sidebar menu: : style can be found in sidebar.less -->

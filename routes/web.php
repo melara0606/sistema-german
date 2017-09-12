@@ -20,17 +20,14 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('usuarios','UsuariosController@index');
-
 Route::get('usuarios/registrar','UsuariosController@registro');
-
 Route::get('usuarios/{id}', 'UsuariosController@buscar');
-
 Route::post('usuarios/save','UsuariosController@save');
-
+Route::get('home/perfil','UsuariosController@perfil');
 Route::put('usuarios/update','UsuariosController@update');
-
+Route::get('perfil/{id}','UsuariosController@modificarperfil');
+Route::put('perfil/update','UsuariosController@updateperfil');
 Route::get('usuarios/borrar/{id}','UsuariosController@borrar');
-
 Route::put('usuarios/destoy','UsuariosController@destroy');
 
 Route::delete('proveedores/restore/{id}','ProveedorController@restore')->name('proveedores.restore');

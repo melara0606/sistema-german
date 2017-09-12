@@ -1,5 +1,6 @@
 <?php
 use App\Bitacora;
+use App\Cargo;
 function cantprov()
 {
 	$proveedores = App\Proveedor::all();
@@ -17,3 +18,5 @@ function bitacora($accion)
 	$bitacora->idusuario = Auth::user()->id;
 	$bitacora->save();
 }
+
+
