@@ -31,15 +31,15 @@
   </div>
   <!-- /.login-logo -->
   <div class="login-box-body">
-    <p class="login-box-msg">Digite sus datos para iniciar sesión</p>
+    <p class="login-box-msg-large">Digite sus datos para iniciar sesión</p>
 
     <form class="form-horizontal" role="form" method="POST" action="{{ route('login') }}">
         {{ csrf_field() }}
 
         <div class="form-group{{ $errors->has('username') ? ' has-error' : '' }}">
-            <label for="username" class="col-md-4 control-label">Nombre de Usuario</label>
+            <label for="username" class="col-md-4 control-label">Nombre de Usuario (*)</label>
 
-            <div class="col-md-6">
+            <div class="col-md-8">
                 <input id="username" type="text" class="form-control" name="username" value="{{ old('username') }}" autofocus/>
                 <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
                     @if ($errors->has('username'))
@@ -51,9 +51,9 @@
         </div>
 
         <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-        <label for="password" class="col-md-4 control-label">Contraseña</label>
+        <label for="password" class="col-md-4 control-label">Contraseña (*)</label>
 
-        <div class="col-md-6">
+        <div class="col-md-8">
             <input id="password" type="password" class="form-control" name="password" >
             <span class="glyphicon glyphicon-lock form-control-feedback"></span>
                 @if ($errors->has('password'))
@@ -70,7 +70,7 @@
             <div class="col-md-6 col-md-offset-4">
                 <div class="checkbox">
                     <label>
-                        <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}> Recordarme
+                        <label>(*) Campos Obligatorios</label>
                     </label>
                 </div>
             </div>

@@ -9,6 +9,11 @@ use App\Http\Requests\UsuariosRequest;
 use App\Http\Requests\ModificarUsuarioRequest;
 class UsuariosController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    } 
+    
     public function index()
     {
     	$usuarios = User::join('cargos','users.cargo','=', 'cargos.idcargo')->paginate(5);
