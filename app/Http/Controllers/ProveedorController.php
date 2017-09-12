@@ -40,6 +40,7 @@ class ProveedorController extends Controller
     public function store(ProveedorRequest $request)
     {
         Proveedor::create($request->All());
+        bitacora('Registro un Proveedor');
         return redirect('/proveedores');
     }
 

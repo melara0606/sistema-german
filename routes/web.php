@@ -37,3 +37,5 @@ Route::delete('proveedores/restore/{id}','ProveedorController@restore')->name('p
 Route::get('proveedores/eliminados','ProveedorController@eliminados');
 Route::Resource('proveedores','ProveedorController');
 
+Route::Resource('bitacoras','BitacoraController');
+

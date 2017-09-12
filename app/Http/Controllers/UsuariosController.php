@@ -31,7 +31,7 @@ class UsuariosController extends Controller
             'cargo' => $request['cargo'],
             'password' => bcrypt($request['password']),
         ]);
-
+        bitacora('Registro un Usuario');
         return redirect('usuarios');
     }
 
