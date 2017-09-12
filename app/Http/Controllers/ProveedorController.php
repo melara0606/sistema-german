@@ -82,7 +82,7 @@ class ProveedorController extends Controller
         $proveedor = Proveedor::find($id);
         $proveedor->fill($request->All());
         $proveedor->save();
-
+        bitacora('Modificó un Proveedor');
         return redirect('/proveedores');
     }
 
@@ -96,7 +96,7 @@ class ProveedorController extends Controller
     {
         $proveedor=Proveedor::find($id);
         $proveedor->delete();
-
+        bitacora('Eliminó un Proveedor');
         return redirect('/proveedores');
         
 
@@ -113,7 +113,7 @@ class ProveedorController extends Controller
     {
         $proveedor=Proveedor::withTrashed()->where('id', '=', $id)->first();
         $proveedor->restore();
-
+        bitacora('Restauró un Proveedor');
         return redirect('/proveedores');
     }
 }

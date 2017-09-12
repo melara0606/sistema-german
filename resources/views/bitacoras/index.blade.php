@@ -1,3 +1,4 @@
+<?php use App\Bitacora;?>
 @extends('layouts.app')
 
 @section('migasdepan')
@@ -35,7 +36,10 @@
                 		<td>{{ $bitacora->registro }}</td>
                 		<td>{{ $bitacora->hora }}</td>
                 		<td>{{ $bitacora->accion }}</td>
-                    <td>{{ $bitacora->name }}</td>
+                    <?php 
+                     $nombre= Bitacora::vernombre($bitacora->idusuario);
+                    ?>
+                    <td>{{ $nombre }}</td>
                 		<td colspan="3">
                     <a href="{{ url('bitacora/'.$bitacora->id) }}" class="btn btn-primary">Ver</a>
                       

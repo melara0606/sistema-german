@@ -326,7 +326,18 @@
       <ul class="sidebar-menu">
         <li class="header">Menú Principal</li>
         @if(Auth::user()->cargo == 1)
-        <li class="active treeview">
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-dashboard"></i> <span>Bitacora</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li class="active"><a href="{{ url('/bitacoras') }}"><i class="fa fa-circle-o"></i> Ver Bitácora</a></li>
+          </ul>
+        </li>
+        <li class="treeview">
           <a href="#">
             <i class="fa fa-dashboard"></i> <span>Usuarios</span>
             <span class="pull-right-container">

@@ -49,6 +49,7 @@ class UsuariosController extends Controller
         $usuario = User::find($id);
         $usuario->fill($request->All());
        //dd($request->all());
+        bitacora('Modificó un Usuario');
         $usuario->save();
 
         
