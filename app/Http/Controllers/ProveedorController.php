@@ -8,6 +8,10 @@ use App\Http\Requests\ProveedorRequest;
 
 class ProveedorController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    } 
     /**
      * Display a listing of the resource.
      *
@@ -16,6 +20,8 @@ class ProveedorController extends Controller
     public function index()
     {
         $proveedores = Proveedor::paginate(10);
+        $count = $proveedores->count();
+       
         return view('proveedores.index', compact('proveedores'));
     }
 
@@ -38,7 +44,8 @@ class ProveedorController extends Controller
     public function store(ProveedorRequest $request)
     {
         Proveedor::create($request->All());
-        return redirect('/proveedores');
+        bitacora('Registro un Proveedor');
+        return redirect('/proveedores')->with('mensaje','Registro almacenado con éxito');
     }
 
     /**
@@ -79,8 +86,8 @@ class ProveedorController extends Controller
         $proveedor = Proveedor::find($id);
         $proveedor->fill($request->All());
         $proveedor->save();
-
-        return redirect('/proveedores');
+        bitacora('Modificó un Proveedor');
+        return redirect('/proveedores')->with('mensaje','Registro modificado con éxito');
     }
 
     /**
@@ -93,7 +100,7 @@ class ProveedorController extends Controller
     {
         $proveedor=Proveedor::find($id);
         $proveedor->delete();
-
+        bitacora('Eliminó un Proveedor');
         return redirect('/proveedores');
         
 
@@ -110,7 +117,7 @@ class ProveedorController extends Controller
     {
         $proveedor=Proveedor::withTrashed()->where('id', '=', $id)->first();
         $proveedor->restore();
-
+        bitacora('Restauró un Proveedor');
         return redirect('/proveedores');
     }
 }
