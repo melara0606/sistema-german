@@ -24,6 +24,8 @@
   {!! Html::style('plugins/daterangepicker/daterangepicker.css')!!}
   {!! Html::style('plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css')!!}
   {!! Html::style('css/bootstrap-toggle.min.css')!!}
+  {!! Html::style('https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.9.1/sweetalert2.min.css') !!}
+  {!! Html::script('https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.9.1/sweetalert2.min.js') !!}
 
   <!-- AdminLTE Skins. Choose a skin from the css/skins
        folder instead of downloading all of them to reduce the load. -->
@@ -267,30 +269,17 @@
                 </p>
               </li>
               <!-- Menu Body -->
-              <li class="user-body">
-                <div class="row">
-                  <div class="col-xs-4 text-center">
-                    <a href="#">Followers</a>
-                  </div>
-                  <div class="col-xs-4 text-center">
-                    <a href="#">Sales</a>
-                  </div>
-                  <div class="col-xs-4 text-center">
-                    <a href="#">Friends</a>
-                  </div>
-                </div>
-                <!-- /.row -->
-              </li>
+              
               <!-- Menu Footer-->
               <li class="user-footer">
                 <div class="pull-left">
-                  <a href="#" class="btn btn-default btn-flat">Profile</a>
+                  <a href="{{ url('home/perfil') }}" class="btn btn-default btn-flat">Perfil</a>
                 </div>
                 <div class="pull-right">
                   <a href="{{ route('logout') }}" class="btn btn-default btn-flat""
                                             onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                            Logout
+                                            Cerrar Sesión
                                         </a>
 
                                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
@@ -326,7 +315,7 @@
       <ul class="sidebar-menu">
         <li class="header">Menú Principal</li>
         @if(Auth::user()->cargo == 1)
-        <li class="active treeview">
+        <li class="treeview">
           <a href="#">
             <i class="fa fa-dashboard"></i> <span>Usuarios</span>
             <span class="pull-right-container">
@@ -338,13 +327,24 @@
             <li><a href="{{ url('/usuarios') }}"><i class="fa fa-circle-o"></i> Listado de Usuarios</a></li>
           </ul>
         </li>
+         <li class="active treeview">
+          <a href="#">
+            <i class="fa fa-dashboard"></i> <span>Bitacora</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li class="active"><a href="{{ url('/bitacoras') }}"><i class="fa fa-circle-o"></i> Ver bitácora</a></li>
+          </ul>
+        </li>
         @endif
         <li class="treeview">
           <a href="#">
             <i class="fa fa-files-o"></i>
             <span>Proveedores</span>
             <span class="pull-right-container">
-              <span class="label label-primary pull-right">4</span>
+              <span class="label label-primary pull-right">{{ cantprov() }}</span>
             </span>
           </a>
           <ul class="treeview-menu">
