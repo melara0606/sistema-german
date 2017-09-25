@@ -37,6 +37,3 @@ Route::delete('proveedores/restore/{id}','ProveedorController@restore')->name('p
 Route::get('proveedores/eliminados','ProveedorController@eliminados');
 Route::Resource('proveedores','ProveedorController');
 
-Route::delete('contratos/restore/{id}','ContratoController@restore')->name('contratos.restore');
-Route::get('contratos/eliminados','ContratosController@eliminados');
-Route::Resource('contratos','ContratosController');
