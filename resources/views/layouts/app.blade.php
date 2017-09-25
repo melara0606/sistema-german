@@ -352,6 +352,19 @@
             <li><a href="{{ url('/proveedores/create') }}"><i class="fa fa-circle-o"></i> Registrar proveedor</a></li>
           </ul>
         </li>
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-files-o"></i>
+            <span>Contrataciones</span>
+            <span class="pull-right-container">
+              <span class="label label-primary pull-right">4</span>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="{{ url('/contratos') }}"><i class="fa fa-circle-o"></i> Listado de Contrataciones</a></li>
+            <li><a href="{{ url('/contratos/create') }}"><i class="fa fa-circle-o"></i> Registrar contrato</a></li>
+          </ul>
+        </li>
         <li>
           <a href="pages/widgets.html">
             <i class="fa fa-th"></i> <span>Widgets</span>
