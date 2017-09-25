@@ -40,7 +40,25 @@
                 		<td>
                     {{ Form::open(['route' => ['proveedores.restore', $proveedor->id ], 'method' => 'DELETE', 'class' => 'form-horizontal'])
                     }}
-                        <button class="btn btn-danger" type="submit">Restaurar</button>
+                        <button class="btn btn-danger" type="button" onclick="
+                        return swal({
+                          title: 'Restaurar proveedor',
+                          text: '¿Está seguro que desea restaurar el proveedor?',
+                          type: 'question',
+                          showCancelButton: true,
+                          confirmButtonText: 'Si, Restaurar',
+                          cancelButtonText: 'No, Mantener',
+                          confirmButtonClass: 'btn btn-danger',
+                          cancelButtonClass: 'btn btn-default',
+                          buttonsStyling: false
+                        }).then(function(){
+                          submit();
+                          swal('Hecho', 'El registro a sido restaurado','success')
+                        }, function(dismiss){
+                          if(dismiss == 'cancel'){
+                            swal('Cancelado', 'El registro se mantiene eliminado','info')
+                          }
+                        })";>Restaurar</button>
                       {{ Form::close()}} 
                      {{--  <a href="{{ route('proveedores.restore', [$proveedor->id]) }}">aqui</a> --}}
                                     {{-- {!! link_to_route('proveedores.destroy', 'ELiminar', [$proveedor->id]) !!}

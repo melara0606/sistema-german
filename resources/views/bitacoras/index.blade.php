@@ -1,4 +1,6 @@
-<?php use App\Bitacora;?>
+<?php 
+use App\Bitacora;
+use Carbon\Carbon; ?>
 @extends('layouts.app')
 
 @section('migasdepan')
@@ -33,7 +35,7 @@
                 	@foreach($bitacoras as $bitacora)
                 	<tr>
                 		<td>{{ $bitacora->id }}</td>
-                		<td>{{ $bitacora->registro }}</td>
+                    <td>{{ $bitacora->registro->format('d-m-Y') }}</td>
                 		<td>{{ $bitacora->hora }}</td>
                 		<td>{{ $bitacora->accion }}</td>
                     <?php 

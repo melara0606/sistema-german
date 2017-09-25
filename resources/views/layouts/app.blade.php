@@ -27,6 +27,9 @@ $cargo=Cargo::vercargo(Auth::user()->cargo);
   {!! Html::style('plugins/daterangepicker/daterangepicker.css')!!}
   {!! Html::style('plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css')!!}
   {!! Html::style('css/bootstrap-toggle.min.css')!!}
+  {!! Html::script('https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.9.1/sweetalert2.min.js') !!}
+  {!! Html::style('https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.9.1/sweetalert2.css') !!}
+ 
 
   <!-- AdminLTE Skins. Choose a skin from the css/skins
        folder instead of downloading all of them to reduce the load. -->
@@ -472,21 +475,17 @@ $cargo=Cargo::vercargo(Auth::user()->cargo);
 {!! Html::script('plugins/jvectormap/jquery-jvectormap-1.2.2.min.js') !!}
 {!! Html::script('plugins/jvectormap/jquery-jvectormap-world-mill-en.js') !!}
 {!! Html::script('plugins/knob/jquery.knob.js') !!}
-{!! Html::script('plugins/daterangepicker/daterangepicker.js') !!}
-{!! Html::script('plugins/datepicker/bootstrap-datepicker.js') !!}
 {!! Html::script('plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js') !!}
 {!! Html::script('plugins/slimScroll/jquery.slimscroll.min.js') !!}
 {!! Html::script('plugins/fastclick/fastclick.js') !!}
 {!! Html::script('js/app.min.js') !!}
-{!! Html::script('js/pages/dashboard.js') !!}
+{{-- {!! Html::script('js/pages/dashboard.js') !!} --}}
 {!! Html::script('js/demo.js') !!}
+{!! Html::script('js/eliminar.js') !!}
 
 <!-- jQuery UI 1.11.4 -->
 <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
-<script>
-  $.widget.bridge('uibutton', $.ui.button);
-</script>
 <!-- Bootstrap 3.3.6 -->
 
 <!-- Morris.js charts -->
@@ -496,6 +495,7 @@ $cargo=Cargo::vercargo(Auth::user()->cargo);
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
 
 <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+@include('sweet::alert')
 
 </body>
 </html>

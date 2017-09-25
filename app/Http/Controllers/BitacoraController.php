@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Bitacora;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class BitacoraController extends Controller
@@ -19,7 +20,7 @@ class BitacoraController extends Controller
     public function index()
     {
         //$bitacoras = Bitacora::join('users','bitacoras.idusuario','=','users.id')->paginate(10);
-        $bitacoras = Bitacora::paginate(10);
+        $bitacoras = Bitacora::paginate(8);
         return view('bitacoras.index', compact('bitacoras'));
     }
 

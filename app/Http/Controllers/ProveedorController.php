@@ -45,7 +45,7 @@ class ProveedorController extends Controller
     {
         Proveedor::create($request->All());
         bitacora('Registro un Proveedor');
-        return redirect('/proveedores');
+        return redirect('/proveedores')->with('mensaje','Registro almacenado con éxito');
     }
 
     /**
@@ -87,7 +87,7 @@ class ProveedorController extends Controller
         $proveedor->fill($request->All());
         $proveedor->save();
         bitacora('Modificó un Proveedor');
-        return redirect('/proveedores');
+        return redirect('/proveedores')->with('mensaje','Registro modificado con éxito');
     }
 
     /**
