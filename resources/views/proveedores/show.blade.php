@@ -70,7 +70,7 @@
                       <a href="{{ url('/proveedores/'.$proveedor->id.'/edit') }}" class="btn btn-warning"><span class="glyphicon glyphicon-text-size"></span> Editar</a> |
                         <button class="btn btn-danger" type="button" onclick="
                         return swal({
-                          title: 'ELiminar proveedor',
+                          title: 'Eliminar proveedor',
                           text: '¿Está seguro de eliminar proveedor?',
                           type: 'question',
                           showCancelButton: true,
