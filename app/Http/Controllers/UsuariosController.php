@@ -24,7 +24,7 @@ class UsuariosController extends Controller
     public function registro()
     {
         //$cargos =Cargo::all();
-    	$cargos = Cargo::where('idcargo' , '!=', 1)->get();
+    	$cargos = Cargo::where('id' , '!=', 1)->get();
     	return view('usuarios.registro')->with('cargos',$cargos);
     }
 

@@ -27,7 +27,16 @@ class LoginController extends Controller
      * @var string
      */
     
-    protected $redirectTo = '/home';
+     public function authenticate()
+    {
+        if (Auth::attempt(['email' => $email, 'password' => $password])) {
+            // Authentication passed...
+            return redirect()->intended('home');
+        }else{
+            $intentos=$intentos+1;
+            echo "hola";
+        }
+    }
     
     /**
      * Create a new controller instance.
