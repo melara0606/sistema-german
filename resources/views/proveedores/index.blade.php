@@ -12,10 +12,7 @@
 @endsection
 
 @section('content')
-@if(Session::has('mensaje'))
-  <?php $mensaje= Session::get('mensaje');
-  echo "<script>swal('exito','$mensaje','success')</script>";?>
-@endif
+
 <div class="col-xs-12">
           <div class="box">
             <div class="box-header">
@@ -25,14 +22,14 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body table-responsive no-padding">
-              <table class="table table-striped table-bordered table-hover">
+              <table class="table table-striped table-bordered table-hover" id="datatable">
   				<thead>
                   <th>ID</th>
                   <th>Nombre de Proveedor</th>
-                  <th>Direción</th>
+                  <th>Dirección</th>
                   <th>Correo</th>
                   <th>Telefono</th>
-                  <th colspan="3">Accion</th>
+                  <th>Accion</th>
                 </thead>
                 <tbody>
                 	@foreach($proveedores as $proveedor)
@@ -42,7 +39,7 @@
                 		<td>{{ $proveedor->direccion }}</td>
                 		<td>{{ $proveedor->emaile }}</td>
                     <td>{{ $proveedor->telefonoe }}</td>
-                		<td colspan="3">
+                		<td>
                       {{ Form::open(['route' => ['proveedores.destroy', $proveedor->id ], 'method' => 'DELETE', 'class' => 'form-horizontal'])}}
                         <a href="{{ url('proveedores/'.$proveedor->id) }}" class="btn btn-primary"><span class="glyphicon glyphicon-eye-open"></span> Ver</a> |
                         <a href="{{ url('/proveedores/'.$proveedor->id.'/edit') }}" class="btn btn-warning"><span class="glyphicon glyphicon-text-size"></span> Editar</a> | 
@@ -82,3 +79,4 @@
           <!-- /.box -->
         </div>
 @endsection
+

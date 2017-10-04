@@ -18,20 +18,14 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('usuarios','UsuariosController@index')->middleware('Admin');
+Route::get('usuarios/registrar','UsuariosController@registro')->middleware('Admin');
+Route::get('usuarios/{id}', 'UsuariosController@buscar')->middleware('Admin');
+Route::post('usuarios/save','UsuariosController@save')->middleware('Admin');
+Route::put('usuarios/update','UsuariosController@update')->middleware('Admin');
+Route::get('usuarios/borrar/{id}','UsuariosController@borrar')->middleware('Admin');
+Route::put('usuarios/destoy','UsuariosController@destroy')->middleware('Admin');
 
-Route::get('usuarios','UsuariosController@index');
-
-Route::get('usuarios/registrar','UsuariosController@registro');
-
-Route::get('usuarios/{id}', 'UsuariosController@buscar');
-
-Route::post('usuarios/save','UsuariosController@save');
-
-Route::put('usuarios/update','UsuariosController@update');
-
-Route::get('usuarios/borrar/{id}','UsuariosController@borrar');
-
-Route::put('usuarios/destoy','UsuariosController@destroy');
 route::get('home/perfil','UsuariosController@perfil');
 route::get('perfil/{id}','UsuariosController@modificarperfil');
 Route::put('updateperfil','UsuariosController@updateperfil');

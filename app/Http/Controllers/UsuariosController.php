@@ -38,7 +38,7 @@ class UsuariosController extends Controller
             'password' => bcrypt($request['password']),
         ]);
         bitacora('Registro un Usuario');
-        return redirect('usuarios');
+        return redirect('usuarios')->with('mensaje','Usuario almacenado con éxito');
     }
 
     public function buscar($id)

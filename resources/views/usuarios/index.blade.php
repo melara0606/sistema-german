@@ -21,7 +21,7 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body table-responsive no-padding">
-              <table class="table table-hover">
+              <table class="table table-hover" id="datatable">
   				<thead>
                   <th>ID</th>
                   <th>Nombre</th>
@@ -56,3 +56,4 @@
           <!-- /.box -->
         </div>
 @endsection
+

@@ -21,15 +21,15 @@ use Carbon\Carbon; ?>
               <h3 class="box-title">Listado</h3>
             </div>
             <!-- /.box-header -->
-            <div class="box-body table-responsive no-padding">
-              <table class="table table-hover">
+            <div class="box-body no-padding" >
+              <table class="table table-hover" id="datatable">
   				<thead>
                   <th>Id</th>
                   <th>Fecha de actividad</th>
                   <th>Hora de la actividad</th>
                   <th>Accion</th>
                   <th>Usuario</th>
-                  <th colspan="3">Accion</th>
+                  <th>Opción</th>
                 </thead>
                 <tbody>
                 	@foreach($bitacoras as $bitacora)
@@ -42,7 +42,7 @@ use Carbon\Carbon; ?>
                      $nombre= Bitacora::vernombre($bitacora->idusuario);
                     ?>
                     <td>{{ $nombre }}</td>
-                		<td colspan="3">
+                		<td>
                     <a href="{{ url('bitacora/'.$bitacora->id) }}" class="btn btn-primary">Ver</a>
                       
                       {{-- {!! link_to_route('proveedores.destroy', 'ELiminar', [$proveedor->id]) !!}

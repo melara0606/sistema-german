@@ -20,11 +20,11 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body table-responsive no-padding">
-              <table class="table table-hover">
+              <table class="table table-hover" id="datatable">
   				<thead>
                   <th>ID</th>
                   <th>Nombre de Proveedor</th>
-                  <th>Direción</th>
+                  <th>Dirección</th>
                   <th>Correo</th>
                   <th>Telefono</th>
                   <th>Accion</th>
@@ -75,3 +75,4 @@
           <!-- /.box -->
         </div>
 @endsection
+

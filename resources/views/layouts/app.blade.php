@@ -25,7 +25,8 @@ $cargo=Cargo::vercargo(Auth::user()->cargo);
   {!! Html::style('plugins/jvectormap/jquery-jvectormap-1.2.2.css')!!}
   {!! Html::style('plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css')!!}
   {!! Html::style('css/bootstrap-toggle.min.css')!!}
-  {!! Html::script('js/sweetalert2.min.js') !!}
+  {!! Html::style('css/datatables.min.css') !!}
+  {!! Html::style('css/buttons.bootstrap.min.css') !!}
   {!! Html::style('css/sweetalert2.min.css') !!}
 
   <!-- AdminLTE Skins. Choose a skin from the css/skins
@@ -41,6 +42,10 @@ $cargo=Cargo::vercargo(Auth::user()->cargo);
   <![endif]-->
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
+  @if(Session::has('mensaje'))
+  <?php $mensaje= Session::get('mensaje');
+  echo "<script>swal('exito','$mensaje','success')</script>";?>
+@endif
 <div class="wrapper">
 
   <header class="main-header">
@@ -467,6 +472,9 @@ $cargo=Cargo::vercargo(Auth::user()->cargo);
 <!-- jQuery 2.2.3 -->
 {!! Html::script('plugins/jQuery/jquery-2.2.3.min.js') !!}
 {!! Html::script('bootstrap/js/bootstrap.min.js') !!}
+{!! Html::script('js/datatables.min.js') !!}
+{!! Html::script('js/dataTables.bootstrap.min.js') !!}
+{!! Html::script('js/sweetalert2.min.js') !!}
 {!! Html::script('plugins/morris/morris.min.js') !!}
 {!! Html::script('plugins/sparkline/jquery.sparkline.min.js') !!}
 {!! Html::script('plugins/jvectormap/jquery-jvectormap-1.2.2.min.js') !!}
@@ -491,6 +499,6 @@ $cargo=Cargo::vercargo(Auth::user()->cargo);
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
 
 <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
-
+{!! Html::script('js/tablas.js') !!}
 </body>
 </html>
