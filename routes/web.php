@@ -10,11 +10,26 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
 Route::get('/', function () {
-    return view('auth.login');
+    $users=DB::select('select * from users');
+        $cuenta=0;
+        foreach ($users as $us) {
+          $cuenta=$cuenta+1;
+        }
+        if($cuenta==0){
+            return view('auth/register');
+
+        }else{
+            return view('auth/login');
+        }
 });
 
+
+
+/*Route::get('/', function () {
+    return view('auth.login');
+});
+*/
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
@@ -36,6 +51,6 @@ Route::delete('proveedores/restore/{id}','ProveedorController@restore')->name('p
 Route::get('proveedores/eliminados','ProveedorController@eliminados');
 Route::Resource('proveedores','ProveedorController');
 
-Route::delete('contratos/restore/{id}','ContratoController@restore')->name('contratos.restore');
+/*Route::delete('contratos/restore/{id}','ContratoController@restore')->name('contratos.restore');
 Route::get('contratos/eliminados','ContratosController@eliminados');
-Route::Resource('contratos','ContratosController');
+Route::Resource('contratos','ContratosController');*/
