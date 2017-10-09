@@ -27,7 +27,7 @@ class AddIdcargoToUsersTable extends Migration
     public function down()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->dropForeign('users_cargo_foreign');
+            $table->dropForeign(['cargo']);
         });
     }
 }
