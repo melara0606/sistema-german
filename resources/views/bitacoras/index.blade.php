@@ -22,37 +22,27 @@ use Carbon\Carbon; ?>
             </div>
             <!-- /.box-header -->
             <div class="box-body no-padding" >
-              <table class="table table-hover" id="datatable">
-  				<thead>
-                  <th>Id</th>
-                  <th>Fecha de actividad</th>
-                  <th>Hora de la actividad</th>
-                  <th>Accion</th>
-                  <th>Usuario</th>
-                  <th>Opción</th>
-                </thead>
-                <tbody>
-                	@foreach($bitacoras as $bitacora)
-                	<tr>
-                		<td>{{ $bitacora->id }}</td>
-                    <td>{{ $bitacora->registro->format('d-m-Y') }}</td>
-                		<td>{{ $bitacora->hora }}</td>
-                		<td>{{ $bitacora->accion }}</td>
-                    <?php 
-                     $nombre= Bitacora::vernombre($bitacora->idusuario);
-                    ?>
-                    <td>{{ $nombre }}</td>
-                		<td>
-                    <a href="{{ url('bitacora/'.$bitacora->id) }}" class="btn btn-primary">Ver</a>
-                      
-                      {{-- {!! link_to_route('proveedores.destroy', 'ELiminar', [$proveedor->id]) !!}
-                			<a class="btn btn-primary" href ="{{ route('proveedores.destroy', $proveedor->id) }}" role="button" >Eliminar </a> --}}
-                    </td>
-                	</tr>
-                	@endforeach 
-                </tbody>
-              </table>
-                 {{ $bitacoras->links() }} 
+              <h1>¿Qué bitácora desea ver?</h1>
+              <div class="form-group">
+                <label>Bitácora general</label>
+                <a href="{{ url('bitacoras/general') }}" class="btn btn-primary">Ver</a>
+              </div>
+               <div class="form-group">
+              {{ Form::open(['action' => 'BitacoraController@usuario','method' => 'get','class' => 'form-horizontal']) }}
+                <label>Bitácora por usuario</label>
+                <select name="usuario" class="form-control">
+                  @foreach($usuarios as $usuario)
+                  <option value="{{ $usuario->id }}">{{ $usuario->name }}</option>
+                  @endforeach
+                </select>
+                <button type="submit" class="btn btn-primary">Ver</button>
+            {{ Form::close() }}
+             </div>
+              <div class="form-group">
+                <label>Bitácora por fecha</label>
+                <input type="text" id="datepicker">
+                <a href="{{ url('bitacoras/general') }}" class="btn btn-primary">Ver</a>
+              </div>
             </div>
             <!-- /.box-body -->
           </div>

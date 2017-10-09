@@ -45,7 +45,10 @@ route::get('home/perfil','UsuariosController@perfil');
 route::get('perfil/{id}','UsuariosController@modificarperfil');
 Route::put('updateperfil','UsuariosController@updateperfil');
 
-Route::Resource('bitacoras' , 'BitacoraController');
+//Route::Resource('bitacoras' , 'BitacoraController');
+Route::get('bitacoras','BitacoraController@index');
+Route::get('bitacoras/general','BitacoraController@general');
+Route::get('bitacoras/usuario','BitacoraController@usuario');
 
 Route::delete('proveedores/restore/{id}','ProveedorController@restore')->name('proveedores.restore');
 Route::get('proveedores/eliminados','ProveedorController@eliminados');

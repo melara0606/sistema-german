@@ -20,8 +20,8 @@ class BitacoraController extends Controller
     public function index()
     {
         //$bitacoras = Bitacora::join('users','bitacoras.idusuario','=','users.id')->paginate(10);
-        $bitacoras = Bitacora::paginate(8);
-        return view('bitacoras.index', compact('bitacoras'));
+        $usuarios = \App\User::all();
+        return view('bitacoras.index', compact('usuarios'));
     }
 
     /**
@@ -29,9 +29,10 @@ class BitacoraController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function general()
     {
-        //
+        $bitacoras = Bitacora::paginate(10);
+        return view('bitacoras.general', compact('bitacoras'));
     }
 
     /**
@@ -40,9 +41,12 @@ class BitacoraController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function usuario(Request $request)
     {
-        //
+        $usuario=$request->usuario;
+       // dd($usuario);
+        $bitacoras = Bitacora::where('idusuario',$usuario)->paginate(10);
+        return view('bitacoras.usuario', compact('bitacoras'));
     }
 
     /**
