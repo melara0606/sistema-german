@@ -11,7 +11,6 @@
 |
 */
 Route::get('/', function () {
-    //$users=DB::select('select * from users');
     $users=\App\User::all()->count();
         if($users==0){
             return view('auth/register');
