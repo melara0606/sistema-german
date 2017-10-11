@@ -2,7 +2,7 @@
                             <label for="nombree" class="col-md-4 control-label">Nombre de la Empresa o Proveedor</label>
 
                             <div class="col-md-6">
-                                <input id="nombree" type="text" class="form-control" name="nombree" value="{{ old('nombree') }}" autofocus>
+                                {{ Form::text('nombree', null,['class' => 'form-control']) }}
 
                                 @if ($errors->has('nombree'))
                                     <span class="help-block">
@@ -16,8 +16,7 @@
                             <label for="direccion" class="col-md-4 control-label">Dirección</label>
 
                             <div class="col-md-6">
-                                <input id="direccion" type="text" class="form-control" name="direccion" value="{{ old('direccion') }}" >
-
+                                 {{ Form::text('direccion', null,['class' => 'form-control']) }}
                                 @if ($errors->has('direccion'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('direccion') }}</strong>
@@ -30,8 +29,7 @@
                             <label for="telefonoe" class="col-md-4 control-label">Telefono de la Empresa o Proveedor</label>
 
                             <div class="col-md-6">
-                                <input id="telefonoe" type="text" class="form-control" name="telefonoe" value="{{ old('telefonoe') }}" >
-
+                                 {{ Form::text('telefonoe', null,['class' => 'form-control']) }}
                                 @if ($errors->has('telefonoe'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('telefonoe') }}</strong>
@@ -44,8 +42,7 @@
                             <label for="emaile" class="col-md-4 control-label">E-Mail Proveedor</label>
 
                             <div class="col-md-6">
-                                <input id="emaile" type="emaile" class="form-control" name="emaile" value="{{ old('email') }}">
-
+                                 {{ Form::email('emaile', null,['class' => 'form-control']) }}
                                 @if ($errors->has('emaile'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('emaile') }}</strong>
@@ -58,7 +55,7 @@
                             <label for="nombrer" class="col-md-4 control-label">Nombre de Represetante</label>
 
                             <div class="col-md-6">
-                                <input id="nombrer" type="nombrer" class="form-control" name="nombrer">
+                                 {{ Form::text('nombrer', null,['class' => 'form-control']) }}
                                 @if ($errors->has('nombrer'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('nombrer') }}</strong>
@@ -71,7 +68,7 @@
                             <label for="telfijor" class="col-md-4 control-label">Telefono fijo Representante (si lo hay)</label>
 
                             <div class="col-md-6">
-                                <input id="telfijor" type="text" class="form-control" name="telfijor" value="{{ old('telfijor') }}" >
+                                 {{ Form::text('telfijor', null,['class' => 'form-control']) }}
 
                                 @if ($errors->has('telfijor'))
                                     <span class="help-block">
@@ -85,7 +82,7 @@
                             <label for="celr" class="col-md-4 control-label">Celular Representante</label>
 
                             <div class="col-md-6">
-                                <input id="celr" type="text" class="form-control" name="celr" value="{{ old('celr') }}" >
+                                 {{ Form::text('celr', null,['class' => 'form-control']) }}
 
                                 @if ($errors->has('celr'))
                                     <span class="help-block">
@@ -96,11 +93,10 @@
                         </div>
 
                         <div class="form-group{{ $errors->has('emailr') ? ' has-error' : '' }}">
-                            <label for="emailr" class="col-md-4 control-label">Dirección</label>
+                            <label for="emailr" class="col-md-4 control-label">E-mail representante</label>
 
                             <div class="col-md-6">
-                                <input id="emailr" type="text" class="form-control" name="emailr" value="{{ old('emailr') }}" >
-
+                                 {{ Form::email('emailr', null,['class' => 'form-control']) }}
                                 @if ($errors->has('emailr'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('emailr') }}</strong>

@@ -45,10 +45,15 @@ Route::put('updateperfil','UsuariosController@updateperfil');
 Route::get('bitacoras','BitacoraController@index');
 Route::get('bitacoras/general','BitacoraController@general');
 Route::get('bitacoras/usuario','BitacoraController@usuario');
+Route::get('bitacoras/fecha','BitacoraController@fecha');
 
 Route::delete('proveedores/restore/{id}','ProveedorController@restore')->name('proveedores.restore');
 Route::get('proveedores/eliminados','ProveedorController@eliminados');
 Route::Resource('proveedores','ProveedorController');
+
+Route::get('contribuyentes/baja/{id}','ContribuyenteController@baja')->name('contribuyentes.baja');
+Route::get('contribuyentes/eliminados','ContribuyenteController@eliminados');
+Route::Resource('contribuyentes','ContribuyenteController');
 
 /*Route::delete('contratos/restore/{id}','ContratoController@restore')->name('contratos.restore');
 Route::get('contratos/eliminados','ContratosController@eliminados');

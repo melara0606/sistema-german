@@ -11,7 +11,7 @@ class UsuariosController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['auth','admin']);
+        $this->middleware(['auth','Admin']);
     } 
     
     public function index()

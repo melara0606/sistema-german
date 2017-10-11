@@ -19,6 +19,7 @@ $cargo=Cargo::vercargo(Auth::user()->cargo);
   <!-- Theme style -->
   {!! Html::style('css/font-awesome.min.css')!!}
   {!! Html::style('css/AdminLTE.min.css') !!}
+  {!! Html::style('css/wizard.css') !!}
   {!! Html::style('css/skins/_all-skins.min.css')!!}
   {!! Html::style('plugins/iCheck/flat/blue.css')!!}
   {!! Html::style('plugins/morris/morris.css')!!}
@@ -390,6 +391,18 @@ $cargo=Cargo::vercargo(Auth::user()->cargo);
             </span>
           </a>
           <ul class="treeview-menu">
+            <li><a href="{{ url('Contribuyentes') }}"><i class="fa fa-circle-o"></i> Listado de Contribuyentes</a></li>
+            <li><a href="{{ url('Contribuyentes/create') }}"><i class="fa fa-circle-o"></i> Registro de Contribuyentes</a></li>
+          </ul>
+        </li>
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-edit"></i> <span>Contribuyentes</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
             <li><a href="pages/forms/general.html"><i class="fa fa-circle-o"></i> Registro de Cotización</a></li>
           </ul>
         </li>
@@ -475,6 +488,7 @@ $cargo=Cargo::vercargo(Auth::user()->cargo);
 {!! Html::script('js/datatables.min.js') !!}
 {!! Html::script('js/dataTables.bootstrap.min.js') !!}
 {!! Html::script('js/sweetalert2.min.js') !!}
+{!! Html::script('js/wizard.js') !!}
 {!! Html::script('plugins/morris/morris.min.js') !!}
 {!! Html::script('plugins/sparkline/jquery.sparkline.min.js') !!}
 {!! Html::script('plugins/jvectormap/jquery-jvectormap-1.2.2.min.js') !!}
@@ -485,6 +499,7 @@ $cargo=Cargo::vercargo(Auth::user()->cargo);
 {!! Html::script('plugins/fastclick/fastclick.js') !!}
 {!! Html::script('js/app.min.js') !!}
 {!! Html::script('js/demo.js') !!}
+{!! Html::script('js/baja.js') !!}
 
 <!-- jQuery UI 1.11.4 -->
 <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>

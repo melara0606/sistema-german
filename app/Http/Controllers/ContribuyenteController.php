@@ -1,27 +1,22 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Bitacora;
-use Carbon\Carbon;
-use Illuminate\Http\Request;
 
-class BitacoraController extends Controller
+use Illuminate\Http\Request;
+use App\Http\Requests\ContribuyenteRequest;
+use App\Contribuyente;
+
+class ContribuyenteController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    } 
-    
     public function index()
     {
-        //$bitacoras = Bitacora::join('users','bitacoras.idusuario','=','users.id')->paginate(10);
-        $usuarios = \App\User::all();
-        return view('bitacoras.index', compact('usuarios'));
+        $contribuyentes = Contribuyente::orderBy('id')->paginate(10);
+        return view('contribuyentes.index',compact('contribuyentes'));
     }
 
     /**
@@ -29,10 +24,9 @@ class BitacoraController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function general()
+    public function create()
     {
-        $bitacoras = Bitacora::paginate(10);
-        return view('bitacoras.general', compact('bitacoras'));
+        return view('contribuyentes.create');
     }
 
     /**
@@ -41,12 +35,11 @@ class BitacoraController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function usuario(Request $request)
+    public function store(ContribuyenteRequest $request)
     {
-        $usuario=$request->usuario;
-       // dd($usuario);
-        $bitacoras = Bitacora::where('idusuario',$usuario)->paginate(10);
-        return view('bitacoras.usuario', compact('bitacoras'));
+        Contribuyente::create($request->All());
+        bitacora('Registro un contribuyente');
+        return redirect('/contribuyentes')->with('mensaje','Registro almacenado con éxito');
     }
 
     /**
@@ -55,9 +48,9 @@ class BitacoraController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function fecha()
+    public function show($id)
     {
-        return view('bitacoras.fecha');
+        //
     }
 
     /**
@@ -92,5 +85,17 @@ class BitacoraController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function baja($id)
+    {
+       dd($id);
+        $contribuyente = Contribuyente::find($id);
+        $contribuyente->estado=$request('estado');
+        $contribuyente->motivo=$request('motivo');
+        $contribuyente->fechabaja=date('Y-m-d');
+        $proveedor->save();
+        bitacora('Modificó un Proveedor');
+        return redirect('/proveedores')->with('mensaje','Registro modificado con éxito');
     }
 }

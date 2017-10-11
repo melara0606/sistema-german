@@ -29,8 +29,8 @@ class LoginController extends Controller
     
      public function authenticate()
     {
-        if (Auth::attempt(['email' => $email, 'password' => $password])) {
-            // Authentication passed...
+        if (Auth::attempt(['username' => $username, 'password' => $password])) {
+            
             return redirect()->intended('home');
         }
     }

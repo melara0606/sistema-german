@@ -41,7 +41,7 @@ use Carbon\Carbon; ?>
               <div class="form-group">
                 <label>Bitácora por fecha</label>
                 <input type="text" id="datepicker">
-                <a href="{{ url('bitacoras/general') }}" class="btn btn-primary">Ver</a>
+                <a href="{{ url('bitacoras/fecha') }}" class="btn btn-primary">Ver</a>
               </div>
             </div>
             <!-- /.box-body -->
