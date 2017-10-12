@@ -10,7 +10,12 @@ class Bitacora extends Model
     protected $guarded = [];
     protected $dates = ['registro'];
 
-    public static function vernombre($id)
+    public function users()
+    {
+    	return $this->belongsTo('App\User');
+    }
+
+   public static function vernombre($id)
     {
     	$nombre = User::find($id);
     	return $nombre->name;

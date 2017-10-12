@@ -18,7 +18,15 @@
             <div class="box-header">
               <h3 class="box-title">Listado</h3>
               	<a href="{{ url('/proveedores/create') }}" class="btn btn-success"><span class="glyphicon glyphicon-plus-sign"></span> Agregar</a>
-                <a href="{{ url('proveedores/eliminados') }}" class="btn btn-primary">Ver eliminados</a> 
+                <a href="{{ url('proveedores/eliminados') }}" class="btn btn-primary">Ver eliminados</a>
+                {{-- <p>
+                  {{ Form::open(['route' => 'proveedores.index', 'method' => 'GET', 'class' => 'navbar-form navbar-left pull-right', 'role' => 'search'])}}
+                    <div class="form-group">
+                      {!! Form::text('name', null, ['class' => 'form-control', 'placeholder' => 'Buscar']) !!}
+                    </div>
+                  <button type="submit" class="btn btn-default">Buscar</button>
+                  {{ Form::close() }}
+                </p>  --}}
             </div>
             <!-- /.box-header -->
             <div class="box-body table-responsive no-padding">

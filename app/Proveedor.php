@@ -12,4 +12,12 @@ class Proveedor extends Model
 	protected $dates = ['deleted_at'];
 	
     protected $guarded = [];
+
+    public function scopeName($query,$name)
+    {
+    	if(trim($name != "")){
+    	$query->where('nombree',$name);	
+    	}
+    	
+    }
 }

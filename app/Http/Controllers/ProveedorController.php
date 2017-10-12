@@ -17,8 +17,9 @@ class ProveedorController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        //echo $request->get('name');
         $proveedores = Proveedor::paginate(10);
         $count = $proveedores->count();
        
@@ -108,7 +109,7 @@ class ProveedorController extends Controller
 
     public function eliminados()
     {
-        $proveedores = Proveedor::onlyTrashed()->paginate(10);
+        $proveedores = Proveedor::onlyTrashedorFail()->paginate(10);
         return view('proveedores.eliminados', compact('proveedores'));
 
     }
