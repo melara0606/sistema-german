@@ -51,10 +51,10 @@ Route::delete('proveedores/restore/{id}','ProveedorController@restore')->name('p
 Route::get('proveedores/eliminados','ProveedorController@eliminados');
 Route::Resource('proveedores','ProveedorController');
 
-Route::get('contribuyentes/baja/{id}','ContribuyenteController@baja')->name('contribuyentes.baja');
+Route::post('contribuyentes/baja/{id}','ContribuyenteController@baja')->name('contribuyentes.baja');
+Route::post('contribuyentes/alta/{id}','ContribuyenteController@alta')->name('contribuyentes.alta');
 Route::get('contribuyentes/eliminados','ContribuyenteController@eliminados');
 Route::Resource('contribuyentes','ContribuyenteController');
 
-/*Route::delete('contratos/restore/{id}','ContratoController@restore')->name('contratos.restore');
-Route::get('contratos/eliminados','ContratosController@eliminados');
-Route::Resource('contratos','ContratosController');*/
+
+Route::Resource('contratos','ContratosController');

@@ -13,10 +13,24 @@ class ContribuyenteController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $contribuyentes = Contribuyente::orderBy('id')->paginate(10);
-        return view('contribuyentes.index',compact('contribuyentes'));
+        //dd($request->get('dato'));
+        //dd($orden);
+        if($request->get('dato') == "" || $request->get('dato') == "nombre"){
+          $contribuyentes = Contribuyente::nombre($request->get('dato'))->orderBy('id')->paginate(10);
+          return view('contribuyentes.index',compact('contribuyentes')); 
+        }
+        if ($request->get('dato') == 1) {
+            $contribuyentes = Contribuyente::estado($request->get('dato'))->orderBy('id')->paginate(10);
+            return view('contribuyentes.index',compact('contribuyentes')); 
+        }
+        if ($request->get('dato') == 2) {
+            $contribuyentes = Contribuyente::estado($request->get('dato'))->orderBy('id')->paginate(10);
+            return view('contribuyentes.index',compact('contribuyentes')); 
+        }
+
+        
     }
 
     /**
@@ -87,15 +101,35 @@ class ContribuyenteController extends Controller
         //
     }
 
-    public function baja($id)
+    public function baja($cadena)
     {
-       dd($id);
+      
+       $datos = explode("+", $cadena);
+       $id=$datos[0];
+       $motivo=$datos[1];
+        //dd($id);
         $contribuyente = Contribuyente::find($id);
-        $contribuyente->estado=$request('estado');
-        $contribuyente->motivo=$request('motivo');
+        $contribuyente->estado=2;
+        $contribuyente->motivo=$motivo;
         $contribuyente->fechabaja=date('Y-m-d');
-        $proveedor->save();
-        bitacora('Modificó un Proveedor');
-        return redirect('/proveedores')->with('mensaje','Registro modificado con éxito');
+        $contribuyente->save();
+        bitacora('Dió de baja a un contribuyente');
+        return redirect('/contribuyentes')->with('mensaje','Contribuyente dado de baja');
+    }
+
+    public function alta($cadena)
+    {
+      
+       $datos = explode("+", $cadena);
+       $id=$datos[0];
+       $motivo=$datos[1];
+        //dd($id);
+        $contribuyente = Contribuyente::find($id);
+        $contribuyente->estado=1;
+        $contribuyente->motivo="";
+        $contribuyente->fechabaja="";
+        $contribuyente->save();
+        bitacora('Dió de alta a un contribuyente');
+        return redirect('/contribuyentes')->with('mensaje','Contribuyente dado de alta');
     }
 }
