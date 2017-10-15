@@ -17,7 +17,7 @@ class ContribuyenteController extends Controller
     {
         //dd($request->get('dato'));
         //dd($orden);
-        if($request->get('dato') == "" || $request->get('dato') == "nombre"){
+        if($request->get('dato') == 1 || $request->get('dato') == "nombre"){
           $contribuyentes = Contribuyente::nombre($request->get('dato'))->orderBy('id')->paginate(10);
           return view('contribuyentes.index',compact('contribuyentes')); 
         }

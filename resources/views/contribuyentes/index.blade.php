@@ -20,13 +20,12 @@
               	<a href="{{ url('/contribuyentes/create') }}" class="btn btn-success"><span class="glyphicon glyphicon-plus-sign"></span> Agregar</a>
                 <a href="{{ url('/contribuyentes?dato=1') }}" class="btn btn-primary">Todos</a> 
                 <a href="{{ url('/contribuyentes?dato=2') }}" class="btn btn-primary">Papelera</a> 
-                  {{ Form::open(['route' => 'contribuyentes.index', 'method' => 'GET', 'class' => 'navbar-form navbar-left pull-right','role' => 'search'])}}
-        <div class="form-group">
-          {{ Form::text('nombre',null,['class' => 'form-control','placeholder' => 'Buscar'])}}
-        </div>
-        <button type="Buscar" class="btn btn-default">Buscar</button>
-      {{ Form::close() }}
-            </div>
+                  {{ Form::open(['route' => 'contribuyentes.index?estado=1', 'method' => 'GET', 'class' => 'navbar-form navbar-left pull-right','role' => 'search'])}}
+                <div class="form-group">
+                        {{ Form::text('nombre',null,['class' => 'form-control','placeholder' => 'Buscar'])}}
+                        <button type="Buscar" class="btn btn-default">Buscar</button>
+                    {{ Form::close() }}
+                </div>
             <!-- /.box-header -->
             <div class="box-body table-responsive no-padding">
               <table class="table table-striped table-bordered table-hover" id="">
