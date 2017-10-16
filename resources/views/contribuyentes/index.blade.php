@@ -3,7 +3,7 @@
 @section('migasdepan')
 <h1>
         Contribuyentes
-        
+
       </h1>
       <ol class="breadcrumb">
         <li><a href="{{ url('/contribuyentes') }}"><i class="fa fa-dashboard"></i> Contribuyentes</a></li>
@@ -18,12 +18,13 @@
             <div class="box-header">
               <h3 class="box-title">Listado</h3>
               	<a href="{{ url('/contribuyentes/create') }}" class="btn btn-success"><span class="glyphicon glyphicon-plus-sign"></span> Agregar</a>
-                <a href="{{ url('/contribuyentes?dato=1') }}" class="btn btn-primary">Todos</a> 
-                <a href="{{ url('/contribuyentes?dato=2') }}" class="btn btn-primary">Papelera</a> 
+                <a href="{{ url('/contribuyentes?estado=1') }}" class="btn btn-primary">Todos</a>
+                <a href="{{ url('/contribuyentes?estado=2') }}" class="btn btn-primary">Papelera</a>
                   {{ Form::open(['route' => 'contribuyentes.index', 'method' => 'GET', 'class' => 'navbar-form navbar-left pull-right','role' => 'search'])}}
                 <div class="form-group">
                         {{ Form::text('nombre',null,['class' => 'form-control','placeholder' => 'Buscar'])}}
-                        <button type="Buscar" class="btn btn-default">Buscar</button>
+                            {{ Form::hidden('estado') }}
+                            <button type="Buscar" class="btn btn-default">Buscar</button>
                 </div>
                     {{ Form::close() }}
                 </div>

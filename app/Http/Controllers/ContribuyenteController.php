@@ -16,21 +16,15 @@ class ContribuyenteController extends Controller
      */
     public function index(Request $request)
     {
-        //dd($request->dato);
-        //dd($orden);
-        if($request->get('dato') == "" || $request->get('dato') == "nombre"){
-          $contribuyentes = Contribuyente::nombre($request->get('dato'))->orderBy('id')->paginate(10);
-          $estado=1;
-          return view('contribuyentes.index',compact('contribuyentes','estado')); 
-        }
-        if ($request->get('dato') == 1) {
-            $contribuyentes = Contribuyente::estado($request->get('dato'))->orderBy('id')->paginate(10);
-            $estado=1;
+        $nombre = $request->get('nombre');
+        $estado = $request->get('estado');
+        if($estado == "" )$estado=1;
+        if ($estado == 1) {
+            $contribuyentes = Contribuyente::Buscar($nombre,$estado);
             return view('contribuyentes.index',compact('contribuyentes','estado')); 
         }
-        if ($request->get('dato') == 2) {
-            $contribuyentes = Contribuyente::estado($request->get('dato'))->orderBy('id')->paginate(10);
-            $estado=2;
+        if ($estado == 2) {
+            $contribuyentes = Contribuyente::Buscar($nombre,$estado);
             return view('contribuyentes.index',compact('contribuyentes','estado')); 
         }
 
