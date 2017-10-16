@@ -8,7 +8,7 @@ use Carbon\Carbon;
 class Contribuyente extends Model
 {
     //protected $dates = ['deleted_at'];
-    protected $dates = ['created_at','updated_at','fechabaja'];
+    protected $dates = ['created_at','updated_at','fechabaja','nacimiento'];
 	
     protected $guarded = [];
 

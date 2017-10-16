@@ -40,6 +40,20 @@
     </div>
 </div>
 
+<div class="form-group{{ $errors->has('nacimiento') ? ' has-error' : '' }}">
+    <label for="nacimiento" class="col-md-4 control-label">Fecha de Nacimiento</label>
+
+    <div class="col-md-6">
+        {{ Form::date('nacimiento', null,['class' => 'form-control']) }}
+
+        @if ($errors->has('nacimiento'))
+            <span class="help-block">
+                <strong>{{ $errors->first('nacimiento') }}</strong>
+            </span>
+         @endif
+    </div>
+</div>
+
 <div class="form-group{{ $errors->has('direccion') ? ' has-error' : '' }}">
     <label for="direccion" class="col-md-4 control-label">Dirección</label>
 

@@ -28,34 +28,12 @@
                 </div>
             <!-- /.box-header -->
             <div class="box-body table-responsive no-padding">
-              <table class="table table-striped table-bordered table-hover" id="">
-  				<thead>
-                  <th>ID</th>
-                  <th>Nombre de contribuyente</th>
-                  <th>DUI</th>
-                  <th>NIT</th>
-                  <th>Dirección</th>
-                  <th>Sexo</th>
-                  <th>Teléfono</th>
-                  <th>Accion</th>
-                </thead>
-                <tbody>
-                	@foreach($contribuyentes as $contribuyente)
-                	<tr>
-                		<td>{{ $contribuyente->id }}</td>
-                		<td>{{ $contribuyente->nombre }}</td>
-                		<td>{{ $contribuyente->dui }}</td>
-                		<td>{{ $contribuyente->nit }}</td>
-                    <td>{{ $contribuyente->direccion }}</td>
-                    <td>{{ $contribuyente->sexo }}</td>
-                    <td>{{ $contribuyente->telefono }}</td>
-                	 <td>
-                      {{ Form::open(['method' => 'POST', 'id' => 'baja', 'class' => 'form-horizontal'])}}
-                        <a href="{{ url('proveedores/'.$contribuyente->id) }}" class="btn btn-primary"><span class="glyphicon glyphicon-eye-open"></span> Ver</a> |
-                        <a href="{{ url('/proveedores/'.$contribuyente->id.'/edit') }}" class="btn btn-warning"><span class="glyphicon glyphicon-text-size"></span> Editar</a> | 
-                        <button class="btn btn-danger" type="button" onclick={{ "baja(".$contribuyente->id.")" }}><span class="glyphicon glyphicon-trash"></span> Eliminar</button>
-                      {{ Form::close()}} 
-                     <script>
+              @if($estado == 1 || $estado == 0)
+              @include('contribuyentes.tabla1')
+              @else
+              @include('contribuyentes.tabla2')
+              @endif
+              <script>
                         function baja(id)
                        {
                         swal({
@@ -82,32 +60,25 @@
                         function alta(id)
                        {
                         swal({
-                            title: 'Motivo dar de baja',
-                            input: 'text',
+                            title: 'Dar de alta',
                             showCancelButton: true,
-                            confirmButtonText: 'Dar de baja',
+                            confirmButtonText: 'Dar de alta',
                             showLoaderOnConfirm: true,
                             allowOutsideClick: false
-                          }).then(function (text) {
+                          }).then(function () {
                             var dominio = window.location.host;
                             var form = $(this).parents('form');
-                            $('#baja').attr('action','http://'+dominio+'/contribuyentes/alta/'+id+'+'+text);
+                            $('#alta').attr('action','http://'+dominio+'/contribuyentes/alta/'+id);
                             //document.getElmentById('baja').submit();
-                            $('#baja').submit();
+                            $('#alta').submit();
                             swal({
                               type: 'success',
                               title: 'Se dio de alta',
-                              html: 'Submitted motivo: ' + text
+                              html: 'Submitted motivo: '
                             })
                           });
                        }
                      </script>
-
-                    </td>
-                	</tr>
-                	@endforeach 
-                </tbody>
-              </table>
               <div class="pull-right">
                  {{ $contribuyentes->links() }}
               </div> 

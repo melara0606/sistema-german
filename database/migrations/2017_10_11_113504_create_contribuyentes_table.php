@@ -18,6 +18,7 @@ class CreateContribuyentesTable extends Migration
             $table->string('nombre');
             $table->string('dui');
             $table->string('nit');
+            $table->date('nacimiento');
             $table->string('direccion');
             $table->string('telefono');
             $table->string('sexo');

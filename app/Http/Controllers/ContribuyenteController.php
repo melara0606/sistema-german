@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests\ContribuyenteRequest;
 use App\Contribuyente;
+use Carbon\Carbon;
 
 class ContribuyenteController extends Controller
 {
@@ -15,19 +16,22 @@ class ContribuyenteController extends Controller
      */
     public function index(Request $request)
     {
-        //dd($request->get('dato'));
+        //dd($request->dato);
         //dd($orden);
         if($request->get('dato') == 1 || $request->get('dato') == "nombre"){
           $contribuyentes = Contribuyente::nombre($request->get('dato'))->orderBy('id')->paginate(10);
-          return view('contribuyentes.index',compact('contribuyentes')); 
+          $estado=1;
+          return view('contribuyentes.index',compact('contribuyentes','estado')); 
         }
         if ($request->get('dato') == 1) {
             $contribuyentes = Contribuyente::estado($request->get('dato'))->orderBy('id')->paginate(10);
-            return view('contribuyentes.index',compact('contribuyentes')); 
+            $estado=1;
+            return view('contribuyentes.index',compact('contribuyentes','estado')); 
         }
         if ($request->get('dato') == 2) {
             $contribuyentes = Contribuyente::estado($request->get('dato'))->orderBy('id')->paginate(10);
-            return view('contribuyentes.index',compact('contribuyentes')); 
+            $estado=2;
+            return view('contribuyentes.index',compact('contribuyentes','estado')); 
         }
 
         
@@ -75,7 +79,9 @@ class ContribuyenteController extends Controller
      */
     public function edit($id)
     {
-        //
+        $contribuyente = Contribuyente::findorFail($id);
+
+        return view('contribuyentes.edit',compact('contribuyente'));
     }
 
     /**
@@ -85,9 +91,13 @@ class ContribuyenteController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ContribuyenteRequest $request, $id)
     {
-        //
+        $contribuyente = Contribuyente::find($id);
+        $contribuyente->fill($request->All());
+        $contribuyente->save();
+        bitacora('Modificó un Proveedor');
+        return redirect('/proveedores')->with('mensaje','Registro modificado con éxito');
     }
 
     /**
@@ -117,17 +127,17 @@ class ContribuyenteController extends Controller
         return redirect('/contribuyentes')->with('mensaje','Contribuyente dado de baja');
     }
 
-    public function alta($cadena)
+    public function alta($id)
     {
       
-       $datos = explode("+", $cadena);
-       $id=$datos[0];
-       $motivo=$datos[1];
+       //$datos = explode("+", $cadena);
+       ////$id=$datos[0];
+       //$motivo=$datos[1];
         //dd($id);
         $contribuyente = Contribuyente::find($id);
         $contribuyente->estado=1;
         $contribuyente->motivo="";
-        $contribuyente->fechabaja="";
+        $contribuyente->fechabaja=null;
         $contribuyente->save();
         bitacora('Dió de alta a un contribuyente');
         return redirect('/contribuyentes')->with('mensaje','Contribuyente dado de alta');
