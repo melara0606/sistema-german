@@ -3,20 +3,27 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Proveedor extends Model
 {
-	use SoftDeletes;
 
-	protected $dates = ['deleted_at'];
+	protected $dates = ['created_at','updated_at','fechabaja'];
 	
     protected $guarded = [];
 
-    public function scopeName($query,$name)
+    public static function Buscar($nombre,$estado)
     {
-    	if(trim($name != "")){
-    	$query->where('nombree',$name);	
+        return Proveedor::nombre($nombre)->estado($estado)->orderBy('id')->paginate(10);
+    }
+
+    public function scopeEstado($query,$estado)
+    {
+        return $query->where('estado',$estado);
+    }
+    public function scopeNombre($query,$nombre)
+    {
+    	if(trim($nombre != "")){
+            return $query->where('nombree','iLIKE', '%'.$nombre.'%');
     	}
     	
     }
