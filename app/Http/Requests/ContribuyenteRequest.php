@@ -30,6 +30,7 @@ class ContribuyenteRequest extends FormRequest
             'direccion' => 'required|max:100',
             'telefono' => 'required',
             'sexo' => 'required',
+            'nacimiento' => 'required|date',
         ];
     }
 }

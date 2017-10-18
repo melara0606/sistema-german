@@ -44,6 +44,17 @@
                             showCancelButton: true,
                             confirmButtonText: 'Dar de baja',
                             showLoaderOnConfirm: true,
+                            preConfirm: function (text) {
+                                return new Promise(function (resolve, reject) {
+                                    setTimeout(function() {
+                                        if (text === '') {
+                                            reject('Debe ingresar el motivo')
+                                        } else {
+                                            resolve()
+                                        }
+                                    }, 2000)
+                                })
+                            },
                             allowOutsideClick: false
                           }).then(function (text) {
                             var dominio = window.location.host;

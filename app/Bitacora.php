@@ -10,9 +10,14 @@ class Bitacora extends Model
     protected $guarded = [];
     protected $dates = ['registro'];
 
-    public function users()
+    public static function bitacora($accion)
     {
-    	return $this->belongsTo('App\User');
+        $bitacora = new Bitacora;
+        $bitacora->registro = date('Y-m-d');
+        $bitacora->hora = date('H:i:s');
+        $bitacora->accion = $accion;
+        $bitacora->idusuario = Auth()->user()->id;
+        $bitacora->save();
     }
 
    public static function vernombre($id)

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\ContribuyenteRequest;
 use App\Contribuyente;
 use Carbon\Carbon;
+use App\Bitacora;
 
 class ContribuyenteController extends Controller
 {
@@ -62,7 +63,9 @@ class ContribuyenteController extends Controller
      */
     public function show($id)
     {
-        //
+        $contribuyente = Contribuyente::findorFail($id);
+
+        return view('contribuyentes.show',compact('contribuyente'));
     }
 
     /**
@@ -91,7 +94,7 @@ class ContribuyenteController extends Controller
         $contribuyente->fill($request->All());
         $contribuyente->save();
         bitacora('Modificó un Proveedor');
-        return redirect('/proveedores')->with('mensaje','Registro modificado con éxito');
+        return redirect('/contribuyentes')->with('mensaje','Registro modificado con éxito');
     }
 
     /**
@@ -133,7 +136,7 @@ class ContribuyenteController extends Controller
         $contribuyente->motivo="";
         $contribuyente->fechabaja=null;
         $contribuyente->save();
-        bitacora('Dió de alta a un contribuyente');
+        Bitacora::bitacora('Dió de alta a un contribuyente');
         return redirect('/contribuyentes')->with('mensaje','Contribuyente dado de alta');
     }
 }

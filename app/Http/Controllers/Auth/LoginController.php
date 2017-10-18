@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use App\Proveedor;
+use App\Bitacora;
 
 class LoginController extends Controller
 {
@@ -30,7 +31,7 @@ class LoginController extends Controller
      public function authenticate()
     {
         if (Auth::attempt(['username' => $username, 'password' => $password])) {
-            
+            Bitacora::bitacora('inicio sesion');
             return redirect()->intended('home');
         }
     }
@@ -43,6 +44,7 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+
     }
 
     public function username()

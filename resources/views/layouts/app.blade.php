@@ -29,6 +29,10 @@ $cargo=Cargo::vercargo(Auth::user()->cargo);
   {!! Html::style('css/datatables.min.css') !!}
   {!! Html::style('css/buttons.bootstrap.min.css') !!}
   {!! Html::style('css/sweetalert2.min.css') !!}
+  {!! Html::style('plugins/daterangepicker/daterangepicker.css') !!}
+  {!! Html::style('plugins/datepicker/datepicker3.css') !!}
+  {!! Html::style('plugins/iCheck/all.css') !!}
+
 
   <!-- AdminLTE Skins. Choose a skin from the css/skins
        folder instead of downloading all of them to reduce the load. -->
@@ -55,7 +59,7 @@ $cargo=Cargo::vercargo(Auth::user()->cargo);
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>S</b>VZ</span>
       <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><b>SisVerapaz</span>
+      <span class="logo-lg"><b>SisVerapaz</b></span>
     </a>
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top">
@@ -286,7 +290,7 @@ $cargo=Cargo::vercargo(Auth::user()->cargo);
                   <a href="{{ url('/home/perfil') }}" class="btn btn-default btn-flat">Perfil</a>
                 </div>
                 <div class="pull-right">
-                  <a href="{{ route('logout') }}" class="btn btn-default btn-flat""
+                  <a href="{{ route('logout') }}" class="btn btn-default btn-flat"
                                             onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                             Cerrar Sesión
@@ -483,7 +487,7 @@ $cargo=Cargo::vercargo(Auth::user()->cargo);
 <!-- ./wrapper -->
 
 <!-- jQuery 2.2.3 -->
-{!! Html::script('plugins/jQuery/jquery-2.2.3.min.js') !!}
+  {!! Html::script('plugins/jQuery/jquery-2.2.3.min.js') !!}
 {!! Html::script('bootstrap/js/bootstrap.min.js') !!}
 {!! Html::script('js/datatables.min.js') !!}
 {!! Html::script('js/dataTables.bootstrap.min.js') !!}
@@ -499,10 +503,12 @@ $cargo=Cargo::vercargo(Auth::user()->cargo);
 {!! Html::script('plugins/fastclick/fastclick.js') !!}
 {!! Html::script('js/app.min.js') !!}
 {!! Html::script('js/demo.js') !!}
-{!! Html::script('js/baja.js') !!}
+{!! Html::script('plugins/select2/select2.full.min.js') !!}
+{!! Html::script('plugins/input-mask/jquery.inputmask.js') !!}
+{!! Html::script('plugins/datepicker/bootstrap-datepicker.js') !!}
+{!! Html::script('plugins/colorpicker/bootstrap-colorpicker.min.js') !!}
+{!! Html::script('plugins/iCheck/icheck.min.js') !!}
 
-<!-- jQuery UI 1.11.4 -->
-<script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
 
 <!-- Bootstrap 3.3.6 -->
@@ -515,5 +521,33 @@ $cargo=Cargo::vercargo(Auth::user()->cargo);
 
 <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
 {!! Html::script('js/tablas.js') !!}
+  <script>
+      $(function () {
+          //Initialize Select2 Elements
+          $(".select2").select2();
+
+          //Datemask dd/mm/yyyy
+          $("#datemask").inputmask("dd/mm/yyyy", {"placeholder": "dd/mm/yyyy"});
+          //Datemask2 mm/dd/yyyy
+          $("#datemask2").inputmask("mm/dd/yyyy", {"placeholder": "mm/dd/yyyy"});
+          //Money Euro
+          $("[data-mask]").inputmask();
+
+
+          //Date picker
+          $('#datepicker').datepicker({
+              autoclose: true
+          });
+          $('input[type="checkbox"].flat-red, input[type="radio"].flat-red').iCheck({
+              checkboxClass: 'icheckbox_flat-green',
+              radioClass: 'iradio_flat-green'
+          });
+           //Colorpicker
+          $(".my-colorpicker1").colorpicker();
+          //color picker with addon
+          $(".my-colorpicker2").colorpicker();
+
+      });
+  </script>
 </body>
 </html>
