@@ -1,6 +1,3 @@
-<?php use App\Cargo; 
-$cargo=Cargo::vercargo(Auth::user()->cargo);
-?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -26,12 +23,48 @@ $cargo=Cargo::vercargo(Auth::user()->cargo);
   {!! Html::style('plugins/jvectormap/jquery-jvectormap-1.2.2.css')!!}
   {!! Html::style('plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css')!!}
   {!! Html::style('css/bootstrap-toggle.min.css')!!}
-  {!! Html::style('css/datatables.min.css') !!}
   {!! Html::style('css/buttons.bootstrap.min.css') !!}
   {!! Html::style('css/sweetalert2.min.css') !!}
   {!! Html::style('plugins/daterangepicker/daterangepicker.css') !!}
   {!! Html::style('plugins/datepicker/datepicker3.css') !!}
   {!! Html::style('plugins/iCheck/all.css') !!}
+  {!! Html::style('plugins/datatables/dataTables.bootstrap.css') !!}
+  {!! Html::script('plugins/jQuery/jquery-2.2.3.min.js') !!}
+{!! Html::script('plugins/iCheck/icheck.min.js') !!}
+{!! Html::script('plugins/datatables/jquery.dataTables.min.js') !!}
+{!! Html::script('plugins/datatables/dataTables.bootstrap.min.js') !!}
+  <script>
+      $(function () {
+          //datatables
+          $('#example2').DataTable({
+              language: {
+                  processing: "Búsqueda en curso...",
+                  search: "Búscar:",
+                  lengthMenu: "Mostrar _MENU_ Elementos",
+                  info: "Mostrando _START_ de _END_ de un total de _TOTAL_ Elementos",
+                  infoEmpty: "Visializando 0 de 0 de un total de 0 elementos",
+                  infoFiltered: "(Filtrado de _MAX_ elementos en total)",
+                  infoPostFix: "",
+                  loadingRecords: "Carga de datos en proceso..",
+                  zeroRecords: "Elementos no encontrado",
+                  emptyTable: "La tabla no contiene datos",
+                  paginate: {
+                      first: "Primero",
+                      previous: "Anterior",
+                      next: "siguiente",
+                      last: "Último"
+                  },
+              },
+              "paging": true,
+              "lengthChange": true,
+              "searching": true,
+              "ordering": true,
+              "info": true,
+              "autoWidth": false
+          });
+      });
+  </script>
+
 
 
   <!-- AdminLTE Skins. Choose a skin from the css/skins
@@ -267,7 +300,7 @@ $cargo=Cargo::vercargo(Auth::user()->cargo);
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <img src="{{ asset('img/user2-160x160.jpg') }}" class="user-image" alt="User Image">
-              <span class="hidden-xs">{{ Auth::user()->name }} </span>
+              <span class="hidden-xs">{{ Auth()->user()->name }} </span>
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->
@@ -275,7 +308,7 @@ $cargo=Cargo::vercargo(Auth::user()->cargo);
                 <img src="{{ asset('img/user2-160x160.jpg') }}" class="img-circle" alt="User Image">
 
                 <p>
-                  {{ Auth::user()->name }}  - {{ $cargo }}
+                  {{ vercargo(Auth::user()->cargo) }}
                   <small>Member since Nov. 2012</small>
                 </p>
               </li>
@@ -487,12 +520,9 @@ $cargo=Cargo::vercargo(Auth::user()->cargo);
 <!-- ./wrapper -->
 
 <!-- jQuery 2.2.3 -->
-  {!! Html::script('plugins/jQuery/jquery-2.2.3.min.js') !!}
+
 {!! Html::script('bootstrap/js/bootstrap.min.js') !!}
-{!! Html::script('js/datatables.min.js') !!}
-{!! Html::script('js/dataTables.bootstrap.min.js') !!}
 {!! Html::script('js/sweetalert2.min.js') !!}
-{!! Html::script('js/wizard.js') !!}
 {!! Html::script('plugins/morris/morris.min.js') !!}
 {!! Html::script('plugins/sparkline/jquery.sparkline.min.js') !!}
 {!! Html::script('plugins/jvectormap/jquery-jvectormap-1.2.2.min.js') !!}
@@ -507,7 +537,9 @@ $cargo=Cargo::vercargo(Auth::user()->cargo);
 {!! Html::script('plugins/input-mask/jquery.inputmask.js') !!}
 {!! Html::script('plugins/datepicker/bootstrap-datepicker.js') !!}
 {!! Html::script('plugins/colorpicker/bootstrap-colorpicker.min.js') !!}
-{!! Html::script('plugins/iCheck/icheck.min.js') !!}
+
+
+
 
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
 
@@ -523,6 +555,8 @@ $cargo=Cargo::vercargo(Auth::user()->cargo);
 {!! Html::script('js/tablas.js') !!}
   <script>
       $(function () {
+          //datatables
+
           //Initialize Select2 Elements
           $(".select2").select2();
 

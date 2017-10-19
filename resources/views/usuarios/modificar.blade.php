@@ -68,13 +68,15 @@
 
                             <div class="col-md-6">
                                 <select name="cargo" id="cargo" class="form-control">
-                                    @foreach($cargos as $cargo)
-                                        @if($cargo->id == $usuario->cargo)
-                                            <option value="{{ $cargo->id }}" selected>{{ $cargo->cargo }}</option>
-                                        @else
-                                            <option value="{{ $cargo->id }}" >{{ $cargo->cargo }}</option>
-                                        @endif
-                                    @endforeach
+                                    @if($usuario->cargo == 1)
+                                        <option value="1" selected>Administrador</option>
+                                    @else
+                                        <option value="2">Jefe UACI</option>
+                                        <option value="3">Jefe Tesorería</option>
+                                        <option value="4">Jefe Registro y Control Tributario</option>
+                                        <option value="5">Colector</option>
+                                    @endif
+                                   
                                 </select>
 
                                 @if ($errors->has('cargo'))

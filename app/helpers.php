@@ -19,4 +19,28 @@ function bitacora($accion)
 	$bitacora->save();
 }
 
+function vercargo($cargo)
+{
+	switch ($cargo) {
+		case '1':
+			return 'Administrador';
+			break;
+		case '2':
+			return 'Jefe UACI';
+			break;
+		case '3':
+			return 'Jefe Tesorería';
+				break;
+		case '4':
+			return 'Jefe Registro y Control Tributario';
+			break;
+		case '5':
+			return 'Colecturía';
+			break;
+		default:
+			
+			break;
+	}
+}
+
 

@@ -11,20 +11,13 @@ class Proveedor extends Model
 	
     protected $guarded = [];
 
-    public static function Buscar($nombre,$estado)
+    public static function Buscar($estado)
     {
-        return Proveedor::nombre($nombre)->estado($estado)->orderBy('id')->paginate(10);
+        return Proveedor::estado($estado);
     }
 
     public function scopeEstado($query,$estado)
     {
-        return $query->where('estado',$estado);
-    }
-    public function scopeNombre($query,$nombre)
-    {
-    	if(trim($nombre != "")){
-            return $query->where('nombree','iLIKE', '%'.$nombre.'%');
-    	}
-    	
+        return $query->where('estado', $estado);
     }
 }

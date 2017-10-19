@@ -47,8 +47,8 @@ Route::get('bitacoras/general','BitacoraController@general');
 Route::get('bitacoras/usuario','BitacoraController@usuario');
 Route::get('bitacoras/fecha','BitacoraController@fecha');
 
-Route::delete('proveedores/restore/{id}','ProveedorController@restore')->name('proveedores.restore');
-Route::get('proveedores/eliminados','ProveedorController@eliminados');
+Route::post('proveedores/baja/{id}','ProveedorController@baja')->name('proveedores.baja');
+Route::post('proveedores/alta/{id}','ProveedorController@alta')->name('proveedores.alta');
 Route::Resource('proveedores','ProveedorController');
 
 Route::post('contribuyentes/baja/{id}','ContribuyenteController@baja')->name('contribuyentes.baja');

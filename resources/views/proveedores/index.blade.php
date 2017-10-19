@@ -1,3 +1,4 @@
+<?php echo Request::ip(); ?>
 @extends('layouts.app')
 
 @section('migasdepan')
@@ -12,79 +13,120 @@
 @endsection
 
 @section('content')
-
+<div class="row">
 <div class="col-xs-12">
           <div class="box">
             <div class="box-header">
               <h3 class="box-title">Listado</h3>
               	<a href="{{ url('/proveedores/create') }}" class="btn btn-success"><span class="glyphicon glyphicon-plus-sign"></span> Agregar</a>
-                <a href="{{ url('proveedores/eliminados') }}" class="btn btn-primary">Ver eliminados</a>
-                {{-- <p>
-                  {{ Form::open(['route' => 'proveedores.index', 'method' => 'GET', 'class' => 'navbar-form navbar-left pull-right', 'role' => 'search'])}}
-                    <div class="form-group">
-                      {!! Form::text('name', null, ['class' => 'form-control', 'placeholder' => 'Buscar']) !!}
-                    </div>
-                  <button type="submit" class="btn btn-default">Buscar</button>
-                  {{ Form::close() }}
-                </p>  --}}
+                <a href="{{ url('/proveedores?estado=1') }}" class="btn btn-primary">Activos</a>
+                <a href="{{ url('/proveedores?estado=2') }}" class="btn btn-primary">Papelera</a>
             </div>
             <!-- /.box-header -->
-            <div class="box-body table-responsive no-padding">
-              <table class="table table-striped table-bordered table-hover" id="datatable">
+            <div class="box-body table-responsive">
+              <table class="table table-striped table-bordered table-hover" id="example2">
   				<thead>
-                  <th>ID</th>
+                  <th>Id</th>
                   <th>Nombre de Proveedor</th>
                   <th>Dirección</th>
                   <th>Correo</th>
                   <th>Telefono</th>
+                  <th>Número de registro</th>
+                  <th>NIT</th>
                   <th>Accion</th>
                 </thead>
                 <tbody>
                 	@foreach($proveedores as $proveedor)
                 	<tr>
                 		<td>{{ $proveedor->id }}</td>
-                		<td>{{ $proveedor->nombree }}</td>
+                		<td>{{ $proveedor->nombre }}</td>
                 		<td>{{ $proveedor->direccion }}</td>
-                		<td>{{ $proveedor->emaile }}</td>
-                    <td>{{ $proveedor->telefonoe }}</td>
+                		<td>{{ $proveedor->email }}</td>
+                        <td>{{ $proveedor->telefono }}</td>
+                        <td>{{ $proveedor->numero_registro }}</td>
+                        <td>{{ $proveedor->nit }}</td>
                 		<td>
-                      {{ Form::open(['route' => ['proveedores.destroy', $proveedor->id ], 'method' => 'DELETE', 'class' => 'form-horizontal'])}}
-                        <a href="{{ url('proveedores/'.$proveedor->id) }}" class="btn btn-primary"><span class="glyphicon glyphicon-eye-open"></span> Ver</a> |
-                        <a href="{{ url('/proveedores/'.$proveedor->id.'/edit') }}" class="btn btn-warning"><span class="glyphicon glyphicon-text-size"></span> Editar</a> | 
-                        <button class="btn btn-danger" type="button" onclick="
-                        return swal({
-                          title: 'Eliminar proveedor',
-                          text: '¿Está seguro de eliminar proveedor?',
-                          type: 'question',
-                          showCancelButton: true,
-                          confirmButtonText: 'Si, Eliminar',
-                          cancelButtonText: 'No, Mantener',
-                          confirmButtonClass: 'btn btn-danger',
-                          cancelButtonClass: 'btn btn-default',
-                          buttonsStyling: false
-                        }).then(function(){
-                          submit();
-                          swal('Hecho', 'El registro a sido eliminado','success')
-                        }, function(dismiss){
-                          if(dismiss == 'cancel'){
-                            swal('Cancelado', 'El registro se mantiene','info')
-                          }
-                        })";><span class="glyphicon glyphicon-trash"></span> Eliminar</button>
-                      {{ Form::close()}} 
-                     
-
-                    </td>
+                            @if($estado == 1 || $estado == "")
+                                {{ Form::open(['method' => 'POST', 'id' => 'baja', 'class' => 'form-horizontal'])}}
+                                <a href="{{ url('proveedores/'.$proveedor->id) }}" class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-eye-open"></span></a>
+                                <a href="{{ url('/proveedores/'.$proveedor->id.'/edit') }}" class="btn btn-warning btn-xs"><span class="glyphicon glyphicon-text-size"></span></a>
+                                <button class="btn btn-danger btn-xs" type="button" onclick={{ "baja(".$proveedor->id.")" }}><span class="glyphicon glyphicon-trash"></span></button>
+                                {{ Form::close()}}
+                            @else
+                                {{ Form::open(['method' => 'POST', 'id' => 'alta', 'class' => 'form-horizontal'])}}
+                                <button class="btn btn-success btn-xs" type="button" onclick={{ "alta(".$proveedor->id.")" }}><span class="glyphicon glyphicon-trash"></span></button>
+                                {{ Form::close()}}
+                             @endif
+                        </td>
                 	</tr>
                 	@endforeach 
                 </tbody>
               </table>
+                <script>
+                    function baja(id)
+                    {
+                        swal({
+                            title: 'Motivo dar de baja',
+                            input: 'text',
+                            showCancelButton: true,
+                            confirmButtonText: 'Dar de baja',
+                            showLoaderOnConfirm: true,
+                            preConfirm: function (text) {
+                                return new Promise(function (resolve, reject) {
+                                    setTimeout(function() {
+                                        if (text === '') {
+                                            reject('Debe ingresar el motivo')
+                                        } else {
+                                            resolve()
+                                        }
+                                    }, 2000)
+                                })
+                            },
+                            allowOutsideClick: false
+                        }).then(function (text) {
+                            var dominio = window.location.host;
+                            var form = $(this).parents('form');
+                            $('#baja').attr('action','http://'+dominio+'/proveedores/baja/'+id+'+'+text);
+                            //document.getElmentById('baja').submit();
+                            $('#baja').submit();
+                            swal({
+                                type: 'success',
+                                title: 'Se dio de baja',
+                                html: 'Submitted motivo: ' + text
+                            })
+                        });
+                    }
+
+                    function alta(id)
+                    {
+                        swal({
+                            title: 'Dar de alta',
+                            showCancelButton: true,
+                            confirmButtonText: 'Dar de alta',
+                            showLoaderOnConfirm: true,
+                            allowOutsideClick: false
+                        }).then(function () {
+                            var dominio = window.location.host;
+                            var form = $(this).parents('form');
+                            $('#alta').attr('action','http://'+dominio+'/proveedores/alta/'+id);
+                            //document.getElmentById('baja').submit();
+                            $('#alta').submit();
+                            swal({
+                                type: 'success',
+                                title: 'Se dio de alta',
+                                html: 'Submitted motivo: '
+                            })
+                        });
+                    }
+                </script>
               <div class="pull-right">
-                 {{ $proveedores->links() }}
+
               </div> 
             </div>
             <!-- /.box-body -->
           </div>
           <!-- /.box -->
         </div>
+</div>
 @endsection
 

@@ -15,7 +15,9 @@ class AddUsernameToUsersTable extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->string('username')->after('name')->unique();
+            $table->integer('cargo')->unsigned();
             $table->string('avatar')->nullable();
+            
         });
     }
 
@@ -28,6 +30,7 @@ class AddUsernameToUsersTable extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->dropColumn('username');
+            $table->dropColumn('cargo');
             $table->dropColumn('avatar');
         });
     }

@@ -3,7 +3,6 @@
 @section('migasdepan')
 <h1>
         Proveedor
-        <small>Control de Proveedor</small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="{{ url('/proveedores') }}"><i class="fa fa-dashboard"></i> Proveedor</a></li>
@@ -13,17 +12,15 @@
 @section('content')
 <div class="container">
     <div class="row">
-        <div class="col-md-10 col-md-offset-1">
-            <div class="panel panel-primary">
-                <div class="panel-heading">Registro de Proveedor</div>
+        <div class="panel panel-default">
                 <div class="panel-body">
                     {{ Form::open(['action' => 'ProveedorController@store','class' => 'form-horizontal']) }}
-
+                        {{ Form::hidden('estado',1) }}
                         @include('proveedores.formulario')
 
                         <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
-                                <button type="submit" class="btn btn-primary">
+                            <div class="col-md-6 col-md-offset-1">
+                                <button type="submit" class="btn btn-primary btn-lg">
                                     <span class="glyphicon glyphicon-floppy-disk"></span>    Registrar
                                 </button>
                             </div>
@@ -32,7 +29,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    
 </div>
 @endsection 
 

@@ -15,7 +15,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <div class="panel panel-default">
+            <div class="panel panel-primary">
                 <div class="panel-heading">Registro de Usuarios</div>
                 <div class="panel-body">
                     {{ Form::open(['action' => 'UsuariosController@save','class' => 'form-horizontal']) }}
@@ -69,10 +69,12 @@
 
                             <div class="col-md-6">
                                 <select name="cargo" id="cargo" class="form-control">
-                                    <option value="">Seleccione</option>
-                                    @foreach($cargos as $cargo)
-                                        <option value="{{ $cargo->id }}">{{ $cargo->cargo }}</option>
-                                    @endforeach
+                                    <option value="">Seleccione un cargo</option>
+                                    <option value="1">Administrador</option>
+                                    <option value="2">Jefe UACI</option>
+                                    <option value="3">Jefe Tesorería</option>
+                                    <option value="4">Jefe Registro y Control Tributario</option>
+                                    <option value="5">Colector</option>
                                 </select>
 
                                 @if ($errors->has('cargo'))

@@ -35,3 +35,15 @@ $factory->define(App\Contribuyente::class,function (Faker\generator $faker){
         'estado' => 1,
     ];
 });
+
+$factory->define(App\Proveedor::class,function (Faker\generator $faker){
+    return [
+        'nombre' => $faker->name,
+        'direccion' => $faker->address,
+        'telefono' => random_int(6000,7999).'-'.random_int(0,9999),
+        'email' => $faker->unique()->safeEmail,
+        'numero_registro' => random_int(6000,7999).'-'.random_int(0,9999),
+        'nit' => random_int(0,9999).'-'.random_int(0,999999).'-'.random_int(0,999).'-'.random_int(0,1),
+        'estado' => 1,
+    ];
+});

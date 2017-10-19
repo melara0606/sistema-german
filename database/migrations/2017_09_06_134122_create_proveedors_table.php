@@ -19,6 +19,7 @@ class CreateProveedorsTable extends Migration
             $table->string('direccion');
             $table->string('telefono');
             $table->string('email');
+            $table->string('nit');
             $table->string('numero_registro');
             $table->string('nombrer')->nullable();
             $table->string('telfijor')->nullable();

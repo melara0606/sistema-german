@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Proveedor;
+use App\Bitacora;
 use App\Http\Requests\ProveedorRequest;
 
 class ProveedorController extends Controller
@@ -19,11 +20,16 @@ class ProveedorController extends Controller
      */
     public function index(Request $request)
     {
-        //echo $request->get('name');
-        $proveedores = Proveedor::paginate(10);
-        $count = $proveedores->count();
-       
-        return view('proveedores.index', compact('proveedores'));
+        $estado = $request->get('estado');
+        if($estado == "" )$estado=1;
+        if ($estado == 1) {
+            $proveedores = Proveedor::where('estado',$estado)->get();
+            return view('proveedores.index',compact('proveedores','estado'));
+        }
+        if ($estado == 2) {
+            $proveedores = Proveedor::where('estado',$estado)->get();
+            return view('proveedores.index',compact('proveedores','estado'));
+        }
     }
 
     /**
@@ -99,26 +105,39 @@ class ProveedorController extends Controller
      */
     public function destroy($id)
     {
-        $proveedor=Proveedor::find($id);
-        $proveedor->delete();
-        bitacora('Eliminó un Proveedor');
-        return redirect('/proveedores');
-        
-
+        //
     }
-
-    public function eliminados()
+    public function baja($cadena)
     {
-        $proveedores = Proveedor::onlyTrashedorFail()->paginate(10);
-        return view('proveedores.eliminados', compact('proveedores'));
 
+        $datos = explode("+", $cadena);
+        $id=$datos[0];
+        $motivo=$datos[1];
+        //dd($id);
+        $proveedor = Proveedor::find($id);
+        $proveedor->estado=2;
+        $proveedor->motivo=$motivo;
+        $proveedor->fechabaja=date('Y-m-d');
+        $proveedor->save();
+        bitacora('Dió de baja a un proveedores');
+        return redirect('/proveedores')->with('mensaje','Proveedor dado de baja');
     }
 
-    public function restore($id)
+    public function alta($id)
     {
-        $proveedor=Proveedor::withTrashed()->where('id', '=', $id)->first();
-        $proveedor->restore();
-        bitacora('Restauró un Proveedor');
-        return redirect('/proveedores');
+
+        //$datos = explode("+", $cadena);
+        ////$id=$datos[0];
+        //$motivo=$datos[1];
+        //dd($id);
+        $proveedor = Proveedor::find($id);
+        $proveedor->estado=1;
+        $proveedor->motivo=null;
+        $proveedor->fechabaja=null;
+        $proveedor->save();
+        Bitacora::bitacora('Dió de alta a un proveedor');
+        return redirect('/proveedores')->with('mensaje','Proveedor dado de alta');
     }
+
+
 }

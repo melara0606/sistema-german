@@ -24,10 +24,12 @@ class ProveedorRequest extends FormRequest
     public function rules()
     {
         return [
-            'nombree' => 'required|string|max:255',
+            'nombre' => 'required|string|max:255',
             'direccion' => 'required|string',
-            'telefonoe' => 'required|string',
-            'emaile' => 'required|string|email',
+            'telefono' => 'required|string',
+            'email' => 'required|string|email',
+            'numero_registro' => 'required',
+            'nit' => 'required',
         ];
     }
 }
