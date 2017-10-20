@@ -17,15 +17,15 @@ class ContribuyenteController extends Controller
      */
     public function index(Request $request)
     {
-        $nombre = $request->get('nombre');
+        //$nombre = $request->get('nombre');
         $estado = $request->get('estado');
         if($estado == "" )$estado=1;
         if ($estado == 1) {
-            $contribuyentes = Contribuyente::Buscar($nombre,$estado);
+            $contribuyentes = Contribuyente::where('estado',$estado)->get();
             return view('contribuyentes.index',compact('contribuyentes','estado')); 
         }
         if ($estado == 2) {
-            $contribuyentes = Contribuyente::Buscar($nombre,$estado);
+            $contribuyentes = Contribuyente::where('estado',$estado)->get();
             return view('contribuyentes.index',compact('contribuyentes','estado')); 
         }
 

@@ -14,19 +14,13 @@
 @section('content')
 
 <div class="col-xs-12">
+    <div class="row">
           <div class="box">
             <div class="box-header">
               <h3 class="box-title">Listado</h3>
               	<a href="{{ url('/contribuyentes/create') }}" class="btn btn-success"><span class="glyphicon glyphicon-plus-sign"></span> Agregar</a>
                 <a href="{{ url('/contribuyentes?estado=1') }}" class="btn btn-primary">Activos</a>
                 <a href="{{ url('/contribuyentes?estado=2') }}" class="btn btn-primary">Papelera</a>
-                  {{ Form::open(['route' => 'contribuyentes.index', 'method' => 'GET', 'class' => 'navbar-form navbar-left pull-right','role' => 'search'])}}
-                <div class="form-group">
-                        {{ Form::text('nombre',null,['class' => 'form-control','placeholder' => 'Buscar'])}}
-                            {{ Form::hidden('estado') }}
-                            <button type="Buscar" class="btn btn-default">Buscar</button>
-                </div>
-                    {{ Form::close() }}
                 </div>
             <!-- /.box-header -->
             <div class="box-body table-responsive no-padding">
@@ -93,13 +87,14 @@
                        }
                      </script>
               <div class="pull-right">
-                 {!! str_replace('/?','?', $contribuyentes->appends(Request::only(['nombre','estado']))->render()) !!}
+              {{-- !!}  {!! str_replace('/?','?', $contribuyentes->appends(Request::only(['nombre','estado']))->render()) !!} --}}
               </div> 
             </div>
             <!-- /.box-body -->
           </div>
           <!-- /.box -->
-        </div>
+    </div>
+</div>
 
         
 @endsection

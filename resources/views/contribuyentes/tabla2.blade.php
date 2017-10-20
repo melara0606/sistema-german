@@ -1,4 +1,4 @@
-<table class="table table-striped table-bordered table-hover" id="">
+<table class="table table-striped table-bordered table-hover" id="example2">
                 <thead>
                   <th>ID</th>
                   <th>Nombre de contribuyente</th>

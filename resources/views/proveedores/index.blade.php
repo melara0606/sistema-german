@@ -1,4 +1,3 @@
-<?php echo Request::ip(); ?>
 @extends('layouts.app')
 
 @section('migasdepan')
