@@ -56,5 +56,9 @@ Route::post('contribuyentes/alta/{id}','ContribuyenteController@alta')->name('co
 Route::get('contribuyentes/eliminados','ContribuyenteController@eliminados');
 Route::Resource('contribuyentes','ContribuyenteController');
 
+Route::delete('contratos/restore/{id}','ContratoController@restore')->name('contratos.restore');
+Route::Resource('contratos','ContratoController');
 
-Route::Resource('contratos','ContratosController');
+Route::delete('proyectos/restore/{id}','ProyectoController@restore')->name('proyectos.restore');/
+Route::get('proyectos/eliminados','ProyectosController@eliminados');
+Route::get('proyectos','ProyectosController');
