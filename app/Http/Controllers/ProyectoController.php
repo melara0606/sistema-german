@@ -4,19 +4,33 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Proyecto;
+use App\Bitacora;
 use App\Http\Requests\ProyectoRequest;
 
 class ProyectoController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+
+    public function index(Request $request)
     {
-        $proyectos = Proyecto::paginate(10);
-        return view('proyectos.index', compact('proyectos'));
+        $estado = $request->get('estado');
+        if($estado == "" )$estado=1;
+        if ($estado == 1) {
+            $proyectos = Proyecto::where('estado',$estado)->get();
+            return view('proyectos.index',compact('proyectos','estado'));
+        }
+        if ($estado == 2) {
+            $proyectos = Proyecto::where('estado',$estado)->get();
+            return view('proyectos.index',compact('proyectos','estado'));
+        }
     }
 
     /**
@@ -38,7 +52,8 @@ class ProyectoController extends Controller
     public function store(ProyectoRequest $request)
     {
         Proyecto::create($request->All());
-        return redirect('/proyectos');
+        bitacora('Registró un proyecto');
+        return redirect('/proyectos')->with('mensaje','Registro almacenado con éxito');
     }
 
     /**
@@ -73,13 +88,14 @@ class ProyectoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
     public function update(ProyectoRequest $request, $id)
     {
         $proyecto = Proyecto::find($id);
         $proyecto->fill($request->All());
         $proyecto->save();
-
-        return redirect('/proyectos');
+        bitacora('Modificó un Proyecto');
+        return redirect('/proyectos')->with('mensaje','Registro modificado con éxito');
     }
 
     /**
@@ -90,23 +106,38 @@ class ProyectoController extends Controller
      */
     public function destroy($id)
     {
-        $proyecto=Proyecto::find($id);
-        $proyecto->delete();
-
-        return redirect('/proyectos');
+        //
     }
 
-    public function eliminados()
+    public function baja($cadena)
     {
-        $proyectos = Proyecto::onlyTrashed()->paginate(10);
-        return view('proyectos.eliminados',compact('proyectos'));
+
+        $datos = explode("+", $cadena);
+        $id=$datos[0];
+        $motivo=$datos[1];
+        //dd($id);
+        $proyecto = Proyecto::find($id);
+        $proyecto->estado=2;
+        $proyecto->motivo=$motivo;
+        $proyecto->fechabaja=date('Y-m-d');
+        $proyecto->save();
+        bitacora('Dió de baja a un proyecto');
+        return redirect('/proyectos')->with('mensaje','Proyecto dado de baja');
     }
 
-    public function restore($id)
+    public function alta($id)
     {
-        $proyecto=Proyecto::withTrashed()->where('id', '=', $id)->first();
-        $contrato->restore();
 
-        return redirect('/proyectos');
+        //$datos = explode("+", $cadena);
+        ////$id=$datos[0];
+        //$motivo=$datos[1];
+        //dd($id);
+        $proyecto = Proyecto::find($id);
+        $proyecto->estado=1;
+        $proyecto->motivo=null;
+        $proyecto->fechabaja=null;
+        $proyecto->save();
+        Bitacora::bitacora('Dió de alta a un proyecto');
+        return redirect('/proyectos')->with('mensaje','Proyecto dado de alta');
     }
 }

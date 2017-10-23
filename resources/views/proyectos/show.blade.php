@@ -1,95 +1,102 @@
+@extends('layouts.app')
+
+@section('migasdepan')
+<h1>
+        
+        <small>Ver proyecto <b>{{ $proyecto->nombre }}</b></small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="{{ url('/proyectos') }}"><i class="fa fa-dashboard"></i> Usuarios</a></li>
+        <li class="active">Ver</li>
+      </ol>
+@endsection
+
+@section('content')
+<div class="container">
+    <div class="row">
+        <div class="col-md-11">
+            <div class="panel panel-primary">
+                <div class="panel-heading">Datos del Proveedor </div>
+                <div class="panel-body">
                         <div class="form-group{{ $errors->has('nombre') ? ' has-error' : '' }}">
-                            <label for="nombre" class="col-md-4 control-label">Nombre del proyecto</label>
-
-                            <div class="col-md-6">
-                                <input id="nombre" type="text" class="form-control" name="nombre" value="{{ old('nombre') }}" autofocus>
-
-                                @if ($errors->has('nombre'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('nombre') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
+                            <label for="nombre" class="col-md-4 control-label">Nombre del Proyecto: </label>
+                            <label for="nombre" class="col-md-4 control-label">{{$proyecto->nombre}}</label><br>
+                            
                         </div>
-                       
+
                          <div class="form-group{{ $errors->has('monto') ? ' has-error' : '' }}">
-                            <label for="monto" class="col-md-4 control-label">Monto del proyecto</label>
-
-                            <div class="col-md-6">
-                                <input id="monto" type="text" class="form-control" name="monto" value="{{ old('monto') }}" >
-
-                                @if ($errors->has('monto'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('monto') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
+                            <label for="monto" class="col-md-4 control-label">Monto del proyecto: </label>
+                            <label for="nombre" class="col-md-4 control-label">{{$proyecto->monto}}</label><br>
+                            
                         </div>
 
                         <div class="form-group{{ $errors->has('direccion') ? ' has-error' : '' }}">
-                            <label for="direccion" class="col-md-4 control-label">Dirección donde se desarrollará</label>
-
-                            <div class="col-md-6">
-                                <input id="direccion" type="text" class="form-control" name="direccion" value="{{ old('direccion') }}" >
-
-                                @if ($errors->has('direccion'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('direccion') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
+                            <label for="direccion" class="col-md-4 control-label">Dirección donde se ejecutará: </label>
+                            <label for="nombre" class="col-md-4 control-label">{{$proyecto->direccion}}</label><br>
+                            
                         </div>
 
-                        <div class="form-group{{ $errors->has('tiempo') ? ' has-error' : '' }}">
-                            <label for="tiempo" class="col-md-4 control-label">Tiempo de desarrollo (días)</label>
-
-                            <div class="col-md-6">
-                                <input id="tiempo" type="tiempo" class="form-control" name="tiempo" value="{{ old('tiempo') }}">
-
-                                @if ($errors->has('tiempo'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('tiempo') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
+                        <div class="form-group{{ $errors->has('fecha_inicio') ? ' has-error' : '' }}">
+                            <label for="fecha_inicio" class="col-md-4 control-label">Fecha inicio: </label>
+                            <label for="nombre" class="col-md-4 control-label">{{$proyecto->fecha_inicio}}</label><br>
+                            
                         </div>
 
-                        <div class="form-group{{ $errors->has('encargado') ? ' has-error' : '' }}">
-                            <label for="encargado" class="col-md-4 control-label">Encargado del proyecto</label>
-
-                            <div class="col-md-6">
-                                <input id="encargado" type="text" class="form-control" name="encargado" value="{{ old('encargado') }}" autofocus>
-
-                                @if ($errors->has('encargado'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('encargado') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
+                        <div class="form-group{{ $errors->has('fecha_fin') ? ' has-error' : '' }}">
+                            <label for="fecha_fin" class="col-md-4 control-label">Fecha finalización: </label>
+                            <label for="nombre" class="col-md-4 control-label">{{$proyecto->fecha_fin}}</label><br>
+                            
                         </div>
 
-                        <div class="form-group{{ $errors->has('organizacion') ? ' has-error' : '' }}">
-                            <label for="organizacion" class="col-md-4 control-label">Organización colaboradora</label>
-
-                            <div class="col-md-6">
-                                <input id="organizacion" type="organizacion" class="form-control" name="organizacion">
-                                @if ($errors->has('organizacion'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('organizacion') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
+                        <div class="form-group{{ $errors->has('id_organizacion') ? ' has-error' : '' }}">
+                            <label for="id_organizacion" class="col-md-4 control-label">Organización colaboradora: </label>
+                            <label for="nombre" class="col-md-4 control-label">{{$proyecto->id_organizacion}}</label><br>
+                            
                         </div>
 
-                        <div class="form-group{{ $errors->has('beneficiario') ? ' has-error' : '' }}">
-                            <label for="beneficiario" class="col-md-4 control-label">Nombre beneficiario</label>
-
-                            <div class="col-md-6">
-                                <input id="beneficiario" type="beneficiario" class="form-control" name="beneficiario">
-                                @if ($errors->has('beneficiario'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('beneficiario') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
+                        <div class="form-group{{ $errors->has('estado') ? ' has-error' : '' }}">
+                            <label for="estado" class="col-md-4 control-label">Estado: </label>
+                            <label for="nombre" class="col-md-4 control-label">{{$proyecto->estado}}</label><br>
+                           
                         </div>
+
+                        <div class="form-group{{ $errors->has('motivo') ? ' has-error' : '' }}">
+                            <label for="motivo" class="col-md-4 control-label">Motivo:</label>
+                            <label for="nombre" class="col-md-4 control-label">{{$proyecto->motivo}}</label><br>
+                            
+                        </div>
+
+                        <!--<div class="form-group{{ $errors->has('fechabaja') ? ' has-error' : '' }}">
+                            <label for="fechabaja" class="col-md-4 control-label">Fecha baja:</label>
+                            <label for="nombre" class="col-md-4 control-label">{{$proyecto->fechabaja}}</label><br>
+                            
+                        </div>-->
+
+                      {{ Form::open(['route' => ['proyectos.destroy', $proyecto->id ], 'method' => 'DELETE', 'class' => 'form-horizontal'])}}
+                      <a href="{{ url('/proyectos/'.$proyecto->id.'/edit') }}" class="btn btn-warning"><span class="glyphicon glyphicon-text-size"></span> Editar</a> |
+                        <button class="btn btn-danger" type="button" onclick="
+                        return swal({
+                          title: 'Eliminar proyecto',
+                          text: '¿Está seguro de eliminar proyecto?',
+                          type: 'question',
+                          showCancelButton: true,
+                          confirmButtonText: 'Si, Eliminar',
+                          cancelButtonText: 'No, Mantener',
+                          confirmButtonClass: 'btn btn-danger',
+                          cancelButtonClass: 'btn btn-default',
+                          buttonsStyling: false
+                        }).then(function(){
+                          submit();
+                          swal('Hecho', 'El registro a sido eliminado','success')
+                        }, function(dismiss){
+                          if(dismiss == 'cancel'){
+                            swal('Cancelado', 'El registro se mantiene','info')
+                          }
+                        })";><span class="glyphicon glyphicon-trash"></span> Eliminar</button>
+                      {{ Form::close()}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@endsection

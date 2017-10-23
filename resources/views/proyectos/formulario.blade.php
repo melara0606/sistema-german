@@ -42,24 +42,38 @@
                         </div>
 
                         <div class="form-group{{ $errors->has('fecha_inicio') ? ' has-error' : '' }}">
-                            <label for="fecha_inicio" class="col-md-4 control-label">Tiempo inicio</label>
+                            <label for="fecha_inicio" class="col-md-4 control-label">Fecha inicio</label>
 
                             <div class="col-md-6">
-                                {!!Form::date('tiempo_inicio',null,['class'=>'form-control','id'=>'nombre','autofocus'])!!}
+                                {!!Form::date('fecha_inicio',null,['class'=>'form-control','id'=>'nombre','autofocus'])!!}
 
-                                @if ($errors->has('tiempo'))
+                                @if ($errors->has('fecha_inicio'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('tiempo') }}</strong>
+                                        <strong>{{ $errors->first('fecha_inicio') }}</strong>
                                     </span>
                                 @endif
                             </div>
                         </div>
 
-                        <div class="form-group{{ $errors->has('encargado') ? ' has-error' : '' }}">
+                        <div class="form-group{{ $errors->has('fecha_fin') ? ' has-error' : '' }}">
+                            <label for="fecha_fin" class="col-md-4 control-label">Fecha finalización</label>
+
+                            <div class="col-md-6">
+                                {!!Form::date('fecha_fin',null,['class'=>'form-control','id'=>'nombre','autofocus'])!!}
+
+                                @if ($errors->has('fecha_fin'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('fecha_fin') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <!-- <div class="form-group{{ $errors->has('encargado') ? ' has-error' : '' }}">
                             <label for="encargado" class="col-md-4 control-label">Encargado del proyecto</label>
 
                             <div class="col-md-6">
-                                <input id="encargado" type="text" class="form-control" name="encargado" value="{{ old('encargado') }}" autofocus>
+                                {!!Form::text('encargado',null,['class'=>'form-control','id'=>'nombre','autofocus'])!!}
 
                                 @if ($errors->has('encargado'))
                                     <span class="help-block">
@@ -67,30 +81,45 @@
                                     </span>
                                 @endif
                             </div>
-                        </div>
-
-                        <div class="form-group{{ $errors->has('organizacion') ? ' has-error' : '' }}">
-                            <label for="organizacion" class="col-md-4 control-label">Organización colaboradora</label>
+                        </div> -->
+                        <div class="form-group{{ $errors->has('motivo') ? ' has-error' : '' }}">
+                            <label for="motivo" class="col-md-4 control-label">Motivo del proyecto</label>
 
                             <div class="col-md-6">
-                                <input id="organizacion" type="organizacion" class="form-control" name="organizacion">
-                                @if ($errors->has('organizacion'))
+                                {!!Form::textarea('motivo',null,['class'=>'form-control','id'=>'nombre','autofocus', 'rows'=>3])!!}
+
+                                @if ($errors->has('motivo'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('organizacion') }}</strong>
+                                        <strong>{{ $errors->first('motivo') }}</strong>
                                     </span>
                                 @endif
                             </div>
                         </div>
 
-                        <div class="form-group{{ $errors->has('beneficiario') ? ' has-error' : '' }}">
-                            <label for="beneficiario" class="col-md-4 control-label">Nombre beneficiario</label>
+                        <div class="form-group{{ $errors->has('id_organizacion') ? ' has-error' : '' }}">
+                            <label for="id_organizacion" class="col-md-4 control-label">Organización colaboradora</label>
 
                             <div class="col-md-6">
-                                <input id="beneficiario" type="beneficiario" class="form-control" name="beneficiario">
+                                {!!Form::text('id_organizacion',null,['class'=>'form-control','id'=>'nombre','autofocus'])!!}
+
+                                @if ($errors->has('id_organizacion'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('id_organizacion') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <!--<div class="form-group{{ $errors->has('beneficiario') ? ' has-error' : '' }}">
+                            <label for="beneficiario" class="col-md-4 control-label">Beneficiario del proyecto</label>
+
+                            <div class="col-md-6">
+                                {!!Form::text('beneficiario',null,['class'=>'form-control','id'=>'nombre','autofocus'])!!}
+
                                 @if ($errors->has('beneficiario'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('beneficiario') }}</strong>
                                     </span>
                                 @endif
                             </div>
-                        </div>
+                        </div>-->

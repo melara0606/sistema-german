@@ -2,8 +2,7 @@
 
 @section('migasdepan')
 <h1>
-        Proyectos
-        
+        Proyecto
       </h1>
       <ol class="breadcrumb">
         <li><a href="{{ url('/proyectos') }}"><i class="fa fa-dashboard"></i> Proyecto</a></li>
@@ -13,19 +12,15 @@
 @section('content')
 <div class="container">
     <div class="row">
-        <div class="col-md-10 col-md-offset-1">
-            <div class="panel panel-primary">
-                <div class="panel-heading">Registro de Proyecto</div>
+        <div class="panel panel-default">
                 <div class="panel-body">
                     {{ Form::open(['action' => 'ProyectoController@store','class' => 'form-horizontal']) }}
-                    {{-- <form class="form-horizontal" role="form" method="POST" action="{{ route('register') }}"> --}}
-                        {{ csrf_field() }}
-
+                        {{ Form::hidden('estado',1) }}
                         @include('proyectos.formulario')
 
                         <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
-                                <button type="submit" class="btn btn-primary">
+                            <div class="col-md-6 col-md-offset-1">
+                                <button type="submit" class="btn btn-primary btn-lg">
                                     <span class="glyphicon glyphicon-floppy-disk"></span>    Registrar
                                 </button>
                             </div>
@@ -34,6 +29,6 @@
                 </div>
             </div>
         </div>
-    </div>
+    
 </div>
-@endsection
+@endsection 
