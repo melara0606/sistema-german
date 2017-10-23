@@ -2,7 +2,8 @@
                             <label for="nombre" class="col-md-4 control-label">Nombre del proyecto</label>
 
                             <div class="col-md-6">
-                                <input id="nombre" type="text" class="form-control" name="nombre" value="{{ old('nombre') }}" autofocus>
+
+                                {!!Form::text('nombre',null,['class'=>'form-control','id'=>'nombre','autofocus'])!!}
 
                                 @if ($errors->has('nombre'))
                                     <span class="help-block">
@@ -16,7 +17,7 @@
                             <label for="monto" class="col-md-4 control-label">Monto del proyecto</label>
 
                             <div class="col-md-6">
-                                <input id="monto" type="text" class="form-control" name="monto" value="{{ old('monto') }}" >
+                                {!!Form::text('monto',null,['class'=>'form-control','id'=>'monto','autofocus'])!!}
 
                                 @if ($errors->has('monto'))
                                     <span class="help-block">
@@ -30,7 +31,7 @@
                             <label for="direccion" class="col-md-4 control-label">Dirección donde se desarrollará</label>
 
                             <div class="col-md-6">
-                                <input id="direccion" type="text" class="form-control" name="direccion" value="{{ old('direccion') }}" >
+                                {!!Form::textarea('direccion',null,['class'=>'form-control','id'=>'direccion','autofocus','rows'=>3])!!}
 
                                 @if ($errors->has('direccion'))
                                     <span class="help-block">
@@ -40,11 +41,11 @@
                             </div>
                         </div>
 
-                        <div class="form-group{{ $errors->has('tiempo') ? ' has-error' : '' }}">
-                            <label for="tiempo" class="col-md-4 control-label">Tiempo de desarrollo (días)</label>
+                        <div class="form-group{{ $errors->has('fecha_inicio') ? ' has-error' : '' }}">
+                            <label for="fecha_inicio" class="col-md-4 control-label">Tiempo inicio</label>
 
                             <div class="col-md-6">
-                                <input id="tiempo" type="tiempo" class="form-control" name="tiempo" value="{{ old('tiempo') }}">
+                                {!!Form::date('tiempo_inicio',null,['class'=>'form-control','id'=>'nombre','autofocus'])!!}
 
                                 @if ($errors->has('tiempo'))
                                     <span class="help-block">
