@@ -3,11 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Proyecto;
+use App\Tipocontrato;
 use App\Bitacora;
-use App\Http\Requests\ProyectoRequest;
+use App\Http\Requests\TipocontratoRequest;
 
-class DatosContratosController extends Controller
+class TipocontratoController extends Controller
 {
     public function __construct()
     {
@@ -24,12 +24,12 @@ class DatosContratosController extends Controller
         $estado = $request->get('estado');
         if($estado == "" )$estado=1;
         if ($estado == 1) {
-            $datosContrato = DatosContrato::where('estado',$estado)->get();
-            return view('datosContratos.index',compact('datosContratos','estado'));
+            $tipocontratos = Tipocontrato::where('estado',$estado)->get();
+            return view('tipocontratos.index',compact('tipocontratos','estado'));
         }
         if ($estado == 2) {
-            $datosContratos = DatosContrato::where('estado',$estado)->get();
-            return view('datosContratos.index',compact('datosContratos','estado'));
+            $tipocontratos = Tipocontrato::where('estado',$estado)->get();
+            return view('tipocontratos.index',compact('tipocontratos','estado'));
         }
     }
 
@@ -40,7 +40,7 @@ class DatosContratosController extends Controller
      */
     public function create()
     {
-        return view('datosContratos.create');
+        return view('tipocontratos.create');
     }
 
     /**
@@ -49,11 +49,11 @@ class DatosContratosController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(DatosContratoRequest $request)
+    public function store(TipocontratoRequest $request)
     {
-        DatosContrato::create($request->All());
-        bitacora('Registró datos');
-        return redirect('/datosContratos')->with('mensaje','Registro almacenado con éxito');
+        Tipocontrato::create($request->All());
+        bitacora('Registró un tipo');
+        return redirect('/tipocontratos')->with('mensaje','Registro almacenado con éxito');
     }
 
     /**
@@ -64,9 +64,9 @@ class DatosContratosController extends Controller
      */
     public function show($id)
     {
-        $datosContrato = DatosContrato::findorFail($id);
+        $Tipocontrato = Tipocontrato::findorFail($id);
 
-        return view('datosContratos.show', compact('datosContrato'));
+        return view('tipocontratos.show', compact('Tipocontrato'));
     }
 
     /**
@@ -77,8 +77,8 @@ class DatosContratosController extends Controller
      */
     public function edit($id)
     {
-        $datosContrato = DatosContrato::find($id);
-        return view('datosContratos.edit',compact('datosContrato'));
+        $Tipocontrato = Tipocontrato::find($id);
+        return view('tipocontratos.edit',compact('Tipocontrato'));
     }
 
     /**
@@ -89,13 +89,13 @@ class DatosContratosController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function update(DatosContratoRequest $request, $id)
+    public function update(TipocontratoRequest $request, $id)
     {
-        $datosContrato = DatosContrato::find($id);
-        $datosContrato->fill($request->All());
-        $datosContrato->save();
-        bitacora('Modificó un datos');
-        return redirect('/datosContratos')->with('mensaje','Registro modificado con éxito');
+        $Tipocontrato = Tipocontrato::find($id);
+        $Tipocontrato->fill($request->All());
+        $Tipocontrato->save();
+        bitacora('Modificó un tipo');
+        return redirect('/tipocontratos')->with('mensaje','Registro modificado con éxito');
     }
 
     /**
@@ -116,13 +116,13 @@ class DatosContratosController extends Controller
         $id=$datos[0];
         $motivo=$datos[1];
         //dd($id);
-        $datosContrato = DatosContrato::find($id);
-        $datosContrato->estado=2;
-        $datosContrato->motivo=$motivo;
-        $datosContrato->fechabaja=date('Y-m-d');
-        $datosContrato->save();
+        $Tipocontrato = Tipocontrato::find($id);
+        $Tipocontrato->estado=2;
+        $Tipocontrato->motivo=$motivo;
+        $Tipocontrato->fechabaja=date('Y-m-d');
+        $Tipocontrato->save();
         bitacora('Dió de baja a un registro');
-        return redirect('/datosContratos')->with('mensaje','Registro dado de baja');
+        return redirect('/tipocontratos')->with('mensaje','Registro dado de baja');
     }
 
     public function alta($id)
@@ -132,12 +132,12 @@ class DatosContratosController extends Controller
         ////$id=$datos[0];
         //$motivo=$datos[1];
         //dd($id);
-        $datosContrato = DatosContrato::find($id);
-        $datosContrato->estado=1;
-        $datosContrato->motivo=null;
-        $datosContrato->fechabaja=null;
-        $datosContrato->save();
-        Bitacora::bitacora('Dió de alta un registro');
-        return redirect('/datosContratos')->with('mensaje','Registro dado de alta');
+        $Tipocontrato = Tipocontrato::find($id);
+        $Tipocontrato->estado=1;
+        $Tipocontrato->motivo=null;
+        $Tipocontrato->fechabaja=null;
+        $Tipocontrato->save();
+        Bitacora::bitacora('Dió de alta a un registro');
+        return redirect('/tipocontratos')->with('mensaje','Registro dado de alta');
     }
 }

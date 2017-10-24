@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateDatosContratosTable extends Migration
+class CreateTipocontratosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,10 @@ class CreateDatosContratosTable extends Migration
      */
     public function up()
     {
-        Schema::create('datos_contratos', function (Blueprint $table) {
+        Schema::create('tipocontratos', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('');
+            $table->string('nombre');
+            $table->integer('estado');
             $table->timestamps();
         });
     }
@@ -27,6 +28,6 @@ class CreateDatosContratosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('datos_contratos');
+        Schema::dropIfExists('tipocontratos');
     }
 }

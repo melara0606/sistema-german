@@ -16,7 +16,7 @@
     <div class="row">
         <div class="col-md-11">
             <div class="panel panel-primary">
-                <div class="panel-heading">Datos del Proveedor </div>
+                <div class="panel-heading">Datos del Proyecto </div>
                 <div class="panel-body">
                         <div class="form-group{{ $errors->has('nombre') ? ' has-error' : '' }}">
                             <label for="nombre" class="col-md-4 control-label">Nombre del Proyecto: </label>
