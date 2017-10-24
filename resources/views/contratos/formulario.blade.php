@@ -1,3 +1,4 @@
+                        
                         <div class="form-group{{ $errors->has('nombree') ? ' has-error' : '' }}">
                             <label for="nombree" class="col-md-4 control-label">Nombre del contratado</label>
 

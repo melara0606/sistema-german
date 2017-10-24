@@ -4,13 +4,13 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Proyecto extends Model
+class DatosContrato extends Model
 {
     protected $guarded = [];
 
     public static function Buscar($nombre,$estado)
     {
-        return Proyecto::nombre($nombre)->estado($estado)->orderBy('id')->paginate(10);
+        return DatosContrato::nombre($nombre)->estado($estado)->orderBy('id')->paginate(10);
     }
 
     public function scopeEstado($query,$estado)

@@ -4,19 +4,33 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Contrato;
-use App\Http\Request\ContratoRequest;
+use App\Bitacora;
+use App\Http\Requests\ContratoRequest;
 
 class ContratoController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+
+    public function index(Request $request)
     {
-        $contratos = Contrato::paginate(10);
-        return view('contratos.index', compact('contratos'));
+        $estado = $request->get('estado');
+        if($estado == "" )$estado=1;
+        if ($estado == 1) {
+            $contratos = Contrato::where('estado',$estado)->get();
+            return view('contratos.index',compact('contratos','estado'));
+        }
+        if ($estado == 2) {
+            $contratos = Contrato::where('estado',$estado)->get();
+            return view('contratos.index',compact('contratos','estado'));
+        }
     }
 
     /**
@@ -38,7 +52,8 @@ class ContratoController extends Controller
     public function store(ContratoRequest $request)
     {
         Contrato::create($request->All());
-        return redirect('/contratos');
+        bitacora('Registró un Contrato');
+        return redirect('/contratos')->with('mensaje','Registro almacenado con éxito');
     }
 
     /**
@@ -73,13 +88,14 @@ class ContratoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
     public function update(ContratoRequest $request, $id)
     {
         $contrato = Contrato::find($id);
         $contrato->fill($request->All());
         $contrato->save();
-
-        return redirect('/contratos');
+        bitacora('Modificó un Contrato');
+        return redirect('/contratos')->with('mensaje','Registro modificado con éxito');
     }
 
     /**
@@ -90,23 +106,38 @@ class ContratoController extends Controller
      */
     public function destroy($id)
     {
-        $contrato=Contrato::find($id);
-        $contrato->delete();
-
-        return redirect('/contratos');
+        //
     }
 
-    public function eliminados()
+    public function baja($cadena)
     {
-        $contratos = Contrato::onlyTrashed()->paginate(10);
-        return view('contratos.eliminados',compact('contratos'));
+
+        $datos = explode("+", $cadena);
+        $id=$datos[0];
+        $motivo=$datos[1];
+        //dd($id);
+        $contrato = Contrato::find($id);
+        $contrato->estado=2;
+        $contrato->motivo=$motivo;
+        $contrato->fechabaja=date('Y-m-d');
+        $contrato->save();
+        bitacora('Dió de baja a un contrato');
+        return redirect('/contratos')->with('mensaje','Contrato dado de baja');
     }
 
-    public function restore($id)
+    public function alta($id)
     {
-        $contrato=Contrato::withTrashed()->where('id', '=', $id)->first();
-        $contrato->restore();
 
-        return redirect('/contratos');
+        //$datos = explode("+", $cadena);
+        ////$id=$datos[0];
+        //$motivo=$datos[1];
+        //dd($id);
+        $contrato = Contrato::find($id);
+        $contrato->estado=1;
+        $contrato->motivo=null;
+        $contrato->fechabaja=null;
+        $contrato->save();
+        Bitacora::bitacora('Dió de alta a un contrato');
+        return redirect('/contratos')->with('mensaje','Contrato dado de alta');
     }
 }

@@ -2,8 +2,7 @@
 
 @section('migasdepan')
 <h1>
-        Contrato
-        <small>Control de Contrato</small>
+        Contratos
       </h1>
       <ol class="breadcrumb">
         <li><a href="{{ url('/contratos') }}"><i class="fa fa-dashboard"></i> Contrato</a></li>
@@ -13,19 +12,15 @@
 @section('content')
 <div class="container">
     <div class="row">
-        <div class="col-md-10 col-md-offset-1">
-            <div class="panel panel-primary">
-                <div class="panel-heading">Registro de Contrato</div>
+        <div class="panel panel-default">
                 <div class="panel-body">
-                    {{ Form::open(['action' => 'ContratoController@store','class' => 'form-horizontal']) }}
-                    {{-- <form class="form-horizontal" role="form" method="POST" action="{{ route('register') }}"> --}}
-                        {{ csrf_field() }}
-
+                    {{ Form::open(['action' => 'ProyectoController@store','class' => 'form-horizontal']) }}
+                        {{ Form::hidden('estado',1) }}
                         @include('contratos.formulario')
 
                         <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
-                                <button type="submit" class="btn btn-primary">
+                            <div class="col-md-6 col-md-offset-1">
+                                <button type="submit" class="btn btn-primary btn-lg">
                                     <span class="glyphicon glyphicon-floppy-disk"></span>    Registrar
                                 </button>
                             </div>
@@ -34,6 +29,6 @@
                 </div>
             </div>
         </div>
-    </div>
+    
 </div>
-@endsection
+@endsection 
