@@ -65,9 +65,9 @@ class TipocontratoController extends Controller
      */
     public function show($id)
     {
-        $Tipocontrato = Tipocontrato::findorFail($id);
+        $tipocontrato = Tipocontrato::findorFail($id);
 
-        return view('tipocontratos.show', compact('Tipocontrato'));
+        return view('tipocontratos.show', compact('tipocontrato'));
     }
 
     /**
@@ -78,8 +78,8 @@ class TipocontratoController extends Controller
      */
     public function edit($id)
     {
-        $Tipocontrato = Tipocontrato::find($id);
-        return view('tipocontratos.edit',compact('Tipocontrato'));
+        $tipocontrato = Tipocontrato::find($id);
+        return view('tipocontratos.edit',compact('tipocontrato'));
     }
 
     /**
@@ -92,11 +92,11 @@ class TipocontratoController extends Controller
 
     public function update(TipocontratoRequest $request, $id)
     {
-        $Tipocontrato = Tipocontrato::find($id);
-        $Tipocontrato->fill($request->All());
-        $Tipocontrato->save();
+        $tipocontrato = Tipocontrato::find($id);
+        $tipocontrato->fill($request->All());
+        $tipocontrato->save();
         bitacora('Modificó un tipo');
-        return redirect('/tipocontratos')->with('mensaje','Registro modificado con éxito');
+        return redirect('/tipocontratos')->with('mensaje','El tipo de contrato se modificó con éxito');
     }
 
     /**

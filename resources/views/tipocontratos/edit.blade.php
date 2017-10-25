@@ -2,11 +2,11 @@
 
 @section('migasdepan')
 <h1>
-        Usuarios
+        
         <small>Modificar Tipo {{ $tipocontrato->nombre }}</small>
       </h1>
       <ol class="breadcrumb">
-        <li><a href="{{ url('/tipocontratos') }}"><i class="fa fa-dashboard"></i> Usuarios</a></li>
+        <li><a href="{{ url('/tipocontratos') }}"><i class="fa fa-dashboard"></i> Tipos de Contrato</a></li>
         <li class="active">Edición</li>
       </ol>
 @endsection
@@ -14,14 +14,12 @@
 @section('content')
 <div class="container">
     <div class="row">
-        <div class="col-md-10 col-md-offset-1">
             <div class="panel panel-primary">
                 <div class="panel-heading">Edicion de Proveedor</div>
                 <div class="panel-body">
                     {{ Form::model($tipocontrato, array('method' => 'put', 'class' => 'form-horizontal' , 'route' => array('tipocontratos.update', $tipocontrato->id))) }} 
                     {{-- <form class="form-horizontal" role="form" method="POST" action="{{ route('register') }}"> --}}
-                        {{ csrf_field() }}
-
+                            {{ Form::hidden('estado',1) }}
                         @include('tipocontratos.formulario')
 
                         <div class="form-group">
@@ -34,7 +32,6 @@
                     {{ Form::close() }}
                 </div>
             </div>
-        </div>
     </div>
 </div>
 @endsection
