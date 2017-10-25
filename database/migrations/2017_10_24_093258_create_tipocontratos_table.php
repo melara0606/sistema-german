@@ -17,6 +17,8 @@ class CreateTipocontratosTable extends Migration
             $table->increments('id');
             $table->string('nombre');
             $table->integer('estado');
+            $table->string('motivo')->nullable();
+            $table->date('fechabaja')->nullable();
             $table->timestamps();
         });
     }

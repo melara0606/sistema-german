@@ -54,8 +54,7 @@ class TipocontratoController extends Controller
     {
         Tipocontrato::create($request->All());
         bitacora('Registró un tipo de contrato');
-        Session::flash('mensaje', 'El tipo de contrato se creo exitosamente.');
-        return redirect('/tipocontratos');
+        return redirect('/tipocontratos')->with('mensaje', 'El tipo de contrato se creo exitosamente.');
     }
 
     /**
