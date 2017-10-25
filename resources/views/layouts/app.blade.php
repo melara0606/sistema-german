@@ -509,8 +509,8 @@
     <section class="content">
       <!-- Small boxes (Stat box) -->
       @if(Session::has('mensaje'))
-        <div class="alert alert-success alert-dismissible" role="alert">
-          <button type="button" class="close" data-dismiss="alert" arial-label="Close"><span aria-      hidden="true">x</span></button>
+        <div class="alert alert-success alert-dismissable" role="alert">
+          <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
           {{ Session::get('mensaje') }}  
         </div>
     @endif
@@ -601,5 +601,9 @@
 
       });
   </script>
+
+  <script>
+$('div.alert').not('.alert-important').delay(9000).fadeOut(350);
+</script>
 </body>
 </html>
