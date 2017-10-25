@@ -29,17 +29,15 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('usuarios','UsuariosController@index')->middleware('Admin');
-Route::get('usuarios/registrar','UsuariosController@registro')->middleware('Admin');
-Route::get('usuarios/{id}', 'UsuariosController@buscar')->middleware('Admin');
-Route::post('usuarios/save','UsuariosController@save')->middleware('Admin');
-Route::put('usuarios/update','UsuariosController@update')->middleware('Admin');
-Route::get('usuarios/borrar/{id}','UsuariosController@borrar')->middleware('Admin');
-Route::put('usuarios/destoy','UsuariosController@destroy')->middleware('Admin');
 
-route::get('home/perfil','UsuariosController@perfil');
-route::get('perfil/{id}','UsuariosController@modificarperfil');
-Route::put('updateperfil','UsuariosController@updateperfil');
+Route::post('usuarios/baja/{id}','UsuarioController@baja')->name('usuarios.baja');
+Route::post('usuarios/alta/{id}','UsuarioController@alta')->name('usuarios.alta');
+Route::Resource('usuarios','UsuarioController');
+
+
+route::get('home/perfil','UsuarioController@perfil');
+route::get('perfil/{id}','UsuarioController@modificarperfil');
+Route::put('updateperfil','UsuarioController@updateperfil');
 
 //Route::Resource('bitacoras' , 'BitacoraController');
 Route::get('bitacoras','BitacoraController@index');

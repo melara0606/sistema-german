@@ -16,11 +16,11 @@
           <div class="box">
             <div class="box-header">
               <h3 class="box-title">Listado</h3>
-              	<a href="{{ url('/usuarios/registrar') }}" class="btn btn-primary">Agregar <span class="glyphicon glyphicon-plus-sign"></span></a>
+              	<a href="{{ url('/usuarios/create') }}" class="btn btn-primary">Agregar <span class="glyphicon glyphicon-plus-sign"></span></a>
             </div>
             <!-- /.box-header -->
             <div class="box-body table-responsive no-padding">
-              <table class="table table-hover" id="datatable">
+              <table class="table table-hover" id="example2">
   				<thead>
                   <th>ID</th>
                   <th>Nombre</th>
@@ -36,16 +36,15 @@
                 		<td>{{ $user->name }}</td>
                 		<td>{{ $user->username }}</td>
                 		<td>{{ $user->email }}</td>
-                    <td>{{ vercargo($user->cargo) }}</td>
+                        <td>{{ vercargo($user->cargo) }}</td>
                 		<td>
-                			<a href="{{ url('/usuarios/'.$user->id) }}" class="btn btn-warning">Editar</a> |
-                			<a class="btn btn-primary" href ="{{ url('usuarios/borrar', $user->id) }}" role="button" >Eliminar </a>
-                    </td>
+                            <a href="{{ url('usuarios/'.$user->id.'/edit') }}" class="btn btn-warning btn-xs"><span class="glyphicon glyphicon-eye-open"></span></a>
+                        </td>
                 	</tr>
                 	@endforeach
                 </tbody>
               </table>
-                {{ $usuarios->links() }}
+
             </div>
             <!-- /.box-body -->
           </div>

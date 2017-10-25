@@ -16,8 +16,8 @@
             <div class="panel panel-default">
                 <div class="panel-heading">Registro de Usuarios</div>
                 <div class="panel-body">
-                	{{-- {{ Form::model($usuario,['method' => 'put', 'route' => ['usuarios.update',$usuario->id]] )}} --}}
-                   {{ Form::open(['action' => 'UsuariosController@update','method' => 'put','class' => 'form-horizontal']) }} 
+                	 {{ Form::model($usuario,['method' => 'put','class' => 'form-horizontal', 'route' => ['usuarios.update',$usuario->id]] )}}
+
                     {{-- <form class="form-horizontal" role="form" method="POST" action="{{ route('register') }}"> --}}
                         {{ csrf_field() }}
 

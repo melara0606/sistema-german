@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
-use App\Proveedor;
+use Illuminate\Support\Facades\Auth;
 use App\Bitacora;
 
 class LoginController extends Controller
@@ -27,7 +27,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    
+
      public function authenticate()
     {
         if (Auth::attempt(['username' => $username, 'password' => $password])) {
@@ -35,7 +35,7 @@ class LoginController extends Controller
             return redirect()->intended('home');
         }
     }
-    
+
     /**
      * Create a new controller instance.
      *
