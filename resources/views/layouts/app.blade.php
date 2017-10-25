@@ -79,11 +79,8 @@
   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <![endif]-->
 </head>
-<body class="hold-transition skin-blue sidebar-mini">
-  @if(Session::has('mensaje'))
-  <?php $mensaje= Session::get('mensaje');
-  echo "<script>swal('exito','$mensaje','success')</script>";?>
-@endif
+<body class="hold-transition skin-purple sidebar-mini">
+  
 <div class="wrapper">
 
   <header class="main-header">
@@ -417,7 +414,8 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="pages/UI/general.html"><i class="fa fa-circle-o"></i> Registro del Contrato</a></li>
+            <li><a href="{{ url('contratos') }}"><i class="fa fa-circle-o"></i> Listado de Contratos</a></li>
+            <li><a href="{{ url('contratos/create') }}"><i class="fa fa-circle-o"></i> Registro del Contrato</a></li>
           </ul>
         </li>
         <li class="treeview">
@@ -448,13 +446,13 @@
 
         <li class="treeview">
           <a href="#">
-            <i class="fa fa-edit"></i> <span>Contribuyentes</span>
+            <i class="fa fa-edit"></i> <span>Proyectos</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="pages/forms/general.html"><i class="fa fa-circle-o"></i> Registro de Cotización</a></li>
+            <li><a href="{{ url('proyectos')}}"><i class="fa fa-circle-o"></i> Listado de Proyectos</a></li>
           </ul>
         </li>
         <li class="treeview">
@@ -510,6 +508,12 @@
     <!-- Main content -->
     <section class="content">
       <!-- Small boxes (Stat box) -->
+      @if(Session::has('mensaje'))
+        <div class="alert alert-success alert-dismissible" role="alert">
+          <button type="button" class="close" data-dismiss="alert" arial-label="Close"><span aria-      hidden="true">x</span></button>
+          {{ Session::get('mensaje') }}  
+        </div>
+    @endif
       @yield('content')
       
       <!-- /.row (main row) -->

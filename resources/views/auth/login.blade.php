@@ -40,7 +40,7 @@
             <label for="username" class="col-md-4 control-label">Nombre de Usuario (*)</label>
 
             <div class="col-md-8">
-                <input id="username" type="text" class="form-control" name="username" value="{{ old('username') }}" autofocus/>
+                <input id="username" type="text" class="form-control" name="username" value="{{ old('username') }}" required autofocus/>
                 <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
                     @if ($errors->has('username'))
                         <span class="help-block">
@@ -54,7 +54,7 @@
         <label for="password" class="col-md-4 control-label">Contraseña (*)</label>
 
         <div class="col-md-8">
-            <input id="password" type="password" class="form-control" name="password" >
+            <input id="password" type="password" class="form-control" name="password" required>
             <span class="glyphicon glyphicon-lock form-control-feedback"></span>
                 @if ($errors->has('password'))
                     <span class="help-block">

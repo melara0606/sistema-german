@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Tipocontrato;
 use App\Bitacora;
 use App\Http\Requests\TipocontratoRequest;
+use Illuminate\Support\Facades\Session;
 
 class TipocontratoController extends Controller
 {
@@ -52,8 +53,9 @@ class TipocontratoController extends Controller
     public function store(TipocontratoRequest $request)
     {
         Tipocontrato::create($request->All());
-        bitacora('Registró un tipo');
-        return redirect('/tipocontratos')->with('mensaje','Registro almacenado con éxito');
+        bitacora('Registró un tipo de contrato');
+        Session::flash('mensaje', 'El tipo de contrato se creo exitosamente.');
+        return redirect('/tipocontratos');
     }
 
     /**
