@@ -374,7 +374,7 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li class="active"><a href="{{ url('/usuarios/registrar') }}"><i class="fa fa-circle-o"></i> Registrar Usuarios</a></li>
+            <li class="active"><a href="{{ url('/usuarios/create') }}"><i class="fa fa-circle-o"></i> Registrar Usuarios</a></li>
             <li><a href="{{ url('/usuarios') }}"><i class="fa fa-circle-o"></i> Listado de Usuarios</a></li>
           </ul>
         </li>

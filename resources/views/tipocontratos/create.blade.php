@@ -15,7 +15,6 @@
         <div class="panel panel-default">
                 <div class="panel-body">
                     {{ Form::open(['action' => 'TipocontratoController@store','class' => 'form-horizontal']) }}
-                        {{ Form::hidden('estado',1) }}
                         @include('tipocontratos.formulario')
 
                         <div class="form-group">

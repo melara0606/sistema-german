@@ -22,7 +22,7 @@ class CreateContribuyentesTable extends Migration
             $table->string('direccion');
             $table->string('telefono');
             $table->string('sexo');
-            $table->integer('estado');
+            $table->integer('estado')->default(1);
             $table->string('motivo')->nullable();
             $table->date('fechabaja')->nullable();
             $table->timestamps();

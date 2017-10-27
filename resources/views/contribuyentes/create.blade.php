@@ -18,7 +18,6 @@
                 <div class="panel-heading">Registro de contribuyente</div>
                 <div class="panel-body">
                     {{ Form::open(['action' => 'ContribuyenteController@store','class' => 'form-horizontal']) }}
-                        {{ Form::hidden('estado',1) }}
                         @include('contribuyentes.formulario')
 
                         <div class="form-group">

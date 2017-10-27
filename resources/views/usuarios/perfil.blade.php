@@ -1,6 +1,3 @@
-<?php use App\Cargo; 
-$cargo=Cargo::vercargo(Auth::user()->cargo);
-?>
 @extends('layouts.app')
 
 @section('migasdepan')
@@ -37,7 +34,7 @@ $cargo=Cargo::vercargo(Auth::user()->cargo);
 
                         <div class="form-group{{ $errors->has('emailr') ? ' has-error' : '' }}">
                             <label for="emailr" class="col-md-4 control-label">Cargo:</label>
-                            <label for="nombree" class="col-md-4 control-label">{{$cargo}}</label><br>
+                            <label for="nombree" class="col-md-4 control-label">{{vercargo(Auth::user()->cargo)}}</label><br>
                             
                         </div>
 

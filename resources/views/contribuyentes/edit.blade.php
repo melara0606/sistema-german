@@ -20,7 +20,6 @@
                 <div class="panel-body">
                     {{ Form::model($contribuyente, array('method' => 'put', 'class' => 'form-horizontal' , 'route' => array('contribuyentes.update', $contribuyente->id))) }} 
                     {{-- <form class="form-horizontal" role="form" method="POST" action="{{ route('register') }}"> --}}
-                        {{ csrf_field() }}
 
                         @include('contribuyentes.formulario')
 

@@ -25,7 +25,7 @@ class CreateProveedorsTable extends Migration
             $table->string('telfijor')->nullable();
             $table->char('celular_r', 9)->nullable();
             $table->string('emailr')->nullable();
-            $table->integer('estado')->unsigned();
+            $table->integer('estado')->unsigned()->default(1);
             $table->string('motivo')->nullable();
             $table->date('fechabaja')->nullable();
             $table->timestamps();

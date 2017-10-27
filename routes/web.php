@@ -21,11 +21,12 @@ Route::get('/', function () {
 });
 
 
-
 /*Route::get('/', function () {
     return view('auth.login');
 });
 */
+
+
 Auth::routes();
 
 Route::post('authenticate','Auth\loginController@authenticate')->name('authenticate');

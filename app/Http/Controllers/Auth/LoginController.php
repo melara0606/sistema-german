@@ -30,7 +30,13 @@ class LoginController extends Controller
      */
     public function showLoginForm()
     {
-        return view('auth.login');
+        $users=\App\User::all()->count();
+        if($users==0){
+            return redirect('register');
+
+        }else{
+            return redirect('login');
+        }
     }
 
     public function username()
@@ -42,7 +48,7 @@ class LoginController extends Controller
     public function authenticate(Request $request)
     {
         //dd(bcrypt($request->password));
-        if (Auth::attempt(['username' => $request->username, 'password' => $request->password])) {
+        if (Auth::attempt(['username' => $request->username, 'password' => $request->password,'estado' => 1])) {
             //dd('hola');
             Bitacora::bitacora('inicio sesion');
             return redirect()->intended('home');
@@ -55,7 +61,7 @@ class LoginController extends Controller
     {
         Bitacora::bitacora('Cerró Sesión');
         Auth::logout();
-        return redirect('login')->with('mensaje','Cerró Sesión del sistema exitósamente');
+        return redirect('/')->with('mensaje','Cerró Sesión del sistema exitósamente');
     }
 
     /**

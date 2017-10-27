@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use App\Bitacora;
 use App\Http\Requests\UsuariosRequest;
 use App\Http\Requests\ModificarUsuarioRequest;
 class UsuarioController extends Controller
@@ -13,10 +14,23 @@ class UsuarioController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $usuarios=User::all();
-        return view('usuarios.index',compact('usuarios'));
+        if(Auth()->user()->cargo == 1){
+            $estado = $request->get('estado');
+            if($estado == "" )$estado=1;
+            if ($estado == 1) {
+                $usuarios = User::where('estado',$estado)->get();
+                return view('usuarios.index',compact('usuarios','estado'));
+            }
+            if ($estado == 2) {
+                $usuarios = User::where('estado',$estado)->get();
+                return view('usuarios.index',compact('usuarios','estado'));
+            }
+        }else{
+            return redirect('home')->with('mensaje','No tiene acceso a usuarios');
+        }
+
     }
 
     /**
@@ -26,7 +40,13 @@ class UsuarioController extends Controller
      */
     public function create()
     {
-        return view('usuarios.create');
+        if(Auth()->user()->cargo == 1)
+        {
+            return view('usuarios.create');
+        }else{
+
+        }
+        return redirect('home')->with('mensaje','No tiene acceso a usuarios');
     }
 
     /**
@@ -42,7 +62,6 @@ class UsuarioController extends Controller
             'username' => $request['username'],
             'email' => $request['email'],
             'cargo' => $request['cargo'],
-            'estado' => $request['estado'],
             'password' => bcrypt($request['password']),
         ]);
         bitacora('Registro un usuario');
@@ -100,5 +119,65 @@ class UsuarioController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function baja($cadena)
+    {
+        //dd($id);
+        //dd(Auth()->user()->cargo);
+        $datos = explode("+", $cadena);
+        $id=$datos[0];
+        $motivo=$datos[1];
+        $usuarios = User::find($id);
+        $idusuario=$usuarios->cargo;
+        //dd($idusuario);
+        if(Auth()->user()->cargo == $idusuario){
+            return redirect('usuarios')->with('mensaje','No se puede eliminar al administrador');
+        }else{
+            $usuarios->estado=2;
+            $usuarios->motivo=$motivo;
+            $usuarios->fechabaja=date('Y-m-d');
+            $usuarios->save();
+            bitacora('Dió de baja a un usuario');
+            return redirect('/usuarios')->with('mensaje','Usuario dado de baja');
+        }
+
+    }
+
+    public function alta($id)
+    {
+
+        //$datos = explode("+", $cadena);
+        ////$id=$datos[0];
+        //$motivo=$datos[1];
+        //dd($id);
+        $usuarios = User::find($id);
+        $usuarios->estado=1;
+        $usuarios->motivo=null;
+        $usuarios->fechabaja=null;
+        $usuarios->save();
+        Bitacora::bitacora('Dió de alta a un usuario');
+        return redirect('/usuarios')->with('mensaje','Usuario dado de alta');
+    }
+
+    public function perfil()
+    {
+        return view('usuarios.perfil');
+    }
+
+    public function modificarperfil($id)
+    {
+        return view('usuarios.modificarperfil');
+    }
+
+    public function updateperfil(Request $request)
+    {
+        $id = $request['id'];
+        $usuario = User::find($id);
+        $usuario->fill($request->All());
+        //dd($request->all());
+        bitacora('Modificó su perfil');
+        $usuario->save();
+        return redirect('home/perfil');
     }
 }

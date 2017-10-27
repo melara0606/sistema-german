@@ -21,7 +21,7 @@ class CreateProyectosTable extends Migration
             $table->date('fecha_inicio');
             $table->date('fecha_fin');
             $table->integer('id_organizacion')->nullable();
-            $table->integer('estado');
+            $table->integer('estado')->default(1);
             $table->string('motivo')->nullable();
             $table->date('fechabaja')->nullable();
             $table->timestamps();

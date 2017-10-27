@@ -18,16 +18,13 @@
             <div class="panel panel-primary">
                 <div class="panel-heading">Registro de Usuarios</div>
                 <div class="panel-body">
-                    {{ Form::open(['action' => 'UsuariosController@save','class' => 'form-horizontal']) }}
-                    {{-- <form class="form-horizontal" role="form" method="POST" action="{{ route('register') }}"> --}}
-                        {{ csrf_field() }}
+                    {{ Form::open(['action' => 'UsuarioController@store','class' => 'form-horizontal']) }}
 
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                             <label for="name" class="col-md-4 control-label">Nombre</label>
 
                             <div class="col-md-6">
                                 <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" autofocus>
-                                {{ Form::hidden('estado',1) }}
                                 @if ($errors->has('name'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('name') }}</strong>
@@ -68,15 +65,7 @@
                             <label for="password" class="col-md-4 control-label">Cargo</label>
 
                             <div class="col-md-6">
-                                <select name="cargo" id="cargo" class="form-control">
-                                    <option value="">Seleccione un cargo</option>
-                                    <option value="1">Administrador</option>
-                                    <option value="2">Jefe UACI</option>
-                                    <option value="3">Jefe Tesorería</option>
-                                    <option value="4">Jefe Registro y Control Tributario</option>
-                                    <option value="5">Colector</option>
-                                </select>
-
+                                {!! Form::select('cargo', ['1' => 'Administrador', '2' => 'Jefe UACI','3' => 'Jefe Tesorería','4'=>'Jefe Registro y Control Tributario','5' => 'Colector'],null,['class' => 'form-control'])!!}
                                 @if ($errors->has('cargo'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('cargo') }}</strong>

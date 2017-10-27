@@ -26,7 +26,6 @@
 
                             <div class="col-md-6">
                                 <input id="name" type="text" class="form-control" name="name" value="{{ $usuario->name}}" autofocus>
-                                <input type="hidden" name="id" id="id" value="{{ $usuario->id }}">
                                 @if ($errors->has('name'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('name') }}</strong>
@@ -67,19 +66,8 @@
                             <label for="password" class="col-md-4 control-label">Cargo</label>
 
                             <div class="col-md-6">
-                                <select name="cargo" id="cargo" class="form-control">
-                                    @if($usuario->cargo == 1)
-                                        <option value="1" selected>Administrador</option>
-                                    @else
-                                        <option value="2">Jefe UACI</option>
-                                        <option value="3">Jefe Tesorería</option>
-                                        <option value="4">Jefe Registro y Control Tributario</option>
-                                        <option value="5">Colector</option>
-                                    @endif
-                                   
-                                </select>
-
-                                @if ($errors->has('cargo'))
+                                {!! Form::select('cargo', ['1' => 'Administrador', '2' => 'Jefe UACI','3' => 'Jefe Tesorería','4'=>'Jefe Registro y Control Tributario','5' => 'Colector'],null,['class' => 'form-control'])!!}
+                            @if ($errors->has('cargo'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('cargo') }}</strong>
                                     </span>
