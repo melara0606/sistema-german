@@ -15,6 +15,16 @@ class CreateContratosTable extends Migration
     {
         Schema::create('contratos', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('nombree');
+            $table->string('duie');
+            $table->string('nite');
+            $table->string('empresa');
+            $table->string('nombrec');
+            $table->string('duic');
+            $table->string('nitc');
+
+            $table->string('motivo');
+            $table->integer('estado');
             $table->timestamps();
         });
     }
