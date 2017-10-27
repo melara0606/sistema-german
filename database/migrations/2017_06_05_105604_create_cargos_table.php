@@ -27,6 +27,6 @@ class CreateCargosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('cargo');
+        Schema::dropIfExists('cargos');
     }
 }

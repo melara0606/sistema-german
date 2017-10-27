@@ -32,8 +32,19 @@
   <!-- /.login-logo -->
   <div class="login-box-body">
     <p class="login-box-msg-large">Digite sus datos para iniciar sesión</p>
-
-    <form class="form-horizontal" role="form" method="POST" action="{{ route('login') }}">
+      @if(Session::has('error'))
+          <div class="alert alert-danger alert-dismissable" role="alert">
+              <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+              {{ Session::get('error') }}
+          </div>
+      @endif
+      @if(Session::has('mensaje'))
+          <div class="alert alert-success alert-dismissable" role="alert">
+              <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+              {{ Session::get('mensaje') }}
+          </div>
+      @endif
+    <form class="form-horizontal" role="form" method="POST" action="{{ route('authenticate') }}">
         {{ csrf_field() }}
 
         <div class="form-group{{ $errors->has('username') ? ' has-error' : '' }}">
@@ -104,6 +115,9 @@
       increaseArea: '20%' // optional
     });
   });
+</script>
+<script>
+    $('div.alert').not('.alert-important').delay(9000).fadeOut(350);
 </script>
 </body>
 </html>

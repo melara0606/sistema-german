@@ -28,6 +28,8 @@ Route::get('/', function () {
 */
 Auth::routes();
 
+Route::post('authenticate','Auth\loginController@authenticate')->name('authenticate');
+
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::post('usuarios/baja/{id}','UsuarioController@baja')->name('usuarios.baja');

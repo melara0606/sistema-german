@@ -42,6 +42,7 @@ class UsuarioController extends Controller
             'username' => $request['username'],
             'email' => $request['email'],
             'cargo' => $request['cargo'],
+            'estado' => $request['estado'],
             'password' => bcrypt($request['password']),
         ]);
         bitacora('Registro un usuario');
