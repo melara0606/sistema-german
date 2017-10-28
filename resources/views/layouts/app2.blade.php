@@ -12,10 +12,9 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <script
-  src="http://code.jquery.com/jquery-3.2.1.min.js"
-  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
-  crossorigin="anonymous"></script>
+    {!! Html::style('css/buttons.bootstrap.min.css') !!}
+    {!! Html::script('plugins/jQuery/jquery-2.2.3.min.js') !!}
+    {!! Html::script('bootstrap/js/bootstrap.min.js') !!}
 </head>
 <body>
     <div id="app">
@@ -58,7 +57,7 @@
     <!-- Scripts -->
     
  {{--  <script src="{{ asset('js/app.js') }}"></script> --}}
-    @yield('script')
+    
     
   
 </body>
