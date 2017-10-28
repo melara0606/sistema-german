@@ -132,7 +132,7 @@ class UsuarioController extends Controller
         $idusuario=$usuarios->cargo;
         //dd($idusuario);
         if(Auth()->user()->cargo == $idusuario){
-            return redirect('usuarios')->with('mensaje','No se puede eliminar al administrador');
+            return redirect('usuarios')->with('error','No se puede eliminar al administrador');
         }else{
             $usuarios->estado=2;
             $usuarios->motivo=$motivo;

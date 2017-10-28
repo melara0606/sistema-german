@@ -77,7 +77,7 @@
                         }).then(function (text) {
                             var dominio = window.location.host;
                             var form = $(this).parents('form');
-                            $('#baja').attr('action','http://'+dominio+'/tipocontratos/baja/'+id+'+'+text);
+                            $('#baja').attr('action','http://'+dominio+'/alcaldia/public/tipocontratos/baja/'+id+'+'+text);
                             //document.getElmentById('baja').submit();
                             $('#baja').submit();
                             swal({
@@ -99,7 +99,7 @@
                         }).then(function () {
                             var dominio = window.location.host;
                             var form = $(this).parents('form');
-                            $('#alta').attr('action','http://'+dominio+'/tipocontratos/alta/'+id);
+                            $('#alta').attr('action','http://'+dominio+'/alcaldia/public/tipocontratos/alta/'+id);
                             //document.getElmentById('baja').submit();
                             $('#alta').submit();
                             swal({

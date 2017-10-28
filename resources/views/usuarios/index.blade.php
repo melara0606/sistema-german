@@ -83,11 +83,11 @@
                             $('#baja').attr('action','http://'+dominio+'/alcaldia/public/usuarios/baja/'+id+'+'+text);
                             //document.getElmentById('baja').submit();
                             $('#baja').submit();
-                            swal({
+                            /*swal({
                                 type: 'success',
                                 title: 'Se dio de baja',
                                 html: 'Submitted motivo: ' + text
-                            })
+                            })*/
                         });
                     }
 
@@ -105,11 +105,11 @@
                             $('#alta').attr('action','http://'+dominio+'/alcaldia/public/usuarios/alta/'+id);
                             //document.getElmentById('baja').submit();
                             $('#alta').submit();
-                            swal({
+                            /*swal({
                                 type: 'success',
                                 title: 'Se dio de alta',
                                 html: 'Submitted motivo: '
-                            })
+                            })*/
                         });
                     }
                 </script>
