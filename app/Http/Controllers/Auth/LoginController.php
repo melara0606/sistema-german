@@ -53,7 +53,7 @@ class LoginController extends Controller
             Bitacora::bitacora('inicio sesion');
             return redirect()->intended('home');
         }else{
-            return redirect('login')->with('error','El nombre de usuario o contraseña no existe en nuestros registros');
+            return redirect('/')->with('error','El nombre de usuario o contraseña no existe en nuestros registros');
         }
     }
 

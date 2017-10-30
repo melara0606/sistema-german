@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Carbon\Carbon;
 
 
 class User extends Authenticatable
@@ -27,5 +28,12 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    protected $dates = ['created_at'];
+
+    public function bitacora()
+    {
+        return $this->hasMany('App\Bitacora');
+    }
 
 }

@@ -16,7 +16,7 @@ class Bitacora extends Model
         $bitacora->registro = date('Y-m-d');
         $bitacora->hora = date('H:i:s');
         $bitacora->accion = $accion;
-        $bitacora->idusuario = Auth()->user()->id;
+        $bitacora->user_id = Auth()->user()->id;
         $bitacora->save();
     }
 
@@ -24,5 +24,10 @@ class Bitacora extends Model
     {
     	$nombre = User::find($id);
     	return $nombre->name;
+    }
+
+    public function user()
+    {
+        return $this->belongsTo('App\User');
     }
 }

@@ -1,6 +1,3 @@
-<?php 
-use App\Bitacora;
-use Carbon\Carbon; ?>
 @extends('layouts.app')
 
 @section('migasdepan')
@@ -22,7 +19,7 @@ use Carbon\Carbon; ?>
             </div>
             <!-- /.box-header -->
             <div class="box-body no-padding" >
-              <table class="table table-hover">
+              <table class="table table-hover" id="example2">
   				<thead>
                   <th>Id</th>
                   <th>Fecha de actividad</th>
@@ -38,10 +35,7 @@ use Carbon\Carbon; ?>
                     <td>{{ $bitacora->registro->format('d-m-Y') }}</td>
                 		<td>{{ $bitacora->hora }}</td>
                 		<td>{{ $bitacora->accion }}</td>
-                    <?php 
-                     $nombre= Bitacora::vernombre($bitacora->idusuario);
-                    ?>
-                    <td>{{ $nombre }}</td>
+                    <td>{{ $bitacora->user->name}}</td>
                 		<td>
                     <a href="{{ url('bitacora/'.$bitacora->id) }}" class="btn btn-primary">Ver</a>
                       
@@ -53,7 +47,7 @@ use Carbon\Carbon; ?>
                 </tbody>
               </table>
                 <div class="pull-right">
-                 {{ $bitacoras->links() }} 
+                 
                  </div>
             </div>
             <!-- /.box-body -->

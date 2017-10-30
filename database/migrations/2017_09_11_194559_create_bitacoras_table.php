@@ -18,9 +18,9 @@ class CreateBitacorasTable extends Migration
             $table->date('registro');
             $table->time('hora');
             $table->string('accion');
-            $table->integer('idusuario')->unsigned();
+            $table->integer('user_id')->unsigned();
             $table->timestamps();
-            $table->foreign('idusuario')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 

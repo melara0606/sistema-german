@@ -3,7 +3,7 @@ use App\Bitacora;
 use App\Cargo;
 function cantprov()
 {
-	$proveedores = App\Proveedor::all();
+	$proveedores = App\Proveedor::all()->where('estado',1);
 	$count=$proveedores->count();
     return $count;
 }
@@ -15,7 +15,7 @@ function bitacora($accion)
 	$bitacora->registro = date('Y-m-d');
 	$bitacora->hora = date('H:i:s');
 	$bitacora->accion = $accion;
-	$bitacora->idusuario = Auth()->user()->id;
+	$bitacora->user_id = Auth()->user()->id;
 	$bitacora->save();
 }
 

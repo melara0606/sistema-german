@@ -31,7 +31,7 @@ class BitacoraController extends Controller
      */
     public function general()
     {
-        $bitacoras = Bitacora::paginate(10);
+        $bitacoras = Bitacora::all();
         return view('bitacoras.general', compact('bitacoras'));
     }
 
