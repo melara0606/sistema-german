@@ -10,3 +10,16 @@
         <li><a href="{{ url('contribuyentes/create') }}"><i class="fa fa-circle-o"></i> Registro de Contribuyentes</a></li>
     </ul>
 </li>
+<li class="treeview">
+    <a href="#">
+        <i class="fa fa-edit"></i> <span>Servicios Municipales</span>
+        <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+    </a>
+    <ul class="treeview-menu">
+        <li><a href="{{ url('tiposervicios') }}"><i class="fa fa-circle-o"></i> Listado de servicios municipales</a></li>
+        <li><a href="{{ url('tiposervicios/create') }}"><i class="fa fa-circle-o"></i> Registro de servicio municipal</a></li>
+        <li><a href="{{ url('impuestos') }}"><i class="fa fa-circle-o"></i>Aplicar Impuesto</a></li>
+    </ul>
+</li>

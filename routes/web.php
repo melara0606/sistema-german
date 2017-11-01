@@ -70,3 +70,6 @@ Route::post('tipocontratos/alta/{id}','TipocontratoController@alta')->name('tipo
 Route::Resource('tipocontratos','TipocontratoController');
 
 Route::Resource('tiposervicios','TiposervicioController');
+Route::post('impuestos/baja/{id}','impuestoController@baja')->name('impuestos.baja');
+Route::post('impuestos/alta/{id}','ImpuestoController@alta')->name('impuestos.alta');
+Route::Resource('impuestos','ImpuestoController');
