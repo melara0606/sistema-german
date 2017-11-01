@@ -8,6 +8,13 @@ function cantprov()
     return $count;
 }
 
+function cantcontri()
+{
+    $contribuyentes = App\Contribuyente::all()->where('estado',1);
+    $count=$contribuyentes->count();
+    return $count;
+}
+
 function bitacora($accion)
 {
 	

@@ -62,7 +62,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group{{ $errors->has('idcargo') ? ' has-error' : '' }}">
+                        <div class="form-group{{ $errors->has('cargo') ? ' has-error' : '' }}">
                             <label for="password" class="col-md-4 control-label">Cargo</label>
 
                             <div class="col-md-6">

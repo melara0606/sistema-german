@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "950569f3818b3223783415494c39f404",
+    "content-hash": "e2910bf164b42f59a6f46b568ec3ebaa",
     "packages": [
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -147,6 +147,62 @@
                 "parser"
             ],
             "time": "2017-05-14T14:47:48+00:00"
+        },
+        {
+            "name": "genealabs/phpgmaps",
+            "version": "0.4.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/GeneaLabs/Phpgmaps.git",
+                "reference": "2aa79643d1b231fa952997062d6240b97b5cf668"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/GeneaLabs/Phpgmaps/zipball/2aa79643d1b231fa952997062d6240b97b5cf668",
+                "reference": "2aa79643d1b231fa952997062d6240b97b5cf668",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/framework": "5.*",
+                "php": ">=5.4.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-laravel4": "1.0-dev",
+                    "dev-develop": "2.0-dev",
+                    "dev-master": "2.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "GeneaLabs\\Phpgmaps\\": "src/GeneaLabs/Phpgmaps/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Mike Bronner",
+                    "email": "mike@genealabs.com",
+                    "role": "maintainer"
+                },
+                {
+                    "name": "Michael Hopkins",
+                    "role": "developer"
+                }
+            ],
+            "description": "Laravel implementation of BIOSTALL's CodeIgniter Google Maps API, originally by Michael Hopkins at Appitventures.",
+            "keywords": [
+                "biostall",
+                "googlemaps",
+                "laravel",
+                "phpgmaps"
+            ],
+            "abandoned": "GeneaLabs/laravel-maps",
+            "time": "2017-10-14T12:23:53+00:00"
         },
         {
             "name": "jakub-onderka/php-console-color",

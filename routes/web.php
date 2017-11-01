@@ -68,3 +68,5 @@ Route::Resource('proyectos','ProyectoController');
 Route::post('tipocontratos/baja/{id}','TipocontratoController@baja')->name('tipocontratos.baja');
 Route::post('tipocontratos/alta/{id}','TipocontratoController@alta')->name('tipocontratos.alta');
 Route::Resource('tipocontratos','TipocontratoController');
+
+Route::Resource('tiposervicios','TiposervicioController');
