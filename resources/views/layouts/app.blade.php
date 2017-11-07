@@ -34,12 +34,18 @@
   {!! Html::style('plugins/datatables/dataTables.bootstrap.css') !!}
   {!! Html::script('plugins/jQuery/jquery-2.2.3.min.js') !!}
 {!! Html::script('plugins/iCheck/icheck.min.js') !!}
+{!! Html::script('js/pdfmake.min.js') !!}
+{!! Html::script('js/vfs_fonts.js') !!}
 {!! Html::script('plugins/datatables/jquery.dataTables.min.js') !!}
 {!! Html::script('plugins/datatables/dataTables.bootstrap.min.js') !!}
+
+
+
+
   <script>
-      $(function () {
+      $(document).ready(function () {
           //datatables
-          $('#example2').DataTable({
+          var tabla = $('#example2').DataTable({
               language: {
                   processing: "Búsqueda en curso...",
                   search: "Búscar:",
@@ -65,7 +71,10 @@
               "info": true,
               "autoWidth": false
           });
-      });
+          
+} );
+          //var tablaTools = new $.fn.dataTable.TableTools(tabla);
+
   </script>
 
 
