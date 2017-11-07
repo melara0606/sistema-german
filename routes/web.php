@@ -73,3 +73,7 @@ Route::Resource('tiposervicios','TiposervicioController');
 Route::post('impuestos/baja/{id}','impuestoController@baja')->name('impuestos.baja');
 Route::post('impuestos/alta/{id}','ImpuestoController@alta')->name('impuestos.alta');
 Route::Resource('impuestos','ImpuestoController');
+
+Route::post('rubros/baja/{id}','RubroController@baja')->name('rubros.baja');
+Route::post('rubros/alta/{id}','RubroController@alta')->name('rubros.alta');
+Route::Resource('rubros','RubroController');
