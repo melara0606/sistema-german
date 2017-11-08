@@ -41,6 +41,8 @@ Route::Resource('usuarios','UsuarioController');
 route::get('home/perfil','UsuarioController@perfil');
 route::get('perfil/{id}','UsuarioController@modificarperfil');
 Route::put('updateperfil','UsuarioController@updateperfil');
+Route::get('avatar','UsuarioController@avatar');
+Route::post('usuarios/updateprofile', 'UsuarioController@actualizaravatar');
 
 //Route::Resource('bitacoras' , 'BitacoraController');
 Route::get('bitacoras','BitacoraController@index');
@@ -77,3 +79,7 @@ Route::Resource('impuestos','ImpuestoController');
 Route::post('rubros/baja/{id}','RubroController@baja')->name('rubros.baja');
 Route::post('rubros/alta/{id}','RubroController@alta')->name('rubros.alta');
 Route::Resource('rubros','RubroController');
+
+Route::post('inmuebles/baja/{id}','InmuebleController@baja')->name('inmuebles.baja');
+Route::post('inmuebles/alta/{id}','InmuebleController@alta')->name('inmuebles.alta');
+Route::Resource('inmuebles','InmuebleController');

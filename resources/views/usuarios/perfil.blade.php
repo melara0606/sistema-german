@@ -39,6 +39,7 @@
                         </div>
 
                         <a href="{{ url('/perfil/'.Auth::user()->id) }}" class="btn btn-warning">Editar</a> |
+                        <a href="{{ url('/avatar') }}" class="btn btn-warning">Cambiar Imagen de perfil</a> |
                 </div>
             </div>
         </div>

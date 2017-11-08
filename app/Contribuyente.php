@@ -30,4 +30,9 @@ class Contribuyente extends Model
     	}
         
     }
+
+    public function inmueble()
+    {
+        return $this->hasMany('App\Inmueble');
+    }
 }

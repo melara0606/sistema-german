@@ -7,6 +7,8 @@ use App\User;
 use App\Bitacora;
 use App\Http\Requests\UsuariosRequest;
 use App\Http\Requests\ModificarUsuarioRequest;
+use Validator;
+use Auth;
 class UsuarioController extends Controller
 {
     /**
@@ -186,5 +188,32 @@ class UsuarioController extends Controller
         bitacora('Modificó su perfil');
         $usuario->save();
         return redirect('home/perfil');
+    }
+
+    public function avatar()
+    {
+        return View('usuarios.avatar');
+    }
+
+    public function actualizaravatar(Request $request){
+        $rules = ['avatar' => 'required|image|max:1024*1024*1',];
+        $messages = [
+            'avatar.required' => 'La imagen es requerida',
+            'avatar.image' => 'Formato no permitido',
+            'avatar.max' => 'El máximo permitido es 1 MB',
+        ];
+        $validator = Validator::make($request->all(), $rules, $messages);
+        
+        if ($validator->fails()){
+            return redirect('avatar')->withErrors($validator);
+        }
+        else{
+            $name = str_random(30) . '-' . $request->file('avatar')->getClientOriginalName();
+            $request->file('avatar')->move('img', $name);
+            $user = new User;
+            $user->where('email', '=', Auth::user()->email)
+                 ->update(['avatar' => $name]);
+            return redirect('/home')->with('mensaje', 'Su imagen de perfil ha sido cambiada con éxito');
+        }
     }
 }
