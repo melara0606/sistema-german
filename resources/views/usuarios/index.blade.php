@@ -16,7 +16,7 @@
           <div class="box">
             <div class="box-header">
               <h3 class="box-title">Listado</h3>
-              	<a href="{{ url('/usuarios/create') }}" class="btn btn-primary">Agregar <span class="glyphicon glyphicon-plus-sign"></span></a>
+              	<a href="{{ url('/usuarios/create') }}" class="btn btn-success">Agregar <span class="glyphicon glyphicon-plus-sign"></span></a>
                 <a href="{{ url('/usuarios?estado=1') }}" class="btn btn-primary">Activos</a>
                 <a href="{{ url('/usuarios?estado=2') }}" class="btn btn-primary">Papelera</a>
             </div>
