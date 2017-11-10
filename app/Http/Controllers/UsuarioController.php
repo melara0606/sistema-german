@@ -9,6 +9,7 @@ use App\Http\Requests\UsuariosRequest;
 use App\Http\Requests\ModificarUsuarioRequest;
 use Validator;
 use Auth;
+use Illuminate\Support\Facades\Hash;
 class UsuarioController extends Controller
 {
     /**
@@ -181,13 +182,19 @@ class UsuarioController extends Controller
 
     public function updateperfil(Request $request)
     {
-        $id = $request['id'];
-        $usuario = User::find($id);
-        $usuario->fill($request->All());
-        //dd($request->all());
-        bitacora('Modificó su perfil');
-        $usuario->save();
-        return redirect('home/perfil');
+        //if(Hash::check($request->actual, Auth()->user()->password))
+        //{
+            $id = $request['id'];
+            $usuario = User::find($id);
+            $usuario->fill($request->All());
+            //dd($request->all());
+            bitacora('Modificó su perfil');
+            $usuario->save();
+            return redirect('home/perfil');
+       // }
+        //else{
+        //    return redirect('home/perfil')->with('error','No coincide con la contraseña actual');
+        //}
     }
 
     public function avatar()
@@ -196,7 +203,7 @@ class UsuarioController extends Controller
     }
 
     public function actualizaravatar(Request $request){
-        $rules = ['avatar' => 'required|image|max:1024*1024*1',];
+        $rules = ['avatar' => 'required|image|max:2048*2048*1',];
         $messages = [
             'avatar.required' => 'La imagen es requerida',
             'avatar.image' => 'Formato no permitido',

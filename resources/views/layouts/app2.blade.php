@@ -11,10 +11,9 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    {!! Html::style('css/buttons.bootstrap.min.css') !!}
-    {!! Html::script('plugins/jQuery/jquery-2.2.3.min.js') !!}
-    {!! Html::script('bootstrap/js/bootstrap.min.js') !!}
+    {!! Html::style('css/app.css') !!}
+    {!! Html::script('js/jquery.min.js') !!}
+    {!! Html::script('js/app.js') !!}
 </head>
 <body>
     <div id="app">
@@ -38,7 +37,7 @@
 
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
                     <!-- Left Side Of Navbar -->
-                    
+
 
                     <!-- Right Side Of Navbar -->
                     <ul class="nav navbar-nav navbar-right">
@@ -54,11 +53,7 @@
         @yield('content')
     </div>
 
-    <!-- Scripts -->
-    
- {{--  <script src="{{ asset('js/app.js') }}"></script> --}}
-    
-    
-  
+
+
 </body>
 </html>

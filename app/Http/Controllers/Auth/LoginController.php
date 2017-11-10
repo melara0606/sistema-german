@@ -30,13 +30,7 @@ class LoginController extends Controller
      */
     public function showLoginForm()
     {
-        $users=\App\User::all()->count();
-        if($users==0){
-            return redirect('register');
-
-        }else{
-            return redirect('login');
-        }
+        return view('Auth.login');
     }
 
     public function username()
@@ -50,7 +44,7 @@ class LoginController extends Controller
         //dd(bcrypt($request->password));
         if (Auth::attempt(['username' => $request->username, 'password' => $request->password,'estado' => 1])) {
             //dd('hola');
-            Bitacora::bitacora('inicio sesion');
+            Bitacora::bitacora('inicio de sesion');
             return redirect()->intended('home');
         }else{
             return redirect('/')->with('error','El nombre de usuario o contraseña no existe en nuestros registros');
@@ -59,7 +53,7 @@ class LoginController extends Controller
 
     public function logout()
     {
-        Bitacora::bitacora('Cerró Sesión');
+        Bitacora::bitacora('Cerró Sesión del sistema');
         Auth::logout();
         return redirect('/')->with('mensaje','Cerró Sesión del sistema exitósamente');
     }
