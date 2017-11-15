@@ -29,7 +29,6 @@ class ProyectoRequest extends FormRequest
             'direccion'=>'required|max:255',
             'fecha_inicio'=>'required|date',
             'fecha_fin'=>'required|date',
-            'estado'=>'required',
         ];
     }
 }

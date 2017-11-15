@@ -9,14 +9,14 @@
   <meta name="csrf-token" content="{{ csrf_token() }}">
   <!-- Bootstrap 3.3.6 -->
   {!!Html::style('bootstrap/css/bootstrap.min.css')!!}
-  {!!Html::style('css/app.css')!!}
+
     <!-- Font Awesome -->
   {!!Html::style('css/font-awesome.css')!!}
-  
+
   <!-- Ionicons -->
   {!!Html::style('css/ionicons.min.css')!!}
   <!-- Theme style -->
-  
+
   {!! Html::style('css/font-awesome.min.css')!!}
   {!! Html::style('css/AdminLTE.min.css') !!}
   {!! Html::style('css/wizard.css') !!}
@@ -40,6 +40,7 @@
 {!! Html::script('plugins/datatables/jquery.dataTables.min.js') !!}
 {!! Html::script('plugins/datatables/dataTables.bootstrap.min.js') !!}
 {!! Html::script('js/chosen.jquery.js') !!}
+{!! Html::script('js/vue.min.js') !!}
 
 
 
@@ -73,7 +74,7 @@
               "info": true,
               "autoWidth": false
           });
-          
+
 });
           //var tablaTools = new $.fn.dataTable.TableTools(tabla);
 
@@ -84,7 +85,7 @@
   <!-- AdminLTE Skins. Choose a skin from the css/skins
        folder instead of downloading all of them to reduce the load. -->
 
-  
+
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -94,7 +95,7 @@
   <![endif]-->
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
-  
+
 <div class="wrapper">
 
   <header class="main-header">
@@ -248,7 +249,7 @@
               </li>
               <!-- Menu Body -->
               <li class="user-body">
-            
+
                 <!-- /.row -->
               </li>
               <!-- Menu Footer-->
@@ -307,17 +308,17 @@
     @if(Session::has('mensaje'))
         <div class="alert alert-success alert-dismissable" role="alert">
           <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-          {{ Session::get('mensaje') }}  
+          {{ Session::get('mensaje') }}
         </div>
     @endif
     @if(Session::has('error'))
         <div class="alert alert-danger alert-dismissable" role="alert">
           <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-          {{ Session::get('error') }}  
+          {{ Session::get('error') }}
         </div>
     @endif
       @yield('content')
-      
+
       <!-- /.row (main row) -->
 
     </section>
@@ -332,7 +333,7 @@
     reserved.
   </footer>
 
- 
+
   <!-- Add the sidebar's background. This div must be placed
        immediately after the control sidebar -->
   <div class="control-sidebar-bg"></div>
@@ -357,7 +358,7 @@
 {!! Html::script('plugins/input-mask/jquery.inputmask.js') !!}
 {!! Html::script('plugins/datepicker/bootstrap-datepicker.js') !!}
 {!! Html::script('plugins/colorpicker/bootstrap-colorpicker.min.js') !!}
-
+{!! Html::script('js/pruebasvue.js') !!}
 
 
 
@@ -410,5 +411,6 @@
   <script>
 $('div.alert').not('.alert-important').delay(7000).fadeOut(350);
 </script>
+@yield('scripts')
 </body>
 </html>

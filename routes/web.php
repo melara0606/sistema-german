@@ -32,17 +32,10 @@ Auth::routes();
 Route::post('authenticate','Auth\loginController@authenticate')->name('authenticate');
 
 Route::get('/home', 'HomeController@index')->name('home');
-
+//administrador
 Route::post('usuarios/baja/{id}','UsuarioController@baja')->name('usuarios.baja');
 Route::post('usuarios/alta/{id}','UsuarioController@alta')->name('usuarios.alta');
 Route::Resource('usuarios','UsuarioController');
-
-
-route::get('home/perfil','UsuarioController@perfil');
-route::get('perfil/{id}','UsuarioController@modificarperfil');
-Route::put('updateperfil','UsuarioController@updateperfil');
-Route::get('avatar','UsuarioController@avatar');
-Route::post('usuarios/updateprofile', 'UsuarioController@actualizaravatar');
 
 //Route::Resource('bitacoras' , 'BitacoraController');
 Route::get('bitacoras','BitacoraController@index');
@@ -50,14 +43,18 @@ Route::get('bitacoras/general','BitacoraController@general');
 Route::get('bitacoras/usuario','BitacoraController@usuario');
 Route::get('bitacoras/fecha','BitacoraController@fecha');
 
+//Perfil de usuario
+route::get('home/perfil','UsuarioController@perfil');
+route::get('perfil/{id}','UsuarioController@modificarperfil');
+Route::put('updateperfil','UsuarioController@updateperfil');
+Route::get('avatar','UsuarioController@avatar');
+Route::post('usuarios/updateprofile', 'UsuarioController@actualizaravatar');
+
+
+//////////////////////////////////// UACI /////////////////////////////////////////////////////
 Route::post('proveedores/baja/{id}','ProveedorController@baja')->name('proveedores.baja');
 Route::post('proveedores/alta/{id}','ProveedorController@alta')->name('proveedores.alta');
 Route::Resource('proveedores','ProveedorController');
-
-Route::post('contribuyentes/baja/{id}','ContribuyenteController@baja')->name('contribuyentes.baja');
-Route::post('contribuyentes/alta/{id}','ContribuyenteController@alta')->name('contribuyentes.alta');
-Route::get('contribuyentes/eliminados','ContribuyenteController@eliminados');
-Route::Resource('contribuyentes','ContribuyenteController');
 
 Route::post('contratos/baja/{id}','ContratoController@alta')->name('contratos.alta');
 Route::post('contratos/alta/{id}','ContratoController@baja')->name('contratos.baja');
@@ -71,6 +68,22 @@ Route::post('tipocontratos/baja/{id}','TipocontratoController@baja')->name('tipo
 Route::post('tipocontratos/alta/{id}','TipocontratoController@alta')->name('tipocontratos.alta');
 Route::Resource('tipocontratos','TipocontratoController');
 
+Route::post('cotizaciones/baja/{id}','CotizacionController@baja')->name('cotizaciones.baja');
+Route::post('cotizaciones/alta/{id}','CotizacionController@alta')->name('cotizaciones.alta');
+Route::Resource('cotizaciones','CotizacionController');
+
+Route::post('ordencompras/baja/{id}','OrdencompraController@baja')->name('ordencompras.baja');
+Route::post('ordencompras/alta/{id}','OrdencompraController@alta')->name('ordencompras.alta');
+Route::Resource('ordencompras','OrdencompraController');
+
+Route::Resource('presupuestos','PresupuestoController');
+
+////////////////triburario /////////////////////////////////////////////////////////////////////////
+Route::post('contribuyentes/baja/{id}','ContribuyenteController@baja')->name('contribuyentes.baja');
+Route::post('contribuyentes/alta/{id}','ContribuyenteController@alta')->name('contribuyentes.alta');
+Route::get('contribuyentes/eliminados','ContribuyenteController@eliminados');
+Route::Resource('contribuyentes','ContribuyenteController');
+
 Route::Resource('tiposervicios','TiposervicioController');
 Route::post('impuestos/baja/{id}','impuestoController@baja')->name('impuestos.baja');
 Route::post('impuestos/alta/{id}','ImpuestoController@alta')->name('impuestos.alta');
@@ -83,7 +96,3 @@ Route::Resource('rubros','RubroController');
 Route::post('inmuebles/baja/{id}','InmuebleController@baja')->name('inmuebles.baja');
 Route::post('inmuebles/alta/{id}','InmuebleController@alta')->name('inmuebles.alta');
 Route::Resource('inmuebles','InmuebleController');
-
-Route::post('cotizaciones/baja/{id}','CotizacionController@baja')->name('cotizaciones.baja');
-Route::post('cotizaciones/alta/{id}','CotizacionController@alta')->name('cotizaciones.alta');
-Route::Resource('cotizaciones','CotizacionController');
