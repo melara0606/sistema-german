@@ -1,4 +1,4 @@
-<?php 
+<?php
 use App\Bitacora;
 use Carbon\Carbon; ?>
 @extends('layouts.app')
@@ -15,6 +15,11 @@ use Carbon\Carbon; ?>
 @endsection
 
 @section('content')
+  <div id="app-6">
+    <p>@{{ message }}</p>
+    <input v-model="message">
+  </div>
+
 <div class="col-xs-12">
           <div class="box">
             <div class="box-header">

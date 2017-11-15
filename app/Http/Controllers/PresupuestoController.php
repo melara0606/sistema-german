@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Cotizacion;
 use Illuminate\Http\Request;
+use App\Proyecto;
+use App\Presupuesto;
+use App\Presupuestodetalle;
 
-
-class OrdencompraController extends Controller
+class PresupuestoController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -25,8 +26,8 @@ class OrdencompraController extends Controller
      */
     public function create()
     {
-        $proveedores = Cotizacion::all()->where('estado', 1)->pluck( 'proveedor_id');
-        return view('ordencompras.create',compact('proveedores'));
+      $proyectos = Proyecto::all();
+        return view('presupuestos.create',compact('proyectos'));
     }
 
     /**
@@ -37,7 +38,21 @@ class OrdencompraController extends Controller
      */
     public function store(Request $request)
     {
-        //
+      $count = $request->contador;
+      $presupuesto = Presupuesto::create([
+          'proyecto_id' => $request->proyecto,
+          'total' => $request->total,
+        ]);
+        for($i = 0; $i<$count;$i++){
+          Presupuestodetalle::create([
+            'presupuesto_id' => $presupuesto->id,
+            'material' => $request->materiales[$i],
+            'cantidad' => $request->cantidades[$i],
+            'preciou' => $request->precios[$i],
+          ]);
+        }
+        return redirect('/proyectos')->with('mensaje','Presupuesto registrado con éxito');
+
     }
 
     /**
