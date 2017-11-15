@@ -32,9 +32,11 @@
   {!! Html::style('plugins/datepicker/datepicker3.css') !!}
   {!! Html::style('plugins/iCheck/all.css') !!}
   {!! Html::style('plugins/datatables/dataTables.bootstrap.css') !!}
+
   {!! Html::style('css/chosen.css') !!}
   {!! Html::script('plugins/jQuery/jquery-2.2.3.min.js') !!}
 {!! Html::script('plugins/iCheck/icheck.min.js') !!}
+{!! Html::script('js/botones.dataTables.min.js') !!}
 {!! Html::script('js/pdfmake.min.js') !!}
 {!! Html::script('js/vfs_fonts.js') !!}
 {!! Html::script('plugins/datatables/jquery.dataTables.min.js') !!}
@@ -49,6 +51,10 @@
       $(document).ready(function () {
           //datatables
           var tabla = $('#example2').DataTable({
+            dom: 'Bfrtip',
+        buttons: [
+            'excel', 'pdf', 'print'
+        ],
               language: {
                   processing: "Búsqueda en curso...",
                   search: "Búscar:",

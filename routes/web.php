@@ -20,7 +20,10 @@ Route::get('/', function () {
         }
 });
 
-
+Route::get('pdf',function(){
+  $pdf = PDF::loadView('pdf');
+  return $pdf->stream('reporte.pdf');
+});
 /*Route::get('/', function () {
     return view('auth.login');
 });

@@ -38,20 +38,29 @@ class PresupuestoController extends Controller
      */
     public function store(Request $request)
     {
-      $count = $request->contador;
-      $presupuesto = Presupuesto::create([
-          'proyecto_id' => $request->proyecto,
-          'total' => $request->total,
-        ]);
-        for($i = 0; $i<$count;$i++){
-          Presupuestodetalle::create([
-            'presupuesto_id' => $presupuesto->id,
-            'material' => $request->materiales[$i],
-            'cantidad' => $request->cantidades[$i],
-            'preciou' => $request->precios[$i],
+      \DB::beginTransaction();
+      try{
+        $count = $request->contador;
+
+        $presupuesto = Presupuesto::create([
+            'proyecto_id' => $request->proyecto,
+            'total' => $request->total,
           ]);
-        }
-        return redirect('/proyectos')->with('mensaje','Presupuesto registrado con éxito');
+          for($i = 0; $i<$count;$i++){
+            Presupuestodetalle::create([
+              'presupuesto_id' => $presupuesto->id,
+              'material' => $request->materiales[$i],
+              'cantidad' => $request->cantidades[$i],
+              'preciou' => $request->precios[$i],
+            ]);
+          }
+          \DB::commit();
+          return redirect('/proyectos')->with('mensaje','Presupuesto registrado con éxito');
+      }catch (\Exception $e){
+        \DB::rollback();
+        return redirect('/presupuestos/create')->with('error','Presupuesto con error'.$e->getMessage());
+      }
+
 
     }
 

@@ -23,7 +23,7 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body table-responsive">
-              <table class="table table-striped table-bordered table-hover" id="example2">
+              <table class="table table-striped table-bordered table-hover display nowrap" id="example2">
   				<thead>
                   <th>Id</th>
                   <th>Nombre de Proveedor</th>
@@ -58,7 +58,7 @@
                              @endif
                         </td>
                 	</tr>
-                	@endforeach 
+                	@endforeach
                 </tbody>
               </table>
                 <script>
@@ -120,7 +120,7 @@
                 </script>
               <div class="pull-right">
 
-              </div> 
+              </div>
             </div>
             <!-- /.box-body -->
           </div>
@@ -128,4 +128,3 @@
         </div>
 </div>
 @endsection
-
