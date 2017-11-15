@@ -19,6 +19,8 @@ class CreateCotizacionsTable extends Migration
             $table->integer('proveedor_id');
             $table->string('descripcion');
             $table->integer('estado');
+            $table->foreign('proyecto_id')->references('id')->on('proyectos');
+            $table->foreign('proveedor_id')->references('id')->on('proveedors');
             $table->timestamps();
         });
     }

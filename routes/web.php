@@ -87,3 +87,5 @@ Route::Resource('inmuebles','InmuebleController');
 Route::post('cotizaciones/baja/{id}','CotizacionController@baja')->name('cotizaciones.baja');
 Route::post('cotizaciones/alta/{id}','CotizacionController@alta')->name('cotizaciones.alta');
 Route::Resource('cotizaciones','CotizacionController');
+
+Route::Resource('detallecotizaciones','DetallecotizacionController');

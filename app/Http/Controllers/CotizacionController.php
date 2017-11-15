@@ -114,8 +114,7 @@ class CotizacionController extends Controller
 
         $datos = explode("+", $cadena);
         $id=$datos[0];
-        $motivo=$datos[1];
-        //dd($id);
+        $motivo=$datos[1];      
         $cotizacion = Cotizacion::find($id);
         $cotizacion->estado=2;
         $cotizacion->motivo=$motivo;
@@ -127,11 +126,6 @@ class CotizacionController extends Controller
 
     public function alta($id)
     {
-
-        //$datos = explode("+", $cadena);
-        ////$id=$datos[0];
-        //$motivo=$datos[1];
-        //dd($id);
         $cotizacion = Cotizacion::find($id);
         $cotizacion->estado=1;
         $cotizacion->motivo=null;

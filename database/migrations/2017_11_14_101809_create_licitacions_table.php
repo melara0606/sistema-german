@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateDetallecotizacionsTable extends Migration
+class CreateLicitacionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,8 @@ class CreateDetallecotizacionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('detallecotizacions', function (Blueprint $table) {
+        Schema::create('licitacions', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('cotizacion_id');
-            $table->string('unidad_medida');
-            $table->integer('cantidad');
-            $table->double('precio_unitario');
-            $table->foreign('cotizacion_id')->references('id')->on('cotizacions');
             $table->timestamps();
         });
     }
@@ -31,6 +26,6 @@ class CreateDetallecotizacionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('detallecotizacions');
+        Schema::dropIfExists('licitacions');
     }
 }

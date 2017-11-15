@@ -4,13 +4,13 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Detallecotizacion extends Model
+class Licitacion extends Model
 {
     protected $guarded = [];
 
     public static function Buscar($nombre,$estado)
     {
-        return Detallecotizacion::nombre($nombre)->estado($estado)->orderBy('id')->paginate(10);
+        return Licitacion::nombre($nombre)->estado($estado)->orderBy('id')->paginate(10);
     }
 
     public function scopeEstado($query,$estado)

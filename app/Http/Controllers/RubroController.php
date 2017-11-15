@@ -77,9 +77,9 @@ class RubroController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Rubro $rubro)
     {
-        $rubro = Rubro::findorFail($id);
+        //$rubro = Rubro::findorFail($id);
         return view('rubros.edit',compact('rubro'));
     }
 
