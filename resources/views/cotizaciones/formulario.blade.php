@@ -2,8 +2,10 @@
                             <label for="proyecto_id" class="col-md-4 control-label">Nombre del proyecto</label>
 
                             <div class="col-md-6">
-
-                                {!!Form::select('proyecto_id',null,['class'=>'form-control','id'=>'proyecto_id','autofocus'])!!}
+                                <select name="proyecto_if}d" id="" class='form-control'>
+                                    <option value="">elija</option>
+                                </select>
+                                
 
                                 @if ($errors->has('proyecto_id'))
                                     <span class="help-block">
@@ -17,8 +19,10 @@
                             <label for="proveedor_id" class="col-md-4 control-label">Proveedor</label>
 
                             <div class="col-md-6">
-                                {!!Form::select('proveedor_id',null,['class'=>'form-control','id'=>'proveedor_id','autofocus'])!!}
-
+                                <select name="proveedor_id" id="" class='form-control'>
+                                    <option value="">hola</option>
+                                </select>
+                                
                                 @if ($errors->has('proveedor_id'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('proveedor_id') }}</strong>

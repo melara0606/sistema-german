@@ -3,24 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Detallecotizacion;
-use App\Bitacora;
-/*use App\Http\Requests\DetallecotizacionRequest;
 
-<?php
-
-namespace App\Http\Controllers;
-
-use Illuminate\Http\Request;
-use App\Proyecto;
-use App\Presupuesto;
-use App\Presupuestodetalle;*/
-
-class DetallecotizacionController extends Controller
+class RequisicionController extends Controller
 {
     /**
-     * Display a listing of  resource.
-     *the
+     * Display a listing of the resource.
+     *
      * @return \Illuminate\Http\Response
      */
     public function index()
@@ -35,8 +23,7 @@ class DetallecotizacionController extends Controller
      */
     public function create()
     {
-      //$proyectos = Proyecto::all();
-        return view('detallecotizaciones.create');
+        //
     }
 
     /**
@@ -47,30 +34,7 @@ class DetallecotizacionController extends Controller
      */
     public function store(Request $request)
     {
-      \DB::beginTransaction();
-      try{
-        $count = $request->contador;
-
-        $detallecotizacion = Detallecotizacion::create([
-            'proyecto_id' => $request->proyecto,
-            'total' => $request->total,
-          ]);
-          for($i = 0; $i<$count;$i++){
-            Detallecotizacion::create([
-              'cotizacion_id' => $detallecotizacion->id,
-              'unidad_medida' => $request->materiales[$i],
-              'cantidad' => $request->cantidades[$i],
-              'precio_unitario' => $request->precios[$i],
-            ]); //////////////PENDIENTE DESDE AQUI/////////////////
-          }
-          \DB::commit();
-          return redirect('/proyectos')->with('mensaje','Presupuesto registrado con éxito');
-      }catch (\Exception $e){
-        \DB::rollback();
-        return redirect('/presupuestos/create')->with('error','Presupuesto con error'.$e->getMessage());
-      }
-
-
+        //
     }
 
     /**
