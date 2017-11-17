@@ -3,11 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Proyecto;
+use App\Formapago;
 use App\Bitacora;
-use App\Http\Requests\ProyectoRequest;
+use App\Http\Requests\FormapagoRequest;
 
-class ProyectoController extends Controller
+class FormapagoController extends Controller
 {
     public function __construct()
     {
@@ -24,12 +24,12 @@ class ProyectoController extends Controller
         $estado = $request->get('estado');
         if($estado == "" )$estado=1;
         if ($estado == 1) {
-            $proyectos = Proyecto::where('estado',$estado)->get();
-            return view('proyectos.index',compact('proyectos','estado'));
+            $formapagos = Formapago::where('estado',$estado)->get();
+            return view('formapagos.index',compact('formapagos','estado'));
         }
         if ($estado == 2) {
-            $proyectos = Proyecto::where('estado',$estado)->get();
-            return view('proyectos.index',compact('proyectos','estado'));
+            $formapagos = Formapago::where('estado',$estado)->get();
+            return view('formapagos.index',compact('formapagos','estado'));
         }
     }
 
@@ -40,7 +40,7 @@ class ProyectoController extends Controller
      */
     public function create()
     {
-        return view('proyectos.create');
+        return view('formapagos.create');
     }
 
     /**
@@ -49,11 +49,11 @@ class ProyectoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(ProyectoRequest $request)
+    public function store(FormapagoRequest $request)
     {
-        Proyecto::create($request->All());
-        bitacora('Registró un proyecto');
-        return redirect('/proyectos')->with('mensaje','Registro almacenado con éxito');
+        Formapago::create($request->All());
+        bitacora('Creó un registro');
+        return redirect('/formapagos')->with('mensaje','Registro almacenado con éxito');
     }
 
     /**
@@ -64,9 +64,9 @@ class ProyectoController extends Controller
      */
     public function show($id)
     {
-        $proyecto = Proyecto::findorFail($id);
+        $formapago = Formapago::findorFail($id);
 
-        return view('proyectos.show', compact('proyecto'));
+        return view('formapagos.show', compact('formapago'));
     }
 
     /**
@@ -77,8 +77,8 @@ class ProyectoController extends Controller
      */
     public function edit($id)
     {
-        $proyecto = Proyecto::find($id);
-        return view('proyectos.edit',compact('proyecto'));
+        $formapago = Formapago::find($id);
+        return view('formapagos.edit',compact('formapago'));
     }
 
     /**
@@ -89,13 +89,13 @@ class ProyectoController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function update(ProyectoRequest $request, $id)
+    public function update(FormapagoRequest $request, $id)
     {
-        $proyecto = Proyecto::find($id);
-        $proyecto->fill($request->All());
-        $proyecto->save();
-        bitacora('Modificó un Proyecto');
-        return redirect('/proyectos')->with('mensaje','Registro modificado con éxito');
+        $formapago = Formapago::find($id);
+        $formapago->fill($request->All());
+        $formapago->save();
+        bitacora('Modificó un registro');
+        return redirect('/formapagos')->with('mensaje','Registro modificado con éxito');
     }
 
     /**
@@ -116,13 +116,13 @@ class ProyectoController extends Controller
         $id=$datos[0];
         $motivo=$datos[1];
         //dd($id);
-        $proyecto = Proyecto::find($id);
-        $proyecto->estado=2;
-        $proyecto->motivo=$motivo;
-        $proyecto->fechabaja=date('Y-m-d');
-        $proyecto->save();
-        bitacora('Dió de baja a un proyecto');
-        return redirect('/proyectos')->with('mensaje','Proyecto dado de baja');
+        $formapago = Formapago::find($id);
+        $formapago->estado=2;
+        $formapago->motivo=$motivo;
+        $formapago->fechabaja=date('Y-m-d');
+        $formapago->save();
+        bitacora('Dió de baja a un registro');
+        return redirect('/formapagos')->with('mensaje','Registro dado de baja');
     }
 
     public function alta($id)
@@ -132,12 +132,12 @@ class ProyectoController extends Controller
         ////$id=$datos[0];
         //$motivo=$datos[1];
         //dd($id);
-        $proyecto = Proyecto::find($id);
-        $proyecto->estado=1;
-        $proyecto->motivo=null;
-        $proyecto->fechabaja=null;
-        $proyecto->save();
-        Bitacora::bitacora('Dió de alta a un proyecto');
-        return redirect('/proyectos')->with('mensaje','Proyecto dado de alta');
+        $formapago = Formapago::find($id);
+        $formapago->estado=1;
+        $formapago->motivo=null;
+        $formapago->fechabaja=null;
+        $formapago->save();
+        Bitacora::bitacora('Dió de alta a un registro');
+        return redirect('/formapagos')->with('mensaje','Registro dado de alta');
     }
 }

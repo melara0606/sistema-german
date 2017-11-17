@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class DetallecotizacionRequest extends FormRequest
+class FormapagoRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,10 +25,6 @@ class DetallecotizacionRequest extends FormRequest
     {
         return [
             'nombre'=>'required|min:3|max:150',
-            'monto'=>'required|numeric',
-            'direccion'=>'required|max:255',
-            'fecha_inicio'=>'required|date',
-            'fecha_fin'=>'required|date',
         ];
     }
 }

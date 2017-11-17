@@ -3,24 +3,16 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Detallecotizacion;
+use App\Solicitudcotizacion;
 use App\Bitacora;
-/*use App\Http\Requests\DetallecotizacionRequest;
+use App\Http\Requests\SolicitudcotizacionRequest;
+use App\Formapago;
 
-<?php
-
-namespace App\Http\Controllers;
-
-use Illuminate\Http\Request;
-use App\Proyecto;
-use App\Presupuesto;
-use App\Presupuestodetalle;*/
-
-class DetallecotizacionController extends Controller
+class SolicitudcotizacionController extends Controller
 {
     /**
-     * Display a listing of  resource.
-     *the
+     * Display a listing of the resource.
+     *
      * @return \Illuminate\Http\Response
      */
     public function index()
@@ -35,8 +27,8 @@ class DetallecotizacionController extends Controller
      */
     public function create()
     {
-      //$proyectos = Proyecto::all();
-        return view('detallecotizaciones.create');
+      $formapagos = Formapago::all();
+        return view('formapagos.create',compact('formapagos'));
     }
 
     /**
@@ -51,23 +43,23 @@ class DetallecotizacionController extends Controller
       try{
         $count = $request->contador;
 
-        $detallecotizacion = Detallecotizacion::create([
-            'proyecto_id' => $request->proyecto,
+        $Solicitudcotizacion = Solicitudcotizacion::create([
+            'formapago_id' => $request->formapago,
             'total' => $request->total,
           ]);
-          for($i = 0; $i<$count;$i++){
-            Detallecotizacion::create([
-              'cotizacion_id' => $detallecotizacion->id,
-              'unidad_medida' => $request->materiales[$i],
+          /*for($i = 0; $i<$count;$i++){
+            Presupuestodetalle::create([
+              'presupuesto_id' => $presupuesto->id,
+              'material' => $request->materiales[$i],
               'cantidad' => $request->cantidades[$i],
-              'precio_unitario' => $request->precios[$i],
-            ]); //////////////PENDIENTE DESDE AQUI/////////////////
-          }
+              'preciou' => $request->precios[$i],
+            ]);
+          }*/
           \DB::commit();
-          return redirect('/proyectos')->with('mensaje','Presupuesto registrado con éxito');
+          return redirect('/formapagos')->with('mensaje','Solicitud registrada con éxito');
       }catch (\Exception $e){
         \DB::rollback();
-        return redirect('/presupuestos/create')->with('error','Presupuesto con error'.$e->getMessage());
+        return redirect('/Solicitudcotizaciones/create')->with('error','Solicitud con error'.$e->getMessage());
       }
 
 

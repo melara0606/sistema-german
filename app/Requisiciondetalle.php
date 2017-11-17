@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Detallecotizacion extends Model
+class Requisiciondetalle extends Model
 {
-    protected $guarded =[];
+    //
 }

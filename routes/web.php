@@ -87,6 +87,14 @@ Route::Resource('cotizaciones','CotizacionController');
 
 Route::Resource('detallecotizaciones','DetallecotizacionController');
 
+Route::post('formapagos/baja/{id}','FormapagoController@baja')->name('formapagos.baja');
+Route::post('formapagos/alta/{id}','FormapagoController@alta')->name('formapagos.alta');
+Route::Resource('formapagos','FormapagoController');
+
+Route::post('solicitudcotizaciones/baja/{id}','SolicitudcotizacionController@baja')->name('solicitudcotizaciones.baja');
+Route::post('solicitudcotizaciones/alta/{id}','SolicitudcotizacionController@alta')->name('solicitudcotizaciones.alta');
+Route::Resource('solicitudcotizaciones','SolicitudcotizacionController');
+
 ////////////////triburario /////////////////////////////////////////////////////////////////////////
 Route::post('contribuyentes/baja/{id}','ContribuyenteController@baja')->name('contribuyentes.baja');
 Route::post('contribuyentes/alta/{id}','ContribuyenteController@alta')->name('contribuyentes.alta');
