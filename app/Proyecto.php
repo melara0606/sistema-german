@@ -3,10 +3,12 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class Proyecto extends Model
 {
     protected $guarded = [];
+    protected $dates = ['fecha_inicio','fecha_fin'];
 
     public static function Buscar($nombre,$estado)
     {
@@ -22,6 +24,6 @@ class Proyecto extends Model
     	if(trim($nombre != "")){
             return $query->where('nombre','iLIKE', '%'.$nombre.'%');
     	}
-    	
+
     }
 }

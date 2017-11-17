@@ -7,6 +7,7 @@
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <meta name="csrf-token" content="{{ csrf_token() }}">
+
   <!-- Bootstrap 3.3.6 -->
   {!!Html::style('bootstrap/css/bootstrap.min.css')!!}
 
@@ -51,10 +52,57 @@
       $(document).ready(function () {
           //datatables
           var tabla = $('#example2').DataTable({
+              language: {
+                  processing: "Búsqueda en curso...",
+                  search: "Búscar:",
+                  lengthMenu: "Mostrar _MENU_ Elementos",
+                  info: "Mostrando _START_ de _END_ de un total de _TOTAL_ Elementos",
+                  infoEmpty: "Visializando 0 de 0 de un total de 0 elementos",
+                  infoFiltered: "(Filtrado de _MAX_ elementos en total)",
+                  infoPostFix: "",
+                  loadingRecords: "Carga de datos en proceso..",
+                  zeroRecords: "Elementos no encontrado",
+                  emptyTable: "La tabla no contiene datos",
+                  paginate: {
+                      first: "Primero",
+                      previous: "Anterior",
+                      next: "siguiente",
+                      last: "Último"
+                  },
+              },
+              "paging": true,
+              "lengthChange": true,
+              "searching": true,
+              "ordering": true,
+              "info": true,
+              "autoWidth": false
+          });
+
+          var consulta = $('#consulta').DataTable({
             dom: 'Bfrtip',
-        buttons: [
-            'excel', 'pdf', 'print'
-        ],
+            buttons: [
+                {
+                    extend: 'pdf'
+
+                },
+                {
+                    extend: 'excel'
+
+                },
+                {
+                    extend: 'print',
+                    text: 'Imprimir',
+                    className: 'btn btn-primary',
+                    exportOptions: {
+                        columns: ':visible'
+                    }
+                },
+                'colvis'
+            ],
+            columnDefs: [ {
+                targets: -1,
+                visible: false
+            } ],
               language: {
                   processing: "Búsqueda en curso...",
                   search: "Búscar:",

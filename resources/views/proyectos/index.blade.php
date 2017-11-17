@@ -42,8 +42,8 @@
                     <td>{{ $proyecto->nombre }}</td>
                     <td>{{ $proyecto->monto }}</td>
                     <td>{{ $proyecto->direccion }}</td>
-                    <td>{{ $proyecto->fecha_inicio }}</td>
-                    <td>{{ $proyecto->fecha_fin }}</td>
+                    <td>{{ $proyecto->fecha_inicio->format('d-m-Y') }}</td>
+                    <td>{{ $proyecto->fecha_fin->format('d-m-Y') }}</td>
                     <td>{{ $proyecto->id_organizacion }}</td>
                     <td>{{ $proyecto->estado }}</td>
                     <td>
@@ -60,7 +60,7 @@
                              @endif
                         </td>
                   </tr>
-                  @endforeach 
+                  @endforeach
                 </tbody>
               </table>
                 <script>
@@ -122,7 +122,7 @@
                 </script>
               <div class="pull-right">
 
-              </div> 
+              </div>
             </div>
             <!-- /.box-body -->
           </div>
@@ -130,4 +130,3 @@
         </div>
 </div>
 @endsection
-

@@ -3,11 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Proyecto;
-use App\Presupuesto;
-use App\Presupuestodetalle;
 
-class PresupuestoController extends Controller
+class PaacController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -26,9 +23,7 @@ class PresupuestoController extends Controller
      */
     public function create()
     {
-      $query = 'select proyectos."id",proyectos.nombre from proyectos inner join presupuestos on proyectos."id"=presupuestos."id"';
-      $proyectos = \DB::select(\DB::raw($query));
-        return view('presupuestos.create',compact('proyectos'));
+        return view('paacs.create');
     }
 
     /**
@@ -39,30 +34,7 @@ class PresupuestoController extends Controller
      */
     public function store(Request $request)
     {
-      \DB::beginTransaction();
-      try{
-        $count = $request->contador;
-
-        $presupuesto = Presupuesto::create([
-            'proyecto_id' => $request->proyecto,
-            'total' => $request->total,
-          ]);
-          for($i = 0; $i<$count;$i++){
-            Presupuestodetalle::create([
-              'presupuesto_id' => $presupuesto->id,
-              'material' => $request->materiales[$i],
-              'cantidad' => $request->cantidades[$i],
-              'preciou' => $request->precios[$i],
-            ]);
-          }
-          \DB::commit();
-          return redirect('/proyectos')->with('mensaje','Presupuesto registrado con éxito');
-      }catch (\Exception $e){
-        \DB::rollback();
-        return redirect('/presupuestos/create')->with('error','Presupuesto con error'.$e->getMessage());
-      }
-
-
+        //
     }
 
     /**

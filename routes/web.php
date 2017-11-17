@@ -85,6 +85,8 @@ Route::post('cotizaciones/baja/{id}','CotizacionController@baja')->name('cotizac
 Route::post('cotizaciones/alta/{id}','CotizacionController@alta')->name('cotizaciones.alta');
 Route::Resource('cotizaciones','CotizacionController');
 
+Route::Resource('paacs','PaacController');
+
 Route::Resource('detallecotizaciones','DetallecotizacionController');
 
 ////////////////triburario /////////////////////////////////////////////////////////////////////////

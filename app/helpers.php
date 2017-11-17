@@ -1,5 +1,6 @@
 <?php
 use App\Bitacora;
+use App\Presupuesto;
 use App\Cargo;
 function cantprov()
 {
@@ -17,7 +18,7 @@ function cantcontri()
 
 function bitacora($accion)
 {
-	
+
 	$bitacora = new Bitacora;
 	$bitacora->registro = date('Y-m-d');
 	$bitacora->hora = date('H:i:s');
@@ -45,9 +46,14 @@ function vercargo($cargo)
 			return 'Colecturía';
 			break;
 		default:
-			
+
 			break;
 	}
 }
 
-
+function presupuesto($proyecto_id)
+{
+	$presupuesto = App\Presupuesto::all()->where('proyecto_id',$proyecto_id);
+	$count=$presupuesto->count();
+    return $count;
+}

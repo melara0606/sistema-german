@@ -23,7 +23,7 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body table-responsive">
-              <table class="table table-striped table-bordered table-hover display nowrap" id="example2">
+              <table class="table table-striped table-bordered table-hover" id="example2">
   				<thead>
                   <th>Id</th>
                   <th>Nombre de Proveedor</th>
