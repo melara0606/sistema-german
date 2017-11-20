@@ -24,13 +24,13 @@
                             </div>
                         </div>
                         <br>
-                        <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
                           Agregar requisiciones
                         </button>
-                        
+
 
                         <!-- Modal -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal fade" data-backdrop="static" data-keyboard="false" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -41,7 +41,7 @@
         @include('requisiciones.detalle')
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
         <button type="button" id="agregar" data-dismiss="modal" class="btn btn-success">Agregar</button>
       </div>
     </div>

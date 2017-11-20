@@ -1,7 +1,7 @@
 <div class="form-group">
   <label for="" class="col-md-4 control-label">Codigo</label>
     <div class="col-md-6">
-        <input type="text" name="codigo" id="codigo" class="form-control">
+        <input type="text" name="codigo" id="codigo" class="form-control" autofocus/>
     </div>
 </div>
 

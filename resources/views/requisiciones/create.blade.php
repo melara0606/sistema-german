@@ -19,7 +19,7 @@
                     {{ Form::open(['action' => 'RequisicionController@store','class' => 'form-horizontal','id' => 'requisicion']) }}
                     @include('requisiciones.formulario')
                     @include('requisiciones.tabla')
-                    <input type="text" name="contador" id="contador" readonly>
+                    <input type="hidden" name="contador" id="contador" readonly>
                     <div class="form-group">
                         <div class="col-md-6 col-md-offset-1">
                             <button type="submit" class="btn btn-success">
@@ -27,7 +27,7 @@
                             </button>
                         </div>
                     </div>
-                    {{Form::close()}}
+                    {{ Form::close() }}
                 </div>
             </div>
         </div>
