@@ -27,11 +27,7 @@
                         <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
                           Agregar requisiciones
                         </button>
-                        <div class="form-group">
-                            <div class="col-md-6">
-                                <button type="button" id="agregar" class="btn btn-success">Agregar</button>
-                            </div>
-                        </div>
+                        
 
                         <!-- Modal -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -46,7 +42,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" id="agregar" class="btn btn-success">Agregar</button>
+        <button type="button" id="agregar" data-dismiss="modal" class="btn btn-success">Agregar</button>
       </div>
     </div>
   </div>

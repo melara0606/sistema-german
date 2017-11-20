@@ -5,25 +5,34 @@ $(document).ready(function(){
 		e.preventDefault();
 		codigo = $("#codigo").val() || 0;
 		cant = $("#cantidad").val() || 0;
-		unidad = $("#medida").val() || 0;
+		unidad = $("#unidad").val() || 0;
 		descripcion = $("#descripcion").val() || 0;
 		if(codigo && cant && unidad && descripcion)
 		{
 			contador++;
 				$(tbRequisicion).append(//$() Para hacer referencia
 					"<tr>"+
-					"<td><input type= 'text' nombre='codigos[]' value='"+codigo+"'></td>" +
-					"<td><input type= 'text' nombre='cantidades[]' value='"+cant+"'></td>" +
-					"<td><input type= 'text' nombre='unidades[]'value='"+unidad+"'></td>" +
-					"<td><input type= 'text' nombre='descriciones[]' value='"+descripcion+"'></td>" +
+					"<td>"+codigo+"</td>"+
+					"<td>"+cant+"</td>"+
+					"<td>"+unidad+"</td>"+
+					"<td>"+descripcion+"</td>"+
 					"<td>" +
+					"<input type='hidden' name='cantidades[]' value='"+cant+"'/>" +
+					"<input type='hidden' name='unidades[]' value='"+unidad+"'/>" +
+					"<input type='hidden' name='codigos[]' value='"+codigo+"' />"+
+					"<input type='hidden' name='descripciones[]' value='"+descripcion+"'/>" +
 					"<button type='button' class='btn btn-danger' id='eliminar'>Eliminar</button></td>" +
 					"</tr>"
 				);
 				$("#contador").val(contador);
+				limpiar();
 		}else {
 			{
-				alert('llene');
+				swal(
+					 '¡Aviso!',
+					 'Debe llenar todos los campos',
+					 'warning'
+)
 			}
 		}
 
@@ -38,7 +47,7 @@ $(document).ready(function(){
 	});
 
 	function limpiar(){
-		$("#requisicion").find("#codigo, #cantidad, #medida, #descripcion").each(function(index, element){
+		$("#requisicion").find("#codigo, #cantidad, #unidad, #descripcion").each(function(index, element){
 			$(element).val("");
 		});
 	}

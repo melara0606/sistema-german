@@ -463,7 +463,7 @@
   </script>
 
   <script>
-$('div.alert').not('.alert-important').delay(7000).fadeOut(350);
+//$('div.alert').not('.alert-important').delay(7000).fadeOut(350);
 </script>
 @yield('scripts')
 </body>
