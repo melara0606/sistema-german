@@ -1,9 +1,9 @@
                         <div class="form-group{{ $errors->has('proyecto_id') ? ' has-error' : '' }}">
-                            <label for="proyecto_id" class="col-md-4 control-label">Nombre del proyecto</label>
+                            <label for="proyecto_id" class="col-md-4 control-label">Proyecto</label>
 
                             <div class="col-md-6">
-                                <select name="proyecto_if}d" id="" class='form-control'>
-                                    <option value="">elija</option>
+                                <select name="proyecto_id" id="" class='form-control'>
+                                    <option value="">Elija un proyecto</option>
                                 </select>
                                 
 
@@ -20,7 +20,7 @@
 
                             <div class="col-md-6">
                                 <select name="proveedor_id" id="" class='form-control'>
-                                    <option value="">hola</option>
+                                    <option value="">Elija un proveedor</option>
                                 </select>
                                 
                                 @if ($errors->has('proveedor_id'))

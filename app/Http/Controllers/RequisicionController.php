@@ -15,7 +15,8 @@ class RequisicionController extends Controller
      */
     public function index()
     {
-        //
+        $requisiciones = Requisicion::where('estado',1)->get();
+        return view('requisiciones.index',compact('requisiciones'));
     }
 
     /**
@@ -72,7 +73,10 @@ class RequisicionController extends Controller
      */
     public function show($id)
     {
-        //
+        $requisicion = Requisicion::findorFail($id);
+        $detalles = Requisiciondetalle::where('requisicion_id',$requisicion->id)->get();
+        //dd($requisicion);
+        return view('requisiciones.show',compact('requisicion','detalles'));
     }
 
     /**
