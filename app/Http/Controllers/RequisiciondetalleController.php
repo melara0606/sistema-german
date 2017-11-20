@@ -3,10 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Requisicion;
-use App\Requisiciondetalle;
 
-class RequisicionController extends Controller
+class RequisiciondetalleController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -36,32 +34,7 @@ class RequisicionController extends Controller
      */
     public function store(Request $request)
     {
-        //dd($request->All());
-        \DB::beginTransaction();
-      try{
-        $count = $request->contador;
-
-        $requisicion = Requisicion::create([
-            'unidad_admin' => $request->unidad_admin,
-            'linea_trabajo' => $request->linea_trabajo,
-            'fuente_financiamiento' => $request->fuente_financiamiento,
-            'justificacion' => $request->justificacion,
-            ]);
-          for($i = 0; $i<$count;$i++){
-            Requisiciondetalle::create([
-              'requisicion_id' => $requisicion->id,
-              'codigo' => $request->codigos[$i],
-              'cantidad' => $request->cantidades[$i],
-              'unidad_medida' => $request->unidades[$i],
-              'descripcion' => $request->descripciones[$i],
-            ]);
-          }
-          \DB::commit();
-          return redirect('/requisiciones')->with('mensaje','Requisición registrada con éxito');
-      }catch (\Exception $e){
-        \DB::rollback();
-        return redirect('/requisiciones/create')->with('error','Requisición con error'.$e->getMessage());
-      }
+        //
     }
 
     /**

@@ -97,6 +97,10 @@ Route::post('solicitudcotizaciones/baja/{id}','SolicitudcotizacionController@baj
 Route::post('solicitudcotizaciones/alta/{id}','SolicitudcotizacionController@alta')->name('solicitudcotizaciones.alta');
 Route::Resource('solicitudcotizaciones','SolicitudcotizacionController');
 
+Route::Resource('requisiciones','RequisicionController');
+
+Route::Resource('requisiciondetalles','RequisiciondetalleController');
+
 ////////////////triburario /////////////////////////////////////////////////////////////////////////
 Route::post('contribuyentes/baja/{id}','ContribuyenteController@baja')->name('contribuyentes.baja');
 Route::post('contribuyentes/alta/{id}','ContribuyenteController@alta')->name('contribuyentes.alta');
