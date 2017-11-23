@@ -38,6 +38,6 @@
                         <br>
                         <div class="form-group">
                             <div class="col-md-6">
-                                <button type="button" id="agregar" class="btn btn-success">Agregar</button>
+                                <button type="button" title="Agregar datos a la tabla" id="agregar" class="btn btn-success">Agregar</button>
                             </div>
                         </div>
