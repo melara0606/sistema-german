@@ -52,7 +52,7 @@
                              @endif
                         </td>
                   </tr>
-                  @endforeach 
+                  @endforeach
                 </tbody>
               </table>
                 <script>
@@ -79,7 +79,7 @@
                         }).then(function (text) {
                             var dominio = window.location.host;
                             var form = $(this).parents('form');
-                            $('#baja').attr('action','http://'+dominio+'/rubros/baja/'+id+'+'+text);
+                            $('#baja').attr('action','http://'+dominio+'/sisverapaz/public/rubros/baja/'+id+'+'+text);
                             //document.getElmentById('baja').submit();
                             $('#baja').submit();
                             swal({
@@ -101,7 +101,7 @@
                         }).then(function () {
                             var dominio = window.location.host;
                             var form = $(this).parents('form');
-                            $('#alta').attr('action','http://'+dominio+'/rubros/alta/'+id);
+                            $('#alta').attr('action','http://'+dominio+'/sisverapaz/public/rubros/alta/'+id);
                             //document.getElmentById('baja').submit();
                             $('#alta').submit();
                             swal({
@@ -114,7 +114,7 @@
                 </script>
               <div class="pull-right">
 
-              </div> 
+              </div>
             </div>
             <!-- /.box-body -->
           </div>
@@ -122,4 +122,3 @@
         </div>
 </div>
 @endsection
-

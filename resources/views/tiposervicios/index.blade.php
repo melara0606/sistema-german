@@ -65,7 +65,7 @@
                             }).then(function (text) {
                                 var dominio = window.location.host;
                                 var form = $(this).parents('form');
-                                $('#baja').attr('action','http://'+dominio+'/alcaldia/public/tiposervicios/baja/'+id+'+'+text);
+                                $('#baja').attr('action','http://'+dominio+'/sisverapaz/public/tiposervicios/baja/'+id+'+'+text);
                                 //document.getElmentById('baja').submit();
                                 $('#baja').submit();
                                 swal({
@@ -87,7 +87,7 @@
                             }).then(function () {
                                 var dominio = window.location.host;
                                 var form = $(this).parents('form');
-                                $('#alta').attr('action','http://'+dominio+'/alcaldia/public/tiposervicios/alta/'+id);
+                                $('#alta').attr('action','http://'+dominio+'/sisverapaz/public/tiposervicios/alta/'+id);
                                 //document.getElmentById('baja').submit();
                                 $('#alta').submit();
                                 swal({
@@ -108,4 +108,3 @@
         </div>
     </div>
 @endsection
-

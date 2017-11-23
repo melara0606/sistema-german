@@ -48,7 +48,7 @@
                       <a href="{{ url('/proveedores/'.$inmueble->id.'/edit') }}" class="btn btn-warning btn-xs"><span class="glyphicon glyphicon-text-size"></span></a>
                     </td>
                   </tr>
-                  @endforeach 
+                  @endforeach
                 </tbody>
               </table>
                 <script>
@@ -75,7 +75,7 @@
                         }).then(function (text) {
                             var dominio = window.location.host;
                             var form = $(this).parents('form');
-                            $('#baja').attr('action','http://'+dominio+'/alcaldia/public/inmuebles/baja/'+id+'+'+text);
+                            $('#baja').attr('action','http://'+dominio+'/sisverapaz/public/inmuebles/baja/'+id+'+'+text);
                             //document.getElmentById('baja').submit();
                             $('#baja').submit();
                             swal({
@@ -97,7 +97,7 @@
                         }).then(function () {
                             var dominio = window.location.host;
                             var form = $(this).parents('form');
-                            $('#alta').attr('action','http://'+dominio+'/alcaldia/public/inmuebles/alta/'+id);
+                            $('#alta').attr('action','http://'+dominio+'/sisverapaz/public/inmuebles/alta/'+id);
                             //document.getElmentById('baja').submit();
                             $('#alta').submit();
                             swal({
@@ -110,7 +110,7 @@
                 </script>
               <div class="pull-right">
 
-              </div> 
+              </div>
             </div>
             <!-- /.box-body -->
           </div>
@@ -118,4 +118,3 @@
         </div>
 </div>
 @endsection
-
