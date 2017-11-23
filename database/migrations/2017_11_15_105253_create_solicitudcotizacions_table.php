@@ -14,8 +14,8 @@ class CreateSolicitudcotizacionsTable extends Migration
     public function up()
     {
         Schema::create('solicitudcotizacions', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('formapago_id');
+            $table->bigIncrements('id');
+            $table->bigInteger('formapago_id')->unsigned();
             $table->string('lugar_entrega');
             $table->string('datos_contenido');
             $table->foreign('formapago_id')->references('id')->on('formapagos');

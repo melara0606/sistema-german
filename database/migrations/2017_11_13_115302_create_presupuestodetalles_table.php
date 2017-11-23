@@ -14,8 +14,8 @@ class CreatePresupuestodetallesTable extends Migration
     public function up()
     {
         Schema::create('presupuestodetalles', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('presupuesto_id');
+            $table->bigIncrements('id');
+            $table->bigInteger('presupuesto_id')->unsigned();
             $table->string('material');
             $table->integer('cantidad');
             $table->double('preciou',8,2);

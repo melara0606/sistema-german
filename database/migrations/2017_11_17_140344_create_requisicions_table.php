@@ -14,8 +14,8 @@ class CreateRequisicionsTable extends Migration
     public function up()
     {
         Schema::create('requisicions', function (Blueprint $table) {
-            $table->increments('id');
-            $table->text('unidad_admin');
+            $table->bigIncrements('id');
+            $table->string('unidad_admin');
             $table->string('linea_trabajo')->nullable();
             $table->string('fuente_financiamiento');
             $table->string('justificacion');

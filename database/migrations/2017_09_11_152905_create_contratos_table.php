@@ -14,7 +14,7 @@ class CreateContratosTable extends Migration
     public function up()
     {
         Schema::create('contratos', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->string('nombree');
             $table->string('duie');
             $table->string('nite');
