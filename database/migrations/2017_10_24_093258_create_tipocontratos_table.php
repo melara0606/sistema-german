@@ -14,7 +14,7 @@ class CreateTipocontratosTable extends Migration
     public function up()
     {
         Schema::create('tipocontratos', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->string('nombre');
             $table->integer('estado')->default(1);
             $table->string('motivo')->nullable();

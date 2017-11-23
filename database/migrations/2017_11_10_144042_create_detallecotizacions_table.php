@@ -14,8 +14,8 @@ class CreateDetallecotizacionsTable extends Migration
     public function up()
     {
         Schema::create('detallecotizacions', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('cotizacion_id');
+            $table->bigIncrements('id');
+            $table->bigInteger('cotizacion_id')->unsigned();
             $table->string('unidad_medida');
             $table->integer('cantidad');
             $table->double('precio_unitario');

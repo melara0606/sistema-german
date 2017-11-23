@@ -14,7 +14,7 @@ class CreateContribuyentesTable extends Migration
     public function up()
     {
         Schema::create('contribuyentes', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->string('nombre');
             $table->string('dui');
             $table->string('nit');

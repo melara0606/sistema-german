@@ -14,8 +14,8 @@ class CreateRequisiciondetallesTable extends Migration
     public function up()
     {
         Schema::create('requisiciondetalles', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('requisicion_id');
+            $table->bigIncrements('id');
+            $table->bigInteger('requisicion_id')->unsigned();
             $table->string('codigo');
             $table->integer('cantidad');
             $table->string('unidad_medida');

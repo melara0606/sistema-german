@@ -14,7 +14,7 @@ class CreateImpuestosTable extends Migration
     public function up()
     {
         Schema::create('impuestos', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->integer('tiposervicio_id');
             $table->double('impuesto',2,2);
             $table->integer('estado')->default(1);

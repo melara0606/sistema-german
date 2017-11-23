@@ -14,9 +14,9 @@ class CreateInmueblesTable extends Migration
     public function up()
     {
         Schema::create('inmuebles', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->string('numero_catastral');
-            $table->integer('contribuyente_id')->unsigned();
+            $table->bigInteger('contribuyente_id')->unsigned();
             $table->string('direccion_inmueble');
             $table->string('medida_inmueble');
             $table->string('numero_escritura');

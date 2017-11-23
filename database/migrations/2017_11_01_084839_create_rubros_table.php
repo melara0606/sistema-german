@@ -14,10 +14,10 @@ class CreateRubrosTable extends Migration
     public function up()
     {
         Schema::create('rubros', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->string('nombre');
             $table->double('porcentaje',2,2);
-            $table->integer('estado');
+            $table->integer('estado')->default(1);
             $table->timestamps();
         });
     }
