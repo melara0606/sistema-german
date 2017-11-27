@@ -1,7 +1,7 @@
                         <div class="form-group">
                           <label for="" class="col-md-2 control-label">Obra, Bien o Servicio</label>
                           <div class="col-md-8">
-                              {{ Form::textarea('obra', null,['class' => 'form-control','rows' => 3]) }}
+                              {{ Form::textarea('obra', null,['class' => 'form-control','rows' => 3,'id' => 'obra']) }}
                           </div>
                         </div>
 

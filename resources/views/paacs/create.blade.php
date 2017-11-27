@@ -19,6 +19,12 @@
                     {{ Form::open(['action' => 'PaacController@store','class' => 'form-horizontal','id' => 'paac']) }}
                     @include('paacs.formulario')
                     @include('paacs.tabla')
+                    <?php
+                    use Carbon\Carbon;
+                    $date = Carbon::now();
+                    $date = $date->format('Y');
+                    ?>
+                    <input type="hidden" name="anio" id="anio" value="<?= $date; ?>" readonly>
                     <input type="hidden" name="total" id="total" readonly>
                     <input type="hidden" name="contador" id="contador" readonly>
                     <div class="form-group">

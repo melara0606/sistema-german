@@ -3,9 +3,15 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Paac;
+use App\Paacdetalle;
 
 class PaacController extends Controller
 {
+  public function __construct()
+  {
+      $this->middleware('auth');
+  }
     /**
      * Display a listing of the resource.
      *
@@ -34,7 +40,8 @@ class PaacController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request->All());
+      \DB::select('SELECT paac(?,?,?)',array($request->anio,$request->total,$request->obra));
+
     }
 
     /**

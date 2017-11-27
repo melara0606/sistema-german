@@ -210,12 +210,14 @@ class UsuarioController extends Controller
             'avatar.max' => 'El máximo permitido es 1 MB',
         ];
         $validator = Validator::make($request->all(), $rules, $messages);
-        
+
         if ($validator->fails()){
             return redirect('avatar')->withErrors($validator);
         }
         else{
+            $info = explode(".",$request->file('avatar')->getClientOriginalName());
             $name = str_random(30) . '-' . $request->file('avatar')->getClientOriginalName();
+            //dd($info);
             $request->file('avatar')->move('img', $name);
             $user = new User;
             $user->where('email', '=', Auth::user()->email)
