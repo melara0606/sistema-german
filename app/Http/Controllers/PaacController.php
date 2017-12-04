@@ -19,7 +19,8 @@ class PaacController extends Controller
      */
     public function index()
     {
-        //
+      $paacs = Paac::all();
+        return view('paacs.index',compact('paacs'));
     }
 
     /**
@@ -27,9 +28,22 @@ class PaacController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    //formulario para registrar plan anual
+    public function crear()
+    {
+      return view('paacs.crear');
+    }
+
+    public function guardar(Request $request)
+    {
+        Paac::create($request->All());
+        return redirect('paacs')->with('mensaje','Registrado con exito');
+    }
     public function create()
     {
-        return view('paacs.create');
+        $anio = date('Y');
+        $paacs = Paac::where('anio',$anio)->get();
+        return view('paacs.create',compact('paacs'));
     }
 
     /**
@@ -40,8 +54,43 @@ class PaacController extends Controller
      */
     public function store(Request $request)
     {
-      \DB::select('SELECT paac(?,?,?)',array($request->anio,$request->total,$request->obra));
+      \DB::beginTransaction();
+      try{
+      $count = $request->contador;
+      $paac = Paac::findorFail($request->paac_id);
+      $total=$paac->total;
+      $paac->total=$total+$request->total;
+      $paac->save();
 
+      for($i = 0; $i<$count;$i++){
+        Paacdetalle::create([
+          'obra' => $request->obras[$i],
+          'paac_id' => $paac->id,
+          'enero' => $request->enero[$i],
+          'febrero' => $request->febrero[$i],
+          'marzo' => $request->marzo[$i],
+          'abril' => $request->abril[$i],
+          'mayo' => $request->mayo[$i],
+          'junio' => $request->junio[$i],
+          'julio' => $request->julio[$i],
+          'agosto' => $request->agosto[$i],
+          'septiembre' => $request->septiembre[$i],
+          'octubre' => $request->octubre[$i],
+          'noviembre' => $request->noviembre[$i],
+          'diciembre' => $request->diciembre[$i],
+          'subtotal' => $request->totales[$i],
+        ]);
+      }
+      \DB::commit();
+        return redirect('/paacs')->with('mensaje','Paac registrado con éxito');
+      }catch (\Exception $e){
+        \DB::rollback();
+        return redirect('/paacs/create')->with('error','Paac con error '.$e->getMessage());
+  }
+
+      //dd($total);
+      //\DB::select('SELECT paac(?,?,?)',array($request->anio,$request->total,$request->obra));
+      return redirect('paacs')->with('mensaje','Paac exitoso');
     }
 
     /**
@@ -52,7 +101,9 @@ class PaacController extends Controller
      */
     public function show($id)
     {
-        //
+      $paac=Paac::findorFail($id);
+      $detalles = Paacdetalle::where('paac_id',$paac->id)->orderBy('id','ASC')->get();
+        return view('paacs.show',compact('paac','detalles'));
     }
 
     /**
@@ -88,4 +139,6 @@ class PaacController extends Controller
     {
         //
     }
+
+
 }

@@ -1,5 +1,17 @@
 <li class="treeview">
     <a href="#">
+        <i class="fa fa-edit"></i> <span>Plan anual de compras</span>
+        <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+    </a>
+    <ul class="treeview-menu">
+      <li><a href="{{ url('paacs')}}"><i class="fa fa-circle-o"></i> listado de plan anual</a></li>
+        <li><a href="{{ url('paacs/create')}}"><i class="fa fa-circle-o"></i> Registro de plan anual</a></li>
+    </ul>
+</li>
+<li class="treeview">
+    <a href="#">
         <i class="fa fa-files-o"></i>
         <span>Proveedores</span>
         <span class="pull-right-container">

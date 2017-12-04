@@ -36,6 +36,7 @@
 
   {!! Html::style('css/chosen.css') !!}
   {!! Html::script('plugins/jQuery/jquery-2.2.3.min.js') !!}
+  {!! Html::script('js/jquery.mask.min.js') !!}
 {!! Html::script('plugins/iCheck/icheck.min.js') !!}
 {!! Html::script('js/botones.dataTables.min.js') !!}
 {!! Html::script('js/pdfmake.min.js') !!}
@@ -443,7 +444,8 @@
           //Money Euro
           $("[data-mask]").inputmask();
 
-
+          //mascara dinero
+          $('.money').mask('000000000000000.00', {reverse: true});
           //Date picker
           $('#datepicker').datepicker({
               autoclose: true

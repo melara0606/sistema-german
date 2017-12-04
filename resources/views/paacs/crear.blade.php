@@ -16,27 +16,21 @@
             <div class="panel panel-primary">
                 <div class="panel-heading">Registro del plan anual de contratación</div>
                 <div class="panel-body">
-                    {{ Form::open(['action' => 'PaacController@store','class' => 'form-horizontal','id' => 'paac']) }}
-                    <div class="form-group">
-                      <label for="" class="col-md-4 control-label">Descripcion plan anual</label>
-                        <div class="col-md-6">
-                                <select class="form-control" name="paac_id">
-                                  @foreach($paacs as $paac)
-                                    <option value="{{$paac->id}}">{{$paac->descripcion}}</option>
-                                  @endforeach
-                                </select>
-                        </div>
-                    </div>
-                    @include('paacs.formulario')
-                    @include('paacs.tabla')
+                    {{ Form::open(['action' => 'PaacController@guardar','class' => 'form-horizontal','id' => 'paac']) }}
+
                     <?php
                     use Carbon\Carbon;
                     $date = Carbon::now();
                     $date = $date->format('Y');
                     ?>
                     <input type="hidden" name="anio" id="anio" value="<?= $date; ?>" readonly>
-                    <input type="hidden" name="total" id="total" readonly>
-                    <input type="hidden" name="contador" id="contador" readonly>
+                    <input type="hidden" name="total" id="total" value="0.00" readonly>
+                    <div class="form-group">
+                      <label for="" class="col-md-4 control-label">Descripcion plan anual</label>
+                        <div class="col-md-6">
+                              {{ Form::text('descripcion', null,['class' => 'form-control money','id' => 'sep','required']) }}
+                        </div>
+                    </div>
                     <div class="form-group">
                         <div class="col-md-6 col-md-offset-1">
                             <button type="submit" class="btn btn-success">

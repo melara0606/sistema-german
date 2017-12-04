@@ -26,7 +26,7 @@ class CreateProcedimientoPaac extends Migration
     	IF(idpaac > 0) THEN
     	UPDATE paacs SET total=total+totall WHERE "id"=idpaac;
     	ELSE
-    	INSERT INTO paacs (anio,obra,total) VALUES (anioo,obra,total);
+    	INSERT INTO paacs (anio,descripcion,total) VALUES (anioo,obra,total);
     	END IF;
 
     	RETURN true;

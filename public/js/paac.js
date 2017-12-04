@@ -8,20 +8,22 @@ var contador = 0;
 
          e.preventDefault();
              obra = $("#obra").val() || 0,
-             ene = $("#ene").val() || 0,
-             feb = $("#feb").val() || 0,
-             mar = $("#mar").val() || 0,
-             abr = $("#abr").val() || 0,
-             may = $("#may").val() || 0,
-             jun = $("#jun").val() || 0,
-             jul = $("#jul").val() || 0,
-             ago = $("#ago").val() || 0,
-             sep = $("#sep").val() || 0,
-             oct = $("#oct").val() || 0,
-             nov = $("#nov").val() || 0,
-             dic = $("#dic").val() || 0;
+             ene = $("#ene").val() || 0.00,
+             feb = $("#feb").val() || 0.00,
+             mar = $("#mar").val() || 0.00,
+             abr = $("#abr").val() || 0.00,
+             may = $("#may").val() || 0.00,
+             jun = $("#jun").val() || 0.00,
+             jul = $("#jul").val() || 0.00,
+             ago = $("#ago").val() || 0.00,
+             sep = $("#sep").val() || 0.00,
+             oct = $("#oct").val() || 0.00,
+             nov = $("#nov").val() || 0.00,
+             dic = $("#dic").val() || 0.00;
 
-         if(ene && feb && mar && abr && may && jun && jul && ago && sep && oct && nov &&dic){
+         //if(ene && feb && mar && abr && may && jun && jul && ago && sep && oct && nov &&dic){
+        if(obra){
+
              var subtotal = parseFloat(ene) + parseFloat(feb) + parseFloat(mar) + parseFloat(abr) + parseFloat(may) + parseFloat(jun) + parseFloat(jul) + parseFloat(ago) + parseFloat(sep) + parseFloat(oct) + parseFloat(nov) + parseFloat(dic) ;
              contador++;
              $(tbMaterial).append(
@@ -29,6 +31,7 @@ var contador = 0;
                      "<td>" + obra + "</td>" +
                      "<td>" + onFixed( subtotal, 2 ) + "</td>" +
                      "<td>"+
+                     "<input type='hidden' name='obras[]' value='"+obra+"' />"+
                      "<input type='hidden' name='enero[]' value='"+ene+"' />"+
                      "<input type='hidden' name='febrero[]' value='"+feb+"' />"+
                      "<input type='hidden' name='marzo[]' value='"+mar+"' />"+
@@ -126,16 +129,9 @@ var contador = 0;
     $(document).on("click", "#delete-btn", function (e) {
         var tr     = $(e.target).parents("tr"),
             totaltotal  = $("#totalEnd");
-          //alert(total.text());
         var totalFila=parseFloat($(this).parents('tr').find('td:eq(1)').text());
-        //var total = $(this).find("td:eq(5)").text();
-            //alert(totalFila);
-            total = parseFloat(totaltotal.text()) - parseFloat(totalFila);
+        total = parseFloat(totaltotal.text()) - parseFloat(totalFila);
         var totalValue = parseFloat(totaltotal.text()) - parseFloat(totalFila);
-        //subtotal=totalValue;
-        //alert(totalValue);
-        //total.text(onTixed(totalValue));
-        //total2 = (on2ixed(totalValue));
         tr.remove();
         $("#total").val(onFixed(totalValue));
         $("#pie #totalEnd").text(onFixed(totalValue));
@@ -144,10 +140,9 @@ var contador = 0;
     });
 
     function clearForm () {
-        $("#presupuesto").find("#material,#precio,#cantidad").each(function (index, element) {
-            $(element).val("");
+        $("#paac").find(":text, #obra").each(function (index, element) {
+          $(element).val("");
         });
-
     }
 
     function onDisplaySelect (productoID) {

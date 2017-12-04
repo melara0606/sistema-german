@@ -85,7 +85,10 @@ Route::post('cotizaciones/baja/{id}','CotizacionController@baja')->name('cotizac
 Route::post('cotizaciones/alta/{id}','CotizacionController@alta')->name('cotizaciones.alta');
 Route::Resource('cotizaciones','CotizacionController');
 
+Route::get('paacs/crear','PaacController@crear');
+route::post('paacs/guardar','PaacController@guardar');
 Route::Resource('paacs','PaacController');
+Route::Resource('paacdetalles','PaacdetalleController');
 
 Route::Resource('detallecotizaciones','DetallecotizacionController');
 
