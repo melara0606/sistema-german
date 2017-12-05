@@ -25,7 +25,7 @@ class TipocontratoRequest extends FormRequest
     {
         return [
             'nombre'=>'required|min:3|max:150',
-            'estado'=>'required',
+            //'estado'=>'required',
         ];
     }
 }

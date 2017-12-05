@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Contrato;
+use App\Tipocontrato;
 use App\Bitacora;
 use App\Http\Requests\ContratoRequest;
 
@@ -40,7 +41,12 @@ class ContratoController extends Controller
      */
     public function create()
     {
-        return view('contratos.create');
+       /* $query = 'select tipocontratos."id",tipocontratos.nombre from tipocontratos inner join contratos on tipocontratos."id"=contratos."id"';
+      $tipocontratos = \DB::select(\DB::raw($query));*/
+      $tipocontratos = Tipocontrato::all();
+        return view('contratos.create',compact('tipocontratos'));
+
+        //return view('contratos.create');
     }
 
     /**

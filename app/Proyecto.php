@@ -31,4 +31,9 @@ class Proyecto extends Model
     {
       return $this->hasMany('App\Presupuesto');
     }
+
+    public function organizacion()
+    {
+        return $this->hasMany('App\Organizacion');
+    }
 }

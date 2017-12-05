@@ -69,19 +69,18 @@
                             </div>
                         </div>
 
-                        <!-- <div class="form-group{{ $errors->has('encargado') ? ' has-error' : '' }}">
-                            <label for="encargado" class="col-md-4 control-label">Encargado del proyecto</label>
-
+                        <div class="form-group">
+                          <label for="" class="col-md-4 control-label">Seleccione organización</label>
                             <div class="col-md-6">
-                                {!!Form::text('encargado',null,['class'=>'form-control','id'=>'nombre','autofocus'])!!}
-
-                                @if ($errors->has('encargado'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('encargado') }}</strong>
-                                    </span>
-                                @endif
+                                <select name="organizacion_id" id="organizacion" class="form-control">
+                                    <option value="">Seleccione organización...</option>
+                                    @foreach($organizaciones as $organizacion)
+                                      <option value="{{$organizacion->id}}">{{$organizacion->nombre}}</option>
+                                    @endforeach
+                                </select>
                             </div>
-                        </div> -->
+                        </div>
+
                         <div class="form-group{{ $errors->has('motivo') ? ' has-error' : '' }}">
                             <label for="motivo" class="col-md-4 control-label">Motivo del proyecto</label>
 
@@ -95,31 +94,3 @@
                                 @endif
                             </div>
                         </div>
-
-                        <div class="form-group{{ $errors->has('id_organizacion') ? ' has-error' : '' }}">
-                            <label for="id_organizacion" class="col-md-4 control-label">Organización colaboradora</label>
-
-                            <div class="col-md-6">
-                                {!!Form::text('id_organizacion',null,['class'=>'form-control','id'=>'nombre','autofocus'])!!}
-
-                                @if ($errors->has('id_organizacion'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('id_organizacion') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <!--<div class="form-group{{ $errors->has('beneficiario') ? ' has-error' : '' }}">
-                            <label for="beneficiario" class="col-md-4 control-label">Beneficiario del proyecto</label>
-
-                            <div class="col-md-6">
-                                {!!Form::text('beneficiario',null,['class'=>'form-control','id'=>'nombre','autofocus'])!!}
-
-                                @if ($errors->has('beneficiario'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('beneficiario') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>-->

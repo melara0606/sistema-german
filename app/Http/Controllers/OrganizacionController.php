@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Organizacion;
+use App\Bitacora;
 
 class OrganizacionController extends Controller
 {
@@ -11,9 +13,15 @@ class OrganizacionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
-        //
+        $organizaciones = Organizacion::all();
+        return view('organizaciones.index', compact('organizaciones'));
     }
 
     /**
@@ -23,7 +31,7 @@ class OrganizacionController extends Controller
      */
     public function create()
     {
-        //
+        return view('organizaciones.create');
     }
 
     /**
@@ -34,7 +42,8 @@ class OrganizacionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Organizacion::create($request->All());
+        return redirect('organizaciones')->with('mensaje', 'Organización registrada');
     }
 
     /**
@@ -45,7 +54,8 @@ class OrganizacionController extends Controller
      */
     public function show($id)
     {
-        //
+        $organizaciones = Organizacion::findorFail($id);
+        return view('organizaciones.show', compact('organizaciones'));
     }
 
     /**
@@ -56,7 +66,8 @@ class OrganizacionController extends Controller
      */
     public function edit($id)
     {
-        //
+        $organizaciones= Organizacion::find($id);
+        return view('organizaciones.edit', compact('organizaciones'));
     }
 
     /**

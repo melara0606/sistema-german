@@ -48,9 +48,9 @@
                             
                         </div>
 
-                        <div class="form-group{{ $errors->has('id_organizacion') ? ' has-error' : '' }}">
-                            <label for="id_organizacion" class="col-md-4 control-label">Organización colaboradora: </label>
-                            <label for="nombre" class="col-md-4 control-label">{{$proyecto->id_organizacion}}</label><br>
+                        <div class="form-group{{ $errors->has('organizacion_id') ? ' has-error' : '' }}">
+                            <label for="organizacion_id" class="col-md-4 control-label">Organización colaboradora: </label>
+                            <label for="nombre" class="col-md-4 control-label">{{$proyecto->organizacion_id}}</label><br>
                             
                         </div>
 

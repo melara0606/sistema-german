@@ -100,6 +100,8 @@ Route::Resource('requisiciones','RequisicionController');
 
 Route::Resource('requisiciondetalles','RequisiciondetalleController');
 
+Route::Resource('organizaciones','OrganizacionController');
+
 ////////////////triburario /////////////////////////////////////////////////////////////////////////
 Route::post('contribuyentes/baja/{id}','ContribuyenteController@baja')->name('contribuyentes.baja');
 Route::post('contribuyentes/alta/{id}','ContribuyenteController@alta')->name('contribuyentes.alta');

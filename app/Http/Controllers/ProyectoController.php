@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Proyecto;
+use App\Organizacion;
 use App\Bitacora;
 use App\Http\Requests\ProyectoRequest;
 
@@ -40,7 +41,10 @@ class ProyectoController extends Controller
      */
     public function create()
     {
-        return view('proyectos.create');
+        $organizaciones = Organizacion::all();
+        return view('proyectos.create',compact('organizaciones'));
+
+        //return view('proyectos.create');
     }
 
     /**

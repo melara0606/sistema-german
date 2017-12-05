@@ -24,4 +24,9 @@ class Contrato extends Model
     	}
     	
     }
+
+    public function tipocontrato()
+    {
+        return $this->belongsTo('App\Tipocontrato');
+    }
 }

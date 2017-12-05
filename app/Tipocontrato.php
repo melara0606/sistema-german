@@ -24,4 +24,9 @@ class Tipocontrato extends Model
     	}
     	
     }
+
+    public function tipocontrato()
+    {
+        return $this->hasMany('App\Contrato');
+    }
 }
