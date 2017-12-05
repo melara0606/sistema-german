@@ -2,11 +2,13 @@
 
 @section('migasdepan')
     <h1>
-        Rubro
+        Plan Anual de Compras y Contrataciones
     </h1>
     <ol class="breadcrumb">
-        <li><a href="{{ url('/proyectos') }}"><i class="fa fa-dashboard"></i> Proyectos</a></li>
-        <li class="active">Registro</li>      </ol>
+        <li><a href="{{ url('/home') }}"><i class="glyphicon glyphicon-home"></i> Inicio</a></li>
+        <li><a href="{{ url('/paacs') }}"><i class="fa fa-dashboard"></i> Listado del plan</a></li>
+        <li class="active">Registro de plan</li>
+      </ol>
 @endsection
 
 @section('content')

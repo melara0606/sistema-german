@@ -8,4 +8,9 @@ class Presupuestodetalle extends Model
 {
     protected $guarded = [];
     public $timestamps = false;
+
+    public function presupuesto()
+    {
+      return $this->belongsTo('App\Presupuesto');
+    }
 }

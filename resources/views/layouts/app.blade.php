@@ -109,7 +109,7 @@
                   search: "Búscar:",
                   lengthMenu: "Mostrar _MENU_ Elementos",
                   info: "Mostrando _START_ de _END_ de un total de _TOTAL_ Elementos",
-                  infoEmpty: "Visializando 0 de 0 de un total de 0 elementos",
+                  infoEmpty: "Visualizando 0 de 0 de un total de 0 elementos",
                   infoFiltered: "(Filtrado de _MAX_ elementos en total)",
                   infoPostFix: "",
                   loadingRecords: "Carga de datos en proceso..",
@@ -362,12 +362,14 @@
       <!-- Small boxes (Stat box) -->
     @if(Session::has('mensaje'))
         <div class="alert alert-success alert-dismissable" role="alert">
+          <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
           <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
           {{ Session::get('mensaje') }}
         </div>
     @endif
     @if(Session::has('error'))
         <div class="alert alert-danger alert-dismissable" role="alert">
+          <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
           <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
           {{ Session::get('error') }}
         </div>

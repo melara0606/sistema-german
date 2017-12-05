@@ -5,8 +5,8 @@
         Plan anual de compras
       </h1>
       <ol class="breadcrumb">
-        <li><a href="{{ url('/paacs') }}"><i class="fa fa-dashboard"></i> plan anual</a></li>
-        <li class="active">Listado de paacs</li>
+        <li><a href="{{ url('/home') }}"><i class="glyphicon glyphicon-home"></i> Inicio</a></li>
+        <li class="active">Plan anual</li>
       </ol>
 @endsection
 
@@ -37,6 +37,7 @@
                     <td>$ {{ $paac->total }}</td>
                     <td>
                       <a href="{{ url('paacs/'.$paac->id) }}" class="btn btn-primary">Ver detalle</a>
+                      <a href="{{ url('paacs/'.$paac->id.'/edit')}}" class="btn btn-warning"><span class="glyphicon glyphicon-text-size"></span></a>
                     </td>
                   </tr>
                   @endforeach

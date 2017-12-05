@@ -26,4 +26,9 @@ class Proyecto extends Model
     	}
 
     }
+
+    public function presupuesto()
+    {
+      return $this->hasMany('App\Presupuesto');
+    }
 }

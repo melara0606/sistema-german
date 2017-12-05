@@ -6,7 +6,7 @@ Ver detalle del plan anual
       </h1>
       <ol class="breadcrumb">
         <li><a href="{{ url('/home') }}"><i class="glyphicon glyphicon-home"></i> Inicio</a></li>
-        <li><a href="{{ url('/paacs') }}"><i class="fa fa-dashboard"></i> Plan anual</a></li>
+        <li><a href="{{ url('/paacs') }}"><i class="fa fa-dashboard"></i> Proyecto</a></li>
         <li class="active">Detalle del presupuesto</li>
       </ol>
 @endsection
@@ -16,7 +16,7 @@ Ver detalle del plan anual
     <div class="row">
         <div class="col-md-11">
             <div class="panel panel-primary">
-                <div class="panel-heading">Presupuesto </div>
+                <div class="panel-heading">Datos del plan anual de compras </div>
                 <div class="panel-body">
                   <a href="{{ url('/paacs/create') }}" class="btn btn-success"><span class="glyphicon glyphicon-plus-sign"></span> Agregar elementos</a>
 

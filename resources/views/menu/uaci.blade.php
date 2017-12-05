@@ -7,9 +7,36 @@
     </a>
     <ul class="treeview-menu">
       <li><a href="{{ url('paacs')}}"><i class="fa fa-circle-o"></i> listado de plan anual</a></li>
-        <li><a href="{{ url('paacs/create')}}"><i class="fa fa-circle-o"></i> Registro de plan anual</a></li>
+        <li><a href="{{ url('paacs/crear')}}"><i class="fa fa-circle-o"></i> Registro de plan anual</a></li>
     </ul>
 </li>
+
+<li class="treeview">
+    <a href="#">
+        <i class="fa fa-edit"></i> <span>Proyectos</span>
+        <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+    </a>
+    <ul class="treeview-menu">
+        <li><a href="{{ url('proyectos')}}"><i class="fa fa-circle-o"></i> Listado de Proyectos</a></li>
+    </ul>
+</li>
+
+<li class="treeview">
+    <a href="#">
+        <i class="fa fa-pie-chart"></i>
+        <span>Presupuestos</span>
+        <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+    </a>
+    <ul class="treeview-menu">
+        <li><a href="{{url('presupuestos')}}"><i class="fa fa-circle-o"></i> Ver presupuesto</a></li>
+        <li><a href="{{url('presupuestos/create')}}"><i class="fa fa-circle-o"></i> Registrar presupuesto</a></li>
+    </ul>
+</li>
+
 <li class="treeview">
     <a href="#">
         <i class="fa fa-files-o"></i>
@@ -19,21 +46,8 @@
             </span>
     </a>
     <ul class="treeview-menu">
-        <li><a href="{{ url('/proveedores') }}"><i class="fa fa-circle-o"></i> Listado de Proveedores</a></li>
-        <li><a href="{{ url('/proveedores/create') }}"><i class="fa fa-circle-o"></i> Registrar proveedor</a></li>
-    </ul>
-</li>
-<li class="treeview">
-    <a href="#">
-        <i class="fa fa-pie-chart"></i>
-        <span>Ofertantes</span>
-        <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-    </a>
-    <ul class="treeview-menu">
-        <li><a href="pages/charts/chartjs.html"><i class="fa fa-circle-o"></i> Listado de Ofertantes</a></li>
-        <li><a href="pages/charts/morris.html"><i class="fa fa-circle-o"></i> Registro de Ofertantes</a></li>
+        <li><a href="{{ url('proveedores') }}"><i class="fa fa-circle-o"></i> Listado de Proveedores</a></li>
+        <li><a href="{{ url('proveedores/create') }}"><i class="fa fa-circle-o"></i> Registrar proveedor</a></li>
     </ul>
 </li>
 <li class="treeview">
@@ -59,16 +73,5 @@
     <ul class="treeview-menu">
         <li><a href="{{ url('tipocontratos?dato=1') }}"><i class="fa fa-circle-o"></i> Tipos de contratos</a></li>
         <li><a href="{{ url('tipocontratos/create') }}"><i class="fa fa-circle-o"></i> Registro de Tipo contratos</a></li>
-    </ul>
-</li>
-<li class="treeview">
-    <a href="#">
-        <i class="fa fa-edit"></i> <span>Proyectos</span>
-        <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-    </a>
-    <ul class="treeview-menu">
-        <li><a href="{{ url('proyectos')}}"><i class="fa fa-circle-o"></i> Listado de Proyectos</a></li>
     </ul>
 </li>

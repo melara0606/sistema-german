@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Paac;
 use App\Paacdetalle;
+use DB;
 
 class PaacController extends Controller
 {
@@ -54,7 +55,7 @@ class PaacController extends Controller
      */
     public function store(Request $request)
     {
-      \DB::beginTransaction();
+      DB::beginTransaction();
       try{
       $count = $request->contador;
       $paac = Paac::findorFail($request->paac_id);
@@ -81,11 +82,11 @@ class PaacController extends Controller
           'subtotal' => $request->totales[$i],
         ]);
       }
-      \DB::commit();
-        return redirect('/paacs')->with('mensaje','Paac registrado con éxito');
+      DB::commit();
+        return redirect('/paacs')->with('mensaje','Plan registrado con éxito');
       }catch (\Exception $e){
-        \DB::rollback();
-        return redirect('/paacs/create')->with('error','Paac con error '.$e->getMessage());
+        DB::rollback();
+        return redirect('/paacs/create')->with('error','Error al registrar el plan '.$e->getMessage());
   }
 
       //dd($total);
@@ -112,9 +113,9 @@ class PaacController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Paac $paac)
     {
-        //
+        return view('paacs.edit',compact('paac'));
     }
 
     /**
@@ -126,7 +127,9 @@ class PaacController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $paac=Paac::find($id);
+        $paac->fill($request->All());
+        return redirect('paacs')->with('mensaje','Plan actualizado con exito');
     }
 
     /**
