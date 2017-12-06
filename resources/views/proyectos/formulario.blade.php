@@ -12,7 +12,7 @@
                                 @endif
                             </div>
                         </div>
-                       
+
                          <div class="form-group{{ $errors->has('monto') ? ' has-error' : '' }}">
                             <label for="monto" class="col-md-4 control-label">Monto del proyecto</label>
 

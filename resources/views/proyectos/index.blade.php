@@ -32,7 +32,6 @@
                   <th>Inicio</th>
                   <th>Fin</th>
                   <th>Colaborador</th>
-                  <th>Estado</th>
                   <th>Accion</th>
                 </thead>
                 <tbody>
@@ -40,25 +39,29 @@
                   <tr>
                     <td>{{ $proyecto->id }}</td>
                     <td>{{ $proyecto->nombre }}</td>
-                    <td>{{ $proyecto->monto }}</td>
+                    <td>{{ number_format($proyecto->monto,2) }}</td>
                     <td>{{ $proyecto->direccion }}</td>
                     <td>{{ $proyecto->fecha_inicio->format('d-m-Y') }}</td>
                     <td>{{ $proyecto->fecha_fin->format('d-m-Y') }}</td>
+                    @if($proyecto->organizacion_id == '')
+                      <td>Fondos propios</td>
+                    @else
                     <td>{{ $proyecto->organizacion->nombre }}</td>
-                    <td>{{ $proyecto->estado }}</td>
+                  @endif
                     <td>
-                            @if($estado == 1 || $estado == "")
-                                {{ Form::open(['method' => 'POST', 'id' => 'baja', 'class' => 'form-horizontal'])}}
-                                <a href="{{ url('proyectos/'.$proyecto->id) }}" class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-eye-open"></span></a>
-                                <a href="{{ url('/proyectos/'.$proyecto->id.'/edit') }}" class="btn btn-warning btn-xs"><span class="glyphicon glyphicon-text-size"></span></a>
-                                <button class="btn btn-danger btn-xs" type="button" onclick={{ "baja(".$proyecto->id.")" }}><span class="glyphicon glyphicon-trash"></span></button>
-                                {{ Form::close()}}
-                            @else
-                                {{ Form::open(['method' => 'POST', 'id' => 'alta', 'class' => 'form-horizontal'])}}
-                                <button class="btn btn-success btn-xs" type="button" onclick={{ "alta(".$proyecto->id.")" }}><span class="glyphicon glyphicon-trash"></span></button>
-                                {{ Form::close()}}
-                             @endif
-                        </td>
+                      @if($estado == 1 || $estado == "")
+                        {{ Form::open(['method' => 'POST', 'id' => 'baja', 'class' => 'form-horizontal'])}}
+                          <a href="{{ url('proyectos/'.$proyecto->id) }}" class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-eye-open"></span></a>
+                          <a href="{{ url('presupuestos/crear/'.$proyecto->id) }}" class="btn btn-warning btn-xs"><span class="glyphicon glyphicon-text-size"></span>Agregar presupuesto</a>
+                          <a href="{{ url('proyectos/'.$proyecto->id.'/edit') }}" class="btn btn-warning btn-xs"><span class="glyphicon glyphicon-text-size"></span></a>
+                          <button class="btn btn-danger btn-xs" type="button" onclick={{ "baja(".$proyecto->id.")" }}><span class="glyphicon glyphicon-trash"></span></button>
+                        {{ Form::close()}}
+                      @else
+                        {{ Form::open(['method' => 'POST', 'id' => 'alta', 'class' => 'form-horizontal'])}}
+                          <button class="btn btn-success btn-xs" type="button" onclick={{ "alta(".$proyecto->id.")" }}><span class="glyphicon glyphicon-trash"></span></button>
+                        {{ Form::close()}}
+                      @endif
+                    </td>
                   </tr>
                   @endforeach
                 </tbody>

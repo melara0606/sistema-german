@@ -75,6 +75,7 @@ Route::post('ordencompras/baja/{id}','OrdencompraController@baja')->name('ordenc
 Route::post('ordencompras/alta/{id}','OrdencompraController@alta')->name('ordencompras.alta');
 Route::Resource('ordencompras','OrdencompraController');
 
+Route::get('presupuestos/crear/{id}','PresupuestoController@crear');
 Route::Resource('presupuestos','PresupuestoController');
 
 Route::post('cotizaciones/baja/{id}','CotizacionController@baja')->name('cotizaciones.baja');

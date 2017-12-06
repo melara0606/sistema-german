@@ -82,7 +82,8 @@ class ProyectoController extends Controller
     public function edit($id)
     {
         $proyecto = Proyecto::find($id);
-        return view('proyectos.edit',compact('proyecto'));
+        $organizaciones = Organizacion::all();
+        return view('proyectos.edit',compact('proyecto','organizaciones'));
     }
 
     /**

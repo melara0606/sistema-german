@@ -31,6 +31,11 @@ class PresupuestoController extends Controller
         return view('presupuestos.create',compact('proyectos'));
     }
 
+    public function crear($id)
+    {
+      $proyecto = Proyecto::find($id);
+      dd($proyecto);
+    }
     /**
      * Store a newly created resource in storage.
      *
