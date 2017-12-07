@@ -9,7 +9,7 @@ use Carbon\Carbon; ?>
         <small>Control de bitacora</small>
       </h1>
       <ol class="breadcrumb">
-        <li><a href="{{ url('/bitacoras') }}"><i class="fa fa-dashboard"></i> Bitacoras</a></li>
+        <li><a href="{{ url('/home') }}"><i class="glyphicon glyphicon-home"></i> Inicio</a></li>
         <li class="active">Listado de bitacoras</li>
       </ol>
 @endsection

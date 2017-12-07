@@ -5,8 +5,10 @@
         Proveedor
       </h1>
       <ol class="breadcrumb">
-        <li><a href="{{ url('/proveedores') }}"><i class="fa fa-dashboard"></i> Proveedor</a></li>
-        <li class="active">Registro</li>      </ol>
+        <li><a href="{{ url('/home') }}"><i class="glyphicon glyphicon-home"></i> Inicio</a></li>
+        <li><a href="{{ url('/proveedores') }}"><i class="fa fa-user-circle-o"></i> Proveedores</a></li>
+        <li class="active">Registro</li>    
+      </ol>
 @endsection
 
 @section('content')
@@ -28,7 +30,6 @@
                 </div>
             </div>
         </div>
-    
-</div>
-@endsection 
 
+</div>
+@endsection

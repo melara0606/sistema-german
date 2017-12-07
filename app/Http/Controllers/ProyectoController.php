@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Proyecto;
 use App\Organizacion;
 use App\Bitacora;
+use App\Presupuesto;
+use App\Presupuestodetalle;
 use App\Http\Requests\ProyectoRequest;
 
 class ProyectoController extends Controller
@@ -55,9 +57,13 @@ class ProyectoController extends Controller
      */
     public function store(ProyectoRequest $request)
     {
-        Proyecto::create($request->All());
+        $proyecto=Proyecto::create($request->All());
+        $presupuesto = Presupuesto::create([
+          'proyecto_id' => $proyecto->id,
+          'total' => 0,
+        ]);
         bitacora('Registró un proyecto');
-        return redirect('/proyectos')->with('mensaje','Registro almacenado con éxito');
+        return redirect('proyectos')->with('mensaje','Registro almacenado con éxito');
     }
 
     /**
@@ -69,8 +75,9 @@ class ProyectoController extends Controller
     public function show($id)
     {
         $proyecto = Proyecto::findorFail($id);
-
-        return view('proyectos.show', compact('proyecto'));
+        $presupuesto = Presupuesto::where('proyecto_id',$proyecto->id)->firstorFail();
+        $detalles = Presupuestodetalle::where('presupuesto_id',$presupuesto->id)->get();
+        return view('proyectos.show', compact('proyecto','presupuesto','detalles'));
     }
 
     /**

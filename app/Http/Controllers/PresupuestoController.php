@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Proyecto;
 use App\Presupuesto;
 use App\Presupuestodetalle;
+use Session;
 
 class PresupuestoController extends Controller
 {
@@ -26,15 +27,16 @@ class PresupuestoController extends Controller
      */
     public function create()
     {
-      $query = 'select proyectos."id",proyectos.nombre from proyectos inner join presupuestos on proyectos."id"=presupuestos."id"';
-      $proyectos = \DB::select(\DB::raw($query));
+      //$query = 'select proyectos."id",proyectos.nombre from proyectos inner join presupuestos on proyectos."id"=presupuestos."id"';
+      //$proyectos = \DB::select(\DB::raw($query));
+      $proyectos = Proyecto::all();
         return view('presupuestos.create',compact('proyectos'));
     }
 
     public function crear($id)
     {
-      $proyecto = Proyecto::find($id);
-      dd($proyecto);
+      $proyecto = Proyecto::findorFail($id);
+      return view('presupuestos.create',compact('proyecto'));
     }
     /**
      * Store a newly created resource in storage.
@@ -47,11 +49,13 @@ class PresupuestoController extends Controller
       \DB::beginTransaction();
       try{
         $count = $request->contador;
+        $presupuesto=Presupuesto::where('proyecto_id',$request->proyecto)->firstorFail();
+        //dd($pre);
+        $tot=$presupuesto->total;
+        //dd($tot);
+        $presupuesto->total=$tot+$request->total;
+        $presupuesto->save();
 
-        $presupuesto = Presupuesto::create([
-            'proyecto_id' => $request->proyecto,
-            'total' => $request->total,
-          ]);
           for($i = 0; $i<$count;$i++){
             Presupuestodetalle::create([
               'presupuesto_id' => $presupuesto->id,
@@ -61,10 +65,11 @@ class PresupuestoController extends Controller
             ]);
           }
           \DB::commit();
-          return redirect('/proyectos')->with('mensaje','Presupuesto registrado con éxito');
+          return redirect('proyectos')->with('mensaje','Presupuesto registrado con éxito');
       }catch (\Exception $e){
         \DB::rollback();
-        return redirect('/presupuestos/create')->with('error','Presupuesto con error'.$e->getMessage());
+        Session::flash('error','Presupuesto con error'.$e->getMessage());
+        return redirect('/presupuestos/crear/'.$request->proyecto);
       }
 
 

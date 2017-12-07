@@ -1,12 +1,17 @@
                         <div class="form-group">
                           <label for="" class="col-md-4 control-label">Seleccione un proyecto</label>
                             <div class="col-md-6">
+                              @if(isset($proyectos))
                                 <select name="proyecto" id="proyecto" class="form-control">
                                     <option value="">Seleccione un Proyecto...</option>
                                     @foreach($proyectos as $proyecto)
                                       <option value="{{$proyecto->id}}">{{$proyecto->nombre}}</option>
                                     @endforeach
                                 </select>
+                              @else
+                                {!!Form::hidden('proyecto',$proyecto->id)!!}
+                                {!!Form::text('nombpro',$proyecto->nombre,['class' => 'form-control','readonly'])!!}
+                              @endif
                             </div>
                         </div>
 

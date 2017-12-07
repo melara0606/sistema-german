@@ -3,11 +3,10 @@
 @section('migasdepan')
 <h1>
         Proyectos
-        <small>Control de proyectos</small>
       </h1>
       <ol class="breadcrumb">
-        <li><a href="{{ url('/proyectos') }}"><i class="fa fa-dashboard"></i> Proyectos</a></li>
-        <li class="active">Listado de proyectos</li>
+        <li><a href="{{ url('/home') }}"><i class="glyphicon glyphicon-home"></i> Inicio</a></li>
+        <li class="active">Listado de Proyectos</li>
       </ol>
 @endsection
 

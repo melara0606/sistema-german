@@ -2,12 +2,13 @@
 
 @section('migasdepan')
 <h1>
-        
-        <small>Ver proveedor <b>{{ $proveedor->nombree }}</b></small>
+  Ver proveedor:
+        <small><b>{{ $proveedor->nombre }}</b></small>
       </h1>
       <ol class="breadcrumb">
-        <li><a href="{{ url('/proveedores') }}"><i class="fa fa-dashboard"></i> Usuarios</a></li>
-        <li class="active">Ver</li>
+        <li><a href="{{ url('/home') }}"><i class="glyphicon glyphicon-home"></i> Inicio</a></li>
+        <li><a href="{{ url('/proveedores') }}"><i class="fa fa-user-circle-o"></i> Proveedores</a></li>
+        <li class="active">Ver proveedor</li>
       </ol>
 @endsection
 
@@ -20,50 +21,50 @@
                 <div class="panel-body">
                         <div class="form-group{{ $errors->has('nombree') ? ' has-error' : '' }}">
                             <label for="nombree" class="col-md-4 control-label">Nombre de la Empresa o Proveedor: </label>
-                            <label for="nombree" class="col-md-4 control-label">{{$proveedor->nombree}}</label><br>
-                            
+                            <label for="nombree" class="col-md-4 control-label">{{$proveedor->nombre}}</label><br>
+
                         </div>
 
                          <div class="form-group{{ $errors->has('direccion') ? ' has-error' : '' }}">
                             <label for="direccion" class="col-md-4 control-label">Dirección: </label>
                             <label for="nombree" class="col-md-4 control-label">{{$proveedor->direccion}}</label><br>
-                            
+
                         </div>
 
                         <div class="form-group{{ $errors->has('telefonoe') ? ' has-error' : '' }}">
                             <label for="telefonoe" class="col-md-4 control-label">Telefono de la Empresa o Proveedor: </label>
-                            <label for="nombree" class="col-md-4 control-label">{{$proveedor->telefonoe}}</label><br>
-                            
+                            <label for="nombree" class="col-md-4 control-label">{{$proveedor->telefono}}</label><br>
+
                         </div>
 
                         <div class="form-group{{ $errors->has('emaile') ? ' has-error' : '' }}">
                             <label for="emaile" class="col-md-4 control-label">E-Mail Proveedor: </label>
-                            <label for="nombree" class="col-md-4 control-label">{{$proveedor->emaile}}</label><br>
-                            
+                            <label for="nombree" class="col-md-4 control-label">{{$proveedor->email}}</label><br>
+
                         </div>
 
                         <div class="form-group{{ $errors->has('nombrer') ? ' has-error' : '' }}">
                             <label for="nombrer" class="col-md-4 control-label">Nombre de Represetante: </label>
                             <label for="nombree" class="col-md-4 control-label">{{$proveedor->nombrer}}</label><br>
-                            
+
                         </div>
 
                         <div class="form-group{{ $errors->has('telfijor') ? ' has-error' : '' }}">
                             <label for="telfijor" class="col-md-4 control-label">Telefono fijo Representante (si lo hay): </label>
                             <label for="nombree" class="col-md-4 control-label">{{$proveedor->teldijor}}</label><br>
-                            
+
                         </div>
 
                         <div class="form-group{{ $errors->has('celr') ? ' has-error' : '' }}">
                             <label for="celr" class="col-md-4 control-label">Celular Representante: </label>
                             <label for="nombree" class="col-md-4 control-label">{{$proveedor->celr}}</label><br>
-                           
+
                         </div>
 
                         <div class="form-group{{ $errors->has('emailr') ? ' has-error' : '' }}">
                             <label for="emailr" class="col-md-4 control-label">Dirección email del Representante:</label>
                             <label for="nombree" class="col-md-4 control-label">{{$proveedor->emailr}}</label><br>
-                            
+
                         </div>
 
                       {{ Form::open(['route' => ['proveedores.destroy', $proveedor->id ], 'method' => 'DELETE', 'class' => 'form-horizontal'])}}

@@ -2,12 +2,13 @@
 
 @section('migasdepan')
 <h1>
-
-        <small>Ver proyecto <b>{{ $proyecto->nombre }}</b></small>
+Ver datos del proyecto:
+        <small> <b>{{ $proyecto->nombre }}</b></small>
       </h1>
       <ol class="breadcrumb">
-        <li><a href="{{ url('/proyectos') }}"><i class="fa fa-dashboard"></i> Usuarios</a></li>
-        <li class="active">Ver</li>
+        <li><a href="{{ url('/home') }}"><i class="glyphicon glyphicon-home"></i> Inicio</a></li>
+        <li><a href="{{ url('/proyectos') }}"><i class="fa fa-industry"></i> Proyectos</a></li>
+        <li class="active">Ver proyecto</li>
       </ol>
 @endsection
 
@@ -25,7 +26,7 @@
                         </div>
 
                          <div class="form-group{{ $errors->has('monto') ? ' has-error' : '' }}">
-                            <label for="monto" class="col-md-4 control-label">Monto del proyecto: </label>
+                            <label for="monto" class="col-md-4 control-label">Monto establecido para el proyecto: </label>
                             <label for="nombre" class="col-md-4 control-label">$ {{number_format($proyecto->monto,2)}}</label><br>
 
                         </div>
@@ -69,6 +70,58 @@
                             <label for="nombre" class="col-md-4 control-label">{{$proyecto->fechabaja}}</label><br>
 
                         </div>-->
+                        <div style="overflow-x:auto;">
+                          <table class="table table-bordered table-striped table-hover table-condensed">
+                            <thead>
+                              <tr>
+                                <th>Material</th>
+                                <th>Cantidad</th>
+                                <th>Precio unitario</th>
+                                <th>Subtotal</th>
+                                <th>Acción</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              @foreach($detalles as $detalle)
+                              <tr>
+                                <td>{{$detalle->material}}</td>
+                                <td>{{$detalle->cantidad}}</td>
+                                <td>$ {{number_format($detalle->preciou,2)}}</td>
+                                <td>$ {{number_format($detalle->cantidad*$detalle->preciou,2)}}</td>
+                                <td>
+                                  {{ Form::open(['route' => ['paacdetalles.destroy', $detalle->id ], 'method' => 'DELETE', 'class' => 'form-horizontal'])}}
+                                  <a href="{{url('paacdetalles/'.$detalle->id.'/edit')}}" class="btn btn-warning"><span class="glyphicon glyphicon-text-size"></span></a>
+                                  <button class="btn btn-danger" type="button" onclick="
+                                  return swal({
+                                    title: 'Eliminar obra',
+                                    text: '¿Está seguro de eliminar la obra?',
+                                    type: 'question',
+                                    showCancelButton: true,
+                                    confirmButtonText: 'Si, Eliminar',
+                                    cancelButtonText: 'No, Mantener',
+                                    confirmButtonClass: 'btn btn-danger',
+                                    cancelButtonClass: 'btn btn-default',
+                                    buttonsStyling: false
+                                  }).then(function(){
+                                    submit();
+                                  }, function(dismiss){
+                                    if(dismiss == 'cancel'){
+                                      swal('Cancelado', 'El registro se mantiene','info')
+                                    }
+                                  })" ; ><span class="glyphicon glyphicon-trash"></span></button>
+                                  {{ Form::close()}}
+                                </td>
+                              </tr>
+                              @endforeach
+                            </tbody>
+                            <tfoot>
+                              <tr>
+                                  <th colspan="3">totales</th>
+                                  <th>$ {{$presupuesto->total}}</th>
+                              </tr>
+
+                            </tfoot>
+                          </table>
 
                       {{ Form::open(['route' => ['proyectos.destroy', $proyecto->id ], 'method' => 'DELETE', 'class' => 'form-horizontal'])}}
                       <a href="{{ url('/proyectos/'.$proyecto->id.'/edit') }}" class="btn btn-warning"><span class="glyphicon glyphicon-text-size"></span> Editar</a> |

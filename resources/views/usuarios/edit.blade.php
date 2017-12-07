@@ -1,12 +1,12 @@
 @extends('layouts.app')
 @section('migasdepan')
 <h1>
-        Usuarios
-        <small>Modificar usuario {{ $usuario->name }}</small>
-      </h1>
+  Modificar usuario <small> {{ $usuario->name }} </small>
+</h1>
       <ol class="breadcrumb">
-        <li><a href="{{ url('/usuarios') }}"><i class="fa fa-dashboard"></i> Usuarios</a></li>
-        <li class="active">Registro</li>
+        <li><a href="{{ url('/home') }}"><i class="glyphicon glyphicon-home"></i> Inicio</a></li>
+        <li><a href="{{ url('/usuarios') }}"><i class="fa fa-address-card"></i> Usuarios</a></li>
+        <li class="active">Edición</li>
       </ol>
 @endsection
 @section('content')

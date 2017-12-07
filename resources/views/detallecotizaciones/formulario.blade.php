@@ -2,9 +2,6 @@
                             <label for="cotizacion_id" class="col-md-4 control-label">Cotización</label>
 
                             <div class="col-md-6">
-
-                                
-
                                 @if ($errors->has('cotizacion_id'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('cotizacion_id') }}</strong>
@@ -12,13 +9,12 @@
                                 @endif
                             </div>
                         </div>
-                       
+
                          <div class="form-group{{ $errors->has('unidad_id') ? ' has-error' : '' }}">
                             <label for="unidad_id" class="col-md-4 control-label">Unidad de medida</label>
 
                             <div class="col-md-6">
-                                <!--{!!Form::select('unidad_id',null,['class'=>'form-control','id'=>'unidad_id','autofocus'])!!}-->
-
+              
                                 @if ($errors->has('unidad_id'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('unidad_id') }}</strong>
