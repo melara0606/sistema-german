@@ -2,18 +2,19 @@
 
 @section('migasdepan')
 <h1>
-        Usuarios
+        Modificar imagen de perfil
       </h1>
       <ol class="breadcrumb">
-        <li><a href="{{ url('/usuarios') }}"><i class="fa fa-dashboard"></i> Usuarios</a></li>
-        <li class="active">Cambiar imagen de perfil</li>
+        <li><a href="{{ url('/home') }}"><i class="glyphicon glyphicon-home"></i> Inicio</a></li>
+        <li><a href="{{ url('/home/perfil') }}"><i class="fa fa-address-card"></i> Perfil</a></li>
+        <li class="active">Imagen de Perfil</li>
       </ol>
 @endsection
 
 @section('content')
 <div class="container">
     <div class="row">
-        <div class="col-md-10">
+        <div class="col-md-11">
             <div class="panel panel-primary">
                 <div class="panel-heading">Registro de Usuarios</div>
                 <div class="panel-body">

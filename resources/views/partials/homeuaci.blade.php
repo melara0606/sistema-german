@@ -6,7 +6,7 @@
         <small>Control panel UACI</small>
       </h1>
       <ol class="breadcrumb">
-        <li><a href="{{ url('/home') }}"><i class="fa fa-dashboard"></i> Inicio</a></li>
+        <li><a href="{{ url('/home') }}"><i class="glyphicon glyphicon-home"></i> Inicio</a></li>
         <li class="active">Pagina principal</li>
       </ol>
 
