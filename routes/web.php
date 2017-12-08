@@ -98,7 +98,7 @@ Route::post('solicitudcotizaciones/alta/{id}','SolicitudcotizacionController@alt
 Route::Resource('solicitudcotizaciones','SolicitudcotizacionController');
 
 Route::Resource('requisiciones','RequisicionController');
-
+Route::get('requisiciondetalles/create/{id}','RequisiciondetalleController@create');
 Route::Resource('requisiciondetalles','RequisiciondetalleController');
 
 Route::Resource('organizaciones','OrganizacionController');
