@@ -121,3 +121,9 @@ Route::Resource('rubros','RubroController');
 Route::post('inmuebles/baja/{id}','InmuebleController@baja')->name('inmuebles.baja');
 Route::post('inmuebles/alta/{id}','InmuebleController@alta')->name('inmuebles.alta');
 Route::Resource('inmuebles','InmuebleController');
+
+
+////////// Tesoreria //////////////////////////////////
+Route::Resource('empleados','EmpleadoController');
+
+Route::Resource('cargos','CargoController');
