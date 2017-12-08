@@ -2,11 +2,11 @@
 
 @section('migasdepan')
 <h1>
-
+Editar <small>{{$paac->obra}}</small>
       </h1>
-      hola
       <ol class="breadcrumb">
-        <li><a href="{{ url('/cotizaciones') }}"><i class="fa fa-dashboard"></i> Cotizaciones</a></li>
+        <li><a href="{{ url('/home') }}"><i class="glyphicon glyphicon-home"></i> Inicio</a></li>
+        <li><a href="{{ url('/paacs') }}"><i class="fa fa-line-chart"></i> Plan anual</a></li>
         <li class="active">Edición</li>
       </ol>
 @endsection
@@ -97,11 +97,11 @@
 
 
                 <br>
-                
+
 
                     <div class="form-group">
                         <div class="col-md-6 col-md-offset-2">
-                            <button type="submit" class="btn btn-primary btn-lg">
+                            <button type="submit" class="btn btn-success">
                                 <span class="glyphicon glyphicon-floppy-disk"></span>    Editar
                             </button>
                         </div>

@@ -85,9 +85,9 @@ class RequisicionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Requisicion $requisicione)
     {
-        //
+        return view('requisiciones.edit',compact('requisicione'));
     }
 
     /**
@@ -97,9 +97,11 @@ class RequisicionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Requisicion $requisicione)
     {
-        //
+        $requisicione->fill($request->All());
+        $requisicione->save();
+        return redirect('/requisiciones')->with('mensaje','Requisición modificada con éxito');
     }
 
     /**
@@ -108,8 +110,8 @@ class RequisicionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Requisicion $requisicione)
     {
-        //
+      
     }
 }

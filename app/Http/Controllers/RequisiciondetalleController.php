@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Requisiciondetalle;
 
 class RequisiciondetalleController extends Controller
 {
@@ -21,9 +22,9 @@ class RequisiciondetalleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($id)
     {
-        return view('requisiciones.create');
+        return view('requisiciones.detalle.create',compact('id'));
     }
 
     /**
@@ -34,7 +35,13 @@ class RequisiciondetalleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+      try{
+        Requisiciondetalle::create($request->All());
+        return redirect('requisiciones/'.$request->requisicion_id);
+      }catch (\Exception $e){
+        return redirect('requisiciones')->with('error',$e->getMessage());
+      }
+
     }
 
     /**
@@ -56,7 +63,8 @@ class RequisiciondetalleController extends Controller
      */
     public function edit($id)
     {
-        //
+        $requisicion=Requisiciondetalle::findorFail($id);
+        return view('requisiciones.detalle.edit',compact('requisicion'));
     }
 
     /**
@@ -66,9 +74,11 @@ class RequisiciondetalleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Requisiciondetalle $requisiciondetalle)
     {
-        //
+        $requisiciondetalle->fill($request->All());
+        $requisiciondetalle->save();
+        return redirect('requisiciones')->with('mensaje','Se modifico con exito');
     }
 
     /**
@@ -77,8 +87,9 @@ class RequisiciondetalleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Requisiciondetalle $requisiciondetalle)
     {
-        //
+        $requisiciondetalle->delete();
+        return redirect('requisiciones')->with('mensaje','Se modifico con exito');
     }
 }

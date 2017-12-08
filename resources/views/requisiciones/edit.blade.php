@@ -2,11 +2,12 @@
 
 @section('migasdepan')
 <h1>
-        Editar plan anual
+Editar <small>{{$requisicione->descripcion}}</small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="{{ url('/home') }}"><i class="glyphicon glyphicon-home"></i> Inicio</a></li>
-        <li class="active">Editar plan</li>
+        <li><a href="{{ url('/requisiciones') }}"><i class="fa fa-balance-scale"></i> Requisiciones</a></li>
+        <li class="active">Edición</li>
       </ol>
 @endsection
 
@@ -15,13 +16,11 @@
     <div class="row">
         <div class="panel panel-default">
             <div class="panel-body">
-                {{ Form::model($paac, array('method' => 'put', 'class' => 'form-horizontal' , 'route' => array('paacs.update', $paac->id))) }}
-                <div class="form-group">
-                  <label for="" class="col-md-4 control-label">Descripcion plan anual</label>
-                    <div class="col-md-6">
-                          {{ Form::text('descripcion', null,['class' => 'form-control','id' => 'sep','required']) }}
-                    </div>
-                </div>
+                {{ Form::model($requisicione, array('method' => 'put', 'class' => 'form-horizontal' , 'route' => array('requisiciones.update', $requisicione->id))) }}
+                @include('requisiciones.formulario')
+
+
+
                     <div class="form-group">
                         <div class="col-md-6 col-md-offset-2">
                             <button type="submit" class="btn btn-success">
