@@ -15,12 +15,15 @@ class CreateContratosTable extends Migration
     {
         Schema::create('contratos', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('nombre_contratado');
+            $table->bigInteger('empleado_id');
             $table->bigInteger('tipocontrato_id');
-            $table->string('nombrec');
-            $table->string('motivo');
-            $table->integer('estado');
+            $table->bigInteger('cargo_id');
+            $table->double('salario',8,2);
+            $table->string('motivo')->nullable();
+            $table->integer('estado')->default(1);
             $table->foreign('tipocontrato_id')->references('id')->on('tipocontratos');
+            $table->foreign('empleado_id')->references('id')->on('empleados');
+            $table->foreign('cargo_id')->references('id')->on('cargos');
             $table->timestamps();
         });
     }

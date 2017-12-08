@@ -30,7 +30,7 @@
                     <div class="form-group">
                       <label for="" class="col-md-4 control-label">Descripcion plan anual</label>
                         <div class="col-md-6">
-                              {{ Form::text('descripcion', null,['class' => 'form-control money','id' => 'sep','required']) }}
+                              {{ Form::text('descripcion', null,['class' => 'form-control','id' => 'sep','required']) }}
                         </div>
                     </div>
                     <div class="form-group">

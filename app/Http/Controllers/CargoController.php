@@ -3,18 +3,25 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Requisiciondetalle;
+use App\Cargo;
 
-class RequisiciondetalleController extends Controller
+class CargoController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
-        //
+        $cargos = Cargo::all();
+        return view('cargos.index',compact('cargos'));
     }
 
     /**
@@ -22,9 +29,9 @@ class RequisiciondetalleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create($id)
+    public function create()
     {
-        return view('requisiciones.detalle.create',compact('id'));
+        return view('cargos.create');
     }
 
     /**
@@ -35,13 +42,8 @@ class RequisiciondetalleController extends Controller
      */
     public function store(Request $request)
     {
-      try{
-        Requisiciondetalle::create($request->All());
-        return redirect('requisiciones/'.$request->requisicion_id);
-      }catch (\Exception $e){
-        return redirect('requisiciones')->with('error',$e->getMessage());
-      }
-
+        Cargo::create($request->All());
+        return redirect('cargos')->with('mensaje', 'Cargo registrado');
     }
 
     /**
@@ -52,7 +54,8 @@ class RequisiciondetalleController extends Controller
      */
     public function show($id)
     {
-        //
+        $cargos = Cargo::findorFile($id);
+        return view('cargos.show',compact('cargos'));
     }
 
     /**
@@ -63,8 +66,8 @@ class RequisiciondetalleController extends Controller
      */
     public function edit($id)
     {
-        $requisicion=Requisiciondetalle::findorFail($id);
-        return view('requisiciones.detalle.edit',compact('requisicion'));
+        $cargos = Cargo::find($id);
+        return view('cargos.edit',compact('cargos'));
     }
 
     /**
@@ -74,11 +77,9 @@ class RequisiciondetalleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Requisiciondetalle $requisiciondetalle)
+    public function update(Request $request, $id)
     {
-        $requisiciondetalle->fill($request->All());
-        $requisiciondetalle->save();
-        return redirect('requisiciones')->with('mensaje','Se modifico con exito');
+        //
     }
 
     /**
@@ -87,9 +88,8 @@ class RequisiciondetalleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Requisiciondetalle $requisiciondetalle)
+    public function destroy($id)
     {
-        $requisiciondetalle->delete();
-        return redirect('requisiciones')->with('mensaje','Se modifico con exito');
+        //
     }
 }

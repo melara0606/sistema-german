@@ -1,25 +1,25 @@
 <div class="form-group">
   <label for="" class="col-md-4 control-label">Codigo</label>
     <div class="col-md-6">
-        <input type="text" name="codigo" id="codigo" class="form-control" autofocus/>
+        {!!Form::text('codigo',null,['class' => 'form-control', 'id' => 'codigo' ])!!}
     </div>
 </div>
 
 <div class="form-group">
   <label for="" class="col-md-4 control-label">Cantidad</label>
     <div class="col-md-6">
-        <input id="cantidad" type="text" class="form-control" name="cantidad" />
+      {!!Form::text('cantidad',null,['class' => 'form-control', 'id' => 'cantidad' ])!!}
     </div>
 </div>
 <div class="form-group">
   <label for="" class="col-md-4 control-label">Unidad de medida</label>
     <div class="col-md-6">
-        <input id="unidad" type="text" class="form-control" name="unidad" />
+      {!!Form::text('unidad_medida',null,['class' => 'form-control', 'id' => 'unidad' ])!!}
     </div>
 </div>
 <div class="form-group">
   <label for="" class="col-md-4 control-label">Descripcion</label>
     <div class="col-md-6">
-        <input id="descripcion" type="text" class="form-control" name="descripcion" />
+      {!!Form::text('descripcion',null,['class' => 'form-control', 'id' => 'descripcion' ])!!}
     </div>
 </div>

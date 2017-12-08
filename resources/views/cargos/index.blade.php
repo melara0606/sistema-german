@@ -2,12 +2,12 @@
 
 @section('migasdepan')
 <h1>
-        Proveedores
-        <small>Control de proveedores</small>
+        Cargos
+        <small>Control de cargos</small>
       </h1>
       <ol class="breadcrumb">
-        <li><a href="{{ url('/home') }}"><i class="glyphicon glyphicon-home"></i> Inicio</a></li>
-        <li class="active">Listado de proveedores</li>
+        <li><a href="{{ url('/cargos') }}"><i class="fa fa-dashboard"></i> Cargos</a></li>
+        <li class="active">Listado de cargos</li>
       </ol>
 @endsection
 
@@ -17,48 +17,32 @@
           <div class="box">
             <div class="box-header">
               <h3 class="box-title">Listado</h3>
-              	<a href="{{ url('/proveedores/create') }}" class="btn btn-success"><span class="glyphicon glyphicon-plus-sign"></span> Agregar</a>
-                <a href="{{ url('/proveedores?estado=1') }}" class="btn btn-primary">Activos</a>
-                <a href="{{ url('/proveedores?estado=2') }}" class="btn btn-primary">Papelera</a>
+                <a href="{{ url('/cargos/create') }}" class="btn btn-success"><span class="glyphicon glyphicon-plus-sign"></span> Agregar</a>
+
             </div>
             <!-- /.box-header -->
             <div class="box-body table-responsive">
               <table class="table table-striped table-bordered table-hover" id="example2">
-  				<thead>
+          <thead>
                   <th>Id</th>
-                  <th>Nombre de Proveedor</th>
-                  <th>Dirección</th>
-                  <th>Correo</th>
-                  <th>Telefono</th>
-                  <th>Número de registro</th>
-                  <th>NIT</th>
-                  <th>Accion</th>
+                  <th>Cargo</th>
+                  <th>Acción</th>
                 </thead>
                 <tbody>
-                	@foreach($proveedores as $proveedor)
-                	<tr>
-                		<td>{{ $proveedor->id }}</td>
-                		<td>{{ $proveedor->nombre }}</td>
-                		<td>{{ $proveedor->direccion }}</td>
-                		<td>{{ $proveedor->email }}</td>
-                        <td>{{ $proveedor->telefono }}</td>
-                        <td>{{ $proveedor->numero_registro }}</td>
-                        <td>{{ $proveedor->nit }}</td>
-                		<td>
-                            @if($estado == 1 || $estado == "")
+                  @foreach($cargos as $cargo)
+                  <tr>
+                    <td>{{ $cargo->id }}</td>
+                    <td>{{ $cargo->cargo }}</td>
+                    <td>
                                 {{ Form::open(['method' => 'POST', 'id' => 'baja', 'class' => 'form-horizontal'])}}
-                                <a href="{{ url('proveedores/'.$proveedor->id) }}" class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-eye-open"></span></a>
-                                <a href="{{ url('/proveedores/'.$proveedor->id.'/edit') }}" class="btn btn-warning btn-xs"><span class="glyphicon glyphicon-text-size"></span></a>
-                                <button class="btn btn-danger btn-xs" type="button" onclick={{ "baja(".$proveedor->id.")" }}><span class="glyphicon glyphicon-trash"></span></button>
+                                <a href="{{ url('cargos/'.$cargo->id) }}" class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-eye-open"></span></a>
+                                <a href="{{ url('/cargos/'.$cargo->id.'/edit') }}" class="btn btn-warning btn-xs"><span class="glyphicon glyphicon-text-size"></span></a>
+                                <button class="btn btn-danger btn-xs" type="button" onclick={{ "baja(".$cargo->id.")" }}><span class="glyphicon glyphicon-trash"></span></button>
                                 {{ Form::close()}}
-                            @else
-                                {{ Form::open(['method' => 'POST', 'id' => 'alta', 'class' => 'form-horizontal'])}}
-                                <button class="btn btn-success btn-xs" type="button" onclick={{ "alta(".$proveedor->id.")" }}><span class="glyphicon glyphicon-trash"></span></button>
-                                {{ Form::close()}}
-                             @endif
+
                         </td>
-                	</tr>
-                	@endforeach
+                  </tr>
+                  @endforeach
                 </tbody>
               </table>
                 <script>
@@ -85,7 +69,7 @@
                         }).then(function (text) {
                             var dominio = window.location.host;
                             var form = $(this).parents('form');
-                            $('#baja').attr('action','http://'+dominio+'/sisverapaz/public/proveedores/baja/'+id+'+'+text);
+                            $('#baja').attr('action','http://'+dominio+'/sisverapaz/public/cargos/baja/'+id+'+'+text);
                             //document.getElmentById('baja').submit();
                             $('#baja').submit();
                             swal({
@@ -107,7 +91,7 @@
                         }).then(function () {
                             var dominio = window.location.host;
                             var form = $(this).parents('form');
-                            $('#alta').attr('action','http://'+dominio+'/sisverapaz/public/proveedores/alta/'+id);
+                            $('#alta').attr('action','http://'+dominio+'/sisverapaz/public/cargos/alta/'+id);
                             //document.getElmentById('baja').submit();
                             $('#alta').submit();
                             swal({

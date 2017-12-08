@@ -21,18 +21,18 @@ Ver detalle del plan anual
                   <a href="{{ url('/paacs/create') }}" class="btn btn-success"><span class="glyphicon glyphicon-plus-sign"></span> Agregar elementos</a>
 
                         <div class="form-group{{ $errors->has('nombre') ? ' has-error' : '' }}">
-                            <label for="nombre" class="col-md-4 control-label">Unidad administrativa: </label>
+                            <label for="nombre" class="col-md-4 control-label">Año de ejecución: </label>
                             <label for="nombre" class="col-md-4 control-label">{{$paac->anio}}</label><br>
                         </div>
 
                          <div class="form-group{{ $errors->has('monto') ? ' has-error' : '' }}">
-                            <label for="monto" class="col-md-4 control-label">Linea de trabajo: </label>
+                            <label for="monto" class="col-md-4 control-label">Descripción del plan anual: </label>
                             <label for="nombre" class="col-md-4 control-label">{{$paac->descripcion}}</label><br>
                         </div>
 
                         <div class="form-group{{ $errors->has('fuente_financiamiento') ? ' has-error' : '' }}">
-                            <label for="direccion" class="col-md-4 control-label">Fuente de financiamiento: </label>
-                            <label for="nombre" class="col-md-4 control-label">{{$paac->total}}</label><br>
+                            <label for="direccion" class="col-md-4 control-label">Monto total: </label>
+                            <label for="nombre" class="col-md-4 control-label">{{number_format($paac->total,2)}}</label><br>
                         </div>
 
 
@@ -62,19 +62,19 @@ Ver detalle del plan anual
                               @foreach($detalles as $detalle)
                               <tr>
                                 <td>{{$detalle->obra}}</td>
-                                <td>$ {{$detalle->enero}}</td>
-                                <td>$ {{$detalle->febrero}}</td>
-                                <td>$ {{$detalle->marzo}}</td>
-                                <td>$ {{$detalle->abril}}</td>
-                                <td>$ {{$detalle->mayo}}</td>
-                                <td>$ {{$detalle->junio}}</td>
-                                <td>$ {{$detalle->julio}}</td>
-                                <td>$ {{$detalle->agosto}}</td>
-                                <td>$ {{$detalle->septiembre}}</td>
-                                <td>$ {{$detalle->octubre}}</td>
-                                <td>$ {{$detalle->noviembre}}</td>
-                                <td>$ {{$detalle->diciembre}}</td>
-                                <td>$ {{$detalle->subtotal}}</td>
+                                <td>$ {{number_format($detalle->enero,2)}}</td>
+                                <td>$ {{number_format($detalle->febrero,2)}}</td>
+                                <td>$ {{number_format($detalle->marzo,2)}}</td>
+                                <td>$ {{number_format($detalle->abril,2)}}</td>
+                                <td>$ {{number_format($detalle->mayo,2)}}</td>
+                                <td>$ {{number_format($detalle->junio,2)}}</td>
+                                <td>$ {{number_format($detalle->julio,2)}}</td>
+                                <td>$ {{number_format($detalle->agosto,2)}}</td>
+                                <td>$ {{number_format($detalle->septiembre,2)}}</td>
+                                <td>$ {{number_format($detalle->octubre,2)}}</td>
+                                <td>$ {{number_format($detalle->noviembre,2)}}</td>
+                                <td>$ {{number_format($detalle->diciembre,2)}}</td>
+                                <td>$ {{number_format($detalle->subtotal,2)}}</td>
                                 <td>
                                   {{ Form::open(['route' => ['paacdetalles.destroy', $detalle->id ], 'method' => 'DELETE', 'class' => 'form-horizontal'])}}
                                   <a href="{{url('paacdetalles/'.$detalle->id.'/edit')}}" class="btn btn-warning"><span class="glyphicon glyphicon-text-size"></span></a>

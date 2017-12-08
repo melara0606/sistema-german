@@ -1,41 +1,60 @@
-                        <div class="form-group{{ $errors->has('nombre_contratado') ? ' has-error' : '' }}">
-                            <label for="nombre_contratado" class="col-md-4 control-label">Nombre del contratado</label>
-
+                       <div class="form-group{{ $errors->has('empleado_id') ? ' has-error' : '' }}">
+                          <label for="" class="col-md-4 control-label">Seleccione un empleado</label>
                             <div class="col-md-6">
+                                <select name="empleado_id" id="empleado" class="form-control">
+                                    <option value="">Seleccione un empleado</option>
+                                    @foreach($empleados as $empleado)
+                                      <option value="{{$empleado->id}}">{{$empleado->nombre}}</option>
+                                    @endforeach
 
-                                {!!Form::text('nombre_contratado',null,['class'=>'form-control','id'=>'nombre_contratado','autofocus'])!!}
-
-                                @if ($errors->has('nombre_contratado'))
+                                </select>
+                                @if ($errors->has('empleado_id'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('nombre_contratado') }}</strong>
+                                        <strong>{{ $errors->first('empleado_id') }}</strong>
                                     </span>
                                 @endif
                             </div>
                         </div>
                        
-                         <div class="form-group">
+                        <div class="form-group{{ $errors->has('tipocontrato_id') ? ' has-error' : '' }}">
+
                           <label for="" class="col-md-4 control-label">Seleccione un contrato</label>
                             <div class="col-md-6">
-                                <select name="tipocontrato" id="tipocontrato" class="form-control">
+                                <select name="tipocontrato_id" id="tipocontrato" class="form-control">
                                     <option value="">Seleccione un contrato...</option>
                                     @foreach($tipocontratos as $tipocontrato)
                                       <option value="{{$tipocontrato->id}}">{{$tipocontrato->nombre}}</option>
                                     @endforeach
                                 </select>
+                                @if ($errors->has('tipocontrato_id'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('tipocontrato_id') }}</strong>
+                                    </span>
+                                @endif
                             </div>
                         </div>
 
+                        <div class="form-group">
+                          <label for="" class="col-md-4 control-label">Seleccione un cargo</label>
+                            <div class="col-md-6">
+                                <select name="cargo_id" id="cargo" class="form-control">
+                                    <option value="">Seleccione un cargo</option>
+                                    @foreach($cargos as $cargo)
+                                      <option value="{{$cargo->id}}">{{$cargo->cargo}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
 
-                        <div class="form-group{{ $errors->has('nombrec') ? ' has-error' : '' }}">
-                            <label for="nombrec" class="col-md-4 control-label">Nombre del contratante</label>
+                        <div class="form-group{{ $errors->has('salario') ? ' has-error' : '' }}">
+                            <label for="salario" class="col-md-4 control-label">Salario</label>
 
                             <div class="col-md-6">
-                                {!!Form::textarea('nombrec',null,['class'=>'form-control','id'=>'nombrec','autofocus','rows'=>3])!!}
-
-                                @if ($errors->has('nombrec'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('nombrec') }}</strong>
-                                    </span>
+                                {{ Form::text('salario', null,['class' => 'form-control']) }}
+                                @if ($errors->has('salario'))
+                                <span class="help-block">
+                                    <strong>{{ $errors->first('salario') }}</strong>
+                                </span>
                                 @endif
                             </div>
                         </div>

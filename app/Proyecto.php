@@ -34,6 +34,6 @@ class Proyecto extends Model
 
     public function organizacion()
     {
-        return $this->hasMany('App\Organizacion');
+        return $this->belongsTo('App\Organizacion');
     }
 }

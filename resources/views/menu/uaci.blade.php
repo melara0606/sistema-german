@@ -1,6 +1,6 @@
 <li class="treeview">
     <a href="#">
-        <i class="fa fa-edit"></i> <span>Plan anual de compras</span>
+        <i class="fa fa-line-chart"></i> <span>Plan anual de compras</span>
         <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
@@ -13,7 +13,7 @@
 
 <li class="treeview">
     <a href="#">
-        <i class="fa fa-edit"></i> <span>Proyectos</span>
+        <i class="fa fa-industry"></i> <span>Proyectos</span>
         <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
@@ -39,7 +39,21 @@
 
 <li class="treeview">
     <a href="#">
-        <i class="fa fa-files-o"></i>
+        <i class="fa fa-bar-chart"></i>
+        <span>Requisicion</span>
+        <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+    </a>
+    <ul class="treeview-menu">
+        <li><a href="{{url('requisiciones')}}"><i class="fa fa-circle-o"></i> Ver requisiciones</a></li>
+        <li><a href="{{url('requisiciones/create')}}"><i class="fa fa-circle-o"></i> Registrar requisiciones</a></li>
+    </ul>
+</li>
+
+<li class="treeview">
+    <a href="#">
+        <i class="fa fa-user-circle-o"></i>
         <span>Proveedores</span>
         <span class="pull-right-container">
               <span class="label label-primary pull-right">{{cantprov()}}</span>
@@ -52,7 +66,7 @@
 </li>
 <li class="treeview">
     <a href="#">
-        <i class="fa fa-laptop"></i>
+        <i class="glyphicon glyphicon-duplicate"></i>
         <span>Contratos</span>
         <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>

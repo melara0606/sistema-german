@@ -2,13 +2,11 @@
 
 @section('migasdepan')
 <h1>
-        Proyecto
+        Empleado
       </h1>
       <ol class="breadcrumb">
-        <li><a href="{{ url('/home') }}"><i class="glyphicon glyphicon-home"></i> Inicio</a></li>
-        <li><a href="{{ url('/proyectos') }}"><i class="fa fa-industry"></i> Proyectos</a></li>
-        <li class="active">Registro</li>
-      </ol>
+        <li><a href="{{ url('/empleados') }}"><i class="fa fa-dashboard"></i> Empleados</a></li>
+        <li class="active">Registro</li>      </ol>
 @endsection
 
 @section('content')
@@ -16,8 +14,8 @@
     <div class="row">
         <div class="panel panel-default">
                 <div class="panel-body">
-                    {{ Form::open(['action' => 'ProyectoController@store','class' => 'form-horizontal']) }}
-                        @include('proyectos.formulario')
+                    {{ Form::open(['action' => 'EmpleadoController@store','class' => 'form-horizontal']) }}
+                        @include('empleados.formulario')
 
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-1">

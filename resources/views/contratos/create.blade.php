@@ -2,10 +2,10 @@
 
 @section('migasdepan')
 <h1>
-        Contratos
+        Contrato
       </h1>
       <ol class="breadcrumb">
-        <li><a href="{{ url('/contratos') }}"><i class="fa fa-dashboard"></i> Contrato</a></li>
+        <li><a href="{{ url('/contratos') }}"><i class="fa fa-dashboard"></i> Contratos</a></li>
         <li class="active">Registro</li>      </ol>
 @endsection
 
@@ -14,13 +14,12 @@
     <div class="row">
         <div class="panel panel-default">
                 <div class="panel-body">
-                    {{ Form::open(['action' => 'ProyectoController@store','class' => 'form-horizontal']) }}
-                        {{ Form::hidden('estado',1) }}
+                    {{ Form::open(['action' => 'ContratoController@store','class' => 'form-horizontal']) }}
                         @include('contratos.formulario')
 
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-1">
-                                <button type="submit" class="btn btn-primary btn-lg">
+                                <button type="submit" class="btn btn-success">
                                     <span class="glyphicon glyphicon-floppy-disk"></span>    Registrar
                                 </button>
                             </div>
@@ -29,6 +28,6 @@
                 </div>
             </div>
         </div>
-    
+
 </div>
-@endsection 
+@endsection

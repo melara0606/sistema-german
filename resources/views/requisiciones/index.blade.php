@@ -6,7 +6,7 @@
         <small>Control de requisiciones</small>
       </h1>
       <ol class="breadcrumb">
-        <li><a href="{{ url('/requisiciones') }}"><i class="fa fa-dashboard"></i> Requisiciones</a></li>
+        <li><a href="{{ url('/home') }}"><i class="glyphicon glyphicon-home"></i> Inicio</a></li>
         <li class="active">Listado de requisiciones</li>
       </ol>
 @endsection
@@ -27,22 +27,22 @@
           <thead>
                   <th>Id</th>
                   <th>Unidad</th>
+                  <th>Descripción</th>
                   <th>Linea de trabajo</th>
                   <th>Fuente de financiamiento</th>
-                  <th>Estado</th>
                   <th>Accion</th>
                 </thead>
                 <tbody>
                   @foreach($requisiciones as $requisicion)
                   <tr>
                     <td>{{ $requisicion->id }}</td>
+                    <td>{{ $requisicion->justificacion}}</td>
                     <td>{{ $requisicion->unidad_admin }}</td>
                     <td>{{ $requisicion->linea_trabajo }}</td>
                     <td>{{ $requisicion->fuente_financiamiento }}</td>
-                    <td>{{ $requisicion->estado }}</td>
                     <td>
-                      <a href="{{url('requisiciones/'.$requisicion->id)}}">Ver</a>
-                      <a href="{{url('requisiciones/'.$requisicion->id.'/edit')}}">Editar</a>
+                      <a href="{{url('requisiciones/'.$requisicion->id)}}" class="btn btn-primary"><span class="glyphicon glyphicon-eye-open"></span></a>
+                      <a href="{{url('requisiciones/'.$requisicion->id.'/edit')}}" class="btn btn-warning"><span class="glyphicon glyphicon-text-size"></span></a>
 
                         </td>
                   </tr>

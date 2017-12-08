@@ -2,13 +2,12 @@
 
 @section('migasdepan')
     <h1>
-        Presupuesto
+        Requisiciones
     </h1>
     <ol class="breadcrumb">
       <li><a href="{{ url('/home') }}"><i class="glyphicon glyphicon-home"></i> Inicio</a></li>
-      <li><a href="{{ url('/proyectos') }}"><i class="fa fa-industry"></i> Proyectos</a></li>
+      <li><a href="{{ url('/requisiciones') }}"><i class="fa fa-balance-scale"></i> Requisiciones</a></li>
       <li class="active">Registro</li>
-    </ol>
 @endsection
 
 @section('content')
@@ -18,11 +17,9 @@
             <div class="panel panel-primary">
                 <div class="panel-heading">Registro de presupuesto</div>
                 <div class="panel-body">
-                    {{ Form::open(['action' => 'PresupuestoController@store','class' => 'form-horizontal','id' => 'presupuesto']) }}
-                    @include('presupuestos.formulario')
-                    @include('presupuestos.tabla')
-                    <input type="hidden" name="total" id="total" readonly>
-                    <input type="hidden" name="contador" id="contador" readonly>
+                    {{ Form::open(['action' => 'RequisiciondetalleController@store','class' => 'form-horizontal','id' => 'requisicion']) }}
+                    {!!Form::hidden('requisicion_id',$id)!!}
+                    @include('requisiciones.detalle.formulario')
                     <div class="form-group">
                         <div class="col-md-6 col-md-offset-1">
                             <button type="submit" class="btn btn-success">
@@ -30,7 +27,7 @@
                             </button>
                         </div>
                     </div>
-                    {{Form::close()}}
+                    {{ Form::close() }}
                 </div>
             </div>
         </div>
@@ -38,5 +35,5 @@
     </div>
 @endsection
 @section('scripts')
-{!! Html::script('js/presupuestos.js') !!}
+{!! Html::script('js/requisicion.js') !!}
 @endsection

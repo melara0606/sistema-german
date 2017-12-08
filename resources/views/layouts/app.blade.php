@@ -310,12 +310,13 @@
               <!-- Menu Footer-->
               <li class="user-footer">
                 <div class="pull-left">
-                  <a href="{{ url('/home/perfil') }}" class="btn btn-default btn-flat">Perfil</a>
+                  <a href="{{ url('/home/perfil') }}" class="btn btn-default btn-flat"><i class="fa fa-user-circle"></i> Perfil</a>
                 </div>
                 <div class="pull-right">
                   <a href="{{ route('logout') }}" class="btn btn-default btn-flat"
                                             onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
+                                            <i class="glyphicon glyphicon-off"></i> 
                                             Cerrar Sesión
                                         </a>
 
@@ -415,21 +416,11 @@
 {!! Html::script('plugins/input-mask/jquery.inputmask.js') !!}
 {!! Html::script('plugins/datepicker/bootstrap-datepicker.js') !!}
 {!! Html::script('plugins/colorpicker/bootstrap-colorpicker.min.js') !!}
+{!! Html::script('js/raphael-min.js')!!}
+{!! Html::script('js/moment.min.js')!!}
+{!! Html::script('js/bootstrap-toggle.min.js')!!}
 {!! Html::script('js/pruebasvue.js') !!}
 
-
-
-<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
-
-<!-- Bootstrap 3.3.6 -->
-
-<!-- Morris.js charts -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
-
-<!-- daterangepicker -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
-
-<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
 {!! Html::script('js/tablas.js') !!}
   <script>
       $(function () {

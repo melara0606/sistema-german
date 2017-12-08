@@ -30,7 +30,7 @@
         <!-- ./col -->
         <div class="col-lg-3 col-xs-6">
           <!-- small box -->
-          <div class="small-box bg-green">
+          <div class="small-box bg-olive">
             <div class="inner">
               <h3>53<sup style="font-size: 20px">%</sup></h3>
 

@@ -3,11 +3,11 @@
 @section('migasdepan')
 <h1>
         Contratos
-        <small>Control de contrataciones</small>
+        <small>Control de contratos</small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="{{ url('/contratos') }}"><i class="fa fa-dashboard"></i> Contratos</a></li>
-        <li class="active">Listado de contrataciones</li>
+        <li class="active">Listado de contratos</li>
       </ol>
 @endsection
 
@@ -28,18 +28,18 @@
                   <th>Id</th>
                   <th>Contratado</th>
                   <th>Tipo de contrato</th>
-                  <th>Contratante</th>
-                  <th>Estado</th>
+                  <th>Cargo</th>
+                  <th>Salario</th>
                   <th>Accion</th>
                 </thead>
                 <tbody>
                   @foreach($contratos as $contrato)
                   <tr>
                     <td>{{ $contrato->id }}</td>
-                    <td>{{ $contrato->nombre_contratado }}</td>
-                    <td>{{ $contrato->tipocontrato_id }}</td>
-                    <td>{{ $contrato->nombrec }}</td>
-                    <td>{{ $contrato->estado }}</td>
+                    <td>{{ $contrato->empleado->nombre }}</td>
+                    <td>{{ $contrato->tipocontrato->nombre }}</td>
+                    <td>{{ $contrato->cargo->cargo }}</td>
+                    <td>{{ $contrato->salario }}</td>
                     <td>
                             @if($estado == 1 || $estado == "")
                                 {{ Form::open(['method' => 'POST', 'id' => 'baja', 'class' => 'form-horizontal'])}}

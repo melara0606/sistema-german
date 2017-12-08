@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ContratoRequest extends FormRequest
+class EmpleadoRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,9 +24,12 @@ class ContratoRequest extends FormRequest
     public function rules()
     {
         return [
-            'empleado_id'=>'required',
-            'tipocontrato_id'=>'required',
-            'cargo_id'=>'required',
+            'nombre'=>'required|min:3|max:150',
+            'dui'=>'required|numeric',
+            'nit'=>'required|numeric',
+            'direccion'=>'required|max:255',
+            'fecha_inicio'=>'required|date',
+            'fecha_fin'=>'required|date',
         ];
     }
 }

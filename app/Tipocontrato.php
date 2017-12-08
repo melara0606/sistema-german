@@ -25,7 +25,7 @@ class Tipocontrato extends Model
     	
     }
 
-    public function tipocontrato()
+    public function contrato()
     {
         return $this->hasMany('App\Contrato');
     }
