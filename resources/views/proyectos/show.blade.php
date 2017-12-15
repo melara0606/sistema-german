@@ -117,7 +117,7 @@ Ver datos del proyecto:
                             <tfoot>
                               <tr>
                                   <th colspan="3">totales</th>
-                                  <th>$ {{$presupuesto->total}}</th>
+                                  <th>$ {{number_format($presupuesto->total,2)}}</th>
                               </tr>
 
                             </tfoot>

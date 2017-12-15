@@ -7,7 +7,7 @@
       <ol class="breadcrumb">
         <li><a href="{{ url('/home') }}"><i class="glyphicon glyphicon-home"></i> Inicio</a></li>
         <li><a href="{{ url('/proveedores') }}"><i class="fa fa-user-circle-o"></i> Proveedores</a></li>
-        <li class="active">Registro</li>    
+        <li class="active">Registro</li>
       </ol>
 @endsection
 
@@ -21,7 +21,7 @@
 
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-1">
-                                <button type="submit" class="btn btn-primary btn-lg">
+                                <button type="submit" class="btn btn-success">
                                     <span class="glyphicon glyphicon-floppy-disk"></span>    Registrar
                                 </button>
                             </div>

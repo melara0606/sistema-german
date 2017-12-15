@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Requisiciondetalle;
+use App\Http\Requests\RequisiciondetalleRequest;
 
 class RequisiciondetalleController extends Controller
 {
@@ -33,7 +34,7 @@ class RequisiciondetalleController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(RequisiciondetalleRequest $request)
     {
       try{
         Requisiciondetalle::create($request->All());
@@ -74,7 +75,7 @@ class RequisiciondetalleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Requisiciondetalle $requisiciondetalle)
+    public function update(RequisiciondetalleRequest $request, Requisiciondetalle $requisiciondetalle)
     {
         $requisiciondetalle->fill($request->All());
         $requisiciondetalle->save();
@@ -90,6 +91,6 @@ class RequisiciondetalleController extends Controller
     public function destroy(Requisiciondetalle $requisiciondetalle)
     {
         $requisiciondetalle->delete();
-        return redirect('requisiciones')->with('mensaje','Se modifico con exito');
+        return redirect('requisiciones')->with('mensaje','Se eliminó con exito');
     }
 }

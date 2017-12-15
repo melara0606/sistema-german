@@ -14,7 +14,6 @@
                             <label for="lugar_entrega" class="col-md-4 control-label">Lugar de entrega</label>
 
                             <div class="col-md-6">
-
                                 {!!Form::text('lugar_entrega',null,['class'=>'form-control','id'=>'lugar_entrega','autofocus'])!!}
 
                                 @if ($errors->has('lugar_entrega'))
@@ -24,7 +23,7 @@
                                 @endif
                             </div>
                         </div>
-                       
+
                          <div class="form-group{{ $errors->has('datos_contenido') ? ' has-error' : '' }}">
                             <label for="datos_contenido" class="col-md-4 control-label">Datos del contenido</label>
 

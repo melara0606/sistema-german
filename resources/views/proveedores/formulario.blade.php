@@ -9,6 +9,7 @@
     </div>
     <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
       <div class="panel-body">
+        
        <div class="form-group{{ $errors->has('nombre') ? ' has-error' : '' }}">
         <label for="nombre" class="col-md-4 control-label">Nombre de la Empresa o Proveedor</label>
         <div class="col-md-6">

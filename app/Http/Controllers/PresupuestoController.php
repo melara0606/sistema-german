@@ -68,7 +68,7 @@ class PresupuestoController extends Controller
           return redirect('proyectos')->with('mensaje','Presupuesto registrado con éxito');
       }catch (\Exception $e){
         \DB::rollback();
-        Session::flash('error','Presupuesto con error'.$e->getMessage());
+        Session::flash('error','Presupuesto con error '.$e->getMessage());
         return redirect('/presupuestos/crear/'.$request->proyecto);
       }
 
