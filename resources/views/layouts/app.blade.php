@@ -9,45 +9,10 @@
   <meta name="csrf-token" content="{{ csrf_token() }}">
 
   <!-- Bootstrap 3.3.6 -->
-  {!!Html::style('bootstrap/css/bootstrap.min.css')!!}
-
-    <!-- Font Awesome -->
-  {!!Html::style('css/font-awesome.css')!!}
-
-  <!-- Ionicons -->
-  {!!Html::style('css/ionicons.min.css')!!}
-  <!-- Theme style -->
-
-  {!! Html::style('css/font-awesome.min.css')!!}
-  {!! Html::style('css/AdminLTE.min.css') !!}
-  {!! Html::style('css/wizard.css') !!}
-  {!! Html::style('css/skins/_all-skins.min.css')!!}
-  {!! Html::style('plugins/iCheck/flat/blue.css')!!}
-  {!! Html::style('plugins/morris/morris.css')!!}
-  {!! Html::style('plugins/jvectormap/jquery-jvectormap-1.2.2.css')!!}
-  {!! Html::style('plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css')!!}
-  {!! Html::style('css/bootstrap-toggle.min.css')!!}
-  {!! Html::style('css/buttons.bootstrap.min.css') !!}
-  {!! Html::style('css/sweetalert2.min.css') !!}
-  {!! Html::style('plugins/daterangepicker/daterangepicker.css') !!}
-  {!! Html::style('plugins/datepicker/datepicker3.css') !!}
-  {!! Html::style('plugins/iCheck/all.css') !!}
-  {!! Html::style('plugins/datatables/dataTables.bootstrap.css') !!}
-
-  {!! Html::style('css/chosen.css') !!}
-  {!! Html::script('plugins/jQuery/jquery-2.2.3.min.js') !!}
-  {!! Html::script('js/jquery.mask.min.js') !!}
-{!! Html::script('plugins/iCheck/icheck.min.js') !!}
-{!! Html::script('js/botones.dataTables.min.js') !!}
-{!! Html::script('js/pdfmake.min.js') !!}
-{!! Html::script('js/vfs_fonts.js') !!}
-{!! Html::script('plugins/datatables/jquery.dataTables.min.js') !!}
-{!! Html::script('plugins/datatables/dataTables.bootstrap.min.js') !!}
-{!! Html::script('js/chosen.jquery.js') !!}
-{!! Html::script('js/vue.min.js') !!}
+  {!!Html::style('css/sisverapaz.css')!!}
 
 
-
+  {!! Html::script('js/sisverapaz.js') !!}
 
   <script>
       $(document).ready(function () {
@@ -316,7 +281,7 @@
                   <a href="{{ route('logout') }}" class="btn btn-default btn-flat"
                                             onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                            <i class="glyphicon glyphicon-off"></i> 
+                                            <i class="glyphicon glyphicon-off"></i>
                                             Cerrar Sesión
                                         </a>
 
@@ -398,37 +363,15 @@
 </div>
 <!-- ./wrapper -->
 
-<!-- jQuery 2.2.3 -->
 
-{!! Html::script('bootstrap/js/bootstrap.min.js') !!}
-{!! Html::script('js/sweetalert2.min.js') !!}
-{!! Html::script('plugins/morris/morris.min.js') !!}
-{!! Html::script('plugins/sparkline/jquery.sparkline.min.js') !!}
-{!! Html::script('plugins/jvectormap/jquery-jvectormap-1.2.2.min.js') !!}
-{!! Html::script('plugins/jvectormap/jquery-jvectormap-world-mill-en.js') !!}
-{!! Html::script('plugins/knob/jquery.knob.js') !!}
-{!! Html::script('plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js') !!}
-{!! Html::script('plugins/slimScroll/jquery.slimscroll.min.js') !!}
-{!! Html::script('plugins/fastclick/fastclick.js') !!}
-{!! Html::script('js/app.min.js') !!}
-{!! Html::script('js/demo.js') !!}
-{!! Html::script('plugins/select2/select2.full.min.js') !!}
-{!! Html::script('plugins/input-mask/jquery.inputmask.js') !!}
-{!! Html::script('plugins/datepicker/bootstrap-datepicker.js') !!}
-{!! Html::script('plugins/colorpicker/bootstrap-colorpicker.min.js') !!}
-{!! Html::script('js/raphael-min.js')!!}
-{!! Html::script('js/moment.min.js')!!}
-{!! Html::script('js/bootstrap-toggle.min.js')!!}
 {!! Html::script('js/pruebasvue.js') !!}
 
-{!! Html::script('js/tablas.js') !!}
   <script>
       $(function () {
           //datatables
 
-          //Initialize Select2 Elements
-          $(".select2").select2();
-          $(".chosen").chosen();
+
+
 
           //Datemask dd/mm/yyyy
           $("#datemask").inputmask("dd/mm/yyyy", {"placeholder": "dd/mm/yyyy"});
@@ -447,10 +390,7 @@
               checkboxClass: 'icheckbox_flat-green',
               radioClass: 'iradio_flat-green'
           });
-           //Colorpicker
-          $(".my-colorpicker1").colorpicker();
-          //color picker with addon
-          $(".my-colorpicker2").colorpicker();
+
 
 
 
