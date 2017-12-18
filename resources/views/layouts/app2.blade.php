@@ -11,9 +11,9 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Styles -->
-    {!! Html::style('css/app.css') !!}
-    {!! Html::script('js/jquery.min.js') !!}
-    {!! Html::script('js/app.js') !!}
+    {!! Html::style('css/sisverapaz.css') !!}
+    {!! Html::script('js/sisverapaz.js') !!}
+  
 </head>
 <body>
     <div id="app">
