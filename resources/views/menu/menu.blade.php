@@ -28,6 +28,9 @@
         @if(Auth::user()->cargo == 2)
         @include('menu.uaci')
         @endif
+        @if(Auth::user()->cargo == 3)
+          @include('menu.tesoreria')
+        @endif
         @if(Auth::user()->cargo == 4)
           @include('menu.ryct')
         @endif

@@ -127,3 +127,6 @@ Route::Resource('inmuebles','InmuebleController');
 Route::Resource('empleados','EmpleadoController');
 
 Route::Resource('cargos','CargoController');
+
+Route::Resource('cuentas','CuentaController');
+Route::Resource('cuentaprincipal','CuentaprincipalController');

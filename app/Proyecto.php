@@ -36,4 +36,9 @@ class Proyecto extends Model
     {
         return $this->belongsTo('App\Organizacion');
     }
+
+    public function cuenta()
+    {
+      return $this->hasOne('App\Cuenta');
+    }
 }
