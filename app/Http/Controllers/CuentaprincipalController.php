@@ -39,7 +39,19 @@ class CuentaprincipalController extends Controller
      */
     public function store(Request $request)
     {
-        Cuentaprincipal::create($request->All());
+        $anio=date('Y')-1;
+        $anterior=Cuentaprincipal::where('anio',$anio)->first();
+        $monto=$anterior->monto_inicial;
+        $anterior->monto_inicial=0;
+        $anterior->estado=2;
+        $anterior->save();
+        $cuenta= new Cuentaprincipal();
+        $cuenta->numero_de_cuenta=$request->numero_de_cuenta;
+        $cuenta->banco=$request->banco;
+        $cuenta->anio=$request->anio;
+        $cuenta->monto_inicial=$monto;
+        $cuenta->save();
+        return redirect('cuentaprincipal');
     }
 
     /**
@@ -61,7 +73,8 @@ class CuentaprincipalController extends Controller
      */
     public function edit($id)
     {
-        //
+        $cuenta=Cuentaprincipal::findorFail($id);
+        return view('cuentaprincipal.edit',compact('cuenta'));
     }
 
     /**
@@ -73,7 +86,10 @@ class CuentaprincipalController extends Controller
      */
     public function update(Request $request, $id)
     {
-        dd($request->All());
+        $cuenta=Cuentaprincipal::find($id);
+        $cuenta->fill($request->All());
+
+        return redirect('cuentaprincipal');
     }
 
     /**

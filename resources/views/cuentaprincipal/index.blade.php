@@ -16,9 +16,7 @@
           <div class="box">
             <div class="box-header">
               <h3 class="box-title">Listado</h3>
-                <a href="{{ url('/cuentas/create') }}" class="btn btn-success"><span class="glyphicon glyphicon-plus-sign"></span> Agregar</a>
-                <a href="{{ url('/cuentas?estado=1') }}" class="btn btn-primary">Activos</a>
-                <a href="{{ url('/cuentas?estado=2') }}" class="btn btn-primary">Papelera</a>
+                <a href="{{ url('/cuentaprincipal/create') }}" class="btn btn-success"><span class="glyphicon glyphicon-plus-sign"></span> Agregar</a>
             </div>
             <!-- /.box-header -->
             <div class="box-body table-responsive">
@@ -40,7 +38,7 @@
                     <td>{{ $cuenta->anio }}</td>
                     <td>$ {{ number_format($cuenta->monto_inicial) }}</td>
                     <td>
-                      <a href="{{url('cuentas/'.$cuenta->id.'/edit')}}" class="btn btn-warning">Editar</a>
+                      <a href="{{url('cuentaprincipal/'.$cuenta->id.'/edit')}}" class="btn btn-warning">Editar</a>
                     </td>
                   </tr>
                   @endforeach
