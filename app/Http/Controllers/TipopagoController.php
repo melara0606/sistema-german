@@ -3,10 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Organizacion;
+use App\Tipopago;
 use App\Bitacora;
+use App\Http\Requests\TipopagoRequest;
 
-class OrganizacionController extends Controller
+class TipopagoController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -20,8 +21,8 @@ class OrganizacionController extends Controller
 
     public function index()
     {
-        $organizaciones = Organizacion::all();
-        return view('organizaciones.index', compact('organizaciones'));
+        $tipopagos = Tipopagos::all();
+        return view('tipopagos.index', compact('tipopagos'));
     }
 
     /**
@@ -31,7 +32,8 @@ class OrganizacionController extends Controller
      */
     public function create()
     {
-        return view('organizaciones.create');
+        $tipopagos = Tipopagos::all();
+        return view('tipopagos.create',compact('tipopagos'));
     }
 
     /**
@@ -42,8 +44,8 @@ class OrganizacionController extends Controller
      */
     public function store(Request $request)
     {
-        Organizacion::create($request->All());
-        return redirect('organizaciones')->with('mensaje', 'Organización registrada');
+        Tipopago::create($request->All());
+        return redirect('tipopagos')->with('mensaje','Tipo de pago registrado');
     }
 
     /**
@@ -54,8 +56,8 @@ class OrganizacionController extends Controller
      */
     public function show($id)
     {
-        $organizaciones = Organizacion::findorFail($id);
-        return view('organizaciones.show', compact('organizaciones'));
+        $tipopagos = Tipopago::findorFile($id);
+        return view('tipopagos.show',compact('tipopagos'));
     }
 
     /**
@@ -66,8 +68,8 @@ class OrganizacionController extends Controller
      */
     public function edit($id)
     {
-        $organizaciones= Organizacion::find($id);
-        return view('organizaciones.edit', compact('organizaciones'));
+        $tipopagos = Tipopago::find($id);
+        return view('tipopagos.edit',compact('tipopagos'));
     }
 
     /**

@@ -14,4 +14,9 @@ class Cuenta extends Model
     {
       return $this->belongsTo('App\Proyecto');
     }
+
+    public function pago()
+    {
+    	return $this->belongsTo('App\Pago');
+    }
 }

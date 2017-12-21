@@ -3,10 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Organizacion;
+use App\Tipopago;
+use App\Cuenta;
+use App\Pago;
 use App\Bitacora;
+use App\Http\Requests\ContratoRequest;
 
-class OrganizacionController extends Controller
+class PagoController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -20,8 +23,8 @@ class OrganizacionController extends Controller
 
     public function index()
     {
-        $organizaciones = Organizacion::all();
-        return view('organizaciones.index', compact('organizaciones'));
+        $pagos = Pago::all();
+        return view('pagos.index', compact('pagos'));
     }
 
     /**
@@ -31,7 +34,10 @@ class OrganizacionController extends Controller
      */
     public function create()
     {
-        return view('organizaciones.create');
+        $tipopagos = Tipopago::all();
+        $cuentas = Cuenta::all();
+        $pagos = Pago::all();
+        return view('pagos.create',compact('tipopagos','cuentas','pagos'));
     }
 
     /**
@@ -42,8 +48,8 @@ class OrganizacionController extends Controller
      */
     public function store(Request $request)
     {
-        Organizacion::create($request->All());
-        return redirect('organizaciones')->with('mensaje', 'Organización registrada');
+        Pago::create($request->All());
+        return redirect('pagos')->with('mensaje', 'Pago registrado');
     }
 
     /**
@@ -54,8 +60,8 @@ class OrganizacionController extends Controller
      */
     public function show($id)
     {
-        $organizaciones = Organizacion::findorFail($id);
-        return view('organizaciones.show', compact('organizaciones'));
+        $pagos = Pago::findorFail($id);
+        return view('pagos.show', compact('pagos'));
     }
 
     /**
@@ -66,8 +72,8 @@ class OrganizacionController extends Controller
      */
     public function edit($id)
     {
-        $organizaciones= Organizacion::find($id);
-        return view('organizaciones.edit', compact('organizaciones'));
+        $pagos= Pago::find($id);
+        return view('pagos.edit', compact('pagos'));
     }
 
     /**
