@@ -2,12 +2,12 @@
 
 @section('migasdepan')
 <h1>
-        Pagos
-        <small>Control de pagos</small>
+        Construcciones
+        <small>Control de construcciones</small>
       </h1>
       <ol class="breadcrumb">
-        <li><a href="{{ url('/pagos') }}"><i class="fa fa-dashboard"></i> Pagos</a></li>
-        <li class="active">Listado de pagos</li>
+        <li><a href="{{ url('/construcciones') }}"><i class="fa fa-dashboard"></i> Construcciones</a></li>
+        <li class="active">Listado de construcciones</li>
       </ol>
 @endsection
 
@@ -17,7 +17,7 @@
           <div class="box">
             <div class="box-header">
               <h3 class="box-title">Listado</h3>
-                <a href="{{ url('/pagos/create') }}" class="btn btn-success"><span class="glyphicon glyphicon-plus-sign"></span> Agregar</a>
+                <a href="{{ url('/construcciones/create') }}" class="btn btn-success"><span class="glyphicon glyphicon-plus-sign"></span> Agregar</a>
 
             </div>
             <!-- /.box-header -->
@@ -25,24 +25,23 @@
               <table class="table table-striped table-bordered table-hover" id="example2">
           <thead>
                   <th>Id</th>
-                  <th>Tipo de pago</th>
-                  <th>Número de cuenta</th>
-                  <th>Monto</th>
+                  <th>Contribuyente</th>
+                  <th>Presupuesto</th>
+                  <th>Impuesto</th>
                   <th>Acción</th>
                 </thead>
                 <tbody>
-                  @foreach($pagos as $pago)
+                  @foreach($construcciones as $construccion)
                   <tr>
-                    <td>{{ $pago->id }}</td>
-                    <td>{{ $pago->tipopago->nombre }}</td>
-                    <td>{{ $pago->cuenta->numero_de_pago }}</td>
-                    <td>{{ $pago->monto }}</td>
-
+                    <td>{{ $construccion->id }}</td>
+                    <td>{{ $construccion->contribuyente->nombre }}</td>
+                    <td>{{ $construccion->presupuesto }}</td>
+                    <td>{{ $construccion->impuesto->impuesto }}</td>
                     <td>
                                 {{ Form::open(['method' => 'POST', 'id' => 'baja', 'class' => 'form-horizontal'])}}
-                                <a href="{{ url('pagos/'.$pago->id) }}" class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-eye-open"></span></a>
-                                <a href="{{ url('/pagos/'.$pago->id.'/edit') }}" class="btn btn-warning btn-xs"><span class="glyphicon glyphicon-text-size"></span></a>
-                                <button class="btn btn-danger btn-xs" type="button" onclick={{ "baja(".$pago->id.")" }}><span class="glyphicon glyphicon-trash"></span></button>
+                                <a href="{{ url('construcciones/'.$construccion->id) }}" class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-eye-open"></span></a>
+                                <a href="{{ url('/construcciones/'.$construccion->id.'/edit') }}" class="btn btn-warning btn-xs"><span class="glyphicon glyphicon-text-size"></span></a>
+                                <button class="btn btn-danger btn-xs" type="button" onclick={{ "baja(".$construccion->id.")" }}><span class="glyphicon glyphicon-trash"></span></button>
                                 {{ Form::close()}}
 
                         </td>
@@ -74,7 +73,7 @@
                         }).then(function (text) {
                             var dominio = window.location.host;
                             var form = $(this).parents('form');
-                            $('#baja').attr('action','http://'+dominio+'/sisverapaz/public/pagos/baja/'+id+'+'+text);
+                            $('#baja').attr('action','http://'+dominio+'/sisverapaz/public/construcciones/baja/'+id+'+'+text);
                             //document.getElmentById('baja').submit();
                             $('#baja').submit();
                             swal({
@@ -96,7 +95,7 @@
                         }).then(function () {
                             var dominio = window.location.host;
                             var form = $(this).parents('form');
-                            $('#alta').attr('action','http://'+dominio+'/sisverapaz/public/pagos/alta/'+id);
+                            $('#alta').attr('action','http://'+dominio+'/sisverapaz/public/construcciones/alta/'+id);
                             //document.getElmentById('baja').submit();
                             $('#alta').submit();
                             swal({

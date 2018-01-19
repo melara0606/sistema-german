@@ -41,4 +41,9 @@ class Proyecto extends Model
     {
       return $this->hasOne('App\Cuenta');
     }
+
+    public function cotizacion()
+    {
+        return $this->hasMany('App\Cotizacion');
+    }
 }

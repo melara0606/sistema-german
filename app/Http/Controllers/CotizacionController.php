@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Proyecto;
+use App\Proveedor;
 use App\Cotizacion;
 use App\Bitacora;
 use App\Http\Requests\CotizacionRequest;
@@ -40,7 +42,10 @@ class CotizacionController extends Controller
      */
     public function create()
     {
-        return view('cotizaciones.create');
+        $proyectos = Proyecto::all();
+        $proveedores = Proveedor::all();
+        $cotizaciones = Cotizacion::all();
+        return view('cotizaciones.create',compact('proyectos','proveedores','cotizaciones'));
     }
 
     /**
@@ -64,9 +69,9 @@ class CotizacionController extends Controller
      */
     public function show($id)
     {
-        $cotizacion = Cotizacion::findorFail($id);
+        $cotizaciones = Cotizacion::findorFail($id);
 
-        return view('cotizaciones.show', compact('cotizacion'));
+        return view('cotizaciones.show', compact('cotizaciones'));
     }
 
     /**
@@ -77,8 +82,8 @@ class CotizacionController extends Controller
      */
     public function edit($id)
     {
-        $cotizacion = Cotizacion::find($id);
-        return view('cotizaciones.edit',compact('cotizacion'));
+        $cotizaciones = Cotizacion::find($id);
+        return view('cotizaciones.edit',compact('cotizaciones'));
     }
 
     /**

@@ -1,27 +1,32 @@
-                        <div class="form-group{{ $errors->has('cotizacion_id') ? ' has-error' : '' }}">
-                            <label for="cotizacion_id" class="col-md-4 control-label">Cotización</label>
+<div class="form-group{{ $errors->has('cotizacion_id') ? ' has-error' : '' }}">
+    <label for="" class="col-md-4 control-label">Seleccione cotización</label>
+    <div class="col-md-6">
+        <select name="cotizacion_id" id="cotizacion" class="form-control">
+            <option value="">Seleccione cotización</option>
+            @foreach($cotizaciones as $cotizacion)
+            <option value="{{$cotizacion->id}}">{{$cotizacion->id}}</option>
+            @endforeach
+        </select>
+        @if ($errors->has('cotizacion_id'))
+        <span class="help-block">
+            <strong>{{ $errors->first('cotizacion_id') }}</strong>
+        </span>
+        @endif
+    </div>
+</div>
 
-                            <div class="col-md-6">
-                                @if ($errors->has('cotizacion_id'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('cotizacion_id') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
+<div class="form-group{{ $errors->has('unidad_medida') ? ' has-error' : '' }}">
+    <label for="unidad_medida" class="col-md-4 control-label">Unidad de medida</label>
 
-                         <div class="form-group{{ $errors->has('unidad_id') ? ' has-error' : '' }}">
-                            <label for="unidad_id" class="col-md-4 control-label">Unidad de medida</label>
-
-                            <div class="col-md-6">
-              
-                                @if ($errors->has('unidad_id'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('unidad_id') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
+    <div class="col-md-6">
+        {!!Form::text('unidad_medida',null,['class'=>'form-control','id'=>'unidad_medida','autofocus'])!!}
+        @if ($errors->has('unidad_medida'))
+        <span class="help-block">
+            <strong>{{ $errors->first('unidad_medida') }}</strong>
+        </span>
+        @endif
+    </div>
+</div>
 
                         <div class="form-group{{ $errors->has('cantidad') ? ' has-error' : '' }}">
                             <label for="cantidad" class="col-md-4 control-label">Cantidad</label>

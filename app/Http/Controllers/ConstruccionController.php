@@ -3,21 +3,27 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Cotizacion;
-use App\Detallecotizacion;
-use App\Bitacora;
+use App\Contribuyente;
+use App\Impuesto;
+use App\Construccion;
+use App\Http\Requests\ConstruccionRequest;
 
-class DetallecotizacionController extends Controller
+class ConstruccionController extends Controller
 {
     /**
-     * Display a listing of  resource.
-     *the
+     * Display a listing of the resource.
+     *
      * @return \Illuminate\Http\Response
      */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
-        $detallecotizaciones = Detallecotizacion::all();
-        return view('detallecotizaciones.index',compact('detallecotizaciones'));
+        $construcciones = Construccion::all();
+        return view('construcciones.index',compact('construcciones'));
     }
 
     /**
@@ -27,9 +33,10 @@ class DetallecotizacionController extends Controller
      */
     public function create()
     {
-        $cotizaciones = Cotizacion::all();
-        $detallecotizaciones = Detallecotizacion::all();
-        return view('detallecotizaciones.create',compact('cotizaciones','detallecotizaciones'));
+        $contribuyentes = Contribuyente::all();
+        $impuestos = Impuesto::all();
+        $construcciones = Construccion::all();
+        return view('construcciones.create',compact('contribuyentes','impuestos','construcciones'));
     }
 
     /**
@@ -40,9 +47,9 @@ class DetallecotizacionController extends Controller
      */
     public function store(Request $request)
     {
-        Detallecotizacion::create($request->All());
-        bitacora('Registró detalles');
-        return redirect('detallecotizaciones')->with('mensaje', 'Detalle registrado');
+        Construccion::create($request->All());
+        bitacora('Registro una construción');
+        return redirect('construcciones')->with('mensaje', 'Pago registrado');
     }
 
     /**
@@ -53,7 +60,8 @@ class DetallecotizacionController extends Controller
      */
     public function show($id)
     {
-        //
+        $construcciones = Construccion::findorFail($id);
+        return view('construcciones.show',compact('construcciones'));
     }
 
     /**
@@ -64,7 +72,8 @@ class DetallecotizacionController extends Controller
      */
     public function edit($id)
     {
-        //
+        $construcciones = Construccion::find($id);
+        return view('construcciones.edit',compact('construcciones'));
     }
 
     /**

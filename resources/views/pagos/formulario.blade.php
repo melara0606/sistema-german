@@ -49,7 +49,7 @@
 	<label for="num_factura" class="col-md-4 control-label">Número de factura</label>
 
 	<div class="col-md-6">
-		{{ Form::text('num_factura', null, ['class' => 'form-control', 'data-inputmask' => '"mask": "999999999999"','data-mask']) }}
+		{{ Form::text('num_factura', null, ['class' => 'form-control']) }}
 
 		@if ($errors->has('num_factura'))
 		<span class="help-block">

@@ -10,24 +10,26 @@
 @endsection
 
 @section('content')
-    <div class="container">
-        <div class="row">
-            <div class="panel panel-default">
+<div class="container">
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+            <div class="panel panel-primary">
+                <div class="panel-heading">Registro de Impuestos</div>
                 <div class="panel-body">
-                    {{ Form::open(['action' => 'ImpuestoController@store','class' => 'form-horizontal']) }}
+                    {{ Form::open(['action'=> 'ImpuestoController@store', 'class' => 'form-horizontal']) }}
                     @include('impuestos.formulario')
 
                     <div class="form-group">
-                        <div class="col-md-6 col-md-offset-1">
-                            <button type="submit" class="btn btn-primary btn-lg">
-                                <span class="glyphicon glyphicon-floppy-disk"></span>    Registrar
+                        <div class="col-md-6 col-md-offset-4">
+                            <button type="submit" class="btn btn-success">
+                                <span class="glyphicon glyphicon-floppy-disk">Registrar</span>
                             </button>
                         </div>
+                        {{ Form::close() }}
                     </div>
-                    </form>
                 </div>
             </div>
         </div>
-
     </div>
+</div>
 @endsection

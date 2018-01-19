@@ -122,6 +122,7 @@ Route::post('inmuebles/baja/{id}','InmuebleController@baja')->name('inmuebles.ba
 Route::post('inmuebles/alta/{id}','InmuebleController@alta')->name('inmuebles.alta');
 Route::Resource('inmuebles','InmuebleController');
 
+Route::Resource('construcciones','ConstruccionController');
 
 ////////// Tesoreria //////////////////////////////////
 Route::Resource('empleados','EmpleadoController');
@@ -130,3 +131,7 @@ Route::Resource('cargos','CargoController');
 
 Route::Resource('cuentas','CuentaController');
 Route::Resource('cuentaprincipal','CuentaprincipalController');
+
+Route::Resource('tipopagos','TipopagoController');
+
+Route::Resource('pagos','PagoController');

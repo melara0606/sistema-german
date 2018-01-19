@@ -13,4 +13,9 @@ class Impuesto extends Model
     {
         return $this->belongsTo('App\Tiposervicio');
     }
+
+    public function construccion()
+    {
+    	return $this->hasMany('App\Construccion');
+    }
 }

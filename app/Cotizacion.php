@@ -24,4 +24,19 @@ class Cotizacion extends Model
     	}
     	
     }
+
+    public function detallecotizacion()
+    {
+        return $this->hasMany('App\Detallecotizacion');
+    }
+
+    public function proyecto()
+    {
+        return $this->belongsTo('App\Proyecto');
+    }
+
+    public function proveedor()
+    {
+        return $this->belongsTo('App\Proveedor');
+    }
 }

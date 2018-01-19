@@ -16,7 +16,7 @@
 			<div class="panel panel-primary">
 				<div class="panel-heading">Registro de Tipos de pago</div>
 				<div class="panel-body">
-					{{ Form::open(['action'=> 'TipopagosController@store', 'class' => 'form-horizontal']) }}
+					{{ Form::open(['action'=> 'TipopagoController@store', 'class' => 'form-horizontal']) }}
 					@include('tipopagos.formulario')
 
 					<div class="form-group">

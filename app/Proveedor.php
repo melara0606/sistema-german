@@ -20,4 +20,9 @@ class Proveedor extends Model
     {
         return $query->where('estado', $estado);
     }
+
+    public function cotizacion()
+    {
+        return $this->hasMany('App\Cotizacion');
+    }
 }

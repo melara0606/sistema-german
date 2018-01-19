@@ -2,11 +2,11 @@
 
 @section('migasdepan')
 <h1>
-      Editar Organizacion: <small> {{ $organizacion->nombre }} </small>
+      Editar información: <small> {{ $construccion->contribuyente_id }} </small>
 </h1>
       <ol class="breadcrumb">
         <li><a href="{{ url('/home') }}"><i class="glyphicon glyphicon-home"></i> Inicio</a></li>
-        <li><a href="{{ url('/organizaciones') }}"><i class="fa fa-industry"></i> Organizaciones</a></li>
+        <li><a href="{{ url('/construcciones') }}"><i class="fa fa-industry"></i> Construcciones</a></li>
         <li class="active">Edición</li>
       </ol>
 @endsection
@@ -16,8 +16,8 @@
     <div class="row">
         <div class="panel panel-default">
             <div class="panel-body">
-                {{ Form::model($organizacion, array('method' => 'put', 'class' => 'form-horizontal' , 'route' => array('organizaciones.update', $organizacion->id))) }}
-                 @include('organizaciones.formulario')
+                {{ Form::model($construccion, array('method' => 'put', 'class' => 'form-horizontal' , 'route' => array('construcciones.update', $construccion->id))) }}
+                 @include('construcciones.formulario')
                     <div class="form-group">
                         <div class="col-md-6 col-md-offset-2">
                             <button type="submit" class="btn btn-primary btn-lg">

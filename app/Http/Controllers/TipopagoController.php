@@ -21,7 +21,7 @@ class TipopagoController extends Controller
 
     public function index()
     {
-        $tipopagos = Tipopagos::all();
+        $tipopagos = Tipopago::all();
         return view('tipopagos.index', compact('tipopagos'));
     }
 
@@ -32,7 +32,7 @@ class TipopagoController extends Controller
      */
     public function create()
     {
-        $tipopagos = Tipopagos::all();
+        $tipopagos = Tipopago::all();
         return view('tipopagos.create',compact('tipopagos'));
     }
 
