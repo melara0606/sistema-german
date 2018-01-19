@@ -28,6 +28,7 @@
                                 </select>
                         </div>
                     </div>
+                    @include('errors.validacion')
                     @include('paacs.formulario')
                     @include('paacs.tabla')
                     <?php
