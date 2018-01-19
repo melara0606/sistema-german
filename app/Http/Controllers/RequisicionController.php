@@ -13,6 +13,11 @@ class RequisicionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+     public function __construct()
+     {
+         $this->middleware('auth');
+     }
+     
     public function index()
     {
         $requisiciones = Requisicion::where('estado',1)->get();
@@ -112,6 +117,6 @@ class RequisicionController extends Controller
      */
     public function destroy(Requisicion $requisicione)
     {
-      
+
     }
 }

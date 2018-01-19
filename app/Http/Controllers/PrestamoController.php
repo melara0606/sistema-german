@@ -3,10 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Requisiciondetalle;
-use App\Http\Requests\RequisiciondetalleRequest;
+use App\Prestamo;
+use App\Empleado;
+use DB;
 
-class RequisiciondetalleController extends Controller
+class PrestamoController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,9 +19,18 @@ class RequisiciondetalleController extends Controller
          $this->middleware('auth');
      }
      
-    public function index()
+    public function index(Request $request)
     {
-        //
+      $estado = $request->get('estado');
+      if($estado == "" )$estado=1;
+      if ($estado == 1) {
+          $prestamos = Prestamo::where('estado',$estado)->get();
+          return view('prestamos.index',compact('prestamos','estado'));
+      }
+      if ($estado == 2) {
+          $prestamos = Prestamo::where('estado',$estado)->get();
+          return view('prestamos.index',compact('prestamos','estado'));
+      }
     }
 
     /**
@@ -28,9 +38,12 @@ class RequisiciondetalleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create($id)
+    public function create()
     {
-        return view('requisiciones.detalle.create',compact('id'));
+      //$empleados = Empleado::where('estado',1)->get();
+      $empleados=DB::select('SELECT "id" FROM empleados WHERE estado =1 EXCEPT SELECT empleado_id FROM prestamos');
+      //dd($empleados);
+        return view('prestamos.create',compact('empleados'));
     }
 
     /**
@@ -39,15 +52,10 @@ class RequisiciondetalleController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(RequisiciondetalleRequest $request)
+    public function store(Request $request)
     {
-      try{
-        Requisiciondetalle::create($request->All());
-        return redirect('requisiciones/'.$request->requisicion_id);
-      }catch (\Exception $e){
-        return redirect('requisiciones')->with('error',$e->getMessage());
-      }
-
+      Prestamo::create($request->All());
+      return redirect('prestamos');
     }
 
     /**
@@ -69,8 +77,7 @@ class RequisiciondetalleController extends Controller
      */
     public function edit($id)
     {
-        $requisicion=Requisiciondetalle::findorFail($id);
-        return view('requisiciones.detalle.edit',compact('requisicion'));
+        //
     }
 
     /**
@@ -80,11 +87,9 @@ class RequisiciondetalleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(RequisiciondetalleRequest $request, Requisiciondetalle $requisiciondetalle)
+    public function update(Request $request, $id)
     {
-        $requisiciondetalle->fill($request->All());
-        $requisiciondetalle->save();
-        return redirect('requisiciones')->with('mensaje','Se modifico con exito');
+        //
     }
 
     /**
@@ -93,9 +98,8 @@ class RequisiciondetalleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Requisiciondetalle $requisiciondetalle)
+    public function destroy($id)
     {
-        $requisiciondetalle->delete();
-        return redirect('requisiciones')->with('mensaje','Se eliminó con exito');
+        //
     }
 }

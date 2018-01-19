@@ -12,6 +12,12 @@ class CuentaprincipalController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+     public function __construct()
+     {
+         $this->middleware('auth');
+     }
+     
     public function index()
     {
         $cuentas = Cuentaprincipal::all();
@@ -41,15 +47,20 @@ class CuentaprincipalController extends Controller
     {
         $anio=date('Y')-1;
         $anterior=Cuentaprincipal::where('anio',$anio)->first();
-        $monto=$anterior->monto_inicial;
-        $anterior->monto_inicial=0;
-        $anterior->estado=2;
-        $anterior->save();
+        if($anterior != null){
+          $monto=$anterior->monto_inicial;
+          $anterior->monto_inicial=0;
+          $anterior->estado=2;
+          $anterior->save();
+        }else{
+          $monto=0.0;
+        }
+
         $cuenta= new Cuentaprincipal();
         $cuenta->numero_de_cuenta=$request->numero_de_cuenta;
         $cuenta->banco=$request->banco;
         $cuenta->anio=$request->anio;
-        $cuenta->monto_inicial=$monto;
+        $cuenta->monto_inicial=$request->monto_inicial+$monto;
         $cuenta->save();
         return redirect('cuentaprincipal');
     }

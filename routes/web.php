@@ -127,6 +127,11 @@ Route::Resource('construcciones','ConstruccionController');
 ////////// Tesoreria //////////////////////////////////
 Route::Resource('empleados','EmpleadoController');
 
+Route::Resource('retenciones','RetencionController');
+
+Route::Resource('planillas','PlanillaController');
+Route::Resource('prestamos','PrestamoController');
+
 Route::Resource('cargos','CargoController');
 
 Route::Resource('cuentas','CuentaController');

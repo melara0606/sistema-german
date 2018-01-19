@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Requisiciondetalle;
-use App\Http\Requests\RequisiciondetalleRequest;
+use App\Empleado;
+use App\Retencion;
+use App\Contrato;
+use App\Planilla;
 
-class RequisiciondetalleController extends Controller
+class PlanillaController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -28,9 +30,13 @@ class RequisiciondetalleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create($id)
+    public function create()
     {
-        return view('requisiciones.detalle.create',compact('id'));
+        $mes = date('m');
+        $year = date('Y');
+        $empleados = Contrato::all();
+        $retencion = Retencion::first();
+        return view('planillas.create',compact('mes','year','empleados','retencion'));
     }
 
     /**
@@ -39,15 +45,22 @@ class RequisiciondetalleController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(RequisiciondetalleRequest $request)
+    public function store(Request $request)
     {
-      try{
-        Requisiciondetalle::create($request->All());
-        return redirect('requisiciones/'.$request->requisicion_id);
-      }catch (\Exception $e){
-        return redirect('requisiciones')->with('error',$e->getMessage());
-      }
-
+      //dd($request->All());
+      $count = count($request->empleado_id);
+        for($i=0;$i<$count;$i++)
+        {
+          Planilla::create([
+            'empleado_id' => $request->empleado_id[$i],
+            'mes' => date('m'),
+            'anio' => date('Y'),
+            'isss' => $request->isss[$i],
+            'afp' => $request->afp[$i],
+            'insaforp' => $request->insaforp[$i],
+            'prestamos' => $request->prestamo[$i],
+          ]);
+        }
     }
 
     /**
@@ -69,8 +82,7 @@ class RequisiciondetalleController extends Controller
      */
     public function edit($id)
     {
-        $requisicion=Requisiciondetalle::findorFail($id);
-        return view('requisiciones.detalle.edit',compact('requisicion'));
+        //
     }
 
     /**
@@ -80,11 +92,9 @@ class RequisiciondetalleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(RequisiciondetalleRequest $request, Requisiciondetalle $requisiciondetalle)
+    public function update(Request $request, $id)
     {
-        $requisiciondetalle->fill($request->All());
-        $requisiciondetalle->save();
-        return redirect('requisiciones')->with('mensaje','Se modifico con exito');
+        //
     }
 
     /**
@@ -93,9 +103,8 @@ class RequisiciondetalleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Requisiciondetalle $requisiciondetalle)
+    public function destroy($id)
     {
-        $requisiciondetalle->delete();
-        return redirect('requisiciones')->with('mensaje','Se eliminó con exito');
+        //
     }
 }

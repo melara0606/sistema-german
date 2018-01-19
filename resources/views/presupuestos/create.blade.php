@@ -19,6 +19,7 @@
                 <div class="panel-heading">Registro de presupuesto</div>
                 <div class="panel-body">
                     {{ Form::open(['action' => 'PresupuestoController@store','class' => 'form-horizontal','id' => 'presupuesto']) }}
+                    @include('errors.validacion')
                     @include('presupuestos.formulario')
                     @include('presupuestos.tabla')
                     <input type="hidden" name="total" id="total" readonly>
