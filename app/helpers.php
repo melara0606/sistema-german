@@ -9,11 +9,26 @@ function cantprov()
     return $count;
 }
 
+function empleado_prestamo($id)
+{
+	$empleado=App\Empleado::where('id',$id)->first();
+	$nombre=$empleado->nombre;
+	return $nombre;
+}
+
 function cantcontri()
 {
     $contribuyentes = App\Contribuyente::all()->where('estado',1);
     $count=$contribuyentes->count();
     return $count;
+}
+
+function prestamos($id)
+{
+	$prestamo = App\Prestamo::where('empleado_id',$id)->first();
+	dd($prestamo->monto);
+	$monto = $prestamo->monto;
+	return $monto;
 }
 
 function bitacora($accion)

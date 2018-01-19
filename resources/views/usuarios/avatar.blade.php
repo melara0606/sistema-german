@@ -19,7 +19,7 @@
                 <div class="panel-heading">Registro de Usuarios</div>
                 <div class="panel-body">
 				<h1>Cambiar imagen de perfil</h1>
-				<img src="{{ asset('img/'.Auth::user()->avatar) }}" width="150" height="200" class="user-image" alt="User Image">
+				<img src="{{ asset('avatars/'.Auth::user()->avatar) }}" width="150" height="200" class="user-image" alt="User Image">
 				<form method='post' action='{{url("usuarios/updateprofile")}}' enctype='multipart/form-data'>
 					{{csrf_field()}}
 					<div class='form-group'>

@@ -7,6 +7,7 @@ use App\User;
 use App\Bitacora;
 use App\Http\Requests\UsuariosRequest;
 use App\Http\Requests\ModificarUsuarioRequest;
+use App\Http\Requests\PerfilRequest;
 use Validator;
 use Auth;
 use Illuminate\Support\Facades\Hash;
@@ -180,7 +181,7 @@ class UsuarioController extends Controller
         return view('usuarios.modificarperfil');
     }
 
-    public function updateperfil(Request $request)
+    public function updateperfil(PerfilRequest $request)
     {
         //if(Hash::check($request->actual, Auth()->user()->password))
         //{
@@ -218,10 +219,10 @@ class UsuarioController extends Controller
             $info = explode(".",$request->file('avatar')->getClientOriginalName());
             $name = str_random(30) . '-' . $request->file('avatar')->getClientOriginalName();
             //dd($info);
-            $request->file('avatar')->move('img', $name);
+            $request->file('avatar')->move('avatars', $request->file('avatar')->getClientOriginalName());
             $user = new User;
             $user->where('email', '=', Auth::user()->email)
-                 ->update(['avatar' => $name]);
+                 ->update(['avatar' => $request->file('avatar')->getClientOriginalName()]);
             return redirect('/home')->with('mensaje', 'Su imagen de perfil ha sido cambiada con éxito');
         }
     }

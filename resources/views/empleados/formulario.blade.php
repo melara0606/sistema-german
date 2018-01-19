@@ -31,7 +31,7 @@
 
                             <div class="col-md-6">
                                 {{ Form::text('nit', null,['class' => 'form-control','data-inputmask' => '"mask": "9999-999999-999-9"','data-mask']) }}
-                                
+
                                 @if ($errors->has('nit'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('nit') }}</strong>
@@ -45,9 +45,9 @@
 
                             <div class="col-md-6">
                                 Másculino
-                                {{ Form::radio('sexo', 'Másculino',false,['class' => 'flat-red']) }}
+                                {{ Form::radio('sexo', 'Másculino', false,['class' => '']) }}
                                 Femenino
-                                {{ Form::radio('sexo', 'Femenino',false,['class' => 'flat-red']) }}
+                                {{ Form::radio('sexo', 'Femenino',false,['class' => '']) }}
                                 @if ($errors->has('sexo'))
                                 <span class="help-block">
                                     <strong>{{ $errors->first('sexo') }}</strong>

@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-Use App\Cuentaprincipal;
+use App\Retencion;
 
-class CuentaprincipalController extends Controller
+class RetencionController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +14,7 @@ class CuentaprincipalController extends Controller
      */
     public function index()
     {
-        $cuentas = Cuentaprincipal::all();
-        return view('cuentaprincipal.index',compact('cuentas'));
+        //
     }
 
     /**
@@ -25,10 +24,8 @@ class CuentaprincipalController extends Controller
      */
     public function create()
     {
-        $anio = date('Y');
-        $cuenta = Cuentaprincipal::where('anio',$anio)->first();
-        //dd($cuenta);
-        return view('cuentaprincipal.create',compact('cuenta'));
+        $retencion = Retencion::first();
+        return view('retenciones.create',compact('retencion'));
     }
 
     /**
@@ -39,24 +36,8 @@ class CuentaprincipalController extends Controller
      */
     public function store(Request $request)
     {
-        $anio=date('Y')-1;
-        $anterior=Cuentaprincipal::where('anio',$anio)->first();
-        if($anterior != null){
-          $monto=$anterior->monto_inicial;
-          $anterior->monto_inicial=0;
-          $anterior->estado=2;
-          $anterior->save();
-        }else{
-          $monto=0.0;
-        }
-
-        $cuenta= new Cuentaprincipal();
-        $cuenta->numero_de_cuenta=$request->numero_de_cuenta;
-        $cuenta->banco=$request->banco;
-        $cuenta->anio=$request->anio;
-        $cuenta->monto_inicial=$request->monto_inicial+$monto;
-        $cuenta->save();
-        return redirect('cuentaprincipal');
+        Retencion::create($request->All());
+        return redirect('retenciones/create')->with('mensaje','Los porcentajes se ingresarón con éxito');
     }
 
     /**
@@ -78,8 +59,7 @@ class CuentaprincipalController extends Controller
      */
     public function edit($id)
     {
-        $cuenta=Cuentaprincipal::findorFail($id);
-        return view('cuentaprincipal.edit',compact('cuenta'));
+        //
     }
 
     /**
@@ -91,10 +71,10 @@ class CuentaprincipalController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $cuenta=Cuentaprincipal::find($id);
-        $cuenta->fill($request->All());
-
-        return redirect('cuentaprincipal');
+        $retencion=Retencion::find($id);
+        $retencion->fill($request->All());
+        $retencion->save();
+        return redirect('retenciones/create')->with('mensaje','Los porcentajes se modificaron con éxito');
     }
 
     /**

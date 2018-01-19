@@ -4,35 +4,20 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Empleado;
-use App\Tipocontrato;
-use App\Bitacora;
-use App\Http\Requests\EmpleadoRequest;
+use App\Retencion;
+use App\Contrato;
+use App\Planilla;
 
-class EmpleadoController extends Controller
+class PlanillaController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
-        $estado = $request->get('estado');
-        if($estado == "" )$estado = 1;
-        if($estado == 1)
-        {
-            $empleados = Empleado::where('estado',$estado)->get();
-            return view('empleados.index',compact('empleados','estado'));
-        }
-        if($estado == 2)
-        {
-            $empleados = Empleado::where('estado',$estado)->get();
-            return view('empleados.index',compact('empleados','estado'));
-        }
+        //
     }
 
     /**
@@ -42,8 +27,11 @@ class EmpleadoController extends Controller
      */
     public function create()
     {
-        $tipocontratos = Tipocontrato::all();
-        return view('empleados.create',compact('tipocontratos'));
+        $mes = date('m');
+        $year = date('Y');
+        $empleados = Contrato::all();
+        $retencion = Retencion::first();
+        return view('planillas.create',compact('mes','year','empleados','retencion'));
     }
 
     /**
@@ -54,8 +42,20 @@ class EmpleadoController extends Controller
      */
     public function store(Request $request)
     {
-        Empleado::create($request->All());
-        return redirect('/empleados')->with('mensaje', 'Empleado registrado');
+      //dd($request->All());
+      $count = count($request->empleado_id);
+        for($i=0;$i<$count;$i++)
+        {
+          Planilla::create([
+            'empleado_id' => $request->empleado_id[$i],
+            'mes' => date('m'),
+            'anio' => date('Y'),
+            'isss' => $request->isss[$i],
+            'afp' => $request->afp[$i],
+            'insaforp' => $request->insaforp[$i],
+            'prestamos' => $request->prestamo[$i],
+          ]);
+        }
     }
 
     /**
@@ -66,8 +66,7 @@ class EmpleadoController extends Controller
      */
     public function show($id)
     {
-        $empleado = Empleado::findorFail($id);
-        return view('empleados.show', compact('empleado'));
+        //
     }
 
     /**
@@ -78,8 +77,7 @@ class EmpleadoController extends Controller
      */
     public function edit($id)
     {
-        $empleado = Empleado::findorFail($id);
-        return view('empleados.edit',compact('empleado'));
+        //
     }
 
     /**
@@ -91,11 +89,7 @@ class EmpleadoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $empleado = Empleado::find($id);
-        $empleado->fill($request->All());
-        $empleado->save();
-        bitacora('Modificó un registro');
-        return redirect('/empleados')->with('mensaje','Registro modificado con éxito');
+        //
     }
 
     /**

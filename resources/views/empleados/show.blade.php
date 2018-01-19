@@ -26,7 +26,7 @@
 
                          <div class="form-group{{ $errors->has('dui') ? ' has-error' : '' }}">
                             <label for="dui" class="col-md-4 control-label">Número de DUI: </label>
-                            <label for="nombre" class="col-md-4 control-label">$ {{number_format($empleado->dui)}}</label><br>
+                            <label for="nombre" class="col-md-4 control-label"> {{$empleado->dui}}</label><br>
 
                         </div>
 
@@ -43,7 +43,7 @@
 
                         <div class="form-group{{ $errors->has('telefono_fijo') ? ' has-error' : '' }}">
                             <label for="telefono_fijo" class="col-md-4 control-label">Número de teléfono:</label>
-                            <label for="nombre" class="col-md-4 control-label">{{$empleado->numero_telefono}}</label><br>
+                            <label for="nombre" class="col-md-4 control-label">{{$empleado->telefono_fijo}}</label><br>
 
                         </div>
 
@@ -56,12 +56,6 @@
                         <div class="form-group{{ $errors->has('direccion') ? ' has-error' : '' }}">
                             <label for="direccion" class="col-md-4 control-label">Dirección:</label>
                             <label for="nombre" class="col-md-4 control-label">{{$empleado->direccion}}</label><br>
-
-                        </div>
-
-                        <div class="form-group{{ $errors->has('salario') ? ' has-error' : '' }}">
-                            <label for="salario" class="col-md-4 control-label">Salario:</label>
-                            <label for="nombre" class="col-md-4 control-label">{{$empleado->salario}}</label><br>
 
                         </div>
 
@@ -103,7 +97,7 @@
 
 
                       {{ Form::open(['route' => ['empleados.destroy', $empleado->id ], 'method' => 'DELETE', 'class' => 'form-horizontal'])}}
-                      <a href="{{ url('/empleados/'.$empleado->id.'/edit') }}" class="btn btn-warning"><span class="glyphicon glyphicon-text-size"></span> Editar</a> |
+                      <a href="{{ url('empleados/'.$empleado->id.'/edit') }}" class="btn btn-warning"><span class="glyphicon glyphicon-text-size"></span> Editar</a> |
                         <button class="btn btn-danger" type="button" onclick="
                         return swal({
                           title: 'Eliminar empleado',

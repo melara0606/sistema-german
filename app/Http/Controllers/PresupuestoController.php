@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\PresupuestoRequest;
 use App\Proyecto;
 use App\Presupuesto;
 use App\Presupuestodetalle;
 use Session;
+use DB;
 
 class PresupuestoController extends Controller
 {
@@ -44,9 +46,9 @@ class PresupuestoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PresupuestoRequest $request)
     {
-      \DB::beginTransaction();
+      DB::beginTransaction();
       try{
         $count = $request->contador;
         $presupuesto=Presupuesto::where('proyecto_id',$request->proyecto)->firstorFail();
@@ -64,10 +66,10 @@ class PresupuestoController extends Controller
               'preciou' => $request->precios[$i],
             ]);
           }
-          \DB::commit();
+          DB::commit();
           return redirect('proyectos')->with('mensaje','Presupuesto registrado con éxito');
       }catch (\Exception $e){
-        \DB::rollback();
+        DB::rollback();
         Session::flash('error','Presupuesto con error '.$e->getMessage());
         return redirect('/presupuestos/crear/'.$request->proyecto);
       }

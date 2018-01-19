@@ -3,17 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Prestamo;
 use App\Empleado;
-use App\Tipocontrato;
-use App\Bitacora;
-use App\Http\Requests\EmpleadoRequest;
+use DB;
 
-class EmpleadoController extends Controller
+class PrestamoController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
     /**
      * Display a listing of the resource.
      *
@@ -21,18 +16,16 @@ class EmpleadoController extends Controller
      */
     public function index(Request $request)
     {
-        $estado = $request->get('estado');
-        if($estado == "" )$estado = 1;
-        if($estado == 1)
-        {
-            $empleados = Empleado::where('estado',$estado)->get();
-            return view('empleados.index',compact('empleados','estado'));
-        }
-        if($estado == 2)
-        {
-            $empleados = Empleado::where('estado',$estado)->get();
-            return view('empleados.index',compact('empleados','estado'));
-        }
+      $estado = $request->get('estado');
+      if($estado == "" )$estado=1;
+      if ($estado == 1) {
+          $prestamos = Prestamo::where('estado',$estado)->get();
+          return view('prestamos.index',compact('prestamos','estado'));
+      }
+      if ($estado == 2) {
+          $prestamos = Prestamo::where('estado',$estado)->get();
+          return view('prestamos.index',compact('prestamos','estado'));
+      }
     }
 
     /**
@@ -42,8 +35,10 @@ class EmpleadoController extends Controller
      */
     public function create()
     {
-        $tipocontratos = Tipocontrato::all();
-        return view('empleados.create',compact('tipocontratos'));
+      //$empleados = Empleado::where('estado',1)->get();
+      $empleados=DB::select('SELECT "id" FROM empleados WHERE estado =1 EXCEPT SELECT empleado_id FROM prestamos');
+      //dd($empleados);
+        return view('prestamos.create',compact('empleados'));
     }
 
     /**
@@ -54,8 +49,8 @@ class EmpleadoController extends Controller
      */
     public function store(Request $request)
     {
-        Empleado::create($request->All());
-        return redirect('/empleados')->with('mensaje', 'Empleado registrado');
+      Prestamo::create($request->All());
+      return redirect('prestamos');
     }
 
     /**
@@ -66,8 +61,7 @@ class EmpleadoController extends Controller
      */
     public function show($id)
     {
-        $empleado = Empleado::findorFail($id);
-        return view('empleados.show', compact('empleado'));
+        //
     }
 
     /**
@@ -78,8 +72,7 @@ class EmpleadoController extends Controller
      */
     public function edit($id)
     {
-        $empleado = Empleado::findorFail($id);
-        return view('empleados.edit',compact('empleado'));
+        //
     }
 
     /**
@@ -91,11 +84,7 @@ class EmpleadoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $empleado = Empleado::find($id);
-        $empleado->fill($request->All());
-        $empleado->save();
-        bitacora('Modificó un registro');
-        return redirect('/empleados')->with('mensaje','Registro modificado con éxito');
+        //
     }
 
     /**
