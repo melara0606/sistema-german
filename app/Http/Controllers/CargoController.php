@@ -54,8 +54,8 @@ class CargoController extends Controller
      */
     public function show($id)
     {
-        $cargos = Cargo::findorFile($id);
-        return view('cargos.show',compact('cargos'));
+        $cargo = Cargo::findorFail($id);
+        return view('cargos.show',compact('cargo'));
     }
 
     /**
@@ -66,8 +66,8 @@ class CargoController extends Controller
      */
     public function edit($id)
     {
-        $cargos = Cargo::find($id);
-        return view('cargos.edit',compact('cargos'));
+        $cargo = Cargo::findorFail($id);
+        return view('cargos.edit',compact('cargo'));
     }
 
     /**

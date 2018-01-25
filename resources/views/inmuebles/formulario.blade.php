@@ -13,7 +13,7 @@
 </div>
 
 <div class="form-group{{ $errors->has('contribuyente_id') ? ' has-error' : '' }}">
-    <label for="contribuyente_id" class="col-md-4 control-label">Nombre del Contribuyente</label>
+    <label for="contribuyente_id" class="col-md-4 control-label">Contribuyente</label>
 
     <div class="col-md-6">
         {{ Form::select('contribuyente_id', $contribuyentes,null,['class' => 'form-control chosen-select']) }}

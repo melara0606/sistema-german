@@ -137,27 +137,13 @@
                         </div>
 
                         <div class="form-group{{ $errors->has('num_afp') ? ' has-error' : '' }}">
-                            <label for="num_afp" class="col-md-4 control-label">Número único previcional</label>
+                            <label for="num_afp" class="col-md-4 control-label">Número único previsional</label>
 
                             <div class="col-md-6">
                                 {{ Form::text('num_afp', null,['class' => 'form-control','data-inputmask' => '"mask": "999999999999"','data-mask']) }}
                                 @if ($errors->has('num_afp'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('num_afp') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group{{ $errors->has('fecha_contrato') ? ' has-error' : '' }}">
-                            <label for="fecha_contrato" class="col-md-4 control-label">Fecha de contrato</label>
-
-                            <div class="col-md-6">
-                                {!!Form::date('fecha_contrato',null,['class'=>'form-control','id'=>'nombre','autofocus'])!!}
-
-                                @if ($errors->has('fecha_contrato'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('fecha_contrato') }}</strong>
                                     </span>
                                 @endif
                             </div>

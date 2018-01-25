@@ -26,7 +26,6 @@ class CreateEmpleadosTable extends Migration
             $table->string('num_contribuyente')->nullable();
             $table->string('num_seguro_social');
             $table->string('num_afp');
-            $table->date('fecha_contrato');
             $table->integer('estado')->unsigned()->default(1);
             $table->timestamps();
         });

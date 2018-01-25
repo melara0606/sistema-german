@@ -1,5 +1,5 @@
 <div class="form-group{{ $errors->has('tiposervicio_id') ? ' has-error' : '' }}">
-    <label for="nombre" class="col-md-4 control-label">Nombre del servicio Municipal</label>
+    <label for="nombre" class="col-md-4 control-label">Servicio Municipal</label>
 
     <div class="col-md-6">
 

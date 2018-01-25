@@ -1,5 +1,5 @@
 <div class="form-group{{ $errors->has('cotizacion_id') ? ' has-error' : '' }}">
-    <label for="" class="col-md-4 control-label">Seleccione cotización</label>
+    <label for="" class="col-md-4 control-label">Cotización</label>
     <div class="col-md-6">
         <select name="cotizacion_id" id="cotizacion" class="form-control">
             <option value="">Seleccione cotización</option>

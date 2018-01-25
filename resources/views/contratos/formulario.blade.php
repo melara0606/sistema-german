@@ -1,5 +1,5 @@
                        <div class="form-group{{ $errors->has('empleado_id') ? ' has-error' : '' }}">
-                          <label for="" class="col-md-4 control-label">Seleccione un empleado</label>
+                          <label for="" class="col-md-4 control-label">Empleado</label>
                             <div class="col-md-6">
                                 <select name="empleado_id" id="empleado" class="form-control">
                                     <option value="">Seleccione un empleado</option>
@@ -18,7 +18,7 @@
                        
                         <div class="form-group{{ $errors->has('tipocontrato_id') ? ' has-error' : '' }}">
 
-                          <label for="" class="col-md-4 control-label">Seleccione un contrato</label>
+                          <label for="" class="col-md-4 control-label">Contrato</label>
                             <div class="col-md-6">
                                 <select name="tipocontrato_id" id="tipocontrato" class="form-control">
                                     <option value="">Seleccione un contrato...</option>
@@ -35,7 +35,7 @@
                         </div>
 
                         <div class="form-group">
-                          <label for="" class="col-md-4 control-label">Seleccione un cargo</label>
+                          <label for="" class="col-md-4 control-label">Cargo</label>
                             <div class="col-md-6">
                                 <select name="cargo_id" id="cargo" class="form-control">
                                     <option value="">Seleccione un cargo</option>

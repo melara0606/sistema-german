@@ -2,7 +2,7 @@
 
 @section('migasdepan')
 <h1>
-	<small>Ver Cargo<b> {{$cargos->cargo}} </b></small>
+	<small>Ver Cargo<b> {{$cargo->cargo}} </b></small>
 </h1>
 <ol class="breadcrumb">
 	<li><a href="{{ url('/cargos') }}"><i class="fa fa-dashboard"></i> Cargos</a></li>
@@ -22,8 +22,8 @@
 						<label for="cargo" class="col-md-4 control-label">{{$cargos->cargo}}</label><br>
 					</div>
 
-					 {{Form::open(['route' => ['cargos.destroy', $cargos->id], 'method' => 'DELETE', 'class' => 'form-horizontal'])}}
-					 <a href="{{ url('/cargos/'.$cargos->id.'/edit') }}" class="btn btn-warning"> <span class="glyphicon glyphicon-text-size"></span> Editar</a> |
+					 {{Form::open(['route' => ['cargos.destroy', $cargo->id], 'method' => 'DELETE', 'class' => 'form-horizontal'])}}
+					 <a href="{{ url('/cargos/'.$cargo->id.'/edit') }}" class="btn btn-warning"> <span class="glyphicon glyphicon-text-size"></span> Editar</a> |
 					 <button class="btn btn-danger" type="button" onclick="return
 					 swal({
 					 title: 'Eliminar organización',

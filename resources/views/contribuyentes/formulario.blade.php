@@ -1,5 +1,5 @@
 <div class="form-group{{ $errors->has('nombre') ? ' has-error' : '' }}">
-    <label for="nombre" class="col-md-4 control-label">Nombre del contribuyente</label>
+    <label for="nombre" class="col-md-4 control-label">Nombre completo</label>
 
     <div class="col-md-6">
         {{ Form::text('nombre', null,['class' => 'form-control']) }}
@@ -82,9 +82,9 @@
 
     <div class="col-md-6">
         Másculino
-        {{ Form::radio('sexo', 'Másculino',false,['class' => 'flat-red']) }}
+        {{ Form::radio('sexo', 'Másculino',false) }}
         Femenino
-        {{ Form::radio('sexo', 'Femenino',false,['class' => 'flat-red']) }}
+        {{ Form::radio('sexo', 'Femenino',false) }}
         @if ($errors->has('sexo'))
             <span class="help-block">
                 <strong>{{ $errors->first('sexo') }}</strong>
@@ -92,6 +92,8 @@
          @endif
     </div>
 </div>
+
+
 
 <div class="form-group{{ $errors->has('telefono') ? ' has-error' : '' }}">
     <label for="telefono" class="col-md-4 control-label">Teléfono</label>

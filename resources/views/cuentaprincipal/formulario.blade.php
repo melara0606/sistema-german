@@ -1,5 +1,5 @@
 <div class="form-group{{ $errors->has('numero_de_cuenta') ? ' has-error' : '' }}">
-    <label for="nombre" class="col-md-4 control-label">Numero de cuenta</label>
+    <label for="nombre" class="col-md-4 control-label">Número de cuenta</label>
 
     <div class="col-md-6">
       @if($cuenta != null)
