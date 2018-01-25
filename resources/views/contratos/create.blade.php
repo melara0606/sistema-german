@@ -33,3 +33,6 @@
     </div>
 </div>
 @endsection
+@section('scripts')
+{!! Html::script('js/contrato.js') !!}
+@endsection

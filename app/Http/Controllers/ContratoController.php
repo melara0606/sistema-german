@@ -36,6 +36,21 @@ class ContratoController extends Controller
         }
     }
 
+    public function listarEmpleados()
+    {
+        return Empleado::where('estado',1)->get();   
+    }
+
+    public function listarTipos()
+    {
+        return Tipocontrato::get();   
+    }
+
+    public function listarCargos()
+    {
+        return Cargo::get();   
+    }    
+
     /**
      * Show the form for creating a new resource.
      *
