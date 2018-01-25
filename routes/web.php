@@ -57,6 +57,9 @@ Route::Resource('proveedores','ProveedorController');
 
 Route::post('contratos/baja/{id}','ContratoController@alta')->name('contratos.alta');
 Route::post('contratos/alta/{id}','ContratoController@baja')->name('contratos.baja');
+Route::get('contratos/listarempleados','ContratoController@listarEmpleados');
+Route::get('contratos/listartipos','ContratoController@listarTipos');
+Route::get('contratos/listarcargos','ContratoController@listarCargos');
 Route::Resource('contratos','ContratoController');
 
 Route::post('proyectos/baja/{id}','ProyectoController@baja')->name('proyectos.baja');
