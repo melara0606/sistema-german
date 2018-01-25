@@ -3,16 +3,49 @@ $(document).ready(function(){
 	cargarCargo();
 	cargarTipo();
 
-	/*$('#btnempleado').on("click", function(e){
-		alert('hola desde empleado');
-	});*/
-
-	$('#btntipocontrato').on("click", function(e){
-		alert('hola desde tipo de contrato');
+	$('#guardarempleado').on("click", function(e){
+		var nombre = $("#nom_empleado").val();
+		var dui = $("#dui_empleado").val();
+		var nit = $("#nit_empleado").val();
+		var sexo = $("#sex_empleado").val();
+		alert(sexo);
 	});
 
-	$('#btncargo').on("click", function(e){
-		alert('hola desde cargos');
+	$('#guardartipo').on("click", function(e){
+		var nombre = $("#nombre_tipo").val();
+			var ruta = "/sisverapaz/public/contratos/guardartipo";
+			var token = $('meta[name="csrf-token"]').attr('content');
+			$.ajax({
+				url: ruta,
+				headers: {'X-CSRF-TOKEN':token},
+				type:'POST',
+				dataType:'json',
+				data:{nombre:nombre},
+
+				success: function(){
+					toastr.success('Tipo de contrato creado con éxito');
+					cargarTipo();
+				}
+			});
+	});
+
+	$('#guardarcargo').on("click", function(e){
+		  var cargo = $("#cargo_nombre").val();
+			var ruta = "/sisverapaz/public/contratos/guardarcargo";
+			var token = $('meta[name="csrf-token"]').attr('content');
+			$.ajax({
+				url: ruta,
+				headers: {'X-CSRF-TOKEN':token},
+				type:'POST',
+				dataType:'json',
+				data:{cargo:cargo},
+
+				success: function(){
+					toastr.success('Cargo creado con éxito');
+					$("#cargo_nombre").val("");
+					cargarCargo();
+				}
+			});
 	});
 });
 

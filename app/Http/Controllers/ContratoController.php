@@ -38,18 +38,40 @@ class ContratoController extends Controller
 
     public function listarEmpleados()
     {
-        return Empleado::where('estado',1)->get();   
+        return Empleado::where('estado',1)->get();
     }
 
     public function listarTipos()
     {
-        return Tipocontrato::get();   
+        return Tipocontrato::get();
     }
 
     public function listarCargos()
     {
-        return Cargo::get();   
-    }    
+        return Cargo::get();
+    }
+
+    public function guardarTipo(Request $request)
+    {
+      if($request->ajax())
+      {
+        Tipocontrato::create($request->All());
+        return response()->json([
+          'mensaje' => 'Tipo de contrato creado con exito'
+        ]);
+      }
+    }
+
+    public function guardarCargo(Request $request)
+    {
+      if($request->ajax())
+      {
+        Cargo::create($request->All());
+        return response()->json([
+          'mensaje' => 'Tipo de contrato creado con exito'
+        ]);
+      }
+    }
 
     /**
      * Show the form for creating a new resource.

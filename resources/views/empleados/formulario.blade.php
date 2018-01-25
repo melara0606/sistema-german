@@ -2,7 +2,7 @@
                             <label for="nombre" class="col-md-4 control-label">Nombre</label>
 
                             <div class="col-md-6">
-                                {{ Form::text('nombre', null,['class' => 'form-control']) }}
+                                {{ Form::text('nombre', null,['id'=>'nom_empleado','class' => 'form-control']) }}
 
                                 @if ($errors->has('nombre'))
                                 <span class="help-block">
@@ -16,7 +16,7 @@
                             <label for="dui" class="col-md-4 control-label">Número de DUI</label>
 
                             <div class="col-md-6">
-                                {{ Form::text('dui', null,['class' => 'form-control','data-inputmask' => '"mask": "99999999-9"','data-mask']) }}
+                                {{ Form::text('dui', null,['id' => 'dui_empleado','class' => 'form-control','data-inputmask' => '"mask": "99999999-9"','data-mask']) }}
 
                                 @if ($errors->has('dui'))
                                     <span class="help-block">
@@ -30,7 +30,7 @@
                             <label for="nit" class="col-md-4 control-label">Número de NIT</label>
 
                             <div class="col-md-6">
-                                {{ Form::text('nit', null,['class' => 'form-control','data-inputmask' => '"mask": "9999-999999-999-9"','data-mask']) }}
+                                {{ Form::text('nit', null,['id'=>'nit_empleado','class' => 'form-control','data-inputmask' => '"mask": "9999-999999-999-9"','data-mask']) }}
 
                                 @if ($errors->has('nit'))
                                     <span class="help-block">
@@ -45,9 +45,9 @@
 
                             <div class="col-md-6">
                                 Másculino
-                                {{ Form::radio('sexo', 'Másculino', false,['class' => '']) }}
+                                {{ Form::radio('sexo', 'Másculino', false,['id' => 'sex_empleado']) }}
                                 Femenino
-                                {{ Form::radio('sexo', 'Femenino',false,['class' => '']) }}
+                                {{ Form::radio('sexo', 'Femenino',false,['id' => 'sex_empleado']) }}
                                 @if ($errors->has('sexo'))
                                 <span class="help-block">
                                     <strong>{{ $errors->first('sexo') }}</strong>

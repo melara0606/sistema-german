@@ -1,7 +1,7 @@
                        <div class="form-group{{ $errors->has('empleado_id') ? ' has-error' : '' }}">
                           <label for="" class="col-md-4 control-label">Empleado</label>
                             <div class="col-md-6">
-                                <select name="empleado_id" id="empleado" class="form-control">  
+                                <select name="empleado_id" id="empleado" class="form-control">
                                 </select>
                                 @if ($errors->has('empleado_id'))
                                     <span class="help-block">
@@ -10,10 +10,10 @@
                                 @endif
                             </div>
                             <div class="col-md-2">
-                                <button class="btn btn-default" type="button" id="" data-toggle="modal" data-target="#btnempleado">Agregar nuevo</button>
+                                <button class="btn btn-default" type="button" id="" data-toggle="modal" data-target="#btnempleado" title="Agregar nuevo empleado"><span class="glyphicon glyphicon-plus"></span></button>
                             </div>
                         </div>
-                       
+
                         <div class="form-group{{ $errors->has('tipocontrato_id') ? ' has-error' : '' }}">
 
                           <label for="" class="col-md-4 control-label">Contrato</label>
@@ -27,7 +27,7 @@
                                 @endif
                             </div>
                              <div class="col-md-2">
-                                <button type="button" class="btn btn-default" data-toggle="modal" data-target="#formtipo">Agregar nuevo</button>
+                                <button type="button" class="btn btn-default" data-toggle="modal" data-target="#formtipo"><span class="glyphicon glyphicon-plus"></span></button>
                             </div>
                         </div>
 
@@ -38,7 +38,7 @@
                                 </select>
                             </div>
                              <div class="col-md-2">
-                                <button class="btn btn-default" type="button" data-toggle="modal" data-target="#formcargo">Agregar nuevo</button>
+                                <button class="btn btn-default" type="button" data-toggle="modal" data-target="#formcargo"><span class="glyphicon glyphicon-plus"></span></button>
                             </div>
                         </div>
 
@@ -83,7 +83,7 @@
                                     </div>
                                     <div class="panel-footer">
                                         <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                                        <button type="button" id="guardartipo" data-dismiss="modal" class="btn btn-success">Agregar</button>
+                                        <button type="button" id="guardarempleado" data-dismiss="modal" class="btn btn-success">Guardar</button>
                                     </div>
                                 </div>
                             </div>
@@ -121,7 +121,7 @@
                                     </div>
                                     <div class="panel-footer">
                                         <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                                        <button type="button" id="guardartipo" data-dismiss="modal" class="btn btn-success">Agregar</button>
+                                        <button type="button" id="guardarcargo" data-dismiss="modal" class="btn btn-success">Agregar</button>
                                     </div>
                                 </div>
                             </div>

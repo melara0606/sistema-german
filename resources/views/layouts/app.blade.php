@@ -327,7 +327,7 @@
     <section class="content">
       <!-- Small boxes (Stat box) -->
     @if(Session::has('mensaje'))
-        <div class="alert alert-success alert-dismissable" role="alert">
+        <div class="alert alert-info alert-dismissable" role="alert">
           <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
           <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
           {{ Session::get('mensaje') }}
