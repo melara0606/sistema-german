@@ -2,6 +2,18 @@ $(document).ready(function(){
 	cargarEmpleados();
 	cargarCargo();
 	cargarTipo();
+
+	/*$('#btnempleado').on("click", function(e){
+		alert('hola desde empleado');
+	});*/
+
+	$('#btntipocontrato').on("click", function(e){
+		alert('hola desde tipo de contrato');
+	});
+
+	$('#btncargo').on("click", function(e){
+		alert('hola desde cargos');
+	});
 });
 
   function cargarEmpleados(){
