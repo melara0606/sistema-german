@@ -9,6 +9,9 @@ use App\Empleado;
 use App\Cargo;
 use App\Bitacora;
 use App\Http\Requests\ContratoRequest;
+use App\Http\Requests\EmpleadoRequest;
+use App\Http\Requests\TipocontratoRequest;
+use App\Http\Requests\CargoRequest;
 
 class ContratoController extends Controller
 {
@@ -51,7 +54,7 @@ class ContratoController extends Controller
         return Cargo::get();
     }
 
-    public function guardarTipo(Request $request)
+    public function guardarTipo(TipocontratoRequest $request)
     {
       if($request->ajax())
       {
@@ -62,7 +65,7 @@ class ContratoController extends Controller
       }
     }
 
-    public function guardarCargo(Request $request)
+    public function guardarCargo(CargoRequest $request)
     {
       if($request->ajax())
       {
@@ -84,8 +87,6 @@ class ContratoController extends Controller
       $empleados = Empleado::all();
       $cargos = Cargo::all();
         return view('contratos.create',compact('tipocontratos','empleados','cargos'));
-
-        //return view('contratos.create');
     }
 
     /**
@@ -160,7 +161,6 @@ class ContratoController extends Controller
         $datos = explode("+", $cadena);
         $id=$datos[0];
         $motivo=$datos[1];
-        //dd($id);
         $contrato = Contrato::find($id);
         $contrato->estado=2;
         $contrato->motivo=$motivo;
@@ -172,11 +172,6 @@ class ContratoController extends Controller
 
     public function alta($id)
     {
-
-        //$datos = explode("+", $cadena);
-        ////$id=$datos[0];
-        //$motivo=$datos[1];
-        //dd($id);
         $contrato = Contrato::find($id);
         $contrato->estado=1;
         $contrato->motivo=null;

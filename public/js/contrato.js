@@ -8,6 +8,7 @@ $(document).ready(function(){
 		var dui = $("#dui_empleado").val();
 		var nit = $("#nit_empleado").val();
 		var sexo = $("#sex_empleado").val();
+		var
 		alert(sexo);
 	});
 
@@ -44,6 +45,10 @@ $(document).ready(function(){
 					toastr.success('Cargo creado con éxito');
 					$("#cargo_nombre").val("");
 					cargarCargo();
+				},
+				error:function(msj){
+					//console.log(msj.responseJSON.cargo);
+					toastr.error(msj.responseJSON.cargo);
 				}
 			});
 	});
