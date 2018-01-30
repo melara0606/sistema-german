@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\CargoRequest;
 use App\Cargo;
 
 class CargoController extends Controller
@@ -40,7 +41,7 @@ class CargoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CargoRequest $request)
     {
         Cargo::create($request->All());
         return redirect('cargos')->with('mensaje', 'Cargo registrado');

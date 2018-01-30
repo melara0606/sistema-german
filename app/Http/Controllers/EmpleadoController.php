@@ -42,7 +42,7 @@ class EmpleadoController extends Controller
      */
     public function create()
     {
-        $tipocontratos = Tipocontrato::all();
+        $tipocontratos = Tipocontrato::where('estado',1);
         return view('empleados.create',compact('tipocontratos'));
     }
 
@@ -52,7 +52,7 @@ class EmpleadoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(EmpleadoRequest $request)
     {
         Empleado::create($request->All());
         return redirect('/empleados')->with('mensaje', 'Empleado registrado');

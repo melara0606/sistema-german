@@ -327,18 +327,14 @@
     <section class="content">
       <!-- Small boxes (Stat box) -->
     @if(Session::has('mensaje'))
-        <div class="alert alert-info alert-dismissable" role="alert">
-          <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
-          <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-          {{ Session::get('mensaje') }}
-        </div>
+        <?php
+          echo ("<script type='text/javascript'>toastr.success('". Session::get('mensaje') ."');</script>");
+         ?>
     @endif
     @if(Session::has('error'))
-        <div class="alert alert-danger alert-dismissable" role="alert">
-          <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-          <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-          {{ Session::get('error') }}
-        </div>
+      <?php
+        echo ("<script type='text/javascript'>toastr.error('". Session::get('error') ."');</script>");
+       ?>
     @endif
       @yield('content')
 

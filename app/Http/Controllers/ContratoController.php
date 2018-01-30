@@ -9,6 +9,9 @@ use App\Empleado;
 use App\Cargo;
 use App\Bitacora;
 use App\Http\Requests\ContratoRequest;
+use App\Http\Requests\EmpleadoRequest;
+use App\Http\Requests\TipocontratoRequest;
+use App\Http\Requests\CargoRequest;
 
 class ContratoController extends Controller
 {
@@ -43,7 +46,7 @@ class ContratoController extends Controller
 
     public function listarTipos()
     {
-        return Tipocontrato::get();
+        return Tipocontrato::where('estado',1)->get();
     }
 
     public function listarCargos()
@@ -51,7 +54,7 @@ class ContratoController extends Controller
         return Cargo::get();
     }
 
-    public function guardarTipo(Request $request)
+    public function guardarTipo(TipocontratoRequest $request)
     {
       if($request->ajax())
       {
@@ -62,13 +65,24 @@ class ContratoController extends Controller
       }
     }
 
-    public function guardarCargo(Request $request)
+    public function guardarCargo(CargoRequest $request)
     {
       if($request->ajax())
       {
         Cargo::create($request->All());
         return response()->json([
           'mensaje' => 'Tipo de contrato creado con éxito'
+        ]);
+      }
+    }
+
+    public function guardarEmpleado(EmpleadoRequest $request)
+    {
+      if($request->ajax())
+      {
+        Empleado::create($request->All());
+        return response()->json([
+          'mensaje' => 'Empleado creado con exito'
         ]);
       }
     }
@@ -84,8 +98,6 @@ class ContratoController extends Controller
       $empleados = Empleado::all();
       $cargos = Cargo::all();
         return view('contratos.create',compact('tipocontratos','empleados','cargos'));
-
-        //return view('contratos.create');
     }
 
     /**
@@ -96,7 +108,13 @@ class ContratoController extends Controller
      */
     public function store(ContratoRequest $request)
     {
-        Contrato::create($request->All());
+        Contrato::create([
+          'empleado_id' => $request->empleado_id,
+          'tipocontrato_id' => $request->tipocontrato_id,
+          'cargo_id' => $request->cargo_id,
+          'salario' => $request->salario,
+          'motivo' => $request->motivo,
+        ]);
         bitacora('Registró un Contrato');
         return redirect('/contratos')->with('mensaje','Registro almacenado con éxito');
     }
@@ -160,7 +178,6 @@ class ContratoController extends Controller
         $datos = explode("+", $cadena);
         $id=$datos[0];
         $motivo=$datos[1];
-        //dd($id);
         $contrato = Contrato::find($id);
         $contrato->estado=2;
         $contrato->motivo=$motivo;
@@ -172,11 +189,6 @@ class ContratoController extends Controller
 
     public function alta($id)
     {
-
-        //$datos = explode("+", $cadena);
-        ////$id=$datos[0];
-        //$motivo=$datos[1];
-        //dd($id);
         $contrato = Contrato::find($id);
         $contrato->estado=1;
         $contrato->motivo=null;
