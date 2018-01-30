@@ -46,7 +46,7 @@ class ContratoController extends Controller
 
     public function listarTipos()
     {
-        return Tipocontrato::get();
+        return Tipocontrato::where('estado',1)->get();
     }
 
     public function listarCargos()
@@ -76,6 +76,17 @@ class ContratoController extends Controller
       }
     }
 
+    public function guardarEmpleado(EmpleadoRequest $request)
+    {
+      if($request->ajax())
+      {
+        Empleado::create($request->All());
+        return response()->json([
+          'mensaje' => 'Empleado creado con exito'
+        ]);
+      }
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -97,7 +108,13 @@ class ContratoController extends Controller
      */
     public function store(ContratoRequest $request)
     {
-        Contrato::create($request->All());
+        Contrato::create([
+          'empleado_id' => $request->empleado_id,
+          'tipocontrato_id' => $request->tipocontrato_id,
+          'cargo_id' => $request->cargo_id,
+          'salario' => $request->salario,
+          'motivo' => $request->motivo,
+        ]);
         bitacora('Registró un Contrato');
         return redirect('/contratos')->with('mensaje','Registro almacenado con éxito');
     }

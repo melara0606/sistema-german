@@ -100,7 +100,7 @@
                             <label for="num_cuenta" class="col-md-4 control-label">Número de cuenta bancaria</label>
 
                             <div class="col-md-6">
-                                {{ Form::text('num_cuenta', null,['class' => 'form-control','data-inputmask' => '"mask": "999999999"','data-mask']) }}
+                                {{ Form::text('num_cuenta', null,['id'=>'cuenta_empleado','class' => 'form-control','data-inputmask' => '"mask": "999999999"','data-mask']) }}
                                 @if ($errors->has('num_cuenta'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('num_cuenta') }}</strong>

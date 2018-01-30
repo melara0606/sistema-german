@@ -8,8 +8,35 @@ $(document).ready(function(){
 		var dui = $("#dui_empleado").val();
 		var nit = $("#nit_empleado").val();
 		var sexo = $("#sex_empleado").val();
-		var
-		alert(sexo);
+		var telefono_fijo = $("#fijo_empleado").val();
+		var celular = $("#cel_empleado").val();
+		var direccion = $("#dir_empleado").val();
+		var num_cuenta = $("#cuenta_empleado").val();
+		var num_contribuyente = $("#contri_empleado").val();
+		var num_seguro_social =$("#seguro_empleado").val();
+		var num_afp =$("#afp_empleado").val();
+
+		var ruta ="/sisverapaz/public/contratos/guardarempleado";
+		var token = $('meta[name="csrf-token"]').attr('content');
+
+		$.ajax({
+			url: ruta,
+			headers: {'X-CSRF-TOKEN':token},
+			type: 'POST',
+			dataType: 'json',
+			data:{nombre,dui,nit,sexo,telefono_fijo,celular,direccion,num_cuenta,num_contribuyente,num_seguro_social,num_afp},
+
+			success: function(){
+				toastr.success('Empleado Registrado con éxito');
+				cargarEmpleados();
+			},
+			error: function(data, textStatus, errorThrown){
+				toastr.error('Ha ocurrido un '+textStatus+' en la solucitud');
+				$.each(data.responseJSON.errors, function( key, value ) {
+					toastr.error(value);
+			});
+			}
+		});
 	});
 
 	$('#guardartipo').on("click", function(e){
@@ -26,6 +53,8 @@ $(document).ready(function(){
 				success: function(){
 					toastr.success('Tipo de contrato creado con éxito');
 					cargarTipo();
+				},error : function(data){
+					toastr.error(data.responseJSON.errors.nombre);
 				}
 			});
 	});
@@ -46,9 +75,8 @@ $(document).ready(function(){
 					$("#cargo_nombre").val("");
 					cargarCargo();
 				},
-				error:function(msj){
-					//console.log(msj.responseJSON.cargo);
-					toastr.error(msj.responseJSON.cargo);
+				error:function(data){
+					toastr.error(data.responseJSON.errors.cargo);
 				}
 			});
 	});
