@@ -27,7 +27,8 @@ const { mix } = require('laravel-mix');
   'resources/assets/js/moment.min.js',
   'resources/assets/js/bootstrap-toggle.min.js',
   'resources/assets/js/jquery.slimscroll.js',
-  'resources/assets/js/bootstrap-datepicker.js',
+  //'resources/assets/js/bootstrap-datepicker.js',
+  'resources/assets/js/jquery-ui.js',
   'resources/assets/js/jquery.inputmask.js',
   'resources/assets/js/toastr.js',
   'resources/assets/js/vue.min.js',
@@ -48,4 +49,6 @@ const { mix } = require('laravel-mix');
   'resources/assets/css/jquery-jvectormap-1.2.2.css',
   'resources/assets/css/toastr.css',
   'resources/assets/css/sweetalert2.min.css',
+  'resources/assets/css/jquery-ui.css',
+  'resources/assets/css/jquery-ui.theme.css',
 ],'public/css/sisverapaz.css');

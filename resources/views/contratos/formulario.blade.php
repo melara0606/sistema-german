@@ -2,6 +2,7 @@
                           <label for="" class="col-md-4 control-label">Empleado</label>
                             <div class="col-md-6">
                                 <select name="empleado_id" id="empleado" class="form-control">
+                                  <option value="">Seleccione un empleado</option>
                                 </select>
                                 @if ($errors->has('empleado_id'))
                                     <span class="help-block">
@@ -19,6 +20,7 @@
                           <label for="" class="col-md-4 control-label">Contrato</label>
                             <div class="col-md-6">
                                 <select name="tipocontrato_id" id="tipocontrato" class="form-control">
+                                  <option value="">Seleccione un tipo de contrato</option>
                                 </select>
                                 @if ($errors->has('tipocontrato_id'))
                                     <span class="help-block">
@@ -35,6 +37,7 @@
                           <label for="" class="col-md-4 control-label">Cargo</label>
                             <div class="col-md-6">
                                 <select name="cargo_id" id="cargo" class="form-control">
+                                  <option value="">Seleccione un cargo</option>
                                 </select>
                             </div>
                              <div class="col-md-2">

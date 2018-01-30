@@ -11,11 +11,12 @@ $(document).ready(function(){
 		var telefono_fijo = $("#fijo_empleado").val();
 		var celular = $("#cel_empleado").val();
 		var direccion = $("#dir_empleado").val();
+		var fecha_nacimiento = $("#nacimiento_empleado").val();
 		var num_cuenta = $("#cuenta_empleado").val();
 		var num_contribuyente = $("#contri_empleado").val();
 		var num_seguro_social =$("#seguro_empleado").val();
 		var num_afp =$("#afp_empleado").val();
-
+		alert(fecha_nacimiento);
 		var ruta ="/sisverapaz/public/contratos/guardarempleado";
 		var token = $('meta[name="csrf-token"]').attr('content');
 
@@ -24,7 +25,7 @@ $(document).ready(function(){
 			headers: {'X-CSRF-TOKEN':token},
 			type: 'POST',
 			dataType: 'json',
-			data:{nombre,dui,nit,sexo,telefono_fijo,celular,direccion,num_cuenta,num_contribuyente,num_seguro_social,num_afp},
+			data:{nombre,dui,nit,sexo,telefono_fijo,celular,direccion,fecha_nacimiento,num_cuenta,num_contribuyente,num_seguro_social,num_afp},
 
 			success: function(){
 				toastr.success('Empleado Registrado con éxito');

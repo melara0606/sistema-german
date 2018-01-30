@@ -100,18 +100,7 @@
                             <label for="fecha_nacimiento" class="col-md-4 control-label">Fecha de Nacimiento</label>
 
                             <div class="col-md-6">
-                                <?php
-                                use Carbon\Carbon;
-                                $date = Carbon::now();
-                                $mayor = $date->subYears(18);
-                                $max = $mayor->format('Y-m-d');
-                                ?>
-                                @if(isset($empleado))
-
-                                {{ Form::date('fecha_nacimiento', $empleado->fecha_nacimiento->format('Y-m-d'),['class' => 'form-control','max' => $max]) }}
-                                @else
-                                {{ Form::date('fecha_nacimiento', null,['class' => 'form-control','max' => $max]) }}
-                                @endif
+                                {{Form::text('fecha_nacimiento', null,['class' => 'nacimiento form-control','id'=>'nacimimiento_empleado'])}}
                             </div>
                         </div>
 

@@ -363,6 +363,24 @@
 {!! Html::script('js/pruebasvue.js') !!}
 
   <script>
+  $.datepicker.regional['es'] = {
+ closeText: 'Cerrar',
+ prevText: '< Ant',
+ nextText: 'Sig >',
+ currentText: 'Hoy',
+ monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+ monthNamesShort: ['Ene','Feb','Mar','Abr', 'May','Jun','Jul','Ago','Sep', 'Oct','Nov','Dic'],
+ dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
+ dayNamesShort: ['Dom','Lun','Mar','Mié','Juv','Vie','Sáb'],
+ dayNamesMin: ['Do','Lu','Ma','Mi','Ju','Vi','Sá'],
+ weekHeader: 'Sm',
+ dateFormat: 'dd/mm/yy',
+ firstDay: 1,
+ isRTL: false,
+ showMonthAfterYear: false,
+ yearSuffix: ''
+ };
+ $.datepicker.setDefaults($.datepicker.regional['es']);
       $(function () {
           //datatables
 
@@ -379,9 +397,15 @@
           //mascara dinero
           $('.money').mask('000000000000000.00', {reverse: true});
           //Date picker
-          $('#datepicker').datepicker({
-              autoclose: true
-          });
+          $('.nacimiento').datepicker({
+      	     selectOtherMonths: true,
+             changeMonth: true,
+             changeYear: true,
+             dateFormat: 'dd-mm-yy',
+             minDate: "-60Y",
+             maxDate: "-18Y",
+				     format: 'dd-mm-yyyy'
+		         });
           $('input[type="checkbox"].flat-red, input[type="radio"].flat-red').iCheck({
               checkboxClass: 'icheckbox_flat-green',
               radioClass: 'iradio_flat-green'

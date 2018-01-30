@@ -28,6 +28,7 @@ class EmpleadoRequest extends FormRequest
             'dui'=>'required|unique:empleados',
             'nit'=>'required|unique:empleados',
             'direccion'=>'required|max:255',
+            'fecha_nacimiento' => 'required|date',
             'sexo'=>'required',
             'num_cuenta'=>'unique:empleados',
             'celular' => 'required',
