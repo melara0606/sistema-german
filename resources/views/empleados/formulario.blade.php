@@ -96,6 +96,26 @@
                             </div>
                         </div>
 
+                        <div class="form-group{{ $errors->has('fecha_nacimiento') ? ' has-error' : '' }}">
+                            <label for="fecha_nacimiento" class="col-md-4 control-label">Fecha de Nacimiento</label>
+
+                            <div class="col-md-6">
+                                <?php
+                                use Carbon\Carbon;
+                                $date = Carbon::now();
+                                $mayor = $date->subYears(18);
+                                $max = $mayor->format('Y-m-d');
+                                ?>
+                                @if(isset($empleado))
+
+                                {{ Form::date('fecha_nacimiento', $empleado->fecha_nacimiento->format('Y-m-d'),['class' => 'form-control','max' => $max]) }}
+                                @else
+                                {{ Form::date('fecha_nacimiento', null,['class' => 'form-control','max' => $max]) }}
+                                @endif
+                            </div>
+                        </div>
+
+
                         <div class="form-group{{ $errors->has('num_cuenta') ? ' has-error' : '' }}">
                             <label for="num_cuenta" class="col-md-4 control-label">Número de cuenta bancaria</label>
 

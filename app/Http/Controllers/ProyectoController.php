@@ -36,6 +36,22 @@ class ProyectoController extends Controller
         }
     }
 
+    public function guardarOrganizacion(Request $request)
+    {
+      if($request->ajax())
+      {
+        Organizacion::create($request->All());
+        return response()->json([
+          'mensaje' => 'Organización creada exitosamente'
+        ]);
+      }
+    }
+
+    public function listarOrganizaciones()
+    {
+        return Organizacion::get();
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -57,7 +73,16 @@ class ProyectoController extends Controller
      */
     public function store(ProyectoRequest $request)
     {
-        $proyecto=Proyecto::create($request->All());
+        Proyecto::create([
+            'nombre' => $request->nombre,
+            'monto' => $request->monto,
+            'direccion' => $request->direccion,
+            'fecha_inicio' => $request->fecha_inicio,
+            'fecha_fin' => $request->fecha_fin,
+            'organizacion_id' => $request->organizacion_id,
+            'motivo' => $request->motivo
+        ]);
+
         $presupuesto = Presupuesto::create([
           'proyecto_id' => $proyecto->id,
           'total' => 0,

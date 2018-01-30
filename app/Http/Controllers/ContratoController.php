@@ -68,7 +68,7 @@ class ContratoController extends Controller
       {
         Cargo::create($request->All());
         return response()->json([
-          'mensaje' => 'Tipo de contrato creado con exito'
+          'mensaje' => 'Tipo de contrato creado con éxito'
         ]);
       }
     }

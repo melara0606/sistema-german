@@ -22,6 +22,7 @@ class CreateEmpleadosTable extends Migration
             $table->string('telefono_fijo')->nullable();
             $table->string('celular');
             $table->string('direccion');
+            $table->date('fecha_nacimiento');
             $table->string('num_cuenta');
             $table->string('num_contribuyente')->nullable();
             $table->string('num_seguro_social');

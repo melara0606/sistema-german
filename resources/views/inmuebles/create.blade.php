@@ -25,12 +25,14 @@
                                     <span class="glyphicon glyphicon-floppy-disk"></span>    Registrar
                                 </button>
                             </div>
+                            {{ Form::close() }}
                         </div>
-                    {{ Form::close() }}
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-@endsection 
-
+@endsection
+@section('scripts')
+{!! Html::script('js/inmueble.js') !!}
+@endsection

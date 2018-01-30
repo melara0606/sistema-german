@@ -4,12 +4,6 @@
                             <div class="col-md-6">
 
                                 {!!Form::text('nombre',null,['class'=>'form-control','id'=>'nombre','autofocus'])!!}
-
-                                @if ($errors->has('nombre'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('nombre') }}</strong>
-                                    </span>
-                                @endif
                             </div>
                         </div>
 
@@ -18,12 +12,6 @@
 
                             <div class="col-md-6">
                                 {!!Form::text('monto',null,['class'=>'form-control','id'=>'monto','autofocus'])!!}
-
-                                @if ($errors->has('monto'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('monto') }}</strong>
-                                    </span>
-                                @endif
                             </div>
                         </div>
 
@@ -32,12 +20,6 @@
 
                             <div class="col-md-6">
                                 {!!Form::textarea('direccion',null,['class'=>'form-control','id'=>'direccion','autofocus','rows'=>3])!!}
-
-                                @if ($errors->has('direccion'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('direccion') }}</strong>
-                                    </span>
-                                @endif
                             </div>
                         </div>
 
@@ -46,12 +28,6 @@
 
                             <div class="col-md-6">
                                 {!!Form::date('fecha_inicio',null,['class'=>'form-control','id'=>'nombre','autofocus'])!!}
-
-                                @if ($errors->has('fecha_inicio'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('fecha_inicio') }}</strong>
-                                    </span>
-                                @endif
                             </div>
                         </div>
 
@@ -60,12 +36,6 @@
 
                             <div class="col-md-6">
                                 {!!Form::date('fecha_fin',null,['class'=>'form-control','id'=>'nombre','autofocus'])!!}
-
-                                @if ($errors->has('fecha_fin'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('fecha_fin') }}</strong>
-                                    </span>
-                                @endif
                             </div>
                         </div>
 
@@ -75,9 +45,12 @@
                                 <select name="organizacion_id" id="organizacion" class="form-control">
                                     <option value="">Seleccione organización...</option>
                                     @foreach($organizaciones as $organizacion)
-                                      <option value="{{$organizacion->id}}">{{$organizacion->nombre}}</option>
+                                      <option value="{{$organizacion->id}}">{{$organizacion->nombre_org}}</option>
                                     @endforeach
                                 </select>
+                            </div>
+                            <div class="col-md-2">
+                                <button class="btn btn-default" type="button" id="" data-toggle="modal" data-target="#btnorganizacion">Agregar nueva</button>
                             </div>
                         </div>
 
@@ -86,11 +59,24 @@
 
                             <div class="col-md-6">
                                 {!!Form::textarea('motivo',null,['class'=>'form-control','id'=>'nombre','autofocus', 'rows'=>3])!!}
-
-                                @if ($errors->has('motivo'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('motivo') }}</strong>
-                                    </span>
-                                @endif
                             </div>
                         </div>
+
+<div class="modal fade" data-backdrop="static" data-keyboard="false" id="btnorganizacion" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="row">
+            <div class="panel panel-primary">
+                <div class="panel-heading">Registro de Organización
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                </div>
+                <div class="panel-body">
+                    @include('organizaciones.formulario')
+                </div>
+                <div class="panel-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                    <button type="button" id="guardarorganizacion" data-dismiss="modal" class="btn btn-success">Agregar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

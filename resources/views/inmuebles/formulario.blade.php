@@ -24,6 +24,9 @@
             </span>
          @endif
     </div>
+    <div class="col-md-2">
+        <button class="btn btn-default" type="button" id="" data-toggle="modal" data-target="#btncontribuyente">Agregar nuevo</button>
+    </div>
 </div>
 
 <div class="form-group{{ $errors->has('direccion_inmueble') ? ' has-error' : '' }}">
@@ -68,7 +71,7 @@
 </div>
 
 <div class="form-group{{ $errors->has('metros_acera') ? ' has-error' : '' }}">
-    <label for="metros_acera" class="col-md-4 control-label">Teléfono</label>
+    <label for="metros_acera" class="col-md-4 control-label">Metros de acera</label>
 
     <div class="col-md-6">
         {{ Form::text('metros_acera', null,['class' => 'form-control']) }}
@@ -80,3 +83,22 @@
          @endif
     </div>
 </div>      
+
+<div class="modal fade" data-backdrop="static" data-keyboard="false" id="btncontribuyente" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="row">
+            <div class="panel panel-primary">
+                <div class="panel-heading">Registro de Contribuyente
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                </div>
+                <div class="panel-body">
+                    @include('contribuyentes.formulario')
+                </div>
+                <div class="panel-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                    <button type="button" id="guardartipo" data-dismiss="modal" class="btn btn-success">Agregar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

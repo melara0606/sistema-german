@@ -45,7 +45,7 @@
                     @if($proyecto->organizacion_id == '')
                       <td>Fondos propios</td>
                     @else
-                    <td>{{ $proyecto->organizacion->nombre }}</td>
+                    <td>{{ $proyecto->organizacion->nombre_org }}</td>
                   @endif
                     <td>
                       @if($estado == 1 || $estado == "")

@@ -15,11 +15,11 @@ class CreateOrganizacionsTable extends Migration
     {
         Schema::create('organizacions', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('nombre');
-            $table->string('direccion');
-            $table->string('telefono');
-            $table->string('representante');
-            $table->string('tel_representante');
+            $table->string('nombre_org');
+            $table->string('direccion_org');
+            $table->string('telefono_org');
+            $table->string('representante_org');
+            $table->string('tel_representante_org');
             $table->timestamps();
         });
     }

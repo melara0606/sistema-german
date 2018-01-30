@@ -18,6 +18,7 @@
             <div class="panel-body">
                 {{ Form::model($organizacion, array('method' => 'put', 'class' => 'form-horizontal' , 'route' => array('organizaciones.update', $organizacion->id))) }}
                  @include('organizaciones.formulario')
+                 @include('errors.validacion')
                     <div class="form-group">
                         <div class="col-md-6 col-md-offset-2">
                             <button type="submit" class="btn btn-primary btn-lg">

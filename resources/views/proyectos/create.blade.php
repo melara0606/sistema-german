@@ -19,6 +19,7 @@
                 <div class="panel-heading">Registro de proyectos</div>
                 <div class="panel-body">
                     {{ Form::open(['action'=> 'ProyectoController@store', 'class' => 'form-horizontal']) }}
+                    @include('errors.validacion')
                     @include('proyectos.formulario')
 
                     <div class="form-group">
@@ -34,4 +35,7 @@
         </div>
     </div>
 </div>
+@endsection
+@section('scripts')
+{{!! Html::script('js/proyecto.js') !!}}
 @endsection

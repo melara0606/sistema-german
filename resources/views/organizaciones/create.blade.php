@@ -17,6 +17,7 @@
 				<div class="panel-heading">Registro de organizaciones colaboradoras</div>
 				<div class="panel-body">
 					{{ Form::open(['action'=> 'OrganizacionController@store', 'class' => 'form-horizontal']) }}
+					@include('errors.validacion')
 					@include('organizaciones.formulario')
 
 					<div class="form-group">

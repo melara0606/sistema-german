@@ -18,6 +18,7 @@
             <div class="panel-body">
                 {{ Form::model($proyecto, array('method' => 'put', 'class' => 'form-horizontal' , 'route' => array('proyectos.update', $proyecto->id))) }}
                  @include('proyectos.formulario')
+                @include('errors.validacion')
                     <div class="form-group">
                         <div class="col-md-6 col-md-offset-2">
                             <button type="submit" class="btn btn-primary btn-lg">

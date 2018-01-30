@@ -24,6 +24,11 @@ class InmuebleController extends Controller
         return view('inmuebles.index',compact('inmuebles'));
     }
 
+    public function listarContribuyentes()
+    {
+        return Contribuyente::where('estado',1)->get();   
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -44,7 +49,14 @@ class InmuebleController extends Controller
      */
     public function store(InmuebleRequest $request)
     {
-        Inmueble::create($request->All());
+        Inmueble::create([
+            'numero_catastral' => $request->numero_catastral,
+            'contribuyente_id' => $request->contribuyente_id,
+            'direccion_inmueble' => $request->direccion_inmueble,
+            'medida_inmueble' => $request->medida_inmueble,
+            'numero_escritura' => $request->numero_escritura,
+            'metros_acera' => $request->metros_acera
+        ]);
         return redirect('inmuebles')->with('mensaje','Inmueble registrado con exito');   
     }
 

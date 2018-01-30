@@ -35,10 +35,10 @@
                   @foreach($organizaciones as $organizacion)
                   <tr>
                     <td>{{ $organizacion->id }}</td>
-                    <td>{{ $organizacion->nombre }}</td>
-                    <td>{{ $organizacion->direccion }}</td>
-                    <td>{{ $organizacion->telefono }}</td>
-                    <td>{{ $organizacion->representante }}</td>
+                    <td>{{ $organizacion->nombre_org }}</td>
+                    <td>{{ $organizacion->direccion_org }}</td>
+                    <td>{{ $organizacion->telefono_org }}</td>
+                    <td>{{ $organizacion->representante_org }}</td>
                     <td>
                                 {{ Form::open(['method' => 'POST', 'id' => 'baja', 'class' => 'form-horizontal'])}}
                                 <a href="{{ url('organizaciones/'.$organizacion->id) }}" class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-eye-open"></span></a>
