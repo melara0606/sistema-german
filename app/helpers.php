@@ -42,6 +42,12 @@ function bitacora($accion)
 	$bitacora->save();
 }
 
+function usuario($id)
+{
+	$empleado = App\Empleado::where('id',$id)->first();
+	return $empleado->nombre;
+}
+
 function vercargo($cargo)
 {
 	switch ($cargo) {

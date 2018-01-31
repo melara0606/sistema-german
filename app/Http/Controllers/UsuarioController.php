@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use App\Bitacora;
+use App\Contrato;
 use App\Http\Requests\UsuariosRequest;
 use App\Http\Requests\ModificarUsuarioRequest;
 use App\Http\Requests\PerfilRequest;
@@ -51,9 +52,10 @@ class UsuarioController extends Controller
      */
     public function create()
     {
+      $contratos=Contrato::where('estado',1)->get();
         if(Auth()->user()->cargo == 1)
         {
-            return view('usuarios.create');
+            return view('usuarios.create',compact('contratos'));
         }else{
 
         }

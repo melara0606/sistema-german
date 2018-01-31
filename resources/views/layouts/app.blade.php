@@ -255,7 +255,7 @@
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <img src="{{ asset('avatars/'.Auth::user()->avatar) }}" class="user-image" alt="User Image">
-              <span class="hidden-xs">{{ Auth()->user()->name }} </span>
+              <span class="hidden-xs">{{usuario(Auth()->user()->empleado_id) }} </span>
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->
@@ -306,7 +306,7 @@
           <img src="{{ asset('avatars/'.Auth::user()->avatar) }}" class="user-image" alt="User Image">
         </div>
         <div class="pull-left info">
-          <p>{{ Auth::user()->name }} </p>
+          <p>{{ usuario(Auth()->user()->empleado_id) }} </p>
           <a href="#"><i class="fa fa-circle text-success"></i> En línea</a>
         </div>
       </div>

@@ -23,7 +23,7 @@
                     <div class="form-group">
                         <div class="col-md-6 col-md-offset-4">
                             <button type="submit" class="btn btn-success">
-                                <span class="glyphicon glyphicon-floppy-disk">Registrar</span>
+                                <span class="glyphicon glyphicon-floppy-disk"> Registrar</span>
                             </button>
                         </div>
                         {{ Form::close() }}

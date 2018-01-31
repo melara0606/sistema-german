@@ -23,10 +23,10 @@ class CreateEmpleadosTable extends Migration
             $table->string('celular');
             $table->string('direccion');
             $table->date('fecha_nacimiento');
-            $table->string('num_cuenta');
+            $table->string('num_cuenta')->nullable();
             $table->string('num_contribuyente')->nullable();
-            $table->string('num_seguro_social');
-            $table->string('num_afp');
+            $table->string('num_seguro_social')->nullable();
+            $table->string('num_afp')->nullable();
             $table->integer('estado')->unsigned()->default(1);
             $table->timestamps();
         });
