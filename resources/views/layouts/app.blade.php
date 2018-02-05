@@ -374,7 +374,7 @@
  dayNamesShort: ['Dom','Lun','Mar','Mié','Juv','Vie','Sáb'],
  dayNamesMin: ['Do','Lu','Ma','Mi','Ju','Vi','Sá'],
  weekHeader: 'Sm',
- dateFormat: 'dd/mm/yy',
+ dateFormat: 'dd-mm-yyyy',
  firstDay: 1,
  isRTL: false,
  showMonthAfterYear: false,
@@ -382,15 +382,10 @@
  };
  $.datepicker.setDefaults($.datepicker.regional['es']);
       $(function () {
-          //datatables
-
-
-
-
-          //Datemask dd/mm/yyyy
-          $("#datemask").inputmask("dd/mm/yyyy", {"placeholder": "dd/mm/yyyy"});
-          //Datemask2 mm/dd/yyyy
-          $("#datemask2").inputmask("mm/dd/yyyy", {"placeholder": "mm/dd/yyyy"});
+        var start = new Date(),
+      	end = new Date(),
+      	start2, end2;
+        end.setDate(end.getDate() + 365);
           //Money Euro
           $("[data-mask]").inputmask();
 
@@ -406,6 +401,32 @@
              maxDate: "-18Y",
 				     format: 'dd-mm-yyyy'
 		         });
+
+             $("#fecha_inicio").datepicker({
+               selectOtherMonths: true,
+               changeMonth: true,
+               changeYear: true,
+               dateFormat: 'dd-mm-yy',
+               minDate: start,
+               maxDate: end,
+           	onSelect: function(){
+           		start2 = $(this).datepicker("getDate");
+           		end2 = $(this).datepicker("getDate");
+
+           		start2.setDate(start2.getDate() + 1);
+           		end2.setDate(end2.getDate() + 365);
+
+           		$("#fecha_fin").datepicker({
+                       selectOtherMonths: true,
+                       changeMonth: true,
+                       changeYear: true,
+                       dateFormat: 'dd-mm-yy',
+                       minDate: start2,
+                       maxDate: end2
+           		});
+           	}
+           });
+
           $('input[type="checkbox"].flat-red, input[type="radio"].flat-red').iCheck({
               checkboxClass: 'icheckbox_flat-green',
               radioClass: 'iradio_flat-green'

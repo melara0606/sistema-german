@@ -1,5 +1,24 @@
 $(document).ready(function(){
-	cargarOrganizacion();
+	var select = '<label for="" class="col-md-4 control-label">Seleccione organización</label>'+
+		'<div class="col-md-6">'+
+				'<select name="organizacion_id" id="organizacion" class="form-control" ><option value="">Seleccione organización...</option></select>'+
+		'</div>'+
+		'<div class="col-md-2">'+
+				'<button class="btn btn-default" type="button" id="" data-toggle="modal" data-target="#btnorganizacion">Agregar nueva</button>'+
+		'</div>';
+
+
+	$( '#colaboradora' ).on( 'click', function() {
+    if( $(this).is(':checked') ){
+        // Hacer algo si el checkbox ha sido seleccionado
+        cargarOrganizacion();
+        $("#cola").html(select);
+    } else {
+        // Hacer algo si el checkbox ha sido deseleccionado
+        //$("#cola").css("visibility", 'hidden');
+        $("#cola").empty();
+    }
+});
 
 	$('#guardarorganizacion').on("click", function(e){
 		var nombre = $("#nombre_org").val();
@@ -19,7 +38,7 @@ $(document).ready(function(){
 
       success: function(){
         toastr.success('Proyecto creado éxitosamente');
-        cargarOrganizacion();
+        (this).cargarOrganizacion();
       }
     });
 	});

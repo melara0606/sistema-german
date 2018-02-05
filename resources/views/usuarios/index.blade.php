@@ -16,9 +16,11 @@
           <div class="box">
             <div class="box-header">
               <h3 class="box-title">Listado</h3>
-              	<a href="{{ url('/usuarios/create') }}" class="btn btn-success">Agregar <span class="glyphicon glyphicon-plus-sign"></span></a>
+              <div class="btn-group pull-right">
+                <a href="{{ url('/usuarios/create') }}" class="btn btn-success">Agregar <span class="glyphicon glyphicon-plus-sign"></span></a>
                 <a href="{{ url('/usuarios?estado=1') }}" class="btn btn-primary">Activos</a>
                 <a href="{{ url('/usuarios?estado=2') }}" class="btn btn-primary">Papelera</a>
+              </div>
             </div>
             <!-- /.box-header -->
             <div class="box-body table-responsive no-padding">
@@ -42,10 +44,12 @@
                 		<td>
                             @if($estado == 1 || $estado == "")
                                 {{ Form::open(['method' => 'POST', 'id' => 'baja', 'class' => 'form-horizontal'])}}
-                                <a href="{{ url('usuarios/'.$user->id) }}" class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-eye-open"></span></a>
-                                <a href="{{ url('/usuarios/'.$user->id.'/edit') }}" class="btn btn-warning btn-xs"><span class="glyphicon glyphicon-text-size"></span></a>
-                                <button class="btn btn-danger btn-xs" type="button" onclick={{ "baja(".$user->id.")" }}><span class="glyphicon glyphicon-trash"></span></button>
-                                {{ Form::close()}}
+                                <div class="btn-group">
+                                  <a href="{{ url('usuarios/'.$user->id) }}" class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-eye-open"></span></a>
+                                  <a href="{{ url('/usuarios/'.$user->id.'/edit') }}" class="btn btn-warning btn-xs"><span class="glyphicon glyphicon-text-size"></span></a>
+                                  <button class="btn btn-danger btn-xs" type="button" onclick={{ "baja(".$user->id.")" }}><span class="glyphicon glyphicon-trash"></span></button>
+                                </div>
+                              {{ Form::close()}}
                             @else
                                 {{ Form::open(['method' => 'POST', 'id' => 'alta', 'class' => 'form-horizontal'])}}
                                 <button class="btn btn-success btn-xs" type="button" onclick={{ "alta(".$user->id.")" }}><span class="glyphicon glyphicon-trash"></span></button>
