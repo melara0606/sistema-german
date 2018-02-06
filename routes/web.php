@@ -69,6 +69,8 @@ Route::post('proyectos/baja/{id}','ProyectoController@baja')->name('proyectos.ba
 Route::post('proyectos/alta/{id}','ProyectoController@alta')->name('proyectos.alta');
 Route::get('proyectos/listarorganizaciones','ProyectoController@listarOrganizaciones');
 Route::post('proyectos/guardarorganizaciones','ProyectoController@guardarOrganizacion');
+Route::get('proyectos/listarfondos','ProyectoController@listarFondos');
+Route::post('proyectos/guardarcategoria','ProyectoController@guardarCategoria');
 Route::Resource('proyectos','ProyectoController');
 
 Route::post('tipocontratos/baja/{id}','TipocontratoController@baja')->name('tipocontratos.baja');
@@ -126,6 +128,8 @@ Route::post('rubros/baja/{id}','RubroController@baja')->name('rubros.baja');
 Route::post('rubros/alta/{id}','RubroController@alta')->name('rubros.alta');
 Route::Resource('rubros','RubroController');
 
+Route::Resource('negocios','NegocioController');
+
 Route::post('inmuebles/baja/{id}','InmuebleController@baja')->name('inmuebles.baja');
 Route::post('inmuebles/alta/{id}','InmuebleController@alta')->name('inmuebles.alta');
 Route::Resource('inmuebles','InmuebleController');
@@ -148,3 +152,56 @@ Route::Resource('cuentaprincipal','CuentaprincipalController');
 Route::Resource('tipopagos','TipopagoController');
 
 Route::Resource('pagos','PagoController');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/**
+ * Rutas para el mapa
+*/
+
+Route::get('negocio/mapa/{id}', 'NegocioController@viewMapa');
+Route::post('negocio/mapa/create', 'NegocioController@mapas');
+Route::get('mapa', 'NegocioController@mapa');
+Route::post('mapa/all', 'NegocioController@mapasAll');

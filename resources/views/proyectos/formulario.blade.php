@@ -88,16 +88,19 @@
                     <div class="col-md-6">
                       <input type="text" id="cant_monto" class="form-control">
                     </div>
+                    <div class="col-md-2">
+                        <button class="btn btn-default" type="button" id="btnAgregarfondo">Agregar</button>
+                    </div>
                   </div>
                   <div class="form-group">
-                    <table class="table table-striped table-bordered" id="tbCategoria">
+                    <table class="table table-striped table-bordered" id="tbFondos">
                       <tr>
                         <th>Categoría</th>
                         <th>Cantidad</th>
                         <th>Acción</th>
                       </tr>
                       <body></body>
-                      <tfoot id="pieC">
+                      <tfoot id="pie_monto">
                           <tr>
                             <td class="text-left" colspan="2">Total $</td>
                             <td colspan="2" style="text-align:right;" id="totalEnd">0.00</td>
@@ -108,7 +111,6 @@
                 </div>
                 <div class="panel-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                    <button type="button" id="guardarmontos" data-dismiss="modal" class="btn btn-success">Agregar</button>
                 </div>
             </div>
         </div>
@@ -123,7 +125,12 @@
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 </div>
                 <div class="panel-body">
-                    
+                    <div class="form-group">
+                        <label for="" class="col-md-4">Digite la categoría</label>
+                        <div class="col-md-6">
+                            <input type="text" id="cate" class="form-control">
+                        </div>
+                    </div>
                 </div>
                 <div class="panel-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
