@@ -24,6 +24,16 @@ class InmuebleController extends Controller
         return view('inmuebles.index',compact('inmuebles'));
     }
 
+    public function guardarContribuyente(Request $request)
+    {
+        if($request->ajax())
+        {
+            Contribuyente::create($request->All());
+            return response()->json([
+                'mensaje' => 'Registro creado exitosamente']);
+        }
+    }
+
     public function listarContribuyentes()
     {
         return Contribuyente::where('estado',1)->get();   
@@ -49,7 +59,7 @@ class InmuebleController extends Controller
      */
     public function store(InmuebleRequest $request)
     {
-        Inmueble::create([
+        $inmuebles = Inmueble::create([
             'numero_catastral' => $request->numero_catastral,
             'contribuyente_id' => $request->contribuyente_id,
             'direccion_inmueble' => $request->direccion_inmueble,

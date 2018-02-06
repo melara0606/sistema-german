@@ -13,7 +13,7 @@
 </div>
 
 <div class="form-group{{ $errors->has('contribuyente_id') ? ' has-error' : '' }}">
-    <label for="contribuyente_id" class="col-md-4 control-label">Contribuyente</label>
+    <label for="" class="col-md-4 control-label">Contribuyente</label>
 
     <div class="col-md-6">
         {{ Form::select('contribuyente_id', $contribuyentes,null,['class' => 'form-control chosen-select']) }}
@@ -96,7 +96,7 @@
                 </div>
                 <div class="panel-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                    <button type="button" id="guardartipo" data-dismiss="modal" class="btn btn-success">Agregar</button>
+                    <button type="button" id="guardarcontribuyente" data-dismiss="modal" class="btn btn-success">Agregar</button>
                 </div>
             </div>
         </div>
