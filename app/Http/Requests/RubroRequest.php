@@ -26,7 +26,6 @@ class RubroRequest extends FormRequest
         return [
             'nombre'=>'required|min:3|max:150',
             'porcentaje'=>'required|numeric',
-            'estado'=>'required',
         ];
     }
 }

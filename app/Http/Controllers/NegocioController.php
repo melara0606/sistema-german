@@ -3,22 +3,24 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\NegocioRequest;
+
+// Models
+use App\Negocio;
+use App\Contribuyente;
+use App\Rubro;
 
 class NegocioController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-     public function __construct()
-     {
-         $this->middleware('auth');
-     }
-     
-    public function index()
+    public function __construct()
     {
-        //
+        $this->middleware('auth');
+    }
+
+    public function index(Request $request)
+    {
+        $negocios = Negocio::all();
+        return view('negocios.index', compact("negocios"));
     }
 
     /**
@@ -28,7 +30,9 @@ class NegocioController extends Controller
      */
     public function create()
     {
-        //
+        $rubros = Rubro::pluck('nombre', 'id');
+        $contribuyentes = Contribuyente::pluck('nombre', 'id');
+        return view('negocios.create', compact('contribuyentes', 'rubros'));
     }
 
     /**
@@ -37,9 +41,11 @@ class NegocioController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(NegocioRequest $request)
     {
-        //
+        Negocio::create($request->All());
+        bitacora('Registró un negocio');
+        return redirect('negocios')->with('mensaje','Registro almacenado con éxito');
     }
 
     /**
@@ -50,7 +56,8 @@ class NegocioController extends Controller
      */
     public function show($id)
     {
-        //
+        $negocio = Negocio::findorFail($id);
+        return view('negocios.show', compact('negocio'));
     }
 
     /**
@@ -59,9 +66,11 @@ class NegocioController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Negocio $negocio)
     {
-        //
+        $rubros = Rubro::pluck('nombre', 'id');
+        $contribuyentes = Contribuyente::pluck('nombre', 'id');
+        return view('negocios.edit', compact('negocio', 'rubros', 'contribuyentes'));
     }
 
     /**
@@ -71,19 +80,41 @@ class NegocioController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+
+    public function update(NegocioRequest $request, $id)
     {
-        //
+        $rubro = Negocio::find($id);
+        $rubro->fill($request->All());
+        $rubro->save();
+        
+        bitacora('Modificó un negocio');
+        return redirect('negocios')->with('mensaje','Registro modificado con éxito');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
+    public function viewMapa($id) {
+        $negocio = Negocio::findorFail($id);
+        return view('negocios.mapa', compact('negocio'));
+    }
+
+    public function mapas(Request $request)
     {
-        //
+        $all = $request->all();
+        $negocio = Negocio::findOrFail($all['id']);
+        $negocio->lat = $all['lat'];
+        $negocio->lng = $all['lng'];
+        $negocio->save();
+        return $negocio;        
+    }
+
+    public function mapa()
+    {
+        return view('negocios.mapaGlobal');
+    }
+
+    public function mapasAll()
+    {
+        return Negocio::where('lat', '!=', 0)
+            ->where('lng', '!=', 0)
+            ->with('contribuyente', 'rubro')->get();
     }
 }

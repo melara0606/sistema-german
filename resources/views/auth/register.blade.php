@@ -7,15 +7,18 @@
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.6 -->
-  <link rel="stylesheet" href="{{ asset('bootstrap/css/bootstrap.min.css') }}">
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
-  <!-- Ionicons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
-  <!-- Theme style -->
-  <link rel="stylesheet" href="{{ asset('css/AdminLTE.min.css') }}">
+  <link rel="stylesheet" href="{{ asset('css/sisverapaz.css') }}">
+  <style>
+    #scroll {
+      background-color: #FFF;
+      width: 100%;
+      height: 100%;
+      overflow: scroll;
+    }
+</style>
+
+ 
   <!-- iCheck -->
-  <link rel="stylesheet" href="{{ asset('plugins/iCheck/square/blue.css') }}">
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -27,107 +30,95 @@
 <body>
 <div class="container">
     <div class="row">
-        <div class="col-md-8 col-md-offset-2">
+        <div class="col-md-12">
             <div class="panel panel-primary">
                 <div class="panel-heading">Registro de Usuarios</div>
                 <div class="panel-body">
                     {{ Form::open(['action' => 'Auth\RegisterController@register','class' => 'form-horizontal']) }}
-
-                        <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-                            <label for="name" class="col-md-4 control-label">Nombre </label>
-
-                            <div class="col-md-6">
-                                {!! Form::text('name',null,['class' => 'form-control','autofocus']) !!}
-                                @if ($errors->has('name'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('name') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-
-                         <div class="form-group{{ $errors->has('username') ? ' has-error' : '' }}">
-                            <label for="username" class="col-md-4 control-label">Nombre de Usuario</label>
-
-                            <div class="col-md-6">
-                                {!! Form::text('username',null,['class' => 'form-control']) !!}
-                                @if ($errors->has('username'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('username') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                            <label for="email" class="col-md-4 control-label">E-Mail</label>
-
-                            <div class="col-md-6">
-                                {!! Form::email('email',null,['class' => 'form-control']) !!}
-                                @if ($errors->has('email'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group{{ $errors->has('cargo') ? ' has-error' : '' }}">
-                            <label for="cargo" class="col-md-4 control-label">Cargo</label>
-
-                            <div class="col-md-6">
-                                <select name="cargo" class="form-control">
-                                    <option value="1">Administrador</option>
-                                </select>
-                                @if ($errors->has('cargo'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('cargo') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                            <label for="password" class="col-md-4 control-label">Contraseña</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control" name="password">
-                                @if ($errors->has('password'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-
-                        <div class="form-group">
-                            <label for="password-confirm" class="col-md-4 control-label">Confirmar Contraseña</label>
-
-                            <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation">
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
-                                <button type="submit" class="btn btn-primary">
-                                    Registrar Administrador
-                                </button>
-                            </div>
-                        </div>
+                    @include('errors.validacion')
+                        <div id="example-basic">
+                          <h3>Datos Personales</h3>
+                          <section>
+                              <div class="container" id="scroll">
+                                @include('auth.personales')
+                              </div>
+                          </section>
+                          <h3>Dato de usuario</h3>
+                          <section>
+                             @include('auth.formulario')
+                          </section>
+                          <h3>Finanizar</h3>
+                          <section>
+                            <button type="submit">Guardar</button>
+                          </section>
+                      </div>
                    {{Form::close()}}
                 </div>
             </div>
         </div>
     </div>
 </div>
-<script src="{{ asset('plugins/jQuery/jquery-2.2.3.min.js') }}"></script>
-<!-- Bootstrap 3.3.6 -->
-<script src="{{ asset('bootstrap/js/bootstrap.min.js') }}"></script>
-<!-- iCheck -->
-<script src="{{ asset('plugins/iCheck/icheck.min.js') }}"></script>
+<script src="{{ asset('js/sisverapaz.js') }}"></script>
+  <script>
+  $.datepicker.regional['es'] = {
+ closeText: 'Cerrar',
+ prevText: '< Ant',
+ nextText: 'Sig >',
+ currentText: 'Hoy',
+ monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+ monthNamesShort: ['Ene','Feb','Mar','Abr', 'May','Jun','Jul','Ago','Sep', 'Oct','Nov','Dic'],
+ dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
+ dayNamesShort: ['Dom','Lun','Mar','Mié','Juv','Vie','Sáb'],
+ dayNamesMin: ['Do','Lu','Ma','Mi','Ju','Vi','Sá'],
+ weekHeader: 'Sm',
+ dateFormat: 'dd/mm/yy',
+ firstDay: 1,
+ isRTL: false,
+ showMonthAfterYear: false,
+ yearSuffix: ''
+ };
+ $.datepicker.setDefaults($.datepicker.regional['es']);
+      $(function () {
+          //datatables
+
+
+
+
+          //Datemask dd/mm/yyyy
+          $("#datemask").inputmask("dd/mm/yyyy", {"placeholder": "dd/mm/yyyy"});
+          //Datemask2 mm/dd/yyyy
+          $("#datemask2").inputmask("mm/dd/yyyy", {"placeholder": "mm/dd/yyyy"});
+          //Money Euro
+          $("[data-mask]").inputmask();
+
+          //mascara dinero
+          $('.money').mask('000000000000000.00', {reverse: true});
+          //Date picker
+          $('.nacimiento').datepicker({
+             selectOtherMonths: true,
+             changeMonth: true,
+             changeYear: true,
+             dateFormat: 'dd-mm-yy',
+             minDate: "-60Y",
+             maxDate: "-18Y",
+             format: 'dd-mm-yyyy'
+             });
+          $('input[type="checkbox"].flat-red, input[type="radio"].flat-red').iCheck({
+              checkboxClass: 'icheckbox_flat-green',
+              radioClass: 'iradio_flat-green'
+          });
+
+
+          $("#example-basic").steps({
+    headerTag: "h3",
+    bodyTag: "section",
+    transitionEffect: "slideLeft",
+    autoFocus: true
+});
+
+      });
+  </script>
+
 </body>
 </html>
 

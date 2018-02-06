@@ -8,6 +8,7 @@ use App\Organizacion;
 use App\Bitacora;
 use App\Presupuesto;
 use App\Presupuestodetalle;
+use App\Fondocat;
 use App\Http\Requests\ProyectoRequest;
 
 class ProyectoController extends Controller
@@ -47,9 +48,25 @@ class ProyectoController extends Controller
       }
     }
 
+    public function guardarCategoria(Request $request)
+    {
+      if($request->ajax())
+      {
+        Fondocat::create($request->All());
+        return response()->json([
+          'mensaje' => 'Organización creada exitosamente'
+        ]);
+      }
+    }
+
     public function listarOrganizaciones()
     {
         return Organizacion::get();
+    }
+
+    public function listarFondos()
+    {
+        return Fondocat::get();
     }
 
     /**

@@ -16,9 +16,11 @@
           <div class="box">
             <div class="box-header">
               <h3 class="box-title">Listado</h3>
+              <div class="btn-group pull-right">
                 <a href="{{ url('/proyectos/create') }}" class="btn btn-success"><span class="glyphicon glyphicon-plus-sign"></span> Agregar</a>
                 <a href="{{ url('/proyectos?estado=1') }}" class="btn btn-primary">Activos</a>
                 <a href="{{ url('/proyectos?estado=2') }}" class="btn btn-primary">Papelera</a>
+              </div>
             </div>
             <!-- /.box-header -->
             <div class="box-body table-responsive">

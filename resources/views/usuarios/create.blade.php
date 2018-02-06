@@ -25,7 +25,11 @@
                             <label for="name" class="col-md-4 control-label">Nombre</label>
 
                             <div class="col-md-6">
-                                <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" autofocus>
+                              <select class="form-control" name="name">
+                                @foreach ($contratos as $contrato)
+                                  <option value="{{$contrato->empleado->nombre}}">{{$contrato->empleado->nombre}}</option>
+                                @endforeach
+                              </select>
                                 @if ($errors->has('name'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('name') }}</strong>

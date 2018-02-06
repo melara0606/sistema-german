@@ -7,7 +7,8 @@ $(document).ready(function(){
 		var nombre = $("#nom_empleado").val();
 		var dui = $("#dui_empleado").val();
 		var nit = $("#nit_empleado").val();
-		var sexo = $("#sex_empleado").val();
+		var sexo = $('input:radio[name=sexo]:checked').val()
+		//var sexo = $("#sex_empleado").val();
 		var telefono_fijo = $("#fijo_empleado").val();
 		var celular = $("#cel_empleado").val();
 		var direccion = $("#dir_empleado").val();
@@ -16,7 +17,7 @@ $(document).ready(function(){
 		var num_contribuyente = $("#contri_empleado").val();
 		var num_seguro_social =$("#seguro_empleado").val();
 		var num_afp =$("#afp_empleado").val();
-		alert(fecha_nacimiento);
+		alert(sexo);
 		var ruta ="/sisverapaz/public/contratos/guardarempleado";
 		var token = $('meta[name="csrf-token"]').attr('content');
 

@@ -37,5 +37,5 @@
 </div>
 @endsection
 @section('scripts')
-{{!! Html::script('js/proyecto.js') !!}}
+{!! Html::script('js/proyecto.js') !!}
 @endsection

@@ -45,9 +45,9 @@
 
                             <div class="col-md-6">
                                 Másculino
-                                {{ Form::radio('sexo', 'Másculino', false,['id' => 'sex_empleado']) }}
+                                {{ Form::radio('sexo', 'Másculino', false,['id' => 'masculino']) }}
                                 Femenino
-                                {{ Form::radio('sexo', 'Femenino',false,['id' => 'sex_empleado']) }}
+                                {{ Form::radio('sexo', 'Femenino',false,['id' => 'femenino']) }}
                                 @if ($errors->has('sexo'))
                                 <span class="help-block">
                                     <strong>{{ $errors->first('sexo') }}</strong>
