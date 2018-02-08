@@ -1,5 +1,5 @@
                         <div class="form-group{{ $errors->has('nombre') ? ' has-error' : '' }}">
-                            <label for="nombre" class="col-md-4 control-label">Nombre del proyecto</label>
+                            <label for="nombre" class="col-md-4 control-label">Nombre</label>
 
                             <div class="col-md-6">
 
@@ -8,13 +8,18 @@
                         </div>
 
                          <div class="form-group{{ $errors->has('monto') ? ' has-error' : '' }}">
-                            <label for="monto" class="col-md-4 control-label">Monto del proyecto</label>
+                            <label for="monto" class="col-md-4 control-label">Monto</label>
 
                             <div class="col-md-4">
-                                {!!Form::text('monto',null,['class'=>'form-control','id'=>'monto','readonly'])!!}
+                                {!!Form::number('monto',null,['class'=>'form-control','id'=>'monto','readonly','steps' => '0.00'])!!}
                             </div>
-                            <div class="col-md-2">
-                              <button class="btn btn-default" type="button" id="" data-toggle="modal" data-target="#btnfondos">Agregar nueva</button>
+                        </div>
+
+                        <div class="form-group{{ $errors->has('motivo') ? ' has-error' : '' }}">
+                            <label for="motivo" class="col-md-4 control-label">Justificación</label>
+
+                            <div class="col-md-6">
+                                {!!Form::textarea('motivo',null,['class'=>'form-control','id'=>'nombre','autofocus', 'rows'=>3])!!}
                             </div>
                         </div>
 
@@ -40,21 +45,64 @@
                         </div>
 
                         <div class="form-group">
+                          <center><label for="" class="col-md-12">Fondos del Proyecto</label></center>
+                        </div>
+
+                        <div class="form-group{{ $errors->has('direccion') ? ' has-error' : '' }}">
+                            <label for="" class="col-md-4 control-label">Categoría</label>
+
+                                <div class="col-md-6">
+                                  <select class="form-control chosen-select" id="cat_id">
+                                    <option value="">Seleccione una categoria</option>
+                                  </select>
+                                </div>
+                                <div class="col-md-2">
+                                  <button type="button" class="btn btn-default" name="button" id="" data-toggle="modal" data-target="#btncategoria"><span class="glyphicon glyphicon-plus"></span></button>
+                                </div>                   
+                        </div>
+
+                          <div class="form-group">
+                            <label for="" class="col-md-4 control-label">Ingrese el monto</label>
+                            <div class="col-md-6">
+                              <input type="number" id="cant_monto" class="form-control" step="0.00" min="0.00">
+                            </div>
+                            <div class="col-md-2">
+                                <button class="btn btn-default" type="button" id="btnAgregarfondo">Agregar</button>
+                            </div>                  
+                        </div>
+
+                        <div class="form-group">
+                            <label for="fecha_fin" class="col-md-4 control-label"></label>
+
+                            <div class="col-md-6">
+                                <table class="table table-striped table-bordered" id="tbFondos">
+                                    <thead>
+                                    <tr>
+                                        <th>Categoría</th>
+                                        <th>Cantidad</th>
+                                        <th>Acción</th>
+                                    </tr>
+                                    </thead>
+                                    <body></body>
+                                    <tfoot id="pie_monto">
+                                        <tr>
+                                            <td class="text-left" colspan="2">Total $</td>
+                                            <td colspan="2" style="text-align:right;" id="totalEnd">0.00</td>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
                           <label for="" class="col-md-6">¿El proyecto cuenta con una organizacion colaboradora?</label>
-                          <input type="checkbox" name="org" value="hola" id="colaboradora">
+                          <input type="checkbox" id="colaboradora">
                         </div>
 
                         <div class="form-group" id="cola">
 
                         </div>
 
-                        <div class="form-group{{ $errors->has('motivo') ? ' has-error' : '' }}">
-                            <label for="motivo" class="col-md-4 control-label">Motivo del proyecto</label>
-
-                            <div class="col-md-6">
-                                {!!Form::textarea('motivo',null,['class'=>'form-control','id'=>'nombre','autofocus', 'rows'=>3])!!}
-                            </div>
-                        </div>
 
                         <div class="form-group{{ $errors->has('beneficiarios') ? ' has-error' : '' }}">
                             <label for="fecha_fin" class="col-md-4 control-label">Beneficiarios</label>
@@ -64,58 +112,7 @@
                             </div>
                         </div>
 
-<div class="modal fade" data-backdrop="static" data-keyboard="false" id="btnfondos" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog" role="document">
-        <div class="row">
-            <div class="panel panel-primary">
-                <div class="panel-heading">Ingreso de fondos
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                </div>
-                <div class="panel-body">
-                  <div class="form-group">
-                    <label for="" class="col-md-4">Categoría</label>
-                    <div class="col-md-6">
-                      <select class="form-control" id="cat_id">
-                        <option value="">Seleccione una categoria</option>
-                      </select>
-                    </div>
-                    <div class="col-md-2">
-                      <button type="button" class="btn btn-default" name="button" id="" data-toggle="modal" data-target="#btncategoria"><span class="glyphicon glyphicon-plus"></span></button>
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label for="" class="col-md-4">Ingrese el monto</label>
-                    <div class="col-md-6">
-                      <input type="text" id="cant_monto" class="form-control">
-                    </div>
-                    <div class="col-md-2">
-                        <button class="btn btn-default" type="button" id="btnAgregarfondo">Agregar</button>
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <table class="table table-striped table-bordered" id="tbFondos">
-                      <tr>
-                        <th>Categoría</th>
-                        <th>Cantidad</th>
-                        <th>Acción</th>
-                      </tr>
-                      <body></body>
-                      <tfoot id="pie_monto">
-                          <tr>
-                            <td class="text-left" colspan="2">Total $</td>
-                            <td colspan="2" style="text-align:right;" id="totalEnd">0.00</td>
-                          </tr>
-                      </tfoot>
-                    </table>
-                  </div>
-                </div>
-                <div class="panel-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+
 
 <div class="modal fade" data-backdrop="static" data-keyboard="false" id="btncategoria" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">

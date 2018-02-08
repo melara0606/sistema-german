@@ -10,6 +10,7 @@ use App\Presupuesto;
 use App\Presupuestodetalle;
 use App\Fondocat;
 use App\Http\Requests\ProyectoRequest;
+use App\Http\Requests\FondocatRequest;
 
 class ProyectoController extends Controller
 {
@@ -48,7 +49,7 @@ class ProyectoController extends Controller
       }
     }
 
-    public function guardarCategoria(Request $request)
+    public function guardarCategoria(FondocatRequest $request)
     {
       if($request->ajax())
       {
@@ -90,6 +91,7 @@ class ProyectoController extends Controller
      */
     public function store(ProyectoRequest $request)
     {
+        //dd($request->all());
         Proyecto::create([
             'nombre' => $request->nombre,
             'monto' => $request->monto,

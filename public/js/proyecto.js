@@ -53,9 +53,11 @@ $(document).ready(function(){
     var cat = $("#cat_id").val() || 0;
     var cat_nombre = $("#cat_id option:selected").text() || 0;
     var cant_monto = $("#cant_monto").val() || 0;
+    var existe = $("#cat_id option:selected");
+
     if(cat && cant_monto){
       $(tbFondos).append(
-                 "<tr>"+
+                 "<tr data-categoria='"+cat+"'>"+
                      "<td>" + cat_nombre + "</td>" +
                      "<td>" + onFixed( parseFloat(cant_monto), 2 ) + "</td>" +
                      "<td>"+
@@ -68,8 +70,16 @@ $(document).ready(function(){
       $("#monto").val(onFixed(monto_total));
       $("#contador").val(contador_monto);
       $("#pie_monto #totalEnd").text(onFixed(monto_total));
+      $(existe).css("display", "none");
+      $("#cant_monto").val("");
+      $("#cat_id").val("");
+      $("#cat_id").trigger('chosen:updated');
     }else{
-      alert('hay error');
+       swal(
+              '¡Aviso!',
+              'Debe seleccionar una categoría y digitar el monto',
+              'warning'
+            )
     }
   });
 
@@ -88,7 +98,11 @@ $(document).ready(function(){
       success: function(){
         toastr.success('categoria creado éxitosamente');
         cargarFondos();
-      }
+        $("#cat_id").trigger('chosen:updated');
+      },
+      error : function(data){
+          toastr.error(data.responseJSON.categoria);
+        }
     });
   });
 
@@ -98,6 +112,7 @@ $(document).ready(function(){
         var totalFila=parseFloat($(this).parents('tr').find('td:eq(1)').text());
         total = parseFloat(totaltotal.text()) - parseFloat(totalFila);
         var totalValue = parseFloat(totaltotal.text()) - parseFloat(totalFila);
+        quitar_mostrar($(tr).attr("data-categoria"));
         tr.remove();
         $("#monto").val(onFixed(totalValue));
         $("#pie #totalEnd").text(onFixed(totalValue));
@@ -131,6 +146,16 @@ function cargarFondos(){
       html_select +='<option value="'+data[i].id+'">'+data[i].categoria+'</option>'
       //console.log(data[i]);
       $("#cat_id").html(html_select);
+      $("#cat_id").trigger('chosen:updated');
     }
   });
 }
+
+function quitar_mostrar (ID) {
+    $("#cat_id option").each(function (index, element) {
+      if($(element).attr("value") == ID ){
+        $(element).css("display", "block");
+      }
+    });
+    $("#cat_id").trigger('chosen:updated');
+  }
