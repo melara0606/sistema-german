@@ -57,8 +57,8 @@
                                   </select>
                                 </div>
                                 <div class="col-md-2">
-                                  <button type="button" class="btn btn-default" name="button" id="" data-toggle="modal" data-target="#btncategoria"><span class="glyphicon glyphicon-plus"></span></button>
-                                </div>                   
+                                  <button type="button" class="btn btn-primary" name="button" id="" data-toggle="modal" data-target="#btncategoria"><span class="glyphicon glyphicon-plus"></span></button>
+                                </div>
                         </div>
 
                           <div class="form-group">
@@ -67,8 +67,8 @@
                               <input type="number" id="cant_monto" class="form-control" step="0.00" min="0.00">
                             </div>
                             <div class="col-md-2">
-                                <button class="btn btn-default" type="button" id="btnAgregarfondo">Agregar</button>
-                            </div>                  
+                                <button class="btn btn-primary" type="button" id="btnAgregarfondo">Agregar</button>
+                            </div>
                         </div>
 
                         <div class="form-group">
@@ -99,8 +99,8 @@
                           <input type="checkbox" id="colaboradora">
                         </div>
 
-                        <div class="form-group" id="cola">
-
+                        <div class="form-group" >
+                          <center id="cola"></center>
                         </div>
 
 
@@ -132,6 +132,24 @@
                 <div class="panel-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
                     <button type="button" id="guardarcategoria" data-dismiss="modal" class="btn btn-success">Agregar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" data-backdrop="static" data-keyboard="false" id="btn_orga" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="row">
+            <div class="panel panel-primary">
+                <div class="panel-heading">Ingreso Org
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                </div>
+                <div class="panel-body">
+                  @include('proyectos.fondos_org.fondos_org')
+                </div>
+                <div class="panel-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
                 </div>
             </div>
         </div>

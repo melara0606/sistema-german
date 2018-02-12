@@ -14,12 +14,14 @@
 @section('content')
 <div class="container">
     <div class="row">
-        <div class="col-md-10 col-md-offset-1">
+        <div class="col-md-11">
             <div class="panel panel-primary">
                 <div class="panel-heading">Registro de proyectos</div>
                 <div class="panel-body">
                     {{ Form::open(['action'=> 'ProyectoController@store', 'class' => 'form-horizontal']) }}
                     @include('errors.validacion')
+                    <input type="text" name="contador_fondos" id="contador_fondos">
+                      <input type="text" name="contador_org" id="contador_org">
                     @include('proyectos.formulario')
 
                     <div class="form-group">
