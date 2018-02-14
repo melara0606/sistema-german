@@ -28,7 +28,9 @@ class AddColumnsNegocios extends Migration
     public function down()
     {
         Schema::table('negocios', function (Blueprint $table) {
-            //
+            $table->dropColumn('nombre');
+            $table->dropColumn('lat');
+            $table->dropColumn('lng');
         });
     }
 }

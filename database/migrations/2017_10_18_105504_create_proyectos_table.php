@@ -20,11 +20,10 @@ class CreateProyectosTable extends Migration
             $table->string('direccion');
             $table->date('fecha_inicio');
             $table->date('fecha_fin');
-            $table->bigInteger('organizacion_id')->unsigned()->nullable();
+            $table->string('beneficiarios');
             $table->integer('estado')->unsigned()->default(1);
             $table->string('motivo')->nullable();
             $table->date('fechabaja')->nullable();
-            $table->foreign('organizacion_id')->references('id')->on('organizacions');
             $table->timestamps();
         });
     }

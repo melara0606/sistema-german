@@ -9,8 +9,11 @@ use App\Bitacora;
 use App\Presupuesto;
 use App\Presupuestodetalle;
 use App\Fondocat;
+use App\Fondo;
+use App\Fondoorg;
 use App\Http\Requests\ProyectoRequest;
 use App\Http\Requests\FondocatRequest;
+use DB;
 
 class ProyectoController extends Controller
 {
@@ -91,8 +94,71 @@ class ProyectoController extends Controller
      */
     public function store(ProyectoRequest $request)
     {
+      if($request->ajax())
+      {
+        DB::beginTransaction();
+        try{
+        //invertir las fechas
+        $inicio = $request->fecha_inicio; //dd-mm-yy
+        $invert = explode("-",$inicio);
+        $inicio_invert = $invert[2]."-".$invert[1]."-".$invert[0];
+        $fin = $request->fecha_fin; //dd-mm-yy
+        $invertf = explode("-",$fin);
+        $fin_invert = $invertf[2]."-".$invertf[1]."-".$invertf[0];
+
+        $montosorg = $request->montosorg;
+        $count = count($montosorg);
+
+
+        $proyecto = Proyecto::create([
+            'nombre' => $request->nombre,
+            'monto' => $request->monto,
+            'direccion' => $request->direccion,
+            'fecha_inicio' => $inicio_invert,
+            'fecha_fin' => $fin_invert,
+            'organizacion_id' => $request->organizacion_id,
+            'motivo' => $request->motivo,
+            'beneficiarios' => $request->beneficiarios,
+        ]);
+
+          foreach ($montos as $monto) {
+            Fondo::create([
+              'proyecto_id' => $proyecto->id,
+              'fondocat_id' => $monto['categoria'],
+              'monto' => $monto['monto'],
+            ]);
+          }
+
+          if($count > 0)
+          {
+            foreach($montosorg as $montoorg)
+            {
+              Fondoorg::create([
+                'proyecto_id' => $proyecto->id,
+                'organizacion_id' => $montoorg['organizacion'],
+                'monto' => $montoorg['montoorg'],
+              ]);
+            }
+          }
+
+          bitacora('Registró un proyecto');
+          DB::commit();
+          return response()->json([
+            'mensaje' => 'exito'
+          ]);
+      }catch (\Exception $e){
+        DB::rollback();
+        return response()->json([
+          'mensaje' => 'error'
+        ]);
+        }
+
+
+
+
+      }
         //dd($request->all());
-        Proyecto::create([
+        /*Proyecto::create([
             'nombre' => $request->nombre,
             'monto' => $request->monto,
             'direccion' => $request->direccion,
@@ -108,6 +174,7 @@ class ProyectoController extends Controller
         ]);
         bitacora('Registró un proyecto');
         return redirect('proyectos')->with('mensaje','Registro almacenado con éxito');
+        */
     }
 
     /**

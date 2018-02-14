@@ -19,7 +19,7 @@
                             <label for="motivo" class="col-md-4 control-label">Justificación</label>
 
                             <div class="col-md-6">
-                                {!!Form::textarea('motivo',null,['class'=>'form-control','id'=>'nombre','autofocus', 'rows'=>3])!!}
+                                {!!Form::textarea('motivo',null,['class'=>'form-control','id'=>'motivo','autofocus', 'rows'=>3])!!}
                             </div>
                         </div>
 
@@ -83,7 +83,7 @@
                                         <th>Acción</th>
                                     </tr>
                                     </thead>
-                                    <body></body>
+                                    <tbody id="cuerpo_fondos"></tbody>
                                     <tfoot id="pie_monto">
                                         <tr>
                                             <td class="text-left" colspan="2">Total $</td>

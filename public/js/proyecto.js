@@ -3,6 +3,7 @@ var contador_org=0;
 var monto_total = 0.0;
 var monto_organizacion = 0.0;
 var monto = 0.0;
+var montosorg = new Array();
 $(document).ready(function(){
 
   cargarFondos();
@@ -37,7 +38,8 @@ $(document).ready(function(){
           $("#contador_org").val(contador_org);
           $("#monto").val(monto_total);
           $("#cola").empty();
-          $("#cuerpoorg").empty();
+          $("#cuerpo_org").empty();
+          montosorg = [];
           cargarOrganizacion();
           swal(
             '¡Eliminado!',
@@ -91,7 +93,7 @@ $(document).ready(function(){
       monto+=parseFloat(cant_monto);
       contador_monto++;
       $(tbFondos).append(
-                 "<tr data-categoria='"+cat+"'>"+
+                 "<tr data-categoria='"+cat+"' data-monto='"+cant_monto+"'>"+
                      "<td>" + cat_nombre + "</td>" +
                      "<td>" + onFixed( parseFloat(cant_monto), 2 ) + "</td>" +
                      "<td>"+
@@ -128,7 +130,7 @@ $(document).ready(function(){
     if(org && cant_monto_org){
       contador_org++;
       $(tbFondosorg).append(
-                 "<tr data-categoria='"+org+"'>"+
+                 "<tr data-organizacion='"+org+"' data-montoorg='"+cant_monto_org+"'>"+
                      "<td>" + org_nombre + "</td>" +
                      "<td>" + onFixed( parseFloat(cant_monto_org), 2 ) + "</td>" +
                      "<td>"+
@@ -178,6 +180,55 @@ $(document).ready(function(){
         }
     });
   });
+
+  $('#btnsubmit').on("click", function(e){
+    var ruta = "/sisverapaz/public/proyectos";
+    var token = $('meta[name="csrf-token"]').attr('content');
+    var montos = new Array();
+    var nombre = $("#nombre").val();
+    var monto = $("#monto").val();
+    var direccion = $("#direccion").val();
+    var motivo = $("#motivo").val();
+    var fecha_inicio = $("#fecha_inicio").val();
+    var fecha_fin = $("#fecha_fin").val();
+    var beneficiarios = $("#beneficiarios").val();
+    $(cuerpo_fondos).find("tr").each(function (index, element) {
+      if(element){
+        montos.push({
+          categoria : $(element).attr("data-categoria"),
+          monto : $(element).attr("data-monto")
+        });
+      }
+    });
+    $(cuerpo_org).find("tr").each(function (index, element) {
+      if(element){
+        montosorg.push({
+          organizacion : $(element).attr("data-organizacion"),
+          montoorg : $(element).attr("data-montoorg")
+        });
+      }
+    });
+    $.ajax({
+      url: ruta,
+      headers: {'X-CSRF-TOKEN':token},
+      type:'POST',
+      dataType:'json',
+      data:{nombre,monto,motivo,direccion,fecha_inicio,fecha_fin,beneficiarios,montos,montosorg},
+
+      success: function(msj){
+        //window.location.href = "/sisverapaz/public/proyectos";
+        console.log(msj);
+        toastr.success('categoria creado éxitosamente');
+      },
+      error: function(data, textStatus, errorThrown){
+				toastr.error('Ha ocurrido un '+textStatus+' en la solucitud');
+				$.each(data.responseJSON.errors, function( key, value ) {
+					toastr.error(value);
+			});
+			}
+    });
+  });
+
 
 //elimina un elemento de la tabla temporal de fondos y actualiza el monto total
   $(document).on("click", "#delete-btn", function (e) {
