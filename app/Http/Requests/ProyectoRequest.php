@@ -25,7 +25,7 @@ class ProyectoRequest extends FormRequest
     {
         return [
             'nombre' => 'required|min:3|max:150',
-            'monto' => 'required|numeric',
+            'monto' => 'required|numeric|min:1',
             'direccion' => 'required|max:255',
             'fecha_inicio' => 'required|date',
             'fecha_fin' => 'required|date',

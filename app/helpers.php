@@ -2,6 +2,15 @@
 use App\Bitacora;
 use App\Presupuesto;
 use App\Cargo;
+
+function invertir_fecha($fecha)
+{
+	$inicio = $fecha; //dd-mm-yy
+    $invert = explode("-",$inicio);
+    $nueva = $invert[2]."-".$invert[1]."-".$invert[0];
+    return $nueva;
+}
+
 function cantprov()
 {
 	$proveedores = App\Proveedor::all()->where('estado',1);

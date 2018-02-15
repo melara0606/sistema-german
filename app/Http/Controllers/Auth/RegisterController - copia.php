@@ -3,11 +3,19 @@
 namespace App\Http\Controllers\Auth;
 
 use App\User;
+use App\Empleado;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
+use Illuminate\Foundation\Auth\RedirectsUsers;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Auth\Events\Registered;
 
 class RegisterController extends Controller
+
+//trait RegistersUsers
+
 {
     /*
     |--------------------------------------------------------------------------
@@ -20,7 +28,57 @@ class RegisterController extends Controller
     |
     */
 
-    use RegistersUsers;
+    //use RegistersUsers;
+    use RedirectsUsers;
+
+    public function showRegistrationForm()
+    {
+        return view('auth.register');
+    }
+
+    protected function guard()
+    {
+        return Auth::guard();
+    }
+
+    public function register(Request $request)
+    {
+       $this->validator($request->all())->validate();
+
+       $empleado = Empleado::create([
+            'nombre' => $request->nombre,
+            'dui' => $request->dui,
+            'nit' => $request->nit,
+            'sexo' => $request->sexo,
+            'telefono_fijo' => $request->telefono_fijo,
+            'celular' => $request->celular,
+            'direccion' => $request->direccion,
+            'fecha_nacimiento' => $request->fecha_nacimiento,
+       ]);
+
+       //event(new Registered($user = $this->create($request->all())));
+
+       event(new Registered($user = $this->create([
+        'empleado_id' => $empleado->id,
+        'username' => $request->username,
+        'email' => $request->email,
+        'cargo' => $request->cargo,
+        'password' => $request->password,
+       ])));
+
+       $this->guard()->login($user);
+
+       return $this->registered($request, $user)
+                        ?: redirect($this->redirectPath());
+
+        /*event(new Registered($user = $this->create($request->all())));
+
+        $this->guard()->login($user);
+
+        return $this->registered($request, $user)
+                        ?: redirect($this->redirectPath());*/
+        //dd($request->All());
+    }
 
     /**
      * Where to redirect users after registration.
@@ -48,7 +106,14 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => 'required|string|max:255',
+            'nombre' => 'required|string|max:255',
+            'dui' => 'required',
+            'nit' => 'required',
+            'sexo' => 'required',
+            'telefono_fijo' => 'required',
+            'celular' => 'required',
+            'direccion' => 'required',
+            'fecha_nacimiento' => 'required',
             'username' => 'required|string|max:255|unique:users',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
@@ -64,12 +129,18 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        //dd($data);
         return User::create([
-            'name' => $data['name'],
+            'empleado_id' => $data['empleado_id'],
             'username' => $data['username'],
             'email' => $data['email'],
             'cargo' => $data['cargo'],
             'password' => bcrypt($data['password']),
         ]);
+    }
+
+    protected function registered(Request $request, $user)
+    {
+        //
     }
 }

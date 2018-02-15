@@ -98,38 +98,32 @@ class ProyectoController extends Controller
       {
         DB::beginTransaction();
         try{
-        //invertir las fechas
-        $inicio = $request->fecha_inicio; //dd-mm-yy
-        $invert = explode("-",$inicio);
-        $inicio_invert = $invert[2]."-".$invert[1]."-".$invert[0];
-        $fin = $request->fecha_fin; //dd-mm-yy
-        $invertf = explode("-",$fin);
-        $fin_invert = $invertf[2]."-".$invertf[1]."-".$invertf[0];
+          $montosorg = $request->montosorg;
+          $montos = $request->montos;
 
-        $montosorg = $request->montosorg;
-        $count = count($montosorg);
+          $proyecto = Proyecto::create([
+              'nombre' => $request->nombre,
+              'monto' => $request->monto,
+              'direccion' => $request->direccion,
+              'fecha_inicio' => invertir_fecha($request->fecha_inicio),
+              'fecha_fin' => invertir_fecha($request->fecha_fin),
+              'motivo' => $request->motivo,
+              'beneficiarios' => $request->beneficiarios,
+          ]);
 
-
-        $proyecto = Proyecto::create([
-            'nombre' => $request->nombre,
-            'monto' => $request->monto,
-            'direccion' => $request->direccion,
-            'fecha_inicio' => $inicio_invert,
-            'fecha_fin' => $fin_invert,
-            'organizacion_id' => $request->organizacion_id,
-            'motivo' => $request->motivo,
-            'beneficiarios' => $request->beneficiarios,
-        ]);
-
-          foreach ($montos as $monto) {
-            Fondo::create([
-              'proyecto_id' => $proyecto->id,
-              'fondocat_id' => $monto['categoria'],
-              'monto' => $monto['monto'],
-            ]);
+          if(isset($montos))
+          {
+            foreach ($montos as $monto) {
+              Fondo::create([
+                'proyecto_id' => $proyecto->id,
+                'fondocat_id' => $monto['categoria'],
+                'monto' => $monto['monto'],
+              ]);
+            }
           }
+          
 
-          if($count > 0)
+          if(isset($montosorg))
           {
             foreach($montosorg as $montoorg)
             {
@@ -141,7 +135,9 @@ class ProyectoController extends Controller
             }
           }
 
-          bitacora('Registró un proyecto');
+          //bitacora('Registró un proyecto');
+          
+          
           DB::commit();
           return response()->json([
             'mensaje' => 'exito'
@@ -149,7 +145,7 @@ class ProyectoController extends Controller
       }catch (\Exception $e){
         DB::rollback();
         return response()->json([
-          'mensaje' => 'error'
+          'mensaje' => $e->getMessage()
         ]);
         }
 

@@ -3,7 +3,7 @@ var contador_org=0;
 var monto_total = 0.0;
 var monto_organizacion = 0.0;
 var monto = 0.0;
-var montosorg = new Array();
+//var montosorg = new Array();
 $(document).ready(function(){
 
   cargarFondos();
@@ -39,7 +39,7 @@ $(document).ready(function(){
           $("#monto").val(monto_total);
           $("#cola").empty();
           $("#cuerpo_org").empty();
-          montosorg = [];
+          //montosorg = [];
           cargarOrganizacion();
           swal(
             '¡Eliminado!',
@@ -59,11 +59,11 @@ $(document).ready(function(){
 });
 
 	$('#guardarorganizacion').on("click", function(e){
-		var nombre = $("#nombre_org").val();
-    var direccion = $("#direccion_org").val();
-    var telefono = $("#telefono_org").val();
-    var representante = $("#representante_org").val();
-    var telrepre = $("#tel_representante_org").val();
+		var nombre_org = $("#nombre_org").val();
+    var direccion_org = $("#direccion_org").val();
+    var telefono_org = $("#telefono_org").val();
+    var representante_org = $("#representante_org").val();
+    var tel_representante_org = $("#tel_representante_org").val();
     var ruta = "/sisverapaz/public/proyectos/guardarorganizacion";
     var token = $('meta[name="csrf-token"]').attr('content');
     //alert(nombre);
@@ -72,11 +72,11 @@ $(document).ready(function(){
       headers: {'X-CSRF-TOKEN':token},
       type:'POST',
       dataType:'json',
-      data:{nombre_org:nombre,direccion_org:direccion,telefono_org:telefono,representante_org:representante,tel_representante_org:telrepre},
+      data:{nombre_org,direccion_org,telefono_org,representante_org,tel_representante_org},
 
       success: function(){
         toastr.success('Proyecto creado éxitosamente');
-        (this).cargarOrganizacion();
+        cargarOrganizacion();
       }
     });
 	});
@@ -102,7 +102,7 @@ $(document).ready(function(){
                      "<button type='button' id='delete-btn' class='btn btn-danger'>Eliminar</button></td>" +
                  "</tr>"
              );
-      monto_total=monto;
+      monto_total=monto+monto_organizacion;
       $("#monto").val(onFixed(monto_total));
       $("#contador_fondos").val(contador_monto);
       $("#pie_monto #totalEnd").text(onFixed(monto));
@@ -129,6 +129,7 @@ $(document).ready(function(){
 
     if(org && cant_monto_org){
       contador_org++;
+      monto_organizacion+=parseFloat(cant_monto_org);
       $(tbFondosorg).append(
                  "<tr data-organizacion='"+org+"' data-montoorg='"+cant_monto_org+"'>"+
                      "<td>" + org_nombre + "</td>" +
@@ -139,8 +140,8 @@ $(document).ready(function(){
                      "<button type='button' id='delete-monto_org' class='btn btn-danger'>Eliminar</button></td>" +
                  "</tr>"
              );
-      monto_organizacion+=parseFloat(cant_monto_org);
-      monto_total+=monto_organizacion;
+      monto_total=monto+monto_organizacion;
+      //monto_total=monto_total+monto_organizacion;
       $("#monto").val(onFixed(monto_total));
       $("#contador_org").val(contador_org);
       $("#pie_fondoorg #totalEndorg").text(onFixed(monto_organizacion));
@@ -184,7 +185,9 @@ $(document).ready(function(){
   $('#btnsubmit').on("click", function(e){
     var ruta = "/sisverapaz/public/proyectos";
     var token = $('meta[name="csrf-token"]').attr('content');
+    var tot=0.0;
     var montos = new Array();
+    var montosorg = new Array();
     var nombre = $("#nombre").val();
     var monto = $("#monto").val();
     var direccion = $("#direccion").val();
@@ -208,6 +211,8 @@ $(document).ready(function(){
         });
       }
     });
+    console.log(montosorg);
+    console.log(montos);
     $.ajax({
       url: ruta,
       headers: {'X-CSRF-TOKEN':token},
@@ -218,7 +223,7 @@ $(document).ready(function(){
       success: function(msj){
         //window.location.href = "/sisverapaz/public/proyectos";
         console.log(msj);
-        toastr.success('categoria creado éxitosamente');
+        toastr.success('Proyecto creado éxitosamente');
       },
       error: function(data, textStatus, errorThrown){
 				toastr.error('Ha ocurrido un '+textStatus+' en la solucitud');
@@ -254,7 +259,7 @@ $(document).ready(function(){
         auxiliar_org=parseFloat(totalFila);
         monto_organizacion = parseFloat(totaltotal.text()) - parseFloat(totalFila);
         monto_total=monto_total-auxiliar_org;
-        quitar_mostrar_org($(tr).attr("data-categoria"));
+        quitar_mostrar_org($(tr).attr("data-organizacion"));
         tr.remove();
         $("#monto").val(onFixed(monto_total));
         $("#pie_fondoorg #totalEndorg").text(onFixed(monto_organizacion));
