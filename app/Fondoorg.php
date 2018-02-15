@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Fondo extends Model
+class Fondoorg extends Model
 {
     protected $guarded = [];
 }

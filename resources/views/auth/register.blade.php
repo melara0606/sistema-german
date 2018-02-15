@@ -8,6 +8,7 @@
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.6 -->
   <link rel="stylesheet" href="{{ asset('css/sisverapaz.css') }}">
+  <script src="{{ asset('js/sisverapaz.js') }}"></script>
   <style>
     #scroll {
       background-color: #FFF;
@@ -17,7 +18,7 @@
     }
 </style>
 
- 
+
   <!-- iCheck -->
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -58,7 +59,7 @@
         </div>
     </div>
 </div>
-<script src="{{ asset('js/sisverapaz.js') }}"></script>
+
   <script>
   $.datepicker.regional['es'] = {
  closeText: 'Cerrar',
@@ -121,4 +122,3 @@
 
 </body>
 </html>
-

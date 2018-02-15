@@ -32,6 +32,7 @@ const { mix } = require('laravel-mix');
   'resources/assets/js/jquery.inputmask.js',
   'resources/assets/js/toastr.js',
   'resources/assets/js/jquery.steps.js',
+  'resources/assets/js/chosen.jquery.js',
   'resources/assets/js/vue.min.js',
 ], 'public/js/sisverapaz.js')
 .styles([
@@ -53,4 +54,5 @@ const { mix } = require('laravel-mix');
   'resources/assets/css/jquery-ui.css',
   'resources/assets/css/jquery-ui.theme.css',
   'resources/assets/css/jquery.steps.css',
+  'resources/assets/css/chosen.css',
 ],'public/css/sisverapaz.css');
