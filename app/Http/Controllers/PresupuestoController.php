@@ -24,7 +24,8 @@ class PresupuestoController extends Controller
      
     public function index()
     {
-        //
+        $presupuestos = Presupuesto::all();
+        return view('presupuestos.index',compact('presupuestos'));
     }
 
     /**
@@ -36,8 +37,9 @@ class PresupuestoController extends Controller
     {
       //$query = 'select proyectos."id",proyectos.nombre from proyectos inner join presupuestos on proyectos."id"=presupuestos."id"';
       //$proyectos = \DB::select(\DB::raw($query));
+
       $proyectos = Proyecto::all();
-        return view('presupuestos.create',compact('proyectos'));
+       return view('presupuestos.create',compact('proyectos'));
     }
 
     public function crear($id)
@@ -53,33 +55,38 @@ class PresupuestoController extends Controller
      */
     public function store(PresupuestoRequest $request)
     {
-      DB::beginTransaction();
-      try{
-        $count = $request->contador;
-        $presupuesto=Presupuesto::where('proyecto_id',$request->proyecto)->firstorFail();
-        //dd($pre);
-        $tot=$presupuesto->total;
-        //dd($tot);
-        $presupuesto->total=$tot+$request->total;
-        $presupuesto->save();
+        if ($request->ajax()) {
+            DB::beginTransaction();
+            try{
+                $presupuestos = $request->presupuestos;
 
-          for($i = 0; $i<$count;$i++){
-            Presupuestodetalle::create([
-              'presupuesto_id' => $presupuesto->id,
-              'material' => $request->materiales[$i],
-              'cantidad' => $request->cantidades[$i],
-              'preciou' => $request->precios[$i],
-            ]);
-          }
-          DB::commit();
-          return redirect('proyectos')->with('mensaje','Presupuesto registrado con éxito');
-      }catch (\Exception $e){
-        DB::rollback();
-        Session::flash('error','Presupuesto con error '.$e->getMessage());
-        return redirect('/presupuestos/crear/'.$request->proyecto);
-      }
+                $presupuesto = Presupuesto::create([
+                    'proyecto_id' => $request->proyecto_id,
+                    'total' => $request->total,
+                ]);
 
-
+                  foreach($presupuestos as $presu){
+                    Presupuestodetalle::create([
+                      'presupuesto_id' => $presupuesto->id,
+                      'material' => $presu['descripcion'],
+                      'cantidad' => $presu['cantidad'],
+                      'preciou' => $presu['precio'],
+                      'unidad' => $presu['unidad'],
+                      'item' => $presu['item'],
+                      'categoria' => $presu['categoria'],
+                    ]);
+                  }
+                  DB::commit();
+                  return response()->json([
+                    'mensaje' => 'exito'
+                  ]);
+            }catch (\Exception $e){
+                DB::rollback();
+                return response()->json([
+                    'mensaje' => $e->getMessage()
+                  ]);
+            }
+        }
     }
 
     /**
@@ -90,7 +97,9 @@ class PresupuestoController extends Controller
      */
     public function show($id)
     {
-        //
+        $presupuesto = Presupuesto::findorFail($id);
+        $detalles = Presupuestodetalle::where('presupuesto_id',$presupuesto->id)->orderby('item','ASC')->get();
+        return view('presupuestos.show',compact('presupuesto','detalles'));
     }
 
     /**

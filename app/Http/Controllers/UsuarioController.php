@@ -71,7 +71,7 @@ class UsuarioController extends Controller
     public function store(UsuariosRequest $request)
     {
         User::create([
-            'name' => $request['name'],
+            'empleado_id' => $request['name'],
             'username' => $request['username'],
             'email' => $request['email'],
             'cargo' => $request['cargo'],

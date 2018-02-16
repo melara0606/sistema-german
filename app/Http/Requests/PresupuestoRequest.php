@@ -24,9 +24,9 @@ class PresupuestoRequest extends FormRequest
     public function rules()
     {
         return [
-            'materiales' => 'required',
-            'cantidades' => 'required',
-            'precios' => 'required',
+            'proyecto_id' => 'required',
+            'presupuestos' => 'required',
+            'total' => 'required|numeric|min:1'
         ];
     }
 }

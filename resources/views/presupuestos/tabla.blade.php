@@ -1,16 +1,19 @@
 <table class="table table-striped table-bordered" id="tbMaterial">
       <thead>
-          <th>Materiales</th>
+          <th>Item</th>
+          <th>Categoría</th>
+          <th>Descripción</th>
+          <th>Unidad de medida</th>
           <th>Cantidad</th>
           <th>Precio unitario</th>
-          <th>Sub total</th>
+          <th>Subtotal</th>
           <th>Acción</th>
       </thead>
-      <tbody></tbody>
+      <tbody id="cuerpo"></tbody>
       <tfoot id="pie">
           <tr>
-            <td class="text-left" colspan="2">Total $</td>
-            <td colspan="5" style="text-align:right;" id="totalEnd">0.00</td>
+            <td class="text-left" colspan="7">Total $</td>
+            <td colspan="1" style="text-align:right;" id="totalEnd">0.00</td>
           </tr>
       </tfoot>
 </table>
