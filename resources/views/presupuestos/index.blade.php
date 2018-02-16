@@ -2,118 +2,112 @@
 
 @section('migasdepan')
 <h1>
-Ver detalle del plan anual
+        Presupuestos
       </h1>
       <ol class="breadcrumb">
         <li><a href="{{ url('/home') }}"><i class="glyphicon glyphicon-home"></i> Inicio</a></li>
-        <li><a href="{{ url('/paacs') }}"><i class="fa fa-dashboard"></i> Proyecto</a></li>
-        <li class="active">Detalle del presupuesto</li>
+        <li class="active">Presupuestos</li>
       </ol>
 @endsection
 
 @section('content')
-<div class="container">
-    <div class="row">
-        <div class="col-md-11">
-            <div class="panel panel-primary">
-                <div class="panel-heading">Datos del plan anual de compras </div>
-                <div class="panel-body">
-                  <a href="{{ url('/paacs/create') }}" class="btn btn-success"><span class="glyphicon glyphicon-plus-sign"></span> Agregar elementos</a>
-
-                        <div class="form-group{{ $errors->has('nombre') ? ' has-error' : '' }}">
-                            <label for="nombre" class="col-md-4 control-label">Unidad administrativa: </label>
-                            <label for="nombre" class="col-md-4 control-label">{{$paac->anio}}</label><br>
-                        </div>
-
-                         <div class="form-group{{ $errors->has('monto') ? ' has-error' : '' }}">
-                            <label for="monto" class="col-md-4 control-label">Linea de trabajo: </label>
-                            <label for="nombre" class="col-md-4 control-label">{{$paac->descripcion}}</label><br>
-                        </div>
-
-                        <div class="form-group{{ $errors->has('fuente_financiamiento') ? ' has-error' : '' }}">
-                            <label for="direccion" class="col-md-4 control-label">Fuente de financiamiento: </label>
-                            <label for="nombre" class="col-md-4 control-label">{{$paac->total}}</label><br>
-                        </div>
-
-
-
-                        <div style="overflow-x:auto;">
-                          <table class="table table-bordered table-striped table-hover table-condensed">
-                            <thead>
-                              <tr>
-                                <th>Obra, bien o servicio</th>
-                                <th>enero</th>
-                                <th>febrero</th>
-                                <th>marzo</th>
-                                <th>abril</th>
-                                <th>mayo</th>
-                                <th>junio</th>
-                                <th>julio</th>
-                                <th>agosto</th>
-                                <th>septiembre</th>
-                                <th>octubre</th>
-                                <th>noviembre</th>
-                                <th>diciembre</th>
-                                <th>total</th>
-                                <th>Acción</th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                              @foreach($detalles as $detalle)
-                              <tr>
-                                <td>{{$detalle->obra}}</td>
-                                <td>$ {{$detalle->enero}}</td>
-                                <td>$ {{$detalle->febrero}}</td>
-                                <td>$ {{$detalle->marzo}}</td>
-                                <td>$ {{$detalle->abril}}</td>
-                                <td>$ {{$detalle->mayo}}</td>
-                                <td>$ {{$detalle->junio}}</td>
-                                <td>$ {{$detalle->julio}}</td>
-                                <td>$ {{$detalle->agosto}}</td>
-                                <td>$ {{$detalle->septiembre}}</td>
-                                <td>$ {{$detalle->octubre}}</td>
-                                <td>$ {{$detalle->noviembre}}</td>
-                                <td>$ {{$detalle->diciembre}}</td>
-                                <td>$ {{$detalle->subtotal}}</td>
-                                <td>
-                                  {{ Form::open(['route' => ['paacdetalles.destroy', $detalle->id ], 'method' => 'DELETE', 'class' => 'form-horizontal'])}}
-                                  <a href="{{url('paacdetalles/'.$detalle->id.'/edit')}}" class="btn btn-warning"><span class="glyphicon glyphicon-text-size"></span></a>
-                                  <button class="btn btn-danger" type="button" onclick="
-                                  return swal({
-                                    title: 'Eliminar obra',
-                                    text: '¿Está seguro de eliminar la obra?',
-                                    type: 'question',
-                                    showCancelButton: true,
-                                    confirmButtonText: 'Si, Eliminar',
-                                    cancelButtonText: 'No, Mantener',
-                                    confirmButtonClass: 'btn btn-danger',
-                                    cancelButtonClass: 'btn btn-default',
-                                    buttonsStyling: false
-                                  }).then(function(){
-                                    submit();
-                                  }, function(dismiss){
-                                    if(dismiss == 'cancel'){
-                                      swal('Cancelado', 'El registro se mantiene','info')
-                                    }
-                                  })" ; ><span class="glyphicon glyphicon-trash"></span></button>
-                                  {{ Form::close()}}
-                                </td>
-                              </tr>
-                              @endforeach
-                            </tbody>
-                            <tfoot>
-                              <tr>
-                                  <th>totales</th>
-                              </tr>
-
-                            </tfoot>
-                          </table>
-                        </div>
-
-
-                </div>
+<div class="row">
+<div class="col-xs-12">
+          <div class="box">
+            <div class="box-header">
+              <h3 class="box-title">Listado</h3>
+              <div class="btn-group pull-right">
+                <a href="{{ url('/presupuestos/create') }}" class="btn btn-success"><span class="glyphicon glyphicon-plus-sign"></span> Agregar</a>
+                <a href="{{ url('/presupuestos?estado=1') }}" class="btn btn-primary">Activos</a>
+                <a href="{{ url('/presupuestos?estado=2') }}" class="btn btn-primary">Papelera</a>
+              </div>
             </div>
+            <!-- /.box-header -->
+            <div class="box-body table-responsive">
+              <table class="table table-striped table-bordered table-hover" id="example2">
+          <thead>
+                  <th>Id</th>
+                  <th>Año</th>
+                  <th>Proyecto</th>
+                  <th>Monto</th>
+                  <th>Accion</th>
+                </thead>
+                <tbody>
+                  @foreach($presupuestos as $presupuesto)
+                    <tr>
+                      <td>{{$presupuesto->id}}</td>
+                      <td>{{$presupuesto->created_at->format('Y')}}</td>
+                      <td>{{$presupuesto->proyecto->nombre}}</td>
+                      <td>${{number_format($presupuesto->total,2)}}</td>
+                      <td><a href="{{url('presupuestos/'.$presupuesto->id)}}" class="btn btn-primary btn-sm">Ver</a></td>
+                    </tr>
+                  @endforeach
+                </tbody>
+              </table>
+                <script>
+                    function baja(id)
+                    {
+                        swal({
+                            title: 'Motivo dar de baja',
+                            input: 'text',
+                            showCancelButton: true,
+                            confirmButtonText: 'Dar de baja',
+                            showLoaderOnConfirm: true,
+                            preConfirm: function (text) {
+                                return new Promise(function (resolve, reject) {
+                                    setTimeout(function() {
+                                        if (text === '') {
+                                            reject('Debe ingresar el motivo')
+                                        } else {
+                                            resolve()
+                                        }
+                                    }, 2000)
+                                })
+                            },
+                            allowOutsideClick: false
+                        }).then(function (text) {
+                            var dominio = window.location.host;
+                            var form = $(this).parents('form');
+                            $('#baja').attr('action','http://'+dominio+'/sisverapaz/public/proyectos/baja/'+id+'+'+text);
+                            //document.getElmentById('baja').submit();
+                            $('#baja').submit();
+                            swal({
+                                type: 'success',
+                                title: 'Se dio de baja',
+                                html: 'Submitted motivo: ' + text
+                            })
+                        });
+                    }
+
+                    function alta(id)
+                    {
+                        swal({
+                            title: 'Dar de alta',
+                            showCancelButton: true,
+                            confirmButtonText: 'Dar de alta',
+                            showLoaderOnConfirm: true,
+                            allowOutsideClick: false
+                        }).then(function () {
+                            var dominio = window.location.host;
+                            var form = $(this).parents('form');
+                            $('#alta').attr('action','http://'+dominio+'/sisverapaz/public/proyectos/alta/'+id);
+                            //document.getElmentById('baja').submit();
+                            $('#alta').submit();
+                            swal({
+                                type: 'success',
+                                title: 'Se dio de alta',
+                                html: 'Submitted motivo: '
+                            })
+                        });
+                    }
+                </script>
+              <div class="pull-right">
+
+              </div>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
         </div>
-    </div>
 </div>
 @endsection

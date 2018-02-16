@@ -4,30 +4,33 @@ var contador = 0;
     var tbMaterial = $("#tbMaterial");
 
      $("#agregar").on("click", function(e) {
-    //     //var tr     = $(e.target).parents("tr"),
+    // 
 
          e.preventDefault();
-             material = $("#material").val()    || 0,
-             canti  = $("#cantidad").val() || 0,
+             descripcion = $("#descripcion").val()    || 0,
+             item = $("#item").val()    || 0,
+             categoria = $("#categoria").val() || 0,
+             cantidad  = $("#cantidad").val() || 0,
+             unidad = $("#unidad").val() || 0,
              precio = $("#precio").val() || 0;
 
-         if(material && canti && precio){
-             var subtotal = parseFloat(precio) * parseFloat(canti);
+         if(descripcion && cantidad && precio && item && unidad && categoria){
+             var subtotal = parseFloat(precio) * parseFloat(cantidad);
              contador++;
              $(tbMaterial).append(
-                 "<tr data-material='"+material+"' data-cantidad='"+canti+"' data-precio='"+precio+"' >"+
-                     "<td>" + material + "</td>" +
-                     "<td>" + canti+ "</td>" +
-                     "<td>" + precio + "</td>" +
+                 "<tr data-item='"+item+"' data-categoria='"+categoria+"' data-descripcion='"+descripcion+"' data-unidad='"+unidad+"' data-cantidad='"+cantidad+"' data-precio='"+precio+"' >"+
+                     "<td>" + item + "</td>" +
+                     "<td>" + categoria + "</td>" + 
+                     "<td>" + descripcion + "</td>" +
+                     "<td>" + unidad + "</td>" +
+                     "<td>" + cantidad+ "</td>" +
+                     "<td> $" + precio + "</td>" +
                      "<td>" + onFixed( subtotal, 2 ) + "</td>" +
                      "<td>"+
-                     "<input type='hidden' name='materiales[]' value='"+material+"' />"+
-                     "<input type='hidden' name='cantidades[]' value='"+canti+"' />"+
-                     "<input type='hidden' name='precios[]' value='"+precio+"' />"+
                      "<button type='button' id='delete-btn' class='btn btn-danger'>Eliminar</button></td>" +
                  "</tr>"
              );
-             total +=( parseFloat(canti) * parseFloat(precio) );
+             total +=( parseFloat(cantidad) * parseFloat(precio) );
              $("#total").val(onFixed(total));
              $("#contador").val(contador);
              $("#pie #totalEnd").text(onFixed(total));
@@ -42,82 +45,55 @@ var contador = 0;
          }
      });
 
-    function onDisplayTotal () {
-
-    };
-
-    $("#btnsub").on("click", function (e) {
-        var elementos = new Array(),
-            token        = null;
-            proyecto  = null;
-            totalpre     = null;
-        $(tbMaterial).find("tr").each(function (index, element) {
+    $("#btnsubmit").on("click", function (e) {
+        ////// obtener todos los datos y convertirlos a json /////////////////////////////////////////////
+        var ruta = "/sisverapaz/public/presupuestos";
+        var token = $('meta[name="csrf-token"]').attr('content');
+        var total = $("#total").val();
+        var proyecto_id = $("#proyecto").val();
+        var presupuestos = new Array();
+        $(cuerpo).find("tr").each(function (index, element) {
             if(element){
-                elementos.push({
-                    material : $(element).attr("data-material"),
+                presupuestos.push({
+                    item : $(element).attr("data-item"),
+                    categoria : $(element).attr("data-categoria"),
+                    descripcion : $(element).attr("data-descripcion"),
+                    unidad : $(element).attr("data-unidad"),
                     cantidad :$(element).attr("data-cantidad"),
-                    precio   : $(element).attr("data-precio")
+                    precio : $(element).attr("data-precio")
                 });
-                //total = totalp+(parseFloat(cantidad))*(parseFloat(precio));
-            }
-            token = $("#_token").val();
-            proyecto = $("#proyecto").val();
-            totalpre    = $("#pie #totalEnd").text();
+            }    
         });
-
-       /*var elemento = {
-            cliente : cliente,
-            mejora  : mejora,
-            trabajados : trabajados,
-            total   : totalpre,
-            elementos : arrayElement
-        };*/
+        console.log(presupuestos);
 
 
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////// funcion ajax para guardar ///////////////////////////////////////////////////////////////////
         $.ajax({
-            type: "POST",
-            headers: {'X-CSRF-TOKEN' : token },
-            url: '/alcaldia/public/presupuestos',
-            dataType: 'json',
-            data: {materiales: elementos, presupuesto: presupuesto, total: totalpre },
+            url: ruta,
+            headers: {'X-CSRF-TOKEN':token},
+            type:'POST',
+            dataType:'json',
+            data: {proyecto_id,total,presupuestos},
            success : function(msj){
-                //alert('Dato insertado');
-                console.log(msj.responseJSON);
-                window.location.reload();
+                //window.location.href = "/sisverapaz/public/proyectos";
+                console.log(msj);
+                toastr.success('Presupuesto registrado éxitosamente');
             },
-            error : function(msj){
-                //console.log(msj.responseJSON);
-
-
+            error: function(data, textStatus, errorThrown){
+                toastr.error('Ha ocurrido un '+textStatus+' en la solucitud');
+                $.each(data.responseJSON.errors, function( key, value ) {
+                    toastr.error(value);
+            });
             }
       });
-
-        /*$.post("", elemento)
-        .done(function (response) {
-            console.log(response);
-            if(response){
-                  alert("guardo");
-
-                //win2ow.location.reload();
-            }
-
-        });*/
     });
 
     $(document).on("click", "#delete-btn", function (e) {
         var tr     = $(e.target).parents("tr"),
             totaltotal  = $("#totalEnd");
-          //alert(total.text());
-        var totalFila=parseFloat($(this).parents('tr').find('td:eq(3)').text());
-        //var total = $(this).find("td:eq(5)").text();
-            //alert(totalFila);
+        var totalFila=parseFloat($(this).parents('tr').find('td:eq(6)').text());
             total = parseFloat(totaltotal.text()) - parseFloat(totalFila);
         var totalValue = parseFloat(totaltotal.text()) - parseFloat(totalFila);
-        //subtotal=totalValue;
-        //alert(totalValue);
-        //total.text(onTixed(totalValue));
-        //total2 = (on2ixed(totalValue));
         tr.remove();
         $("#total").val(onFixed(totalValue));
         $("#pie #totalEnd").text(onFixed(totalValue));
@@ -126,22 +102,14 @@ var contador = 0;
     });
 
     function clearForm () {
-        $("#presupuesto").find("#material,#precio,#cantidad").each(function (index, element) {
+        $("#presupuesto").find("#descripcion,#precio,#cantidad,#unidad").each(function (index, element) {
             $(element).val("");
         });
-
-    }
-
-    function onDisplaySelect (productoID) {
-        $("#producto option").each(function (index, element) {
-            if($(element).attr("value") == productoID ){
-                $(element).css("display", "block");
-            }
-     });
     }
 
     function onFixed (valor, maximum) {
         maximum = (!maximum) ? 2 : maximum;
         return valor.toFixed(maximum);
     }
+
 });

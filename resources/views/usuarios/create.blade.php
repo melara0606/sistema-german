@@ -20,14 +20,14 @@
                 <div class="panel-heading">Registro de Usuarios</div>
                 <div class="panel-body">
                     {{ Form::open(['action' => 'UsuarioController@store','class' => 'form-horizontal']) }}
-
+                        @include('errors.validacion')
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                             <label for="name" class="col-md-4 control-label">Nombre</label>
 
                             <div class="col-md-6">
                               <select class="form-control" name="name">
                                 @foreach ($contratos as $contrato)
-                                  <option value="{{$contrato->empleado->nombre}}">{{$contrato->empleado->nombre}}</option>
+                                  <option value="{{$contrato->empleado->id}}">{{$contrato->empleado->nombre}}</option>
                                 @endforeach
                               </select>
                                 @if ($errors->has('name'))
