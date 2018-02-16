@@ -402,6 +402,14 @@
 				     format: 'dd-mm-yyyy'
 		         });
 
+          $('#calendario').fullCalendar({
+            dayClick: function(){
+              alert('Fecha seleccionada!');
+            },
+            weekends: false,
+            lang:'es'
+          });
+
              $("#fecha_inicio").datepicker({
                selectOtherMonths: true,
                changeMonth: true,

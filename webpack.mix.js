@@ -34,6 +34,8 @@ const { mix } = require('laravel-mix');
   'resources/assets/js/jquery.steps.js',
   'resources/assets/js/chosen.jquery.js',
   'resources/assets/js/vue.min.js',
+  'resources/assets/js/fullcalendar.js',
+  'resources/assets/js/es.js',
 ], 'public/js/sisverapaz.js')
 .styles([
 	'resources/assets/css/_all-skins.css',
@@ -55,4 +57,5 @@ const { mix } = require('laravel-mix');
   'resources/assets/css/jquery-ui.theme.css',
   'resources/assets/css/jquery.steps.css',
   'resources/assets/css/chosen.css',
+  'resources/assets/css/fullcalendar.css',
 ],'public/css/sisverapaz.css');
