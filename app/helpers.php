@@ -25,6 +25,12 @@ function empleado_prestamo($id)
 	return $nombre;
 }
 
+function nombre_proyecto($id)
+{
+	$proyecto = App\Proyecto::where('id',$id)->first();
+	return $proyecto->nombre;
+}
+
 function cantcontri()
 {
     $contribuyentes = App\Contribuyente::all()->where('estado',1);

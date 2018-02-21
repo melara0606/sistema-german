@@ -14,64 +14,64 @@
                         <div class="form-group">
                             <div class="col-md-4">
                             <label for="" class="col-md-2 control-label">Enero</label>
-                                  {{ Form::text('ene', null,['class' => 'form-control money','id' => 'ene']) }}
+                                  {{ Form::number('ene', null,['class' => 'form-control ','id' => 'ene','steps' => 0.00,'min' => 0]) }}
 
                             </div>
                             <div class="col-md-4">
                                 <label for="" class="col-md-2 control-label">Febrero</label>
-                                  {{ Form::text('feb', null,['class' => 'form-control money','id' => 'feb']) }}
+                                  {{ Form::number('feb', null,['class' => 'form-control ','id' => 'feb','steps' => 0.00,'min' => 0]) }}
                             </div>
                             <div class="col-md-4">
                                 <label for="" class="col-md-2 control-label">Marzo</label>
-                                  {{ Form::text('mar', null,['class' => 'form-control money','id' => 'mar']) }}
+                                  {{ Form::number('mar', null,['class' => 'form-control ','id' => 'mar','steps' => 0.00,'min' => 0]) }}
                             </div>
                         </div>
 
                         <div class="form-group">
                             <div class="col-md-4">
                             <label for="" class="col-md-2 control-label">Abril</label>
-                                  {{ Form::text('abr', null,['class' => 'form-control money','id' => 'abr']) }}
+                                  {{ Form::number('abr', null,['class' => 'form-control ','id' => 'abr','steps' => 0.00,'min' => 0]) }}
 
                             </div>
                             <div class="col-md-4">
                                 <label for="" class="col-md-2 control-label">Mayo</label>
-                                  {{ Form::text('may', null,['class' => 'form-control money','id' => 'may']) }}
+                                  {{ Form::number('may', null,['class' => 'form-control ','id' => 'may','steps' => 0.00,'min' => 0]) }}
                             </div>
                             <div class="col-md-4">
                                 <label for="" class="col-md-2 control-label">Junio</label>
-                                  {{ Form::text('jun', null,['class' => 'form-control money','id' => 'jun']) }}
+                                  {{ Form::number('jun', null,['class' => 'form-control ','id' => 'jun','steps' => 0.00,'min' => 0]) }}
                             </div>
                         </div>
 
                         <div class="form-group">
                             <div class="col-md-4">
                             <label for="" class="col-md-2 control-label">Julio</label>
-                                  {{ Form::text('jul', null,['class' => 'form-control money','id' => 'jul']) }}
+                                  {{ Form::number('jul', null,['class' => 'form-control','id' => 'jul','steps' => 0.00,'min' => 0]) }}
 
                             </div>
                             <div class="col-md-4">
                                 <label for="" class="col-md-2 control-label">Agosto</label>
-                                  {{ Form::text('ago', null,['class' => 'form-control money','id' => 'ago']) }}
+                                  {{ Form::number('ago', null,['class' => 'form-control','id' => 'ago','steps' => 0.00,'min' => 0]) }}
                             </div>
                             <div class="col-md-4">
                                 <label for="" class="col-md-2 control-label">Septiembre</label>
-                                  {{ Form::text('sep', null,['class' => 'form-control money','id' => 'sep']) }}
+                                  {{ Form::number('sep', null,['class' => 'form-control','id' => 'sep','steps' => 0.00,'min' => 0]) }}
                             </div>
                         </div>
 
                         <div class="form-group">
                             <div class="col-md-4">
                             <label for="" class="col-md-2 control-label">Octubre</label>
-                                  {{ Form::text('oct', null,['class' => 'form-control money','id' => 'oct']) }}
+                                  {{ Form::number('oct', null,['class' => 'form-control','id' => 'oct','steps' => 0.00,'min' => 0]) }}
 
                             </div>
                             <div class="col-md-4">
                                 <label for="" class="col-md-2 control-label">Noviembre</label>
-                                  {{ Form::text('nov', null,['class' => 'form-control money','id' => 'nov']) }}
+                                  {{ Form::number('nov', null,['class' => 'form-control','id' => 'nov','steps' => 0.00,'min' => 0]) }}
                             </div>
                             <div class="col-md-4">
                                 <label for="" class="col-md-2 control-label">Diciembre</label>
-                                  {{ Form::text('dic', null,['class' => 'form-control money','id' => 'dic']) }}
+                                  {{ Form::number('dic', null,['class' => 'form-control','id' => 'dic','steps' => 0.00,'min' => 0]) }}
                             </div>
                         </div>
 

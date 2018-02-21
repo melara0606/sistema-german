@@ -5,10 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 
 class Admin
-{
-    protected $auth;
-
-    
+{   
     /**
      * Handle an incoming request.
      *

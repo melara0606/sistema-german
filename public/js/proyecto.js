@@ -221,7 +221,7 @@ $(document).ready(function(){
       data:{nombre,monto,motivo,direccion,fecha_inicio,fecha_fin,beneficiarios,montos,montosorg},
 
       success: function(msj){
-        //window.location.href = "/sisverapaz/public/proyectos";
+        window.location.href = "/sisverapaz/public/proyectos";
         console.log(msj);
         toastr.success('Proyecto creado éxitosamente');
       },

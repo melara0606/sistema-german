@@ -455,6 +455,65 @@
 
 
       });
+
+                      function baja(id,ruta)
+                        {
+                            swal({
+                              title: 'Motivo por el que da de baja',
+                              input: 'text',
+                              showCancelButton: true,
+                              confirmButtonText: 'Dar de baja',
+                              showLoaderOnConfirm: true,
+                              preConfirm: (text) => {
+                                return new Promise((resolve) => {
+                                  setTimeout(() => {
+                                    if (text === '') {
+                                      swal.showValidationError(
+                                        'El motivo es requerido.'
+                                      )
+                                    }
+                                    resolve()
+                                  }, 2000)
+                                })
+                              },
+                              allowOutsideClick: () => !swal.isLoading()
+                            }).then((result) => {
+                              if (result.value) {
+                                var dominio = window.location.host;
+                                var form = $(this).parents('form');
+                                $('#baja').attr('action','http://'+dominio+'/sisverapaz/public/'+ruta+'/baja/'+id+'+'+result.value);
+                                //document.getElmentById('baja').submit();
+                                $('#baja').submit();
+                                swal({
+                                  type: 'success',
+                                  title: 'Solicitud finalizada',
+                                  html: 'Motivo: ' + result.value
+                                })
+                              }
+                            })
+                        }
+
+                        function alta(id,ruta)
+                        {
+                            swal({
+                                title: 'Dar de alta',
+                                showCancelButton: true,
+                                confirmButtonText: 'Dar de alta',
+                                showLoaderOnConfirm: true,
+                                allowOutsideClick: false
+                            }).then(function () {
+                                var dominio = window.location.host;
+                                var form = $(this).parents('form');
+                                $('#alta').attr('action','http://'+dominio+'/sisverapaz/public/'+ruta+'/alta/'+id);
+                                //document.getElmentById('baja').submit();
+                                $('#alta').submit();
+                                swal({
+                                    type: 'success',
+                                    title: 'Se dio de alta',
+                                    html: 'Submitted motivo: '
+                                })
+                            })
+                        }
   </script>
 
   <script>

@@ -23,18 +23,18 @@
                     <table class="table table-striped table-bordered table-hover" id="example2">
                         <thead>
                         <th>Id</th>
-                        <th>Nombre del servicio municipal</th>
+                        <th>Nombre de la unidad</th>
                         <th>Accion</th>
                         </thead>
                         <tbody>
-                        @foreach($tiposervicios as $tiposervicio)
+                        @foreach($unidaddes as $unidad)
                             <tr>
-                                <td>{{ $tiposervicio->id }}</td>
-                                <td>{{ $tiposervicio->nombre }}</td>
+                                <td>{{ $unidad->id }}</td>
+                                <td>{{ $unidad->nombre }}</td>
                                 <td>
                                     {{ Form::open(['method' => 'POST', 'id' => 'baja', 'class' => 'form-horizontal'])}}
-                                        <a href="{{ url('tiposervicios/'.$tiposervicio->id) }}" class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-eye-open"></span></a>
-                                        <a href="{{ url('/tiposervicios/'.$tiposervicio->id.'/edit') }}" class="btn btn-warning btn-xs"><span class="glyphicon glyphicon-text-size"></span></a>
+                                        <a href="{{ url('tiposervicios/'.$unidad->id) }}" class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-eye-open"></span></a>
+                                        <a href="{{ url('/tiposervicios/'.$unidad->id.'/edit') }}" class="btn btn-warning btn-xs"><span class="glyphicon glyphicon-text-size"></span></a>
                                     {{ Form::close()}}
                                 </td>
                             </tr>
