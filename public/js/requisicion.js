@@ -31,13 +31,18 @@ $(document).ready(function(){
 				swal(
 					 '¡Aviso!',
 					 'Debe llenar todos los campos',
-					 'warning'
-)
+					 'warning')
 			}
 		}
 
 
 	});
+
+	$("#proyecto").on("change", function(){
+		var id = $(this).val();
+		alert(id);
+	});
+
 	$(document).on("click","#eliminar",function(e){
 		var tr= $(e.target).parents("tr");
 		tr.remove();

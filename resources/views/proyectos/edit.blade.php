@@ -2,7 +2,7 @@
 
 @section('migasdepan')
 <h1>
-      Editar Proyecto: <small> {{ $proyecto->nombre }} </small>
+      Editar datos generales del proyecto: <small> {{ $proyecto->nombre }} </small>
 </h1>
       <ol class="breadcrumb">
         <li><a href="{{ url('/home') }}"><i class="glyphicon glyphicon-home"></i> Inicio</a></li>
@@ -17,11 +17,11 @@
         <div class="panel panel-default">
             <div class="panel-body">
                 {{ Form::model($proyecto, array('method' => 'put', 'class' => 'form-horizontal' , 'route' => array('proyectos.update', $proyecto->id))) }}
-                 @include('proyectos.formulario')
+                @include('proyectos.formularioedit')
                 @include('errors.validacion')
                     <div class="form-group">
                         <div class="col-md-6 col-md-offset-2">
-                            <button type="submit" class="btn btn-primary btn-lg">
+                            <button type="submit" class="btn btn-success">
                                 <span class="glyphicon glyphicon-floppy-disk"></span>    Editar
                             </button>
                         </div>
@@ -31,4 +31,7 @@
         </div>
     </div>
 </div>
+@endsection
+@section('scripts')
+{!! Html::script('js/proyecto.js') !!}
 @endsection

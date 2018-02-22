@@ -73,6 +73,40 @@ class ProyectoController extends Controller
         return Fondocat::get();
     }
 
+    public function getMontos($id)
+    {
+      return Fondo::where('proyecto_id',$id)->get();
+    }
+
+    public function deleteMonto($id)
+    {
+      if(isset($id))
+      {
+        $fondo = Fondo::findorFail($id);
+        $fondo->delete();
+
+        return response()->json([
+            'mensaje' => 'exito'
+          ]);
+      }
+        
+    }
+
+    public function addMonto(Request $request)
+    {
+      if($request->Ajax())
+      {
+        Fondo::create([
+          'proyecto_id' => $request->id,
+          'fondocat_id' => $request->cat,
+          'monto' => $request->monto,
+        ]);
+        return response()->json([
+            'mensaje' => $request->All()
+          ]);
+      }
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -210,7 +244,8 @@ class ProyectoController extends Controller
 
     public function update(ProyectoRequest $request, $id)
     {
-        $proyecto = Proyecto::find($id);
+      //dd($request->All());
+        $proyecto = Proyecto::findorFail($id);
         $proyecto->fill($request->All());
         $proyecto->save();
         bitacora('Modificó un Proyecto');
