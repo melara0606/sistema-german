@@ -1,4 +1,15 @@
-                        <div class="form-group">
+                      <div class="form-group">
+                        <label for="" class="col-md-4 control-label">Proyecto</label>
+                        <div class="col-md-6">
+                          <select id="proyecto" class="form-control">
+                            <option value="">Seleccione un proyecto</option>
+                            @foreach($proyectos as $proyecto)
+                              <option value="{{$proyecto->id}}">{{$proyecto->nombre}}</option>
+                            @endforeach
+                          </select>
+                        </div>
+                      </div>
+                      <div class="form-group">
                           <label for="" class="col-md-4 control-label">Unidad administrativa</label>
                             <div class="col-md-6">
                                 {!!Form::text('unidad_admin',null,['class' => 'form-control','id'=>'unidad_admin'])!!}

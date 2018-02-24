@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Requisicion;
 use App\Requisiciondetalle;
+use App\Proyecto;
 
 class RequisicionController extends Controller
 {
@@ -31,7 +32,8 @@ class RequisicionController extends Controller
      */
     public function create()
     {
-        return view('requisiciones.create');
+        $proyectos = Proyecto::where('estado',1)->where('presupuesto',true)->get();
+        return view('requisiciones.create',compact('proyectos'));
     }
 
     /**

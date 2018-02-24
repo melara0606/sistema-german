@@ -38,7 +38,8 @@ class PresupuestoController extends Controller
       //$query = 'select proyectos."id",proyectos.nombre from proyectos inner join presupuestos on proyectos."id"=presupuestos."id"';
       //$proyectos = \DB::select(\DB::raw($query));
 
-      $proyectos = Proyecto::all();
+      //$proyectos=DB::select('SELECT "id" FROM proyectos WHERE estado =1 EXCEPT SELECT proyecto_id FROM presupuestos');
+        $proyectos = Proyecto::where('estado',1)->where('presupuesto',false)->get();
        return view('presupuestos.create',compact('proyectos'));
     }
 
@@ -76,6 +77,9 @@ class PresupuestoController extends Controller
                       'categoria' => $presu['categoria'],
                     ]);
                   }
+                  $proyecto = Proyecto::findorFail($request->proyecto_id);
+                  $proyecto->presupuesto=true;
+                  $proyecto->save();
                   DB::commit();
                   return response()->json([
                     'mensaje' => 'exito'
