@@ -3,26 +3,18 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Tipopago;
-use App\Bitacora;
-use App\Http\Requests\TipopagoRequest;
 
-class TipopagoController extends Controller
+class CalendarizacionController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
     public function index()
     {
-        $tipopagos = Tipopago::all();
-        return view('tipopagos.index', compact('tipopagos'));
+        $calendarizaciones = Calendarizacion::all();
+        return view('calendarizaciones.index',compact('calendarizaciones'));
     }
 
     /**
@@ -32,8 +24,7 @@ class TipopagoController extends Controller
      */
     public function create()
     {
-        $tipopagos = Tipopago::all();
-        return view('tipopagos.create',compact('tipopagos'));
+        return view('calendarizaciones.create');
     }
 
     /**
@@ -44,8 +35,7 @@ class TipopagoController extends Controller
      */
     public function store(Request $request)
     {
-        Tipopago::create($request->All());
-        return redirect('tipopagos')->with('mensaje','Tipo de pago registrado');
+        //
     }
 
     /**
@@ -56,8 +46,7 @@ class TipopagoController extends Controller
      */
     public function show($id)
     {
-        $tipopago = Tipopago::findorFail($id);
-        return view('tipopagos.show',compact('tipopago'));
+        //
     }
 
     /**
@@ -68,8 +57,7 @@ class TipopagoController extends Controller
      */
     public function edit($id)
     {
-        $tipopago = Tipopago::find($id);
-        return view('tipopagos.edit',compact('tipopago'));
+        //
     }
 
     /**

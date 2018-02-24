@@ -26,9 +26,7 @@
             <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
-        <div id="calendario">
-          
-        </div>
+        
         <!-- ./col -->
         <div class="col-lg-3 col-xs-6">
           <!-- small box -->

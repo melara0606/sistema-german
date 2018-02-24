@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Tipocobro;
+use App\Bitacora;
 
 class TipocobroController extends Controller
 {
