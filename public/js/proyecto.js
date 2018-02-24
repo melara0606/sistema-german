@@ -96,7 +96,7 @@ $(document).ready(function(){
                  "<tr data-categoria='"+cat+"' data-monto='"+cant_monto+"'>"+
                      "<td>" + cat_nombre + "</td>" +
                      "<td>" + onFixed( parseFloat(cant_monto), 2 ) + "</td>" +
-                     "<td><button type='button' id='delete-btn' class='btn btn-danger'>Eliminar</button></td>" +
+                     "<td><button type='button' id='delete-btn' class='btn btn-danger'><span class='glyphicon glyphicon-trash'></button></td>" +
                  "</tr>"
              );
       monto_total=monto+monto_organizacion;
@@ -131,7 +131,7 @@ $(document).ready(function(){
                  "<tr data-categoria='"+cat+"' data-monto='"+cant_monto+"'>"+
                      "<td>" + cat_nombre + "</td>" +
                      "<td>" + onFixed( parseFloat(cant_monto), 2 ) + "</td>" +
-                     "<td><button type='button' id='delete-btn' class='btn btn-danger'>Eliminar</button></td>" +
+                     "<td><button type='button' id='delete-btn' class='btn btn-danger'><span class='glyphicon glyphicon-trash'></button></td>" +
                  "</tr>"
              );
       monto_total=monto+monto_organizacion;
@@ -163,7 +163,7 @@ $(document).ready(function(){
                  "<tr data-categoria='"+data[i].id+"' data-monto='"+data[i].monto+"'>"+
                      "<td>" + data[i].id + "</td>" +
                      "<td>" + data[i].monto + "</td>" +
-                     "<td><button type='button' id='delete-from-base' class='btn btn-danger'>Eliminar</button></td>" +
+                     "<td><button type='button' id='delete-from-base' class='btn btn-danger'><span class='glyphicon glyphicon-trash'></button></td>" +
                  "</tr>"
           );
     }
@@ -193,7 +193,7 @@ $(document).ready(function(){
                      "<td>"+
                      "<input type='hidden' name='categorias[]' value='"+org+"' />"+
                      "<input type='hidden' name='montos[]' value='"+cant_monto_org+"' />"+
-                     "<button type='button' id='delete-monto_org' class='btn btn-danger'>Eliminar</button></td>" +
+                     "<button type='button' id='delete-monto_org' class='btn btn-danger'><span class='glyphicon glyphicon-trash'></button></td>" +
                  "</tr>"
              );
       monto_total=monto+monto_organizacion;

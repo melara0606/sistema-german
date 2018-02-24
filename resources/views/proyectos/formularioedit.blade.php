@@ -13,7 +13,7 @@
                             <div class="col-md-4">
                                 {!!Form::number('monto',null,['class'=>'form-control','id'=>'monto','readonly','steps' => '0.00'])!!}
                             </div>
-                            <button type="button" class="btn btn-primary" name="button" id="verfondos" data-toggle="modal" data-target="#btnverfondos"><span class="glyphicon glyphicon-plus"></span></button>
+                            <button type="button" class="btn btn-primary" name="button" id="verfondos" data-toggle="modal" data-target="#btnverfondos"><span class="glyphicon glyphicon-eye-open"></span></button>
                         </div>
 
                         <div class="form-group{{ $errors->has('motivo') ? ' has-error' : '' }}">
@@ -65,7 +65,6 @@
                 </div>
                 <div class="panel-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                    <button type="button" id="guardarorganizacion" data-dismiss="modal" class="btn btn-success">Agregar</button>
                 </div>
             </div>
         </div>
