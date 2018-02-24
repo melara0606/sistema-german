@@ -71,6 +71,9 @@ Route::get('proyectos/listarorganizaciones','ProyectoController@listarOrganizaci
 Route::post('proyectos/guardarorganizacion','ProyectoController@guardarOrganizacion');
 Route::get('proyectos/listarfondos','ProyectoController@listarFondos');
 Route::post('proyectos/guardarcategoria','ProyectoController@guardarCategoria');
+Route::get('proyectos/getMontos/{id}','ProyectoController@getMontos');
+Route::delete('proyectos/deleteMonto/{id}','ProyectoController@deleteMonto');
+Route::post('proyectos/addMonto','ProyectoController@addMonto');
 Route::Resource('proyectos','ProyectoController');
 
 Route::post('tipocontratos/baja/{id}','TipocontratoController@baja')->name('tipocontratos.baja');
@@ -112,6 +115,7 @@ Route::get('requisiciondetalles/create/{id}','RequisiciondetalleController@creat
 Route::Resource('requisiciondetalles','RequisiciondetalleController');
 
 Route::Resource('organizaciones','OrganizacionController');
+Route::Resource('calendarizaciones','CalendarizacionController');
 
 ////////////////triburario /////////////////////////////////////////////////////////////////////////
 Route::post('contribuyentes/baja/{id}','ContribuyenteController@baja')->name('contribuyentes.baja');
@@ -153,6 +157,7 @@ Route::Resource('tipopagos','TipopagoController');
 
 Route::Resource('pagos','PagoController');
 
+Route::Resource('tipopagos', 'TipopagoController');
 
 
 
@@ -193,7 +198,8 @@ Route::Resource('pagos','PagoController');
 
 
 
-
+Route::Resource('unidades','UnidadAdminController');
+Route::Resource('presupuestounidades','PresupuestoUnidadController');
 
 
 
