@@ -4,12 +4,12 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Fondocat extends Model
+class Cuentaproy extends Model
 {
     protected $guarded = [];
 
-    public function fondo()
+    public function proyecto()
     {
-    	return $this->hasMany('App\Fondocat');
+    	return $this->belongsTo('App\Proyecto');
     }
 }

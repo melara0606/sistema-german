@@ -47,8 +47,13 @@ class Proyecto extends Model
         return $this->hasMany('App\Cotizacion');
     }
 
-    public function monto()
+    public function fondo()
     {
-        return $this->hasMany('App\Fondos');
+        return $this->hasMany('App\Fondo');
+    }
+
+    public function cuentaproy()
+    {
+        return $this->hasMany('App\Cuentaproy');
     }
 }

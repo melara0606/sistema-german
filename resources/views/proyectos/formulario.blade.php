@@ -94,10 +94,10 @@
                             </div>
                         </div>
 
-                        <div class="form-group">
+{{--                         <div class="form-group">
                           <label for="" class="col-md-6">¿El proyecto cuenta con una organizacion colaboradora?</label>
                           <input type="checkbox" id="colaboradora">
-                        </div>
+                        </div> --}}
 
                         <div class="form-group" >
                           <center id="cola"></center>

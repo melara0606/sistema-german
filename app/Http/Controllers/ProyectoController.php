@@ -11,6 +11,7 @@ use App\Presupuestodetalle;
 use App\Fondocat;
 use App\Fondo;
 use App\Fondoorg;
+use App\Cuentaproy;
 use App\Http\Requests\ProyectoRequest;
 use App\Http\Requests\FondocatRequest;
 use DB;
@@ -75,7 +76,7 @@ class ProyectoController extends Controller
 
     public function getMontos($id)
     {
-      return Fondo::where('proyecto_id',$id)->get();
+      return Fondo::where('proyecto_id',$id)->with('fondocat','proyecto')->get();
     }
 
     public function deleteMonto($id)
@@ -155,9 +156,14 @@ class ProyectoController extends Controller
               ]);
             }
           }
+
+          Cuentaproy::create([
+            'proyecto_id' => $proyecto->id,
+            'monto_inicial' => $request->monto,
+          ]);
           
 
-          if(isset($montosorg))
+/*          if(isset($montosorg))
           {
             foreach($montosorg as $montoorg)
             {
@@ -167,7 +173,7 @@ class ProyectoController extends Controller
                 'monto' => $montoorg['montoorg'],
               ]);
             }
-          }
+          }*/
 
           //bitacora('Registró un proyecto');
           
@@ -216,9 +222,10 @@ class ProyectoController extends Controller
     public function show($id)
     {
         $proyecto = Proyecto::findorFail($id);
-        $presupuesto = Presupuesto::where('proyecto_id',$proyecto->id)->firstorFail();
-        $detalles = Presupuestodetalle::where('presupuesto_id',$presupuesto->id)->get();
-        return view('proyectos.show', compact('proyecto','presupuesto','detalles'));
+        //$presupuesto = Presupuesto::where('proyecto_id',$proyecto->id)->first();
+        //$detalles = Presupuestodetalle::where('presupuesto_id',$presupuesto->id)->get();
+
+        return view('proyectos.show', compact('proyecto'));
     }
 
     /**

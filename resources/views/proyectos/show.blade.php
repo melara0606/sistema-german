@@ -51,12 +51,7 @@ Ver datos del proyecto:
 
                         <div class="form-group{{ $errors->has('organizacion_id') ? ' has-error' : '' }}">
                             <label for="organizacion_id" class="col-md-4 control-label">Organización colaboradora: </label>
-                            @if($proyecto->organizacion_id == "")
-                              <label for="nombre" class="col-md-4 control-label">Fondos propios</label><br>
-                            @else
-                            <label for="nombre" class="col-md-4 control-label">{{$proyecto->organizacion->nombre}}</label><br>
-                          @endif
-
+                            <label for="nombre" class="col-md-4 control-label">{{$proyecto->fondo->monto}}</label><br>
                         </div>
 
                         <div class="form-group{{ $errors->has('motivo') ? ' has-error' : '' }}">
@@ -71,7 +66,7 @@ Ver datos del proyecto:
 
                         </div>-->
                         <div style="overflow-x:auto;">
-                          <table class="table table-bordered table-striped table-hover table-condensed">
+{{--                           <table class="table table-bordered table-striped table-hover table-condensed">
                             <thead>
                               <tr>
                                 <th>Material</th>
@@ -121,7 +116,7 @@ Ver datos del proyecto:
                               </tr>
 
                             </tfoot>
-                          </table>
+                          </table> --}}
 
                       {{ Form::open(['route' => ['proyectos.destroy', $proyecto->id ], 'method' => 'DELETE', 'class' => 'form-horizontal'])}}
                       <a href="{{ url('/proyectos/'.$proyecto->id.'/edit') }}" class="btn btn-warning"><span class="glyphicon glyphicon-text-size"></span> Editar</a> |

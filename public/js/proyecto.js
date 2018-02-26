@@ -158,19 +158,20 @@ $(document).ready(function(){
     cargarFondos();
     var datos = $.get('/sisverapaz/public/proyectos/getMontos/'+ idp , function(data){
       for(var i=0;i<data.length;i++){
+        var dataJson = JSON.stringify({ id: data[i].fondocat.id, monto: data[i].monto })
         monto+= parseFloat(data[i].monto);
         $(tbFondos).append(
                  "<tr data-categoria='"+data[i].id+"' data-monto='"+data[i].monto+"'>"+
-                     "<td>" + data[i].id + "</td>" +
+                     "<td>" + data[i].fondocat.categoria + "</td>" +
                      "<td>" + data[i].monto + "</td>" +
-                     "<td><button type='button' id='delete-from-base' class='btn btn-danger'><span class='glyphicon glyphicon-trash'></button></td>" +
+                     "<td class='btn-group'><button type='button' id='delete-from-base' class='btn btn-danger'><span class='glyphicon glyphicon-trash'></button>" +
+                     "<button data-data="+ dataJson +"  type='button' id='edit-form' class='btn btn-primary'><span class='glyphicon glyphicon-edit'></button></td>" +
                  "</tr>"
           );
     }
     monto_total=monto+monto_organizacion;
       $("#pie_monto #totalEnd").text(onFixed(parseFloat(monto),2));
       //$(existe).css("display", "none"); 
-      console.log(datos);
     });
 
   });
@@ -320,6 +321,13 @@ $(document).ready(function(){
         $("#pie_monto #totalEnd").text(onFixed(monto));
         contador_monto--;
         $("#contador_fondos").val(contador_monto);
+  });
+
+  $(document).on("click", "#edit-form", function (e) {
+    var data = JSON.parse($(e.currentTarget).attr('data-data'));
+    console.log(data)
+    $(document).find("#cat_id").val(data.id)
+    $(document).find("#cant_monto").val(data.monto);
   });
 
 //elimina un elemento de la tabla temporal de fondos aportados por una organizacion y actualiza el monto total
