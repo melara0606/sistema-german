@@ -108,6 +108,7 @@ Route::Resource('formapagos','FormapagoController');
 
 Route::post('solicitudcotizaciones/baja/{id}','SolicitudcotizacionController@baja')->name('solicitudcotizaciones.baja');
 Route::post('solicitudcotizaciones/alta/{id}','SolicitudcotizacionController@alta')->name('solicitudcotizaciones.alta');
+Route::get('solicitudcotizaciones/getpresupuesto/{id}','SolicitudcotizacionController@getPresupuesto');
 Route::Resource('solicitudcotizaciones','SolicitudcotizacionController');
 
 Route::Resource('requisiciones','RequisicionController');

@@ -39,7 +39,7 @@
                     <td>{{ $cuenta->numero_de_cuenta }}</td>
                     <td>{{ $cuenta->proyecto->nombre }}</td>
                     <td>{{ $cuenta->banco }}</td>
-                    <td>{{ $cuenta->fecha_de_apertura->format('d-m-Y') }}</td>
+                    <td>{{ $cuenta->created_at->format('d-m-Y') }}</td>
                     <td>$ {{ number_format($cuenta->monto_inicial) }}</td>
                     <td>
                       <a href="{{url('cuentas/'.$cuenta->id.'/edit')}}" class="btn btn-warning">Editar</a>

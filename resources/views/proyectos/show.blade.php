@@ -31,6 +31,21 @@ Ver datos del proyecto:
 
                         </div>
 
+                        <div class="form-group{{ $errors->has('organizacion_id') ? ' has-error' : '' }}">
+                            <label for="organizacion_id" class="col-md-4 control-label">Origen de los fondos: </label>
+                            <table class="table">
+                              <tbody>
+                                @foreach($proyecto->fondo as $fondo)
+                                <tr>
+                                    <td>{{$fondo->fondocat->categoria}}</td>
+                                    <td>${{number_format($fondo->monto,2)}}</td>
+                                </tr>
+                                @endforeach
+                              </tbody>
+                            </table>
+                            <label for="nombre" class="col-md-4 control-label"></label><br>
+                        </div>
+
                         <div class="form-group{{ $errors->has('direccion') ? ' has-error' : '' }}">
                             <label for="direccion" class="col-md-4 control-label">Dirección donde se ejecutará: </label>
                             <label for="nombre" class="col-md-4 control-label">{{$proyecto->direccion}}</label><br>
@@ -49,10 +64,7 @@ Ver datos del proyecto:
 
                         </div>
 
-                        <div class="form-group{{ $errors->has('organizacion_id') ? ' has-error' : '' }}">
-                            <label for="organizacion_id" class="col-md-4 control-label">Organización colaboradora: </label>
-                            <label for="nombre" class="col-md-4 control-label">{{$proyecto->fondo->monto}}</label><br>
-                        </div>
+                        
 
                         <div class="form-group{{ $errors->has('motivo') ? ' has-error' : '' }}">
                             <label for="motivo" class="col-md-4 control-label">Motivo:</label>
@@ -65,8 +77,9 @@ Ver datos del proyecto:
                             <label for="nombre" class="col-md-4 control-label">{{$proyecto->fechabaja}}</label><br>
 
                         </div>-->
+{{--                         @if($presupuesto)
                         <div style="overflow-x:auto;">
-{{--                           <table class="table table-bordered table-striped table-hover table-condensed">
+                           <table class="table table-bordered table-striped table-hover table-condensed">
                             <thead>
                               <tr>
                                 <th>Material</th>
@@ -77,34 +90,15 @@ Ver datos del proyecto:
                               </tr>
                             </thead>
                             <tbody>
-                              @foreach($detalles as $detalle)
+                              @foreach($presupuesto->presupuestodetalle as $detalle)
                               <tr>
                                 <td>{{$detalle->material}}</td>
                                 <td>{{$detalle->cantidad}}</td>
                                 <td>$ {{number_format($detalle->preciou,2)}}</td>
                                 <td>$ {{number_format($detalle->cantidad*$detalle->preciou,2)}}</td>
                                 <td>
-                                  {{ Form::open(['route' => ['paacdetalles.destroy', $detalle->id ], 'method' => 'DELETE', 'class' => 'form-horizontal'])}}
                                   <a href="{{url('paacdetalles/'.$detalle->id.'/edit')}}" class="btn btn-warning"><span class="glyphicon glyphicon-text-size"></span></a>
-                                  <button class="btn btn-danger" type="button" onclick="
-                                  return swal({
-                                    title: 'Eliminar obra',
-                                    text: '¿Está seguro de eliminar la obra?',
-                                    type: 'question',
-                                    showCancelButton: true,
-                                    confirmButtonText: 'Si, Eliminar',
-                                    cancelButtonText: 'No, Mantener',
-                                    confirmButtonClass: 'btn btn-danger',
-                                    cancelButtonClass: 'btn btn-default',
-                                    buttonsStyling: false
-                                  }).then(function(){
-                                    submit();
-                                  }, function(dismiss){
-                                    if(dismiss == 'cancel'){
-                                      swal('Cancelado', 'El registro se mantiene','info')
-                                    }
-                                  })" ; ><span class="glyphicon glyphicon-trash"></span></button>
-                                  {{ Form::close()}}
+                                  
                                 </td>
                               </tr>
                               @endforeach
@@ -116,7 +110,8 @@ Ver datos del proyecto:
                               </tr>
 
                             </tfoot>
-                          </table> --}}
+                          </table> 
+                          @endif --}}
 
                       {{ Form::open(['route' => ['proyectos.destroy', $proyecto->id ], 'method' => 'DELETE', 'class' => 'form-horizontal'])}}
                       <a href="{{ url('/proyectos/'.$proyecto->id.'/edit') }}" class="btn btn-warning"><span class="glyphicon glyphicon-text-size"></span> Editar</a> |

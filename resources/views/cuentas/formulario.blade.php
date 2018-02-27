@@ -43,20 +43,6 @@
     </div>
 </div>
 
-<div class="form-group{{ $errors->has('fecha_de_apertura') ? ' has-error' : '' }}">
-    <label for="nombre" class="col-md-4 control-label">Fecha de apertura</label>
-
-    <div class="col-md-6">
-        {{ Form::date('fecha_de_apertura', null,['class' => 'form-control']) }}
-
-        @if ($errors->has('fecha_de_apertura'))
-            <span class="help-block">
-                <strong>{{ $errors->first('fecha_de_apertura') }}</strong>
-            </span>
-         @endif
-    </div>
-</div>
-
 <div class="form-group{{ $errors->has('monto_inicial') ? ' has-error' : '' }}">
     <label for="nombre" class="col-md-4 control-label">Monto inicial</label>
 

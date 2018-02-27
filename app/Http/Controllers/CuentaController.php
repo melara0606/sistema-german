@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Cuenta;
+use App\Cuentaproy;
 use App\Proyecto;
 use App\Http\Requests\CuentaRequest;
 use App\Http\Requests\CuentauRequest;
@@ -22,7 +22,7 @@ class CuentaController extends Controller
      */
     public function index()
     {
-        $cuentas = Cuenta::all();
+        $cuentas = Cuentaproy::all();
         return view('cuentas.index',compact('cuentas'));
     }
 
@@ -65,7 +65,7 @@ class CuentaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Cuenta $cuenta)
+    public function edit(Cuentaproy $cuenta)
     {
         $proyectos=Proyecto::all();
         return view('cuentas.edit',compact('cuenta','proyectos'));
@@ -78,7 +78,7 @@ class CuentaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(CuentauRequest $request, Cuenta $cuenta)
+    public function update(Request $request, Cuentaproy $cuenta)
     {
         $cuenta->fill($request->All());
         $cuenta->save();

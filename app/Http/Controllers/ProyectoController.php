@@ -222,9 +222,7 @@ class ProyectoController extends Controller
     public function show($id)
     {
         $proyecto = Proyecto::findorFail($id);
-        //$presupuesto = Presupuesto::where('proyecto_id',$proyecto->id)->first();
-        //$detalles = Presupuestodetalle::where('presupuesto_id',$presupuesto->id)->get();
-
+        //$presupuesto = Presupuesto::where('proyecto_id',$proyecto->id)->get()->first();
         return view('proyectos.show', compact('proyecto'));
     }
 
