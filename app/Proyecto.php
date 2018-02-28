@@ -29,7 +29,7 @@ class Proyecto extends Model
 
     public function presupuesto()
     {
-      return $this->hasOne('App\Presupuesto');
+      return $this->hasMany('App\Presupuesto');
     }
 
     public function solicitudcotizacion()
@@ -49,7 +49,7 @@ class Proyecto extends Model
 
     public function cotizacion()
     {
-        return $this->hasMany('App\Cotizacion');
+        return $this->hasOne('App\Cotizacion');
     }
 
     public function fondo()
