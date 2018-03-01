@@ -24,4 +24,9 @@ class Formapago extends Model
     	}
     	
     }
+
+    public function solicitudcotizacion()
+    {
+        return $this->hasOne('App\Solicitudcotizacion');
+    }
 }

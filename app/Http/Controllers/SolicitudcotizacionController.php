@@ -7,6 +7,9 @@ use App\Solicitudcotizacion;
 use App\Bitacora;
 use App\Http\Requests\SolicitudcotizacionRequest;
 use App\Formapago;
+use App\Proyecto;
+use App\Unidad;
+use App\Presupuesto;
 
 class SolicitudcotizacionController extends Controller
 {
@@ -22,7 +25,13 @@ class SolicitudcotizacionController extends Controller
      
     public function index()
     {
-        //
+        $solicitudes = Solicitudcotizacion::with('proyecto','formapago')->get();
+        return view('solicitudcotizaciones.index',compact('solicitudes'));
+    }
+
+    public function getPresupuesto($id)
+    {
+        return Presupuesto::where('proyecto_id',$id)->with('Presupuestodetalle')->get();
     }
 
     /**
@@ -32,8 +41,10 @@ class SolicitudcotizacionController extends Controller
      */
     public function create()
     {
+      $proyectos = Proyecto::where('estado',1)->where('presupuesto',true)->get();
       $formapagos = Formapago::all();
-        return view('formapagos.create',compact('formapagos'));
+      $unidades = Unidad::all();
+        return view('solicitudcotizaciones.create',compact('formapagos','proyectos','unidades'));
     }
 
     /**
@@ -44,7 +55,21 @@ class SolicitudcotizacionController extends Controller
      */
     public function store(Request $request)
     {
-      \DB::beginTransaction();
+        //dd($request->All());
+        Solicitudcotizacion::create([
+            "formapago_id" => $request->formapago,
+            "unidad" => $request->unidad,
+            "encargado" => $request->encargado,
+            "cargo_encargado" => $request->cargo,
+            "proyecto_id" => $request->proyecto,
+            "lugar_entrega" => $request->lugar_entrega,
+            "datos_contenido" => $request->datos_contenido,
+        ]);
+
+        $proyecto=Proyecto::findorFail($request->proyecto);
+        $proyecto->estado=3;
+        $proyecto->save();
+      /*\DB::beginTransaction();
       try{
         $count = $request->contador;
 
@@ -59,14 +84,14 @@ class SolicitudcotizacionController extends Controller
               'cantidad' => $request->cantidades[$i],
               'preciou' => $request->precios[$i],
             ]);
-          }*/
+          }
           \DB::commit();
           return redirect('/formapagos')->with('mensaje','Solicitud registrada con éxito');
       }catch (\Exception $e){
         \DB::rollback();
         return redirect('/Solicitudcotizaciones/create')->with('error','Solicitud con error'.$e->getMessage());
       }
-
+*/
 
     }
 
@@ -78,7 +103,10 @@ class SolicitudcotizacionController extends Controller
      */
     public function show($id)
     {
-        //
+        $solicitud=Solicitudcotizacion::findorFail($id);
+        $presupuesto = Presupuesto::where('proyecto_id',$solicitud->proyecto_id)->with('presupuestodetalle')->first();
+        //dd($presupuesto);
+        return view('solicitudcotizaciones.show',compact('solicitud','presupuesto'));
     }
 
     /**

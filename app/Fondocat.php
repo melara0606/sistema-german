@@ -10,6 +10,6 @@ class Fondocat extends Model
 
     public function fondo()
     {
-    	return $this->hasMany('App\Fondocat');
+    	return $this->hasMany('App\Fondo');
     }
 }

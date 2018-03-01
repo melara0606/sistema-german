@@ -32,6 +32,11 @@ class Proyecto extends Model
       return $this->hasMany('App\Presupuesto');
     }
 
+    public function solicitudcotizacion()
+    {
+        return $this->hasOne('App\Solicitudcotizacion');
+    }
+
     public function organizacion()
     {
         return $this->belongsTo('App\Organizacion');
@@ -44,7 +49,7 @@ class Proyecto extends Model
 
     public function cotizacion()
     {
-        return $this->hasMany('App\Cotizacion');
+        return $this->hasOne('App\Cotizacion');
     }
 
     public function fondo()
@@ -54,6 +59,6 @@ class Proyecto extends Model
 
     public function cuentaproy()
     {
-        return $this->hasMany('App\Cuentaproy');
+        return $this->hasOne('App\Cuentaproy');
     }
 }

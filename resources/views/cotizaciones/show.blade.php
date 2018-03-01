@@ -22,13 +22,13 @@
                 <div class="panel-body">
                         <div class="form-group{{ $errors->has('proyecto_id') ? ' has-error' : '' }}">
                             <label for="proyecto_id" class="col-md-4 control-label">Nombre del Proyecto: </label>
-                            <label for="proyecto_id" class="col-md-4 control-label">{{$cotizacion->proyecto_id}}</label><br>
+                            <label for="proyecto_id" class="col-md-4 control-label">{{$cotizacion->proyecto->nombre}}</label><br>
                             
                         </div>
 
                          <div class="form-group{{ $errors->has('proveedor_id') ? ' has-error' : '' }}">
                             <label for="proveedor_id" class="col-md-4 control-label">Proveedor: </label>
-                            <label for="proyecto_id" class="col-md-4 control-label">{{$cotizacion->proveedor_id}}</label><br>
+                            <label for="proyecto_id" class="col-md-4 control-label">{{$cotizacion->proveedor->nombre}}</label><br>
                             
                         </div>
 
@@ -36,6 +36,29 @@
                             <label for="descripcion" class="col-md-4 control-label">Descripción: </label>
                             <label for="proyecto_id" class="col-md-4 control-label">{{$cotizacion->descripcion}}</label><br>
                             
+                        </div>
+
+                        <div style="overflow-x:auto;">
+                          <table class="table table-bordered table-striped table-hover table-condensed">
+                            <thead>
+                              <tr>
+                                <th width="50%">MATERIAL</th>
+                                <th width="15%">CANTIDAD</th>
+                                <th width="20%">UNIDAD DE MEDIDA</th>
+                                <th width="15%">PRECIO</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              @foreach($cotizacion->detallecotizacion as $detalle)
+                              <tr>
+                                <td>{{strtoupper($detalle->material)}}</td>
+                                <td>{{$detalle->cantidad}}</td>
+                                <td>{{strtoupper($detalle->unidad_medida)}}</td>
+                                <td>${{number_format($detalle->precio_unitario,2)}}</td>
+                              </tr>
+                              @endforeach
+                            </tbody>
+                          </table>
                         </div>
 
                       {{ Form::open(['route' => ['cotizaciones.destroy', $cotizacion->id ], 'method' => 'DELETE', 'class' => 'form-horizontal'])}}

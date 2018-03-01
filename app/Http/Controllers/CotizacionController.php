@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Proyecto;
 use App\Proveedor;
 use App\Cotizacion;
+use App\Detallecotizacion;
 use App\Bitacora;
 use App\Http\Requests\CotizacionRequest;
 
@@ -42,8 +43,8 @@ class CotizacionController extends Controller
      */
     public function create()
     {
-        $proyectos = Proyecto::all();
-        $proveedores = Proveedor::all();
+        $proyectos = Proyecto::where('estado',3)->where('presupuesto',true)->get();
+        $proveedores = Proveedor::where('estado',1)->get();
         $cotizaciones = Cotizacion::all();
         return view('cotizaciones.create',compact('proyectos','proveedores','cotizaciones'));
     }
@@ -54,9 +55,24 @@ class CotizacionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(CotizacionRequest $request)
+    public function store(Request $request)
     {
-        Cotizacion::create($request->All());
+        $count = count($request->precios);
+        $cotizacion = Cotizacion::create([
+            'proveedor_id' => $request->proveedor_id,
+            'proyecto_id' => $request->proyecto_id,
+            'descripcion' => $request->descripcion,
+        ]);
+        for($i=0;$i<$count;$i++)
+        {
+            Detallecotizacion::create([
+                'cotizacion_id' => $cotizacion->id,
+                'unidad_medida' => $request->unidades[$i],
+                'cantidad' => $request->cantidades[$i],
+                'precio_unitario' => $request->precios[$i],
+            ]);
+        }
+        
         bitacora('Registró una cotización');
         return redirect('/cotizaciones')->with('mensaje','Registro almacenado con éxito');
     }
@@ -69,9 +85,9 @@ class CotizacionController extends Controller
      */
     public function show($id)
     {
-        $cotizaciones = Cotizacion::findorFail($id);
+        $cotizacion = Cotizacion::where('estado',1)->findorFail($id);
 
-        return view('cotizaciones.show', compact('cotizaciones'));
+        return view('cotizaciones.show', compact('cotizacion'));
     }
 
     /**
@@ -82,8 +98,8 @@ class CotizacionController extends Controller
      */
     public function edit($id)
     {
-        $cotizaciones = Cotizacion::find($id);
-        return view('cotizaciones.edit',compact('cotizaciones'));
+        $cotizacion = Cotizacion::findorFail($id);
+        return view('cotizaciones.edit',compact('cotizacion'));
     }
 
     /**

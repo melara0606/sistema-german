@@ -2,7 +2,7 @@
 
 @section('migasdepan')
 <h1>
-        Cotizacion: {{ $cotizacion->nombre }}
+        Cotizacion: {{ $cotizacion->proyecto->nombre }}
       </h1>
       <ol class="breadcrumb">
         <li><a href="{{ url('/cotizaciones') }}"><i class="fa fa-dashboard"></i> Cotizaciones</a></li>

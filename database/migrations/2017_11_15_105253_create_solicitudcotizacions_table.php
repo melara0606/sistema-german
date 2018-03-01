@@ -16,9 +16,14 @@ class CreateSolicitudcotizacionsTable extends Migration
         Schema::create('solicitudcotizacions', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->bigInteger('formapago_id')->unsigned();
+            $table->bigInteger('proyecto_id')->unsigned();
+            $table->string('unidad')->nullable();
+            $table->string('encargado')->nullable();
+            $table->string('cargo_encargado')->nullable();
             $table->string('lugar_entrega');
             $table->string('datos_contenido');
             $table->foreign('formapago_id')->references('id')->on('formapagos');
+            $table->foreign('proyecto_id')->references('id')->on('proyectos');
             $table->timestamps();
         });
     }
