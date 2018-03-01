@@ -87,6 +87,30 @@ function vercargo($cargo)
 	}
 }
 
+function proyecto_estado($estado)
+{
+    switch ($estado) {
+        case '1':
+            return 'Aprobado';
+            break;
+        case '2':
+            return 'Inactivo';
+            break;
+        case '3':
+            return 'En proceso de cotización';
+                break;
+        case '4':
+            return 'En proceso';
+            break;
+        case '5':
+            return 'Inconcluso';
+            break;
+        default:
+
+            break;
+    }
+}
+
 function presupuesto($proyecto_id)
 {
 	$presupuesto = App\Presupuesto::all()->where('proyecto_id',$proyecto_id);

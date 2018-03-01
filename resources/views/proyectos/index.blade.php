@@ -18,8 +18,8 @@
               <h3 class="box-title">Listado</h3>
               <div class="btn-group pull-right">
                 <a href="{{ url('/proyectos/create') }}" class="btn btn-success"><span class="glyphicon glyphicon-plus-sign"></span> Agregar</a>
-                <a href="{{ url('/proyectos?estado=1') }}" class="btn btn-primary">Activos</a>
-                <a href="{{ url('/proyectos?estado=2') }}" class="btn btn-primary">Papelera</a>
+                <a href="{{ url('/proyectos?estado=1') }}" class="btn btn-primary">Aprobados</a>
+                <a href="{{ url('/proyectos?estado=2') }}" class="btn btn-primary">Inactivos</a>
               </div>
             </div>
             <!-- /.box-header -->
@@ -32,6 +32,7 @@
                   <th>Dirección</th>
                   <th>Inicio</th>
                   <th>Fin</th>
+                  <th>Estado</th>
                   <th>Accion</th>
                 </thead>
                 <tbody>
@@ -43,6 +44,7 @@
                     <td>{{ $proyecto->direccion }}</td>
                     <td>{{ $proyecto->fecha_inicio->format('d-m-Y') }}</td>
                     <td>{{ $proyecto->fecha_fin->format('d-m-Y') }}</td>
+                    <td><span class="label-primary">{{proyecto_estado($proyecto->estado)}}</span></td>
                     <td>
                       @if($estado == 1 || $estado == "")
                         {{ Form::open(['method' => 'POST', 'id' => 'baja', 'class' => 'form-horizontal'])}}

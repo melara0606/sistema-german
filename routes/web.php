@@ -91,6 +91,7 @@ Route::Resource('ordencompras','OrdencompraController');
 Route::get('presupuestos/crear/{id}','PresupuestoController@crear');
 Route::Resource('presupuestos','PresupuestoController');
 
+Route::get('cotizaciones/ver/cuadros','CotizacionController@cuadros');
 Route::post('cotizaciones/baja/{id}','CotizacionController@baja')->name('cotizaciones.baja');
 Route::post('cotizaciones/alta/{id}','CotizacionController@alta')->name('cotizaciones.alta');
 Route::Resource('cotizaciones','CotizacionController');

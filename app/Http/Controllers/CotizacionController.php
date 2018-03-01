@@ -8,6 +8,8 @@ use App\Proveedor;
 use App\Cotizacion;
 use App\Detallecotizacion;
 use App\Bitacora;
+use App\Presupuesto;
+use DB;
 use App\Http\Requests\CotizacionRequest;
 
 class CotizacionController extends Controller
@@ -23,7 +25,7 @@ class CotizacionController extends Controller
      */
 
     public function index(Request $request)
-    {
+    {   
         $estado = $request->get('estado');
         if($estado == "" )$estado=1;
         if ($estado == 1) {
@@ -34,6 +36,12 @@ class CotizacionController extends Controller
             $cotizaciones = Cotizacion::where('estado',$estado)->get();
             return view('cotizaciones.index',compact('cotizaciones','estado'));
         }
+    }
+
+    public function cuadros()
+    { 
+        $proyectos = Proyecto::where('estado',3)->where('presupuesto',true)->with('presupuesto','cotizacion')->get();
+        return view('cotizaciones.cuadros',compact('proyectos'));
     }
 
     /**
@@ -57,24 +65,34 @@ class CotizacionController extends Controller
      */
     public function store(Request $request)
     {
-        $count = count($request->precios);
-        $cotizacion = Cotizacion::create([
+        //dd($request->All());
+        DB::beginTransaction();
+        try
+        {
+            $count = count($request->precios);
+            $cotizacion = Cotizacion::create([
             'proveedor_id' => $request->proveedor_id,
             'proyecto_id' => $request->proyecto_id,
             'descripcion' => $request->descripcion,
         ]);
-        for($i=0;$i<$count;$i++)
-        {
-            Detallecotizacion::create([
-                'cotizacion_id' => $cotizacion->id,
-                'unidad_medida' => $request->unidades[$i],
-                'cantidad' => $request->cantidades[$i],
-                'precio_unitario' => $request->precios[$i],
-            ]);
+            for($i=0;$i<$count;$i++)
+            {
+                Detallecotizacion::create([
+                    'cotizacion_id' => $cotizacion->id,
+                    'descripcion' => $request->descripciones[$i],
+                    'marca' => $request->marcas[$i],
+                    'unidad_medida' => $request->unidades[$i],
+                    'cantidad' => $request->cantidades[$i],
+                    'precio_unitario' => $request->precios[$i],
+                ]);
+            }
+            DB::commit();
+            bitacora('Registró una cotización');
+            return redirect('/cotizaciones')->with('mensaje','Registro almacenado con éxito');
+        }catch (\Exception $e){
+            DB::rollback();
+            return redirect('/cotizaciones/create')->with('error','Ocurrió un error');
         }
-        
-        bitacora('Registró una cotización');
-        return redirect('/cotizaciones')->with('mensaje','Registro almacenado con éxito');
     }
 
     /**

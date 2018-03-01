@@ -23,7 +23,7 @@
 </div>
 
 <div class="form-group{{ $errors->has('descripcion') ? ' has-error' : '' }}">
-    <label for="descripcion" class="col-md-4 control-label">Descripción de cotización</label>
+    <label for="descripcion" class="col-md-4 control-label">Forma de pago</label>
 
     <div class="col-md-6">
         {!!Form::text('descripcion',null,['class'=>'form-control','id'=>'descripcion','autofocus','rows'=>3])!!}
@@ -34,9 +34,10 @@
     <thead>
         <tr>
             <th width="5%">Item</th>
-            <th width="55%">Descripción</th>
+            <th width="45%">Descripción</th>
             <th width="10%">Unidad de medida</th>
             <th width="10%">Cantidad</th>
+            <th width="10%">Marca</th>
             <th width="10%">Precio unitario</th>
             <th width="10%">Total</th>
         </tr>
