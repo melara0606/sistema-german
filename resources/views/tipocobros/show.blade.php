@@ -3,7 +3,7 @@
 @section('migasdepan')
 <h1>
         
-        <small>Ver cobro <b>{{ $cobro->nombre_cobro }}</b></small>
+        <small>Ver cobro <b>{{ $tipocobro->nombre_cobro }}</b></small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="{{ url('/tipocobros') }}"><i class="fa fa-dashboard"></i> Cobros</a></li>
@@ -25,7 +25,7 @@
 
                          <div class="form-group{{ $errors->has('monto') ? ' has-error' : '' }}">
                             <label for="monto" class="col-md-4 control-label">Monto: </label>
-                            <label for="nombre" class="col-md-4 control-label">{{$tipocobro->nombre_cobro}}</label><br>
+                            <label for="nombre" class="col-md-4 control-label">{{$tipocobro->monto}}</label><br>
                         </div>
 
                       {{ Form::open(['route' => ['tipocobros.destroy', $tipocobro->id ], 'method' => 'DELETE', 'class' => 'form-horizontal'])}}

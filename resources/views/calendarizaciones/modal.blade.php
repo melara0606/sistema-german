@@ -21,10 +21,11 @@
         </button>
       </div>
       <div class="modal-body">
-        <label for="">Fecha:</label>
-        <input type="text" id="fecha"><br>
+        
         <label for="">Evento</label>
-        <input type="text" name="">
+        <input type="text" name="evento">
+        <label for="">Descripción</label>
+        <input type="text" name="descripcion">
       </div>
 
       

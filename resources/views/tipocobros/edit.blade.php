@@ -17,7 +17,8 @@
             <div class="panel panel-primary">
                 <div class="panel-heading">Edicion de tipo de cobros</div>
                 <div class="panel-body">
-                    {{ Form::model($tipocobro, array('method' => 'put', 'class' => 'form-horizontal' , 'route' => array('tipocobro.update', $tipocobro->id))) }}
+                    {{ Form::model($tipocobro, array('method' => 'put', 'class' => 'form-horizontal' , 'route' => array('tipocobros.update', $tipocobro->id))) }}
+
                     {{-- <form class="form-horizontal" role="form" method="POST" action="{{ route('register') }}"> --}}
                     @include('tipocobros.formulario')
 
