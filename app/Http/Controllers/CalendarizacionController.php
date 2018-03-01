@@ -7,6 +7,10 @@ use App\Calendarizacion;
 
 class CalendarizacionController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -36,7 +40,8 @@ class CalendarizacionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Calendarizacion::create($request->All());
+        return redirect('/calendarizaciones')->with('mensaje', 'Dato registrado');
     }
 
     /**
@@ -47,7 +52,8 @@ class CalendarizacionController extends Controller
      */
     public function show($id)
     {
-        //
+        $calendarizacion = Calendarizacion::findorFail($id);
+        return view('calendarizaciones.show',compact('calendarizacion'));
     }
 
     /**
@@ -58,7 +64,8 @@ class CalendarizacionController extends Controller
      */
     public function edit($id)
     {
-        //
+        $calendarizacion = Calendarizacion::findorFail($id);
+        return view('calendarizaciones.edit',compact('calendarizacion'));
     }
 
     /**

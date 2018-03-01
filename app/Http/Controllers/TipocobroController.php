@@ -78,10 +78,11 @@ class TipocobroController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $tipocobro = Tipocobro::findorFail($id);
+        $tipocobro = Tipocobro::find($id);
         $tipocobro->fill($request->All());
         $tipocobro->save();
-        return redirect('tipocobros')->with('mensaje','Registro modificado');
+        bitacora('Modificó un tipo');
+        return redirect('/tipocobros')->with('mensaje','El tipo de cobro se modificó con éxito');
     }
 
     /**
