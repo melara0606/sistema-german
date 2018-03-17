@@ -11,7 +11,7 @@ $(document).ready(function(){
     var telefono = $("#tel").val();
     var sexo = $("#sexo").val();
     var motivo = $("#motivo").val();
-    var ruta = "/sisverapaz/public/inmuebles/guardarcontribuyente";
+    var ruta = "/"+carpeta()+"/public/inmuebles/guardarcontribuyente";
     var token = $('meta[name="csrf-token"]').attr('content');
     alert(sexo);
     $.ajax({
@@ -31,7 +31,7 @@ $(document).ready(function(){
 });
 
   function cargarContribuyente(){
-  	$.get('/sisverapaz/public/contratos/listarcontribuyentes', function (data){
+  	$.get('/'+carpeta()+'/public/contratos/listarcontribuyentes', function (data){
   		var html_select = '<option value="">Seleccione un contribuyente</option>';
   		for(var i=0;i<data.length;i++){
   			html_select +='<option value="'+data[i].id+'">'+data[i].nombre+'</option>'

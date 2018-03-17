@@ -32,7 +32,7 @@ $(document).ready(function(){
 
 	$("#btnsub").on("click", function(e){
 		var nFilas = $("#cuerpo tr").length;
-		var ruta = "/sisverapaz/public/presupuestounidades";
+		var ruta = "/"+carpeta()+"/public/presupuestounidades";
 		var token = $('meta[name="csrf-token"]').attr('content');
 		var unidad_admin = $("#unidad_admin").val();
 		totalp    = $("#pie #totalEnd").text();

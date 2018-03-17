@@ -47,7 +47,7 @@ var contador = 0;
 
     $("#btnsubmit").on("click", function (e) {
         ////// obtener todos los datos y convertirlos a json /////////////////////////////////////////////
-        var ruta = "/sisverapaz/public/presupuestos";
+        var ruta = "/"+carpeta()+"/public/presupuestos";
         var token = $('meta[name="csrf-token"]').attr('content');
         var total = $("#total").val();
         var proyecto_id = $("#proyecto").val();
@@ -88,6 +88,11 @@ var contador = 0;
       });
     });
 
+    $("#guardacat").on("click",function(e){
+        //alert(carpeta());
+        guardar_categoria();
+    });
+
     $(document).on("click", "#delete-btn", function (e) {
         var tr     = $(e.target).parents("tr"),
             totaltotal  = $("#totalEnd");
@@ -110,6 +115,15 @@ var contador = 0;
     function onFixed (valor, maximum) {
         maximum = (!maximum) ? 2 : maximum;
         return valor.toFixed(maximum);
+    }
+
+    function guardar_categoria()
+    {
+        var item = $("#item2").val();
+        var nombre = $("#categoria2").val();
+        var ruta = '/'+carpeta()+'/public/presupuestos/guardarcategoria';
+        alert(ruta);
+
     }
 
 });

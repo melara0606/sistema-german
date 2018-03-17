@@ -20,7 +20,12 @@ Route::get('/', function () {
 });
 
 Route::get('pdf',function(){
-  $pdf = PDF::loadView('pdf');
+	$usuarios = \App\Proveedor::where('estado',1)->get();
+  $unidad = "Unidad de Adquicisiones Institucionales";
+  $pdf = \PDF::loadView('pdf.pdf',compact('usuarios','unidad'));
+  $pdf->setPaper('letter', 'portrait');
+  //$canvas = $pdf ->get_canvas();
+//$canvas->page_text(0, 0, "Page {PAGE_NUM} of {PAGE_COUNT}", null, 10, array(0, 0, 0));
   return $pdf->stream('reporte.pdf');
 });
 
@@ -80,18 +85,17 @@ Route::post('tipocontratos/baja/{id}','TipocontratoController@baja')->name('tipo
 Route::post('tipocontratos/alta/{id}','TipocontratoController@alta')->name('tipocontratos.alta');
 Route::Resource('tipocontratos','TipocontratoController');
 
-Route::post('cotizaciones/baja/{id}','CotizacionController@baja')->name('cotizaciones.baja');
-Route::post('cotizaciones/alta/{id}','CotizacionController@alta')->name('cotizaciones.alta');
-Route::Resource('cotizaciones','CotizacionController');
-
 Route::post('ordencompras/baja/{id}','OrdencompraController@baja')->name('ordencompras.baja');
 Route::post('ordencompras/alta/{id}','OrdencompraController@alta')->name('ordencompras.alta');
+Route::get('ordencompras/cotizaciones/{id}','OrdencompraController@getCotizacion');
+Route::get('ordencompras/montos/{id}','OrdencompraController@getMonto');
 Route::Resource('ordencompras','OrdencompraController');
 
 Route::get('presupuestos/crear/{id}','PresupuestoController@crear');
 Route::Resource('presupuestos','PresupuestoController');
 
 Route::get('cotizaciones/ver/cuadros','CotizacionController@cuadros');
+Route::get('cotizaciones/ver/{id}', 'CotizacionController@cotizar');
 Route::post('cotizaciones/baja/{id}','CotizacionController@baja')->name('cotizaciones.baja');
 Route::post('cotizaciones/alta/{id}','CotizacionController@alta')->name('cotizaciones.alta');
 Route::Resource('cotizaciones','CotizacionController');
@@ -109,6 +113,7 @@ Route::Resource('formapagos','FormapagoController');
 
 Route::post('solicitudcotizaciones/baja/{id}','SolicitudcotizacionController@baja')->name('solicitudcotizaciones.baja');
 Route::post('solicitudcotizaciones/alta/{id}','SolicitudcotizacionController@alta')->name('solicitudcotizaciones.alta');
+Route::get('solicitudcotizaciones/getpresupuesto/{id}','SolicitudcotizacionController@getPresupuesto');
 Route::Resource('solicitudcotizaciones','SolicitudcotizacionController');
 
 Route::Resource('requisiciones','RequisicionController');

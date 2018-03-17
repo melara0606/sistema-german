@@ -44,6 +44,15 @@ class CotizacionController extends Controller
         return view('cotizaciones.cuadros',compact('proyectos'));
     }
 
+    public function cotizar($id)
+    {
+        //return $cotizaciones = Cotizacion::where('proyecto_id',$id)->with('proveedor')->get();
+        $proyecto = Proyecto::where('estado',3)->where('presupuesto',true)->findorFail($id);
+        $presupuesto = Presupuesto::where('proyecto_id',$proyecto->id)->with('presupuestodetalle')->first();
+        $cotizaciones = Cotizacion::where('proyecto_id',$proyecto->id)->with('detallecotizacion')->get();
+        return view('cotizaciones.cotizar',compact('proyecto','presupuesto','cotizaciones'));
+    }
+
     /**
      * Show the form for creating a new resource.
      *

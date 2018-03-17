@@ -15,7 +15,15 @@
   {!! Html::script('js/sisverapaz.js') !!}
 
   <script>
+    function carpeta()
+        {
+          var carpeta = window.location.href;
+          var nombre = carpeta.split("/");
+          return nombre[3];
+        }
       $(document).ready(function () {
+
+        
           //datatables
           var tabla = $('#example2').DataTable({
               language: {
@@ -484,7 +492,7 @@
                               if (result.value) {
                                 var dominio = window.location.host;
                                 var form = $(this).parents('form');
-                                $('#baja').attr('action','http://'+dominio+'/sisverapaz/public/'+ruta+'/baja/'+id+'+'+result.value);
+                                $('#baja').attr('action','http://'+dominio+'/'+carpeta()+'/public/'+ruta+'/baja/'+id+'+'+result.value);
                                 //document.getElmentById('baja').submit();
                                 $('#baja').submit();
                                 swal({
@@ -507,7 +515,7 @@
                             }).then(function () {
                                 var dominio = window.location.host;
                                 var form = $(this).parents('form');
-                                $('#alta').attr('action','http://'+dominio+'/sisverapaz/public/'+ruta+'/alta/'+id);
+                                $('#alta').attr('action','http://'+dominio+'/'+carpeta()+'/public/'+ruta+'/alta/'+id);
                                 //document.getElmentById('baja').submit();
                                 $('#alta').submit();
                                 swal({

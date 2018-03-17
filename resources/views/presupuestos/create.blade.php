@@ -41,3 +41,4 @@
 @section('scripts')
 {!! Html::script('js/presupuestos.js') !!}
 @endsection
+

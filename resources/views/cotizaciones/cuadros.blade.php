@@ -36,10 +36,10 @@
                   <tr>
                     <td>{{$proyecto->id}}</td>
                     <td>{{$proyecto->nombre}}</td>
-                    <td>{{$proyecto->monto}}</td>
+                    <td>${{number_format($proyecto->monto,2)}}</td>
                     <td><span class="label-warning">{{proyecto_estado($proyecto->estado)}}</span></td>
                     <td>
-                      <a class="btn btn-primary btn-xs" href="{{url('contribuyentes/ver/'.$proyecto->id)}}"><span class="glyphicon glyphicon-eye-open"></span></a>
+                      <a class="btn btn-primary btn-xs" href="{{url('cotizaciones/ver/'.$proyecto->id)}}"><span class="glyphicon glyphicon-eye-open"></span></a>
                     </td>
                   </tr>
                   @endforeach

@@ -14,7 +14,7 @@ class AddArgumentsToCotizacionsTable extends Migration
     public function up()
     {
         Schema::table('cotizacions', function (Blueprint $table) {
-            //
+            $table->boolean('seleccionado')->default(false);
         });
     }
 
@@ -26,7 +26,7 @@ class AddArgumentsToCotizacionsTable extends Migration
     public function down()
     {
         Schema::table('cotizacions', function (Blueprint $table) {
-            //
+            $table->dropColumn('seleccionado');
         });
     }
 }

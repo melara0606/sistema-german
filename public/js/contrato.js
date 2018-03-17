@@ -18,7 +18,7 @@ $(document).ready(function(){
 		var num_seguro_social =$("#seguro_empleado").val();
 		var num_afp =$("#afp_empleado").val();
 		alert(sexo);
-		var ruta ="/sisverapaz/public/contratos/guardarempleado";
+		var ruta ="/"+carpeta()+"/public/contratos/guardarempleado";
 		var token = $('meta[name="csrf-token"]').attr('content');
 
 		$.ajax({
@@ -43,7 +43,7 @@ $(document).ready(function(){
 
 	$('#guardartipo').on("click", function(e){
 		var nombre = $("#nombre_tipo").val();
-			var ruta = "/sisverapaz/public/contratos/guardartipo";
+			var ruta = "/"+carpeta()+"/public/contratos/guardartipo";
 			var token = $('meta[name="csrf-token"]').attr('content');
 			$.ajax({
 				url: ruta,
@@ -63,7 +63,7 @@ $(document).ready(function(){
 
 	$('#guardarcargo').on("click", function(e){
 		  var cargo = $("#cargo_nombre").val();
-			var ruta = "/sisverapaz/public/contratos/guardarcargo";
+			var ruta = "/"+carpeta()+"/public/contratos/guardarcargo";
 			var token = $('meta[name="csrf-token"]').attr('content');
 			$.ajax({
 				url: ruta,
@@ -85,7 +85,7 @@ $(document).ready(function(){
 });
 
   function cargarEmpleados(){
-  	$.get('/sisverapaz/public/contratos/listarempleados', function (data){
+  	$.get('/'+carpeta()+'/public/contratos/listarempleados', function (data){
   		var html_select = '<option value="">Seleccione un empleado</option>';
   		for(var i=0;i<data.length;i++){
   			html_select +='<option value="'+data[i].id+'">'+data[i].nombre+'</option>'
@@ -96,7 +96,7 @@ $(document).ready(function(){
   }
 
 function cargarTipo(){
-  	$.get('/sisverapaz/public/contratos/listartipos', function (data){
+  	$.get('/'+carpeta()+'/public/contratos/listartipos', function (data){
   		var html_select = '<option value="">Seleccione un tipo de contrato</option>';
   		for(var i=0;i<data.length;i++){
   			html_select +='<option value="'+data[i].id+'">'+data[i].nombre+'</option>'
@@ -107,7 +107,7 @@ function cargarTipo(){
   }
 
 function cargarCargo(){
-  	$.get('/sisverapaz/public/contratos/listarcargos', function (data){
+  	$.get('/'+carpeta()+'/public/contratos/listarcargos', function (data){
   		var html_select = '<option value="">Seleccione un cargo</option>';
   		for(var i=0;i<data.length;i++){
   			html_select +='<option value="'+data[i].id+'">'+data[i].cargo+'</option>'

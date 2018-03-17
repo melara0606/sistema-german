@@ -32,11 +32,7 @@
                   <th>Dirección</th>
                   <th>Inicio</th>
                   <th>Fin</th>
-<<<<<<< HEAD
                   <th>Estado</th>
-=======
-                  <th>Colaborador</th>
->>>>>>> 34fd9af675c1e91ee3b4c670f8c4c317167ea715
                   <th>Accion</th>
                 </thead>
                 <tbody>
@@ -48,20 +44,11 @@
                     <td>{{ $proyecto->direccion }}</td>
                     <td>{{ $proyecto->fecha_inicio->format('d-m-Y') }}</td>
                     <td>{{ $proyecto->fecha_fin->format('d-m-Y') }}</td>
-<<<<<<< HEAD
                     <td><span class="label-primary">{{proyecto_estado($proyecto->estado)}}</span></td>
-=======
-                    @if($proyecto->organizacion_id == '')
-                      <td>Fondos propios</td>
-                    @else
-                    <td>{{ $proyecto->organizacion->nombre_org }}</td>
-                  @endif
->>>>>>> 34fd9af675c1e91ee3b4c670f8c4c317167ea715
                     <td>
                       @if($estado == 1 || $estado == "")
                         {{ Form::open(['method' => 'POST', 'id' => 'baja', 'class' => 'form-horizontal'])}}
                           <a href="{{ url('proyectos/'.$proyecto->id) }}" class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-eye-open"></span></a>
-                          <a href="{{ url('presupuestos/crear/'.$proyecto->id) }}" class="btn btn-warning btn-xs"><span class="glyphicon glyphicon-text-size"></span>Agregar presupuesto</a>
                           <a href="{{ url('proyectos/'.$proyecto->id.'/edit') }}" class="btn btn-warning btn-xs"><span class="glyphicon glyphicon-text-size"></span></a>
                           <button class="btn btn-danger btn-xs" type="button" onclick={{ "baja(".$proyecto->id.",'proyectos')" }}><span class="glyphicon glyphicon-trash"></span></button>
                         {{ Form::close()}}

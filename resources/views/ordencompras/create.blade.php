@@ -17,6 +17,7 @@
                 <div class="panel-heading">Orden de compra</div>
                 <div class="panel-body">
                     {{ Form::open(['action' => 'OrdencompraController@store','class' => 'form-horizontal']) }}
+                    @include('errors.validacion')
                     @include('ordencompras.formulario')
                     @include('ordencompras.cotizacion')
 
@@ -33,4 +34,7 @@
         </div>
         </div>
     </div>
+@endsection
+@section('scripts')
+{!! Html::script('js/ordencompra.js')!!}
 @endsection

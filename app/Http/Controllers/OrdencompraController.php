@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Cotizacion;
+use App\Proyecto;
+use App\Fondo;
+use App\Ordencompra;
 use Illuminate\Http\Request;
 
 
@@ -17,10 +20,21 @@ class OrdencompraController extends Controller
      {
          $this->middleware('auth');
      }
+
+     public function getCotizacion($id)
+     {
+        return Cotizacion::where('proyecto_id',$id)->where('seleccionado',true)->with('proveedor','detallecotizacion','proyecto')->orderby('id')->get();
+     }
+
+     public function getMonto($id)
+     {
+        return Fondo::where('proyecto_id',$id)->with('fondocat')->get();
+     }
      
     public function index()
     {
-        //
+        $ordenes = Ordencompra::get();
+        return view('ordencompras.index',compact('ordenes'));
     }
 
     /**
@@ -30,8 +44,8 @@ class OrdencompraController extends Controller
      */
     public function create()
     {
-        $proveedores = Cotizacion::all()->where('estado', 1)->pluck( 'proveedor_id');
-        return view('ordencompras.create',compact('proveedores'));
+        $proyectos = Proyecto::where('estado',4)->get();
+        return view('ordencompras.create',compact('proyectos'));
     }
 
     /**
@@ -42,7 +56,15 @@ class OrdencompraController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //dd($request->All());
+        Ordencompra::create([
+            'fecha_inicio' => $request->fecha_inicio,
+            'fecha_fin' => $request->fecha_fin,
+            'cotizacion_id' => $request->cotizacion_id,
+            'observaciones' => $request->observaciones,
+            'direccion_entrega' => $request->direccion_entrega,
+            'adminorden' => $request->adminorden,
+        ]);
     }
 
     /**

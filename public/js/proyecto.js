@@ -63,7 +63,7 @@ $(document).ready(function(){
     var telefono_org = $("#telefono_org").val();
     var representante_org = $("#representante_org").val();
     var tel_representante_org = $("#tel_representante_org").val();
-    var ruta = "/sisverapaz/public/proyectos/guardarorganizacion";
+    var ruta = "/"+carpeta()+"/public/proyectos/guardarorganizacion";
     var token = $('meta[name="csrf-token"]').attr('content');
     //alert(nombre);
     $.ajax({
@@ -156,7 +156,7 @@ $(document).ready(function(){
     var idp= $("#idp").val();
     //var monto_total=$("#monto").val();
     cargarFondos();
-    var datos = $.get('/sisverapaz/public/proyectos/getMontos/'+ idp , function(data){
+    var datos = $.get('/'+carpeta()+'/public/proyectos/getMontos/'+ idp , function(data){
       for(var i=0;i<data.length;i++){
         var dataJson = JSON.stringify({ id: data[i].fondocat.id, monto: data[i].monto })
         monto+= parseFloat(data[i].monto);
@@ -218,7 +218,7 @@ $(document).ready(function(){
 //agrega nueva categoria de los montos para luego seleccionarla
     $('#guardarcategoria').on("click", function(e){
     var categoria = $("#cate").val();
-    var ruta = "/sisverapaz/public/proyectos/guardarcategoria";
+    var ruta = "/"+carpeta()+"/public/proyectos/guardarcategoria";
     var token = $('meta[name="csrf-token"]').attr('content');
     //alert(nombre);
     $.ajax({
@@ -240,7 +240,7 @@ $(document).ready(function(){
   });
 
   $('#btnsubmit').on("click", function(e){
-    var ruta = "/sisverapaz/public/proyectos";
+    var ruta = "/"+carpeta()+"/public/proyectos";
     var token = $('meta[name="csrf-token"]').attr('content');
     var tot=0.0;
     var montos = new Array();
@@ -357,7 +357,7 @@ function onFixed (valor, maximum) {
 
 
 function cargarOrganizacion(){
-  $.get('/sisverapaz/public/proyectos/listarorganizaciones', function (data){
+  $.get('/'+carpeta()+'/public/proyectos/listarorganizaciones', function (data){
     var html_select = '<option value="">Seleccione una organizacion</option>';
     for(var i=0;i<data.length;i++){
       html_select +='<option value="'+data[i].id+'">'+data[i].nombre_org+'</option>'
@@ -369,7 +369,7 @@ function cargarOrganizacion(){
 }
 
 function cargarFondos(){
-  $.get('/sisverapaz/public/proyectos/listarfondos', function (data){
+  $.get('/'+carpeta()+'/public/proyectos/listarfondos', function (data){
     var html_select = '<option value="">Seleccione una categoria</option>';
     for(var i=0;i<data.length;i++){
       html_select +='<option value="'+data[i].id+'">'+data[i].categoria+'</option>'
