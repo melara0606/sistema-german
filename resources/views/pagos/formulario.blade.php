@@ -16,12 +16,12 @@
 </div>
 
 <div class="form-group{{ $errors->has('cuenta_id') ? ' has-error' : '' }}">
-	<label for="" class="col-md-4 control-label">Seleccione cuenta</label>
+	<label for="" class="col-md-4 control-label">Cuenta</label>
 	<div class="col-md-6">
 		<select name="cuenta_id" id="cuenta" class="form-control">
-			<option value="">Seleccione cuenta bancaria</option>
+			<option value="">Seleccione cuenta</option>
 			@foreach($cuentas as $cuenta)
-			<option value="{{$cuenta->id}}">{{$cuenta->numero_de_cuenta}}</option>
+			<option value="{{$cuenta->id}}">{{$cuenta->numero_cuenta}}</option>
 			@endforeach
 		</select>
 		@if ($errors->has('cuenta_id'))

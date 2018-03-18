@@ -15,7 +15,7 @@ class CreateCuentaproysTable extends Migration
     {
         Schema::create('cuentaproys', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('numero_de_cuenta')->nullable();
+            $table->bigInteger('numero_cuenta')->nullable();
             $table->bigInteger('proyecto_id')->unsigned();
             $table->string('banco')->nullable();
             $table->double('monto_inicial',8,2);

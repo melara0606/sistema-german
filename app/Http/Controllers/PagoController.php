@@ -60,8 +60,8 @@ class PagoController extends Controller
      */
     public function show($id)
     {
-        $pagos = Pago::findorFail($id);
-        return view('pagos.show', compact('pagos'));
+        $pago = Pago::findorFail($id);
+        return view('pagos.show', compact('pago'));
     }
 
     /**
@@ -72,8 +72,8 @@ class PagoController extends Controller
      */
     public function edit($id)
     {
-        $pagos= Pago::find($id);
-        return view('pagos.edit', compact('pagos'));
+        $pago = Pago::find($id);
+        return view('pagos.edit', compact('pago'));
     }
 
     /**
@@ -85,7 +85,11 @@ class PagoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $pago = Pago::find($id);
+        $pago->fill($request->All());
+        $pago->save();
+        bitacora('Modificó registro');
+        return redirect('/pagos')->with('mensaje','Registro modificado con éxito');
     }
 
     /**

@@ -23,6 +23,21 @@ class NegocioController extends Controller
         return view('negocios.index', compact("negocios"));
     }
 
+    public function guardarContribuyente(Request $request)
+    {
+        if($request->ajax())
+        {
+            Contribuyente::create($request->All());
+            return response()->json([
+                'mensaje' => 'Registro creado']);
+        }
+    }
+
+    public function listarContribuyentes()
+    {
+        return Contribuyente::where('estado',1)->get();
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -43,8 +58,14 @@ class NegocioController extends Controller
      */
     public function store(NegocioRequest $request)
     {
-        Negocio::create($request->All());
-        bitacora('Registró un negocio');
+        $negocios = Negocio::create([
+            'contribuyente_id' => $request->contribuyente_id,
+            'direccion' => $request->direccion,
+            'rubro_id' => $request->rubro_id
+        ]);
+
+        //Negocio::create($request->All());
+        //bitacora('Registró un negocio');
         return redirect('negocios')->with('mensaje','Registro almacenado con éxito');
     }
 

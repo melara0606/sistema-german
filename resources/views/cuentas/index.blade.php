@@ -36,7 +36,7 @@
                 <tbody>
                   @foreach($cuentas as $cuenta)
                   <tr>
-                    <td>{{ $cuenta->numero_de_cuenta }}</td>
+                    <td>{{ $cuenta->numero_cuenta }}</td>
                     <td>{{ $cuenta->proyecto->nombre }}</td>
                     <td>{{ $cuenta->banco }}</td>
                     <td>{{ $cuenta->created_at->format('d-m-Y') }}</td>

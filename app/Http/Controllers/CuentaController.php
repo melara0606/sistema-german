@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Cuentaproy;
+use App\Cuenta;
 use App\Proyecto;
 use App\Http\Requests\CuentaRequest;
 use App\Http\Requests\CuentauRequest;

@@ -40,8 +40,8 @@ class CalendarizacionController extends Controller
      */
     public function store(Request $request)
     {
-        Calendarizacion::create($request->All());
-        return redirect('/calendarizaciones')->with('mensaje', 'Dato registrado');
+        /*Calendarizacion::create($request->All());
+        return redirect('/calendarizaciones')->with('mensaje', 'Dato registrado');*/
     }
 
     /**
@@ -88,6 +88,9 @@ class CalendarizacionController extends Controller
      */
     public function destroy($id)
     {
-        //
+    }
+
+    public function agregar_calendarizacion(Request $request){
+        $cal = Calendarizacion::create($request->All());
     }
 }

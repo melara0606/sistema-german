@@ -15,7 +15,7 @@ class CreateCuentasTable extends Migration
     {
         Schema::create('cuentas', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('numero_de_cuenta');
+            $table->bigInteger('numero_cuenta');
             $table->bigInteger('proyecto_id')->unsigned();
             $table->string('banco');
             $table->date('fecha_de_apertura');

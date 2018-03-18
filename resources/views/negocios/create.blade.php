@@ -35,3 +35,6 @@
     </div>
 </div>
 @endsection 
+@section('scripts')
+{!! Html::script('js/inmueble.js') !!}
+@endsection
