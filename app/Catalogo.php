@@ -10,6 +10,11 @@ class Catalogo extends Model
 
     public function categoria()
     {
-    	return $this->hasMane('App\Categoria');
+    	return $this->belongsTo('App\Categoria')->orderby('id','asc');
+    }
+
+    public function presupuestodetalle()
+    {
+    	return $this->hasMany('App\Presupuestodetalle');
     }
 }

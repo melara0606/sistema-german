@@ -13,4 +13,9 @@ class Presupuestodetalle extends Model
     {
       return $this->belongsTo('App\Presupuesto');
     }
+
+    public function catalogo()
+    {
+    	return $this->belongsTo('App\Catalogo')->orderby('categoria_id','asc');
+    }
 }

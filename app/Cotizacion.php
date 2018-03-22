@@ -30,9 +30,9 @@ class Cotizacion extends Model
         return $this->hasMany('App\Detallecotizacion')->orderby('id','asc');
     }
 
-    public function proyecto()
+    public function presupuesto()
     {
-        return $this->belongsTo('App\Proyecto');
+        return $this->belongsTo('App\Presupuesto');
     }
 
     public function proveedor()

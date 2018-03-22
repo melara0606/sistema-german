@@ -2,7 +2,7 @@
 
 @section('migasdepan')
 <h1>
-        
+
         <small>Ver cotizacion <b>{{ $cotizacion->nombre }}</b></small>
       </h1>
       <ol class="breadcrumb">
@@ -22,32 +22,32 @@
                 <div class="panel-body">
                         <div class="form-group{{ $errors->has('proyecto_id') ? ' has-error' : '' }}">
                             <label for="proyecto_id" class="col-md-4 control-label">Nombre del Proyecto: </label>
-                            <label for="proyecto_id" class="col-md-4 control-label">{{$cotizacion->proyecto->nombre}}</label><br>
-                            
+                            <label for="proyecto_id" class="col-md-8 control-label">{{$cotizacion->presupuesto->proyecto->nombre}}</label><br>
+
                         </div>
 
                          <div class="form-group{{ $errors->has('proveedor_id') ? ' has-error' : '' }}">
                             <label for="proveedor_id" class="col-md-4 control-label">Proveedor: </label>
                             <label for="proyecto_id" class="col-md-4 control-label">{{$cotizacion->proveedor->nombre}}</label><br>
-                            
+
                         </div>
 
                         <div class="form-group{{ $errors->has('descripcion') ? ' has-error' : '' }}">
                             <label for="descripcion" class="col-md-4 control-label">Forma de pago: </label>
                             <label for="proyecto_id" class="col-md-4 control-label">{{$cotizacion->descripcion}}</label><br>
-                            
+
                         </div>
 
                         <div class="form-group{{ $errors->has('descripcion') ? ' has-error' : '' }}">
                             <label for="descripcion" class="col-md-4 control-label">Validez de la oferta: </label>
                             <label for="proyecto_id" class="col-md-4 control-label"></label><br>
-                            
+
                         </div>
 
                         <div class="form-group{{ $errors->has('descripcion') ? ' has-error' : '' }}">
                             <label for="descripcion" class="col-md-4 control-label">Plazo de entrega: </label>
                             <label for="proyecto_id" class="col-md-4 control-label"></label><br>
-                            
+
                         </div>
 
                         <div style="overflow-x:auto;">

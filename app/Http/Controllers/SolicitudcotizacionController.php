@@ -10,6 +10,7 @@ use App\Formapago;
 use App\Proyecto;
 use App\Unidad;
 use App\Presupuesto;
+use App\Presupuestodetalle;
 
 class SolicitudcotizacionController extends Controller
 {
@@ -22,16 +23,17 @@ class SolicitudcotizacionController extends Controller
      {
          $this->middleware('auth');
      }
-     
+
     public function index()
     {
-        $solicitudes = Solicitudcotizacion::with('proyecto','formapago')->get();
+        $solicitudes = Solicitudcotizacion::with('presupuesto','formapago')->get();
         return view('solicitudcotizaciones.index',compact('solicitudes'));
     }
 
     public function getPresupuesto($id)
     {
-        return Presupuesto::where('proyecto_id',$id)->with('Presupuestodetalle')->get();
+        $presupuesto = Presupuesto::where('proyecto_id',$id)->with('presupuestodetalle')->first();
+        return Presupuestodetalle::where('presupuesto_id',$presupuesto->id)->with('catalogo')->get();
     }
 
     /**
@@ -56,12 +58,13 @@ class SolicitudcotizacionController extends Controller
     public function store(Request $request)
     {
         //dd($request->All());
+        $presupuesto = Presupuesto::where('proyecto_id',$request->proyecto)->first();
         Solicitudcotizacion::create([
             "formapago_id" => $request->formapago,
             "unidad" => $request->unidad,
             "encargado" => $request->encargado,
             "cargo_encargado" => $request->cargo,
-            "proyecto_id" => $request->proyecto,
+            "presupuesto_id" => $presupuesto->id,
             "lugar_entrega" => $request->lugar_entrega,
             "datos_contenido" => $request->datos_contenido,
         ]);

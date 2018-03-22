@@ -92,6 +92,10 @@ Route::get('ordencompras/montos/{id}','OrdencompraController@getMonto');
 Route::Resource('ordencompras','OrdencompraController');
 
 Route::get('presupuestos/crear/{id}','PresupuestoController@crear');
+Route::get('presupuestos/getcategorias/{item}','PresupuestoController@getCategorias');
+Route::post('presupuestos/guardarcategoria','PresupuestoController@guardarCategoria');
+Route::get('presupuestos/getcatalogo/{id}','PresupuestoController@getCatalogo');
+Route::post('presupuestos/guardardescripcion','PresupuestoController@guardarDescripcion');
 Route::Resource('presupuestos','PresupuestoController');
 
 Route::get('cotizaciones/ver/cuadros','CotizacionController@cuadros');

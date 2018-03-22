@@ -25,23 +25,25 @@
               <table class="table table-striped table-bordered table-hover" id="example2">
           <thead>
                   <th>Id</th>
+                  <td>Proyecto o proceso</td>
                   <th>Forma de pago</th>
                   <th>Lugar de entrega</th>
                   <th>Datos del contenido</th>
                   <th>Accion</th>
                 </thead>
                 <tbody>
-                  @foreach($solicitudcotizaciones as $solicitudcotizacion)
+                  @foreach($solicitudes as $solicitud)
                   <tr>
-                    <td>{{ $solicitudcotizacion->id }}</td>
-                    <td>{{ $solicitudcotizacion->formapago_id }}</td>
-                    <td>{{ $solicitudcotizacion->lugar_entrega }}</td>
-                    <td>{{ $solicitudcotizacion->datos_contenido }}</td>
+                    <td>{{ $solicitud->id }}</td>
+                    <td>{{ $solicitud->presupuesto->proyecto->nombre}}</td>
+                    <td>{{ $solicitud->formapago->nombre }}</td>
+                    <td>{{ $solicitud->lugar_entrega }}</td>
+                    <td>{{ $solicitud->datos_contenido }}</td>
                   </tr>
                   @endforeach
                 </tbody>
               </table>
-                
+
               <div class="pull-right">
 
               </div>

@@ -8,9 +8,9 @@ class Solicitudcotizacion extends Model
 {
     protected $guarded =[];
 
-    public function proyecto()
+    public function presupuesto()
     {
-    	return $this->belongsTo('App\Proyecto');
+    	return $this->belongsTo('App\Presupuesto');
     }
 
     public function formapago()

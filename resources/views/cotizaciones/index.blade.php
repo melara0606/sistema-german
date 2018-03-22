@@ -35,7 +35,7 @@
                   @foreach($cotizaciones as $cotizacion)
                   <tr>
                     <td>{{ $cotizacion->id }}</td>
-                    <td>{{ $cotizacion->proyecto->nombre }}</td>
+                    <td>{{ $cotizacion->presupuesto->proyecto->nombre }}</td>
                     <td>{{ $cotizacion->proveedor->nombre }}</td>
                     <td>{{ $cotizacion->descripcion }}</td>
                     <td>
