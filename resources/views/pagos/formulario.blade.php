@@ -16,7 +16,7 @@
 </div>
 
 <div class="form-group{{ $errors->has('cuenta_id') ? ' has-error' : '' }}">
-	<label for="" class="col-md-4 control-label">Cuenta</label>
+	<label for="" class="col-md-4 control-label">Seleccione cuenta</label>
 	<div class="col-md-6">
 		<select name="cuenta_id" id="cuenta" class="form-control">
 			<option value="">Seleccione cuenta</option>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Tipopago;
 use App\Cuenta;
+use App\Cuentaproy;
 use App\Pago;
 use App\Bitacora;
 use App\Http\Requests\ContratoRequest;
@@ -35,7 +36,7 @@ class PagoController extends Controller
     public function create()
     {
         $tipopagos = Tipopago::all();
-        $cuentas = Cuenta::all();
+        $cuentas = Cuentaproy::all();
         $pagos = Pago::all();
         return view('pagos.create',compact('tipopagos','cuentas','pagos'));
     }
@@ -48,6 +49,7 @@ class PagoController extends Controller
      */
     public function store(Request $request)
     {
+        //dd($request->all());
         Pago::create($request->All());
         return redirect('pagos')->with('mensaje', 'Pago registrado');
     }

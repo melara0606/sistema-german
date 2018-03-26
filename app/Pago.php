@@ -13,8 +13,8 @@ class Pago extends Model
     	return $this->belongsTo('App\Tipopago');
     }
 
-    public function cuenta()
+    public function cuentaproy()
     {
-    	return $this->belongsTo('App\Cuenta');
+    	return $this->belongsTo('App\Cuentaproy', 'cuenta_id');
     }
 }

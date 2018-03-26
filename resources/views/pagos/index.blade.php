@@ -35,7 +35,7 @@
                   <tr>
                     <td>{{ $pago->id }}</td>
                     <td>{{ $pago->tipopago->nombre }}</td>
-                    <td>{{ $pago->cuenta->numero_de_pago }}</td>
+                    <td>{{ $pago->cuentaproy->numero_cuenta }}</td>
                     <td>{{ $pago->monto }}</td>
 
                     <td>

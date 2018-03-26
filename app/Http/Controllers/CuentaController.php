@@ -46,7 +46,7 @@ class CuentaController extends Controller
      */
     public function store(CuentaRequest $request)
     {
-        Cuenta::create($request->All());
+        Cuentaproy::create($request->All());
     }
 
     /**
@@ -55,7 +55,7 @@ class CuentaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Cuenta $cuenta)
+    public function show(Cuentaproy $cuenta)
     {
         //
     }
