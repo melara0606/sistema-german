@@ -1,8 +1,8 @@
 @extends('layouts.app')
 
 @section('migasdepan')
-<h1>        
-        <small>Proceso libre gestion <b>{{ $proyecto->nombre }}</b></small>
+<h1>
+        <small>Proceso libre gestion <b>{{ $presupuesto->proyecto->nombre }}</b></small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="{{ url('/cotizaciones') }}"><i class="fa fa-dashboard"></i> Cotizaciones</a></li>
@@ -37,9 +37,9 @@
                                       <tr>
                                         <td><small>Adquisic</small></td>
                                         <td><small>{{$detalle->cantidad}}</small></td>
-                                        <td><small>{{$detalle->material}}</small></td> 
-                                      </tr> 
-                                    @endforeach                                      
+                                        <td><small>{{$detalle->material}}</small></td>
+                                      </tr>
+                                    @endforeach
                                   </tbody>
                                   <tfoot>
                                     <tr><th colspan="3"><small>Total de la oferta</small></th></tr>
@@ -48,16 +48,16 @@
                                   </tfoot>
                                 </table>
                               </td>
-                              
+
                               @foreach($cotizaciones as $cotizacion)
-                               <td>         
-                                        
+                               <td>
+
                                 <table border="1px" width="100%" class="">
                                   <?php $total=0.0;?>
                                   <thead>
                                     <tr>
                                       <th heigth="5px" colspan="3">
-                                        <center><small>OFERENTE: {{$cotizacion->proveedor->nombre}}</small></center>
+                                        <center><small>OFERENTE: {{$cotizacion->proveedor->nombre}}</small><input type="radio" data-proyecto="{{$presupuesto->proyecto->id}}" name="seleccionar" value="{{$cotizacion->id}}"/></center>
                                       </th>
                                     </tr>
                                     <tr>
@@ -77,7 +77,7 @@
                                         <td><small>${{number_format($detalle2->cantidad*$detalle2->precio_unitario,2)}}</small></td>
                                       </tr>
                                     @endforeach
-                                  </tbody>   
+                                  </tbody>
                                   <tfoot>
                                     <tr>
                                       <th colspan="2"></th>
@@ -85,10 +85,10 @@
                                     </tr>
                                     <tr><th colspan="3"><small>Plazo de la oferta</small></th></tr>
                                     <tr><th colspan="3"><small>{{$cotizacion->descripcion}}</small></th></tr>
-                                  </tfoot>  
+                                  </tfoot>
                                 </table>
                                 </td>
-                              @endforeach 
+                              @endforeach
 
                           </table>
                         </div>
@@ -97,4 +97,7 @@
         </div>
     </div>
 </div>
+@endsection
+@section('scripts')
+{{Html::script('js/cotizacion.js')}}
 @endsection

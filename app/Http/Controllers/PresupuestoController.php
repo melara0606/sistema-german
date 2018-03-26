@@ -7,8 +7,11 @@ use App\Http\Requests\PresupuestoRequest;
 use App\Proyecto;
 use App\Presupuesto;
 use App\Presupuestodetalle;
+use App\Categoria;
+use App\Catalogo;
 use Session;
 use DB;
+use Validator;
 
 class PresupuestoController extends Controller
 {
@@ -21,7 +24,7 @@ class PresupuestoController extends Controller
      {
          $this->middleware('auth');
      }
-     
+
     public function index()
     {
         $presupuestos = Presupuesto::all();
@@ -40,7 +43,52 @@ class PresupuestoController extends Controller
 
       //$proyectos=DB::select('SELECT "id" FROM proyectos WHERE estado =1 EXCEPT SELECT proyecto_id FROM presupuestos');
         $proyectos = Proyecto::where('estado',1)->where('presupuesto',false)->get();
-       return view('presupuestos.create',compact('proyectos'));
+        $categorias = Categoria::all();
+       return view('presupuestos.create',compact('proyectos','categorias'));
+    }
+
+    public function guardarCategoria(Request $request)
+    {
+        if($request->Ajax())
+        {
+            try{
+                Categoria::create($request->All());
+                return response()->json([
+                    'mensaje' => 'exito'
+                ]);
+            }catch(\Exception $e){
+                return response()->json([
+                    'mensaje' => $e->getMessage()
+                ]);
+            }
+        }
+    }
+
+    public function guardarDescripcion(Request $request)
+    {
+        if($request->Ajax())
+        {
+            try{
+                Catalogo::create($request->All());
+                return response()->json([
+                    'mensaje' => 'exito'
+                ]);
+            }catch(\Exception $e){
+                return response()->json([
+                    'mensaje' => $e->getMessage()
+                ]);
+            }
+        }
+    }
+
+    public function getCategorias($item)
+    {
+        return Categoria::where('item',$item)->get();
+    }
+
+    public function getCatalogo($id)
+    {
+        return Catalogo::where('categoria_id',$id)->with('categoria')->get();
     }
 
     public function crear($id)
@@ -69,12 +117,9 @@ class PresupuestoController extends Controller
                   foreach($presupuestos as $presu){
                     Presupuestodetalle::create([
                       'presupuesto_id' => $presupuesto->id,
-                      'material' => $presu['descripcion'],
                       'cantidad' => $presu['cantidad'],
                       'preciou' => $presu['precio'],
-                      'unidad' => $presu['unidad'],
-                      'item' => $presu['item'],
-                      'categoria' => $presu['categoria'],
+                      'catalogo_id' => $presu['categoria'],
                     ]);
                   }
                   $proyecto = Proyecto::findorFail($request->proyecto_id);
@@ -102,7 +147,8 @@ class PresupuestoController extends Controller
     public function show($id)
     {
         $presupuesto = Presupuesto::findorFail($id);
-        $detalles = Presupuestodetalle::where('presupuesto_id',$presupuesto->id)->orderby('item','ASC')->get();
+        $detalles = Presupuestodetalle::where('presupuesto_id',$presupuesto->id)->with('catalogo')->orderby('id','desc')->get();
+        //dd($detalles);
         return view('presupuestos.show',compact('presupuesto','detalles'));
     }
 

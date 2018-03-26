@@ -3,37 +3,42 @@ var contador = 0;
     $(document).ready(function(){
     var tbMaterial = $("#tbMaterial");
 
-     $("#agregar").on("click", function(e) {
+     $("#agregaratabla").on("click", function(e) {
     // 
 
          e.preventDefault();
-             descripcion = $("#descripcion").val()    || 0,
-             item = $("#item").val()    || 0,
-             categoria = $("#categoria").val() || 0,
+             categoria = $("#categoria option:selected").text()    || 0,
+             nombrecat = $("#descripcion option:selected").text(),
+             catalogo = $("#descripcion").val() || 0,
              cantidad  = $("#cantidad").val() || 0,
-             unidad = $("#unidad").val() || 0,
+             unidad = $("#descripcion option:selected").attr('data-unidad'),
+             existe = $("#descripcion option:selected");
              precio = $("#precio").val() || 0;
 
-         if(descripcion && cantidad && precio && item && unidad && categoria){
+
+         if(cantidad){
              var subtotal = parseFloat(precio) * parseFloat(cantidad);
              contador++;
              $(tbMaterial).append(
-                 "<tr data-item='"+item+"' data-categoria='"+categoria+"' data-descripcion='"+descripcion+"' data-unidad='"+unidad+"' data-cantidad='"+cantidad+"' data-precio='"+precio+"' >"+
-                     "<td>" + item + "</td>" +
+                 "<tr data-categoria='"+catalogo+"' data-cantidad='"+cantidad+"' data-precio='"+precio+"' >"+
                      "<td>" + categoria + "</td>" + 
-                     "<td>" + descripcion + "</td>" +
+                     "<td>" + nombrecat + "</td>" +
                      "<td>" + unidad + "</td>" +
                      "<td>" + cantidad+ "</td>" +
                      "<td> $" + precio + "</td>" +
                      "<td>" + onFixed( subtotal, 2 ) + "</td>" +
                      "<td>"+
-                     "<button type='button' id='delete-btn' class='btn btn-danger'>Eliminar</button></td>" +
+                     "<button type='button' id='delete-btn' class='btn btn-danger btn-xs'><span class='glyphicon glyphicon-remove'></span></button></td>" +
                  "</tr>"
              );
              total +=( parseFloat(cantidad) * parseFloat(precio) );
              $("#total").val(onFixed(total));
              $("#contador").val(contador);
              $("#pie #totalEnd").text(onFixed(total));
+             $(existe).css("display", "none");
+             $("#descripcion").val("");
+             $("#descripcion").trigger('chosen:updated');
+
              //total2=total;
              clearForm();
          }else{
@@ -41,7 +46,7 @@ var contador = 0;
               '¡Aviso!',
               'Debe llenar todos los campos',
               'warning'
-)
+            )
          }
      });
 
@@ -55,10 +60,7 @@ var contador = 0;
         $(cuerpo).find("tr").each(function (index, element) {
             if(element){
                 presupuestos.push({
-                    item : $(element).attr("data-item"),
                     categoria : $(element).attr("data-categoria"),
-                    descripcion : $(element).attr("data-descripcion"),
-                    unidad : $(element).attr("data-unidad"),
                     cantidad :$(element).attr("data-cantidad"),
                     precio : $(element).attr("data-precio")
                 });
@@ -89,8 +91,44 @@ var contador = 0;
     });
 
     $("#guardacat").on("click",function(e){
-        //alert(carpeta());
         guardar_categoria();
+    });
+
+    $("#guardarcatalogo").on("click",function(e){
+        guardar_descripcion();
+    });
+
+    $("#item").on("change", function(e){
+        var item = (this.value);
+        if(item > 0)
+        {
+            listarcategorias(item);
+        }else{
+            swal(
+              '¡Debe seleccionar un item!',
+              '',
+              'warning'
+            )
+        }
+    });
+
+    $("#categoria").on("change",function(){
+        var id = (this.value);
+        listarcatalogo(id);
+    });
+
+    $("#item3").on("change", function(e){
+        var item = (this.value);
+        if(item > 0)
+        {
+            listarcategorias3(item);
+        }else{
+            swal(
+              '¡Debe seleccionar un item!',
+              '',
+              'warning'
+            )
+        }
     });
 
     $(document).on("click", "#delete-btn", function (e) {
@@ -120,10 +158,131 @@ var contador = 0;
     function guardar_categoria()
     {
         var item = $("#item2").val();
-        var nombre = $("#categoria2").val();
+        var nombr = $("#categoria2").val();
+        var nombre_categoria = nombr.toUpperCase();
+        var token = $('meta[name="csrf-token"]').attr('content');
         var ruta = '/'+carpeta()+'/public/presupuestos/guardarcategoria';
-        alert(ruta);
-
+        $.ajax({
+            url: ruta,
+            headers: {'X-CSRF-TOKEN':token},
+            type:'POST',
+            dataType:'json',
+            data: {item,nombre_categoria},
+           success : function(msj){
+                //window.location.href = "/sisverapaz/public/proyectos";
+                console.log(msj.mensaje);
+                if(msj.mensaje === "exito")
+                {
+                    toastr.success('Categoría registrado éxitosamente');
+                    $("#item2").val("");
+                    $("#categoria2").val(""); 
+                }else{
+                    toastr.error('Ocurrió un error al guardar');
+                }
+                
+            },
+            error: function(data, textStatus, errorThrown){
+                toastr.error('Ha ocurrido un '+textStatus+' en la solucitud');
+                $.each(data.responseJSON.errors, function( key, value ) {
+                    toastr.error(value);
+                });
+            }
+        });
     }
 
+    function guardar_descripcion()
+    {
+        var categoria_id = $("#categoria3").val();
+        var nombre_descripcion = $("#nombre_descripcion").val();
+        var unidad_medida = $("#unidad_medida").val();
+        var nombre = nombre_descripcion.toUpperCase();
+        var token = $('meta[name="csrf-token"]').attr('content');
+        var ruta = '/'+carpeta()+'/public/presupuestos/guardardescripcion';
+        $.ajax({
+            url: ruta,
+            headers: {'X-CSRF-TOKEN':token},
+            type:'POST',
+            dataType:'json',
+            data: {categoria_id,nombre,unidad_medida},
+           success : function(msj){
+                //window.location.href = "/sisverapaz/public/proyectos";
+                console.log(msj.mensaje);
+                if(msj.mensaje === "exito")
+                {
+                    toastr.success('Categoría registrado éxitosamente');
+                    $("#categoria").trigger('chosen:updated');
+                    $("#nombre_descripcion").val(""); 
+                    $("#unidad_medida").val("");
+                }else{
+                    toastr.error('Ocurrió un error al guardar');
+                }
+                
+            },
+            error: function(data, textStatus, errorThrown){
+                toastr.error('Ha ocurrido un '+textStatus+' en la solucitud');
+                $.each(data.responseJSON.errors, function( key, value ) {
+                    toastr.error(value);
+                });
+            }
+        });
+    }
+
+    function listarcategorias(item)
+    {
+        $.get('/'+carpeta()+'/public/presupuestos/getcategorias/'+item, function (data){
+        var html_select = '<option value="">Seleccione una categoría</option>';
+        //console.log(data.length);
+        if(data.length < 1){
+            $("#categoria").html(html_select);
+            $("#categoria").trigger('chosen:updated');
+        }else{
+            for(var i=0;i<data.length;i++){
+                html_select +='<option value="'+data[i].id+'">'+data[i].nombre_categoria+'</option>'
+                //console.log(data[i]);
+                $("#categoria").html(html_select);
+                $("#categoria").trigger('chosen:updated');
+            }  
+        }
+            
+        });
+    }
+
+    function listarcategorias3(item)
+    {
+        $.get('/'+carpeta()+'/public/presupuestos/getcategorias/'+item, function (data){
+        var html_select = '<option value="">Seleccione una categoría</option>';
+        //console.log(data.length);
+        if(data.length < 1){
+            $("#categoria3").html(html_select);
+            $("#categoria3").trigger('chosen:updated');
+        }else{
+            for(var i=0;i<data.length;i++){
+                html_select +='<option value="'+data[i].id+'">'+data[i].nombre_categoria+'</option>'
+                //console.log(data[i]);
+                $("#categoria3").html(html_select);
+                $("#categoria3").trigger('chosen:updated');
+            }  
+        }
+            
+        });
+    }
+
+    function listarcatalogo(id)
+    {
+        $.get('/'+carpeta()+'/public/presupuestos/getcatalogo/'+id, function (data){
+            var html_select = '<option value="">Seleccione una descripción</option>';
+            //console.log(data.length);
+            if(data.length < 1){
+                $("#descripcion").html(html_select);
+                $("#descripcion").trigger('chosen:updated');
+            }else{
+                for(var i=0;i<data.length;i++){
+                    html_select +='<option data-categoria="'+data[i].categoria_id+'" data-unidad="'+data[i].unidad_medida+'" value="'+data[i].id+'">'+data[i].nombre+'</option>'
+                    //console.log(data[i]);
+                    $("#descripcion").html(html_select);
+                    $("#descripcion").trigger('chosen:updated');
+                }  
+            }   
+        });
+    }
 });

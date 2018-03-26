@@ -33,8 +33,7 @@
 <table class="table table-striped" id="tabla" display="block;">
     <thead>
         <tr>
-            <th width="5%">Item</th>
-            <th width="45%">Descripción</th>
+            <th width="50%">Descripción</th>
             <th width="10%">Unidad de medida</th>
             <th width="10%">Cantidad</th>
             <th width="10%">Marca</th>

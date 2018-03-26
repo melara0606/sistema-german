@@ -27,7 +27,7 @@ Ver detalle del plan anual
 
                          <div class="form-group{{ $errors->has('monto') ? ' has-error' : '' }}">
                             <label for="monto" class="col-md-4 control-label">Descripción del plan anual: </label>
-                            <label for="nombre" class="col-md-4 control-label">{{$presupuesto->proyecto->nombre}}</label><br>
+                            <label for="nombre" class="col-md-8 control-label">{{$presupuesto->proyecto->nombre}}</label><br>
                         </div>
 
                         <div class="form-group{{ $errors->has('fuente_financiamiento') ? ' has-error' : '' }}">
@@ -54,10 +54,10 @@ Ver detalle del plan anual
                             <tbody>
                               @foreach($detalles as $detalle)
                               <tr>
-                                <td>{{$detalle->item}}</td>
-                                <td>{{$detalle->categoria}}</td>
-                                <td>{{$detalle->material}}</td>
-                                <td>{{$detalle->unidad}}</td>
+                                <td>{{$detalle->catalogo->categoria->item}}</td>
+                                <td>{{$detalle->catalogo->categoria->nombre_categoria}}</td>
+                                <td>{{$detalle->catalogo->nombre}}</td>
+                                <td>{{$detalle->catalogo->unidad_medida}}</td>
                                 <td>{{$detalle->cantidad}}</td>
                                 <td>${{number_format($detalle->preciou,2)}}</td>
                                 <td>${{number_format($detalle->cantidad*$detalle->preciou,2)}}</td>

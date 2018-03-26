@@ -25,7 +25,7 @@ class CotizacionController extends Controller
      */
 
     public function index(Request $request)
-    {   
+    {
         $estado = $request->get('estado');
         if($estado == "" )$estado=1;
         if ($estado == 1) {
@@ -38,9 +38,36 @@ class CotizacionController extends Controller
         }
     }
 
+    public function seleccionar(Request $request)
+    {
+        if($request->Ajax())
+        {
+          try{
+            $cotizacion=Cotizacion::findorFail($request->idcot);
+            $cotizacion->seleccionado=true;
+            $cotizacion->estado=2;
+            $cotizacion->save();
+
+            $proyecto=Proyecto::findorFail($request->idproy);
+            $proyecto->estado=4;
+            $proyecto->save();
+
+            return response()->json([
+              'mensaje' => 'exito'
+            ]);
+          }catch(\Exception $e){
+
+            return response()->json([
+              'mensaje' => 'error'
+            ]);
+          }
+
+        }
+    }
+
     public function cuadros()
-    { 
-        $proyectos = Proyecto::where('estado',3)->where('presupuesto',true)->with('presupuesto','cotizacion')->get();
+    {
+        $proyectos = Proyecto::where('estado',3)->where('presupuesto',true)->get();
         return view('cotizaciones.cuadros',compact('proyectos'));
     }
 
@@ -49,8 +76,8 @@ class CotizacionController extends Controller
         //return $cotizaciones = Cotizacion::where('proyecto_id',$id)->with('proveedor')->get();
         $proyecto = Proyecto::where('estado',3)->where('presupuesto',true)->findorFail($id);
         $presupuesto = Presupuesto::where('proyecto_id',$proyecto->id)->with('presupuestodetalle')->first();
-        $cotizaciones = Cotizacion::where('proyecto_id',$proyecto->id)->with('detallecotizacion')->get();
-        return view('cotizaciones.cotizar',compact('proyecto','presupuesto','cotizaciones'));
+        $cotizaciones = Cotizacion::where('presupuesto_id',$presupuesto->id)->with('detallecotizacion')->get();
+        return view('cotizaciones.cotizar',compact('presupuesto','cotizaciones'));
     }
 
     /**
@@ -75,15 +102,17 @@ class CotizacionController extends Controller
     public function store(Request $request)
     {
         //dd($request->All());
+
         DB::beginTransaction();
         try
         {
+          $presupuesto = Presupuesto::where('proyecto_id',$request->proyecto_id)->first();
             $count = count($request->precios);
             $cotizacion = Cotizacion::create([
-            'proveedor_id' => $request->proveedor_id,
-            'proyecto_id' => $request->proyecto_id,
-            'descripcion' => $request->descripcion,
-        ]);
+                'proveedor_id' => $request->proveedor_id,
+                'presupuesto_id' => $presupuesto->id,
+                'descripcion' => $request->descripcion,
+            ]);
             for($i=0;$i<$count;$i++)
             {
                 Detallecotizacion::create([
@@ -100,7 +129,7 @@ class CotizacionController extends Controller
             return redirect('/cotizaciones')->with('mensaje','Registro almacenado con éxito');
         }catch (\Exception $e){
             DB::rollback();
-            return redirect('/cotizaciones/create')->with('error','Ocurrió un error');
+            return redirect('/cotizaciones/create')->with('error',$e->getMessage());
         }
     }
 
@@ -162,7 +191,7 @@ class CotizacionController extends Controller
 
         $datos = explode("+", $cadena);
         $id=$datos[0];
-        $motivo=$datos[1];      
+        $motivo=$datos[1];
         $cotizacion = Cotizacion::find($id);
         $cotizacion->estado=2;
         $cotizacion->motivo=$motivo;
