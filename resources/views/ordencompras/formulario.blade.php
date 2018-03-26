@@ -2,7 +2,7 @@
     <label for="nombre" class="col-md-4 control-label">Nombre del proyecto o proceso</label>
 
     <div class="col-md-6">
-        <select id="proyecto" class="form-control">
+        <select id="proyecto" class="form-control chosen-select">
             <option value="">Seleccione un proyecto</option>
            @foreach($proyectos as $proyecto)
                 <option value="{{$proyecto->id}}">{{$proyecto->nombre}}</option>

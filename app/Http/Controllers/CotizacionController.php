@@ -38,9 +38,36 @@ class CotizacionController extends Controller
         }
     }
 
+    public function seleccionar(Request $request)
+    {
+        if($request->Ajax())
+        {
+          try{
+            $cotizacion=Cotizacion::findorFail($request->idcot);
+            $cotizacion->seleccionado=true;
+            $cotizacion->estado=2;
+            $cotizacion->save();
+
+            $proyecto=Proyecto::findorFail($request->idproy);
+            $proyecto->estado=4;
+            $proyecto->save();
+
+            return response()->json([
+              'mensaje' => 'exito'
+            ]);
+          }catch(\Exception $e){
+
+            return response()->json([
+              'mensaje' => 'error'
+            ]);
+          }
+
+        }
+    }
+
     public function cuadros()
     {
-        $proyectos = Proyecto::where('estado',3)->where('presupuesto',true)->with('presupuesto')->get();
+        $proyectos = Proyecto::where('estado',3)->where('presupuesto',true)->get();
         return view('cotizaciones.cuadros',compact('proyectos'));
     }
 
@@ -50,7 +77,7 @@ class CotizacionController extends Controller
         $proyecto = Proyecto::where('estado',3)->where('presupuesto',true)->findorFail($id);
         $presupuesto = Presupuesto::where('proyecto_id',$proyecto->id)->with('presupuestodetalle')->first();
         $cotizaciones = Cotizacion::where('presupuesto_id',$presupuesto->id)->with('detallecotizacion')->get();
-        return view('cotizaciones.cotizar',compact('proyecto','presupuesto','cotizaciones'));
+        return view('cotizaciones.cotizar',compact('presupuesto','cotizaciones'));
     }
 
     /**

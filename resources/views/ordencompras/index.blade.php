@@ -22,15 +22,16 @@
             <span class="glyphicon glyphicon-plus-sign"></span> Agregar
         </a>
         <a href="{{ url('/ordencompras?estado=1') }}" class="btn btn-primary">Activos</a>
-        <a href="{{ url('/ordencompras?estado=2') }}" class="btn btn-primary">Papelera</a>
+        <a href="{{ url('/ordencompras?estado=2') }}" class="btn btn-primary">Inactivo</a>
       </div>
     </div>
     <!-- /.box-header -->
-    <div class="box-body">
+    <div class="box-body table-responsive">
       <table class="table table-striped table-bordered table-hover" id="example2">
         <thead>
           <th>Id</th>
           <th>Número de orden</th>
+          <th>Administrador de la orden</th>
           <th>Proveedor</th>
           <th>Proyecto</th>
           <th>Accion</th>
@@ -40,9 +41,15 @@
             <tr>
               <td>{{$orden->id}}</td>
               <td>{{$orden->numero_orden}}</td>
+              <td>{{$orden->adminorden}}</td>
               <td>{{$orden->cotizacion->proveedor->nombre}}</td>
-              <td>{{$orden->cotizacion->proyecto->nombre}}</td>
-              <td></td>
+              <td>{{$orden->cotizacion->presupuesto->proyecto->nombre}}</td>
+              @if($estado == 1)
+                <td>activo</td>
+              @endif
+              @if($estado == 2)
+                <td>inactivo</td>
+              @endif
             </tr>
           @endforeach
         </tbody>

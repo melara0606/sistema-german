@@ -31,7 +31,11 @@ class ProyectoController extends Controller
     public function index(Request $request)
     {
         $estado = $request->get('estado');
-        if($estado == "" )$estado=1;
+        //if($estado == "" )$estado=1;
+        if($estado == ""){
+          $proyectos = Proyecto::all();
+          return view('proyectos.index',compact('proyectos','estado'));
+        }
         if ($estado == 1) {
             $proyectos = Proyecto::where('estado',$estado)->get();
             return view('proyectos.index',compact('proyectos','estado'));
@@ -90,7 +94,7 @@ class ProyectoController extends Controller
             'mensaje' => 'exito'
           ]);
       }
-        
+
     }
 
     public function addMonto(Request $request)
@@ -161,7 +165,7 @@ class ProyectoController extends Controller
             'proyecto_id' => $proyecto->id,
             'monto_inicial' => $request->monto,
           ]);
-          
+
 
 /*          if(isset($montosorg))
           {
@@ -176,8 +180,8 @@ class ProyectoController extends Controller
           }*/
 
           //bitacora('Registró un proyecto');
-          
-          
+
+
           DB::commit();
           return response()->json([
             'mensaje' => 'exito'
@@ -276,8 +280,9 @@ class ProyectoController extends Controller
         $motivo=$datos[1];
         //dd($id);
         $proyecto = Proyecto::find($id);
+        $proyecto->estadoanterior=$proyecto->estado;
         $proyecto->estado=2;
-        $proyecto->motivo=$motivo;
+        $proyecto->motivobaja=$motivo;
         $proyecto->fechabaja=date('Y-m-d');
         $proyecto->save();
         bitacora('Dió de baja a un proyecto');
@@ -292,9 +297,10 @@ class ProyectoController extends Controller
         //$motivo=$datos[1];
         //dd($id);
         $proyecto = Proyecto::find($id);
-        $proyecto->estado=1;
-        $proyecto->motivo=null;
+        $proyecto->estado=$proyecto->estadoanterior;
+        $proyecto->motivobaja=null;
         $proyecto->fechabaja=null;
+        $proyecto->estadoanterior=null;
         $proyecto->save();
         Bitacora::bitacora('Dió de alta a un proyecto');
         return redirect('/proyectos')->with('mensaje','Proyecto dado de alta');

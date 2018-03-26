@@ -24,7 +24,7 @@ class PresupuestoController extends Controller
      {
          $this->middleware('auth');
      }
-     
+
     public function index()
     {
         $presupuestos = Presupuesto::all();
@@ -60,7 +60,7 @@ class PresupuestoController extends Controller
                 return response()->json([
                     'mensaje' => $e->getMessage()
                 ]);
-            }     
+            }
         }
     }
 
@@ -147,7 +147,7 @@ class PresupuestoController extends Controller
     public function show($id)
     {
         $presupuesto = Presupuesto::findorFail($id);
-        $detalles = Presupuestodetalle::where('presupuesto_id',$presupuesto->id)->with('catalogo')->get();
+        $detalles = Presupuestodetalle::where('presupuesto_id',$presupuesto->id)->with('catalogo')->orderby('id','desc')->get();
         //dd($detalles);
         return view('presupuestos.show',compact('presupuesto','detalles'));
     }

@@ -6,6 +6,7 @@ use App\Cotizacion;
 use App\Proyecto;
 use App\Fondo;
 use App\Ordencompra;
+use App\Presupuesto;
 use Illuminate\Http\Request;
 
 
@@ -23,18 +24,31 @@ class OrdencompraController extends Controller
 
      public function getCotizacion($id)
      {
-        return Cotizacion::where('proyecto_id',$id)->where('seleccionado',true)->with('proveedor','detallecotizacion','proyecto')->orderby('id')->get();
+        $proyecto=Proyecto::findorFail($id);
+        $presupuesto=Presupuesto::where('proyecto_id',$proyecto->id)->first();
+        return Cotizacion::where('presupuesto_id',$presupuesto->id)->where('seleccionado',true)->with('proveedor','detallecotizacion')->orderby('id','asc')->get();
      }
 
      public function getMonto($id)
      {
         return Fondo::where('proyecto_id',$id)->with('fondocat')->get();
      }
-     
-    public function index()
+
+    public function index(Request $request)
     {
-        $ordenes = Ordencompra::get();
-        return view('ordencompras.index',compact('ordenes'));
+      $estado = $request->get('estado');
+      if($estado == "" || $estado == 1)
+      {
+        $estado=1;
+        $ordenes = Ordencompra::where('estado',$estado)->get();
+        return view('ordencompras.index',compact('ordenes','estado'));
+      }
+      if($estado==2)
+      {
+        $ordenes = Ordencompra::where('estado',$estado)->get();
+        return view('ordencompras.index',compact('ordenes','estado'));
+      }
+
     }
 
     /**
@@ -65,6 +79,8 @@ class OrdencompraController extends Controller
             'direccion_entrega' => $request->direccion_entrega,
             'adminorden' => $request->adminorden,
         ]);
+
+        return redirect('ordencompras')->with('mensaje','Orden de compra registrada con éxito');
     }
 
     /**
@@ -75,7 +91,8 @@ class OrdencompraController extends Controller
      */
     public function show($id)
     {
-        //
+        $orden = Ordencompra::findorFail($id);
+        return view('ordencompras.show',compact('orden'));
     }
 
     /**

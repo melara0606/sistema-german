@@ -100,15 +100,46 @@ function proyecto_estado($estado)
             return 'En proceso de cotización';
                 break;
         case '4':
-            return 'En proceso';
+            return 'En proceso de adjudicación';
             break;
         case '5':
             return 'Inconcluso';
             break;
+				case '6':
+						return 'En ejecución';
+						break;
         default:
-
+						return 'Sin clasificar';
             break;
     }
+}
+
+function estilo_proyecto($estado)
+{
+	switch ($estado) {
+			case '1':
+					return 'primary';
+					break;
+			case '2':
+					return 'danger';
+					break;
+			case '3':
+					return 'warning';
+							break;
+			case '4':
+					return 'warning';
+					break;
+			case '5':
+					return 'danger';
+					break;
+			case '6':
+					return 'success';
+					break;
+			default:
+					return 'default';
+					break;
+	}
+
 }
 
 function presupuesto($proyecto_id)
@@ -140,7 +171,7 @@ function numletras($xcifra)
         $xaux_int = substr($xcifra, 0, $xpos_punto); // obtengo el entero de la cifra a covertir
         $xdecimales = substr($xcifra . "00", $xpos_punto + 1, 2); // obtengo los valores decimales
     }
- 
+
     $XAUX = str_pad($xaux_int, 18, " ", STR_PAD_LEFT); // ajusto la longitud de la cifra, para que sea divisible por centenas de miles (grupos de 6)
     $xcadena = "";
     for ($xz = 0; $xz < 3; $xz++) {
@@ -152,14 +183,14 @@ function numletras($xcifra)
             if ($xi == $xlimite) { // si ya llegó al límite máximo de enteros
                 break; // termina el ciclo
             }
- 
+
             $x3digitos = ($xlimite - $xi) * -1; // comienzo con los tres primeros digitos de la cifra, comenzando por la izquierda
             $xaux = substr($xaux, $x3digitos, abs($x3digitos)); // obtengo la centena (los tres dígitos)
             for ($xy = 1; $xy < 4; $xy++) { // ciclo para revisar centenas, decenas y unidades, en ese orden
                 switch ($xy) {
                     case 1: // checa las centenas
                         if (substr($xaux, 0, 3) < 100) { // si el grupo de tres dígitos es menor a una centena ( < 99) no hace nada y pasa a revisar las decenas
-                             
+
                         } else {
                             $key = (int) substr($xaux, 0, 3);
                             if (TRUE === array_key_exists($key, $xarray)){  // busco si la centena es número redondo (100, 200, 300, 400, etc..)
@@ -180,7 +211,7 @@ function numletras($xcifra)
                         break;
                     case 2: // checa las decenas (con la misma lógica que las centenas)
                         if (substr($xaux, 1, 2) < 10) {
-                             
+
                         } else {
                             $key = (int) substr($xaux, 1, 2);
                             if (TRUE === array_key_exists($key, $xarray)) {
@@ -204,7 +235,7 @@ function numletras($xcifra)
                         break;
                     case 3: // checa las unidades
                         if (substr($xaux, 2, 1) < 1) { // si la unidad es cero, ya no hace nada
-                             
+
                         } else {
                             $key = (int) substr($xaux, 2, 1);
                             $xseek = $xarray[$key]; // obtengo directamente el valor de la unidad (del uno al nueve)
@@ -216,13 +247,13 @@ function numletras($xcifra)
             } // END FOR
             $xi = $xi + 3;
         } // ENDDO
- 
+
         if (substr(trim($xcadena), -5, 5) == "ILLON") // si la cadena obtenida termina en MILLON o BILLON, entonces le agrega al final la conjuncion DE
             $xcadena.= " DE";
- 
+
         if (substr(trim($xcadena), -7, 7) == "ILLONES") // si la cadena obtenida en MILLONES o BILLONES, entoncea le agrega al final la conjuncion DE
             $xcadena.= " DE";
- 
+
         // ----------- esta línea la puedes cambiar de acuerdo a tus necesidades o a tu país -------
         if (trim($xaux) != "") {
             switch ($xz) {
@@ -286,7 +317,7 @@ function numaletras($xcifra)
         $xdecimales = substr($xcifra . "00", $xpos_punto + 1, 2); // obtengo los valores decimales
 		$xdecimales1=numletras($xdecimales);
     }
- 
+
     $XAUX = str_pad($xaux_int, 18, " ", STR_PAD_LEFT); // ajusto la longitud de la cifra, para que sea divisible por centenas de miles (grupos de 6)
     $xcadena = "";
     for ($xz = 0; $xz < 3; $xz++) {
@@ -298,14 +329,14 @@ function numaletras($xcifra)
             if ($xi == $xlimite) { // si ya llegó al límite máximo de enteros
                 break; // termina el ciclo
             }
- 
+
             $x3digitos = ($xlimite - $xi) * -1; // comienzo con los tres primeros digitos de la cifra, comenzando por la izquierda
             $xaux = substr($xaux, $x3digitos, abs($x3digitos)); // obtengo la centena (los tres dígitos)
             for ($xy = 1; $xy < 4; $xy++) { // ciclo para revisar centenas, decenas y unidades, en ese orden
                 switch ($xy) {
                     case 1: // checa las centenas
                         if (substr($xaux, 0, 3) < 100) { // si el grupo de tres dígitos es menor a una centena ( < 99) no hace nada y pasa a revisar las decenas
-                             
+
                         } else {
                             $key = (int) substr($xaux, 0, 3);
                             if (TRUE === array_key_exists($key, $xarray)){  // busco si la centena es número redondo (100, 200, 300, 400, etc..)
@@ -326,7 +357,7 @@ function numaletras($xcifra)
                         break;
                     case 2: // checa las decenas (con la misma lógica que las centenas)
                         if (substr($xaux, 1, 2) < 10) {
-                             
+
                         } else {
                             $key = (int) substr($xaux, 1, 2);
                             if (TRUE === array_key_exists($key, $xarray)) {
@@ -350,7 +381,7 @@ function numaletras($xcifra)
                         break;
                     case 3: // checa las unidades
                         if (substr($xaux, 2, 1) < 1) { // si la unidad es cero, ya no hace nada
-                             
+
                         } else {
                             $key = (int) substr($xaux, 2, 1);
                             $xseek = $xarray[$key]; // obtengo directamente el valor de la unidad (del uno al nueve)
@@ -362,13 +393,13 @@ function numaletras($xcifra)
             } // END FOR
             $xi = $xi + 3;
         } // ENDDO
- 
+
         if (substr(trim($xcadena), -5, 5) == "ILLON") // si la cadena obtenida termina en MILLON o BILLON, entonces le agrega al final la conjuncion DE
             $xcadena.= " DE";
- 
+
         if (substr(trim($xcadena), -7, 7) == "ILLONES") // si la cadena obtenida en MILLONES o BILLONES, entoncea le agrega al final la conjuncion DE
             $xcadena.= " DE";
- 
+
         // ----------- esta línea la puedes cambiar de acuerdo a tus necesidades o a tu país -------
         if (trim($xaux) != "") {
             switch ($xz) {
@@ -399,17 +430,17 @@ function numaletras($xcifra)
 					if ($xcifra == 1) {
                         $xcadena.= " DÓLAR EXACTO";
                     }
-					
+
                     if ($xcifra > 1 && $xcifra < 2) {
 					 //  $xdecimales1=numaletras($xdecimales);
                         $xcadena = "UN DÓLAR CON $xdecimales1 CENTAVOS";
                     }
-					
+
 					 if ($xcifra == 2 ) {
 					    $xcadena.= " DOLARES EXACTOS " ; //
 //						return 0;
                     }
-					
+
                     if ($xcifra > 2) {
 						if($xdecimales=="00"){
 						//$xdecimales1="CERO";
@@ -420,7 +451,7 @@ function numaletras($xcifra)
 //						return 0;
                     }
                     break;
-					
+
             } // endswitch ($xz)
 
         } // ENDIF (trim($xaux) != "")
@@ -432,16 +463,16 @@ function numaletras($xcifra)
         $xcadena = str_replace("BILLON DE MILLONES", "BILLON DE", $xcadena); // corrigo la leyenda
         $xcadena = str_replace("BILLONES DE MILLONES", "BILLONES DE", $xcadena); // corrigo la leyenda
         $xcadena = str_replace("DE UN", "UN", $xcadena); // corrigo la leyenda
-		
-		
+
+
     } // ENDFOR ($xz)
 
     return trim($xcadena);
-	
+
 }
- 
+
 // END FUNCTION
- 
+
 function sub_fijo($xx)
 { // esta función regresa un sub_fijo para la cifra
     $xx = trim($xx);
