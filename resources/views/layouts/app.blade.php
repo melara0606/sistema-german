@@ -23,7 +23,7 @@
         }
       $(document).ready(function () {
 
-        
+
           //datatables
           var tabla = $('#example2').DataTable({
               language: {
@@ -104,23 +104,7 @@
           });
 
 });
-          //var tablaTools = new $.fn.dataTable.TableTools(tabla);
-
   </script>
-
-
-
-  <!-- AdminLTE Skins. Choose a skin from the css/skins
-       folder instead of downloading all of them to reduce the load. -->
-
-
-
-  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-  <!--[if lt IE 9]>
-  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-  <![endif]-->
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 
@@ -356,8 +340,7 @@
     <div class="pull-right hidden-xs">
       <b>Version</b> 1.0
     </div>
-    <strong>Copyright &copy; 2017 <a href="http://almsaeedstudio.com">Universidad de El Salvador. FMP</a>.</strong> All rights
-    reserved.
+    <strong> &copy; 2017 <a target="_blank" href="http://www.ues.edu.sv">Universidad de El Salvador. FMP</a>.</strong> Todos los derechos reservados
   </footer>
 
 
@@ -415,7 +398,7 @@
               $("#exampleModal").modal("show");
               $("#fecha").val(fecha.format());
               //alert(fecha.format());
-               
+
             },
             weekends: false,
             lang:'es'

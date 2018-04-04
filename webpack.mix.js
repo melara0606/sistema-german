@@ -27,7 +27,6 @@ const { mix } = require('laravel-mix');
   'resources/assets/js/moment.min.js',
   'resources/assets/js/bootstrap-toggle.min.js',
   'resources/assets/js/jquery.slimscroll.js',
-  //'resources/assets/js/bootstrap-datepicker.js',
   'resources/assets/js/jquery-ui.js',
   'resources/assets/js/jquery.inputmask.js',
   'resources/assets/js/toastr.js',
