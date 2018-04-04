@@ -289,7 +289,7 @@ var monto=0.0;
             dataType:'json',
             data: {proyecto_id,total,presupuestos},
            success : function(msj){
-                //window.location.href = "/sisverapaz/public/proyectos";
+                window.location.href = "/"+carpeta()+"/public/proyectos";
                 console.log(msj);
                 toastr.success('Presupuesto registrado éxitosamente');
             },
