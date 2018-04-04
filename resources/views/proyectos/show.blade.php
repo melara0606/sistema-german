@@ -1,10 +1,7 @@
 @extends('layouts.app')
 
 @section('migasdepan')
-<h1>
-Ver datos del proyecto:
-        <small> <b>{{ $proyecto->nombre }}</b></small>
-      </h1>
+<h1>Ver datos del proyecto:</h1>
       <ol class="breadcrumb">
         <li><a href="{{ url('/home') }}"><i class="glyphicon glyphicon-home"></i> Inicio</a></li>
         <li><a href="{{ url('/proyectos') }}"><i class="fa fa-industry"></i> Proyectos</a></li>
@@ -21,11 +18,19 @@ Ver datos del proyecto:
                 <div class="panel-body">
                   <table class="table">
                     <tr>
-                      <td>Nombre del proyecto</td>
-                      <td>{{$proyecto->nombre}}</td>
+                      <th>Nombre del proyecto</th>
+                      <th>{{$proyecto->nombre}}</th>
                     </tr>
                     <tr>
-                      <td>Origen de los fondos:</td>
+                      <th>Justificación</th>
+                      <th>{{$proyecto->motivo}}</th>
+                    </tr>
+                    <tr>
+                      <th>Dirección donde se ejecutará</th>
+                      <th>{{$proyecto->direccion}}</th>
+                    </tr>
+                    <tr>
+                      <th>Origen de los fondos:</th>
                       <td>
                         @foreach($proyecto->fondo as $fondo)
                         <tr>
@@ -36,24 +41,20 @@ Ver datos del proyecto:
                       </td>
                     </tr>
                     <tr>
-                      <td>Monto total</td>
-                      <td>${{number_format($proyecto->monto,2)}}</td>
+                      <th>Monto total</th>
+                      <th>${{number_format($proyecto->monto,2)}}</th>
                     </tr>
                     <tr>
-                      <td>Dirección donde se ejecutará</td>
-                      <td>{{$proyecto->direccion}}</td>
+                      <th>Fecha de inicio</th>
+                      <th>{{$proyecto->fecha_inicio->format('l d, F Y')}}</th>
                     </tr>
                     <tr>
-                      <td>Fecha de inicio</td>
-                      <td>{{$proyecto->fecha_inicio->format('d-m-Y')}}</td>
+                      <th>Fecha de finalización</th>
+                      <th>{{$proyecto->fecha_fin->format('l d, F Y')}}</th>
                     </tr>
                     <tr>
-                      <td>Fecha de finalización</td>
-                      <td>{{$proyecto->fecha_fin->format('d-m-Y')}}</td>
-                    </tr>
-                    <tr>
-                      <td>Motivo</td>
-                      <td>{{$proyecto->motivo}}</td>
+                      <th>Beneficiarios</th>
+                      <th>{{$proyecto->beneficiarios}}</th>
                     </tr>
                   </table>
                       <a href="{{ url('proyectos/'.$proyecto->id.'/edit') }}" class="btn btn-warning"><span class="glyphicon glyphicon-edit"></span></a>

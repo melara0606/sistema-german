@@ -3,12 +3,12 @@
 
                             <div class="col-md-6">
 
-                                {!!Form::text('nombre',null,['class'=>'form-control','id'=>'nombre','autofocus'])!!}
+                                {!!Form::textarea('nombre',null,['class'=>'form-control','rows' => 2, 'id'=>'nombre','autofocus'])!!}
                             </div>
                         </div>
 
                          <div class="form-group{{ $errors->has('monto') ? ' has-error' : '' }}">
-                            <label for="monto" class="col-md-4 control-label">Monto</label>
+                            <label for="monto" class="col-md-4 control-label">Monto total</label>
 
                             <div class="col-md-4">
                                 {!!Form::number('monto',null,['class'=>'form-control','id'=>'monto','readonly','steps' => '0.00'])!!}
@@ -19,7 +19,7 @@
                             <label for="motivo" class="col-md-4 control-label">Justificación</label>
 
                             <div class="col-md-6">
-                                {!!Form::textarea('motivo',null,['class'=>'form-control','id'=>'motivo','autofocus', 'rows'=>3])!!}
+                                {!!Form::textarea('motivo',null,['class'=>'form-control','id'=>'motivo', 'rows'=>3])!!}
                             </div>
                         </div>
 
@@ -52,7 +52,7 @@
                             <label for="" class="col-md-4 control-label">Categoría</label>
 
                                 <div class="col-md-6">
-                                  <select class="form-control chosen-select" id="cat_id">
+                                  <select class="form-control chosen-select-width" id="cat_id">
                                     <option value="">Seleccione una categoria</option>
                                   </select>
                                 </div>
@@ -131,7 +131,7 @@
                 </div>
                 <div class="panel-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                    <button type="button" id="guardarcategoria" data-dismiss="modal" class="btn btn-success">Agregar</button>
+                    <button type="button" id="guardarcategoria" class="btn btn-success">Agregar</button>
                 </div>
             </div>
         </div>

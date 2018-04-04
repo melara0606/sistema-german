@@ -3,7 +3,7 @@
 
                             <div class="col-md-6">
                                 {!! Form::hidden('id',null,['id' => 'idp']) !!}
-                                {!!Form::text('nombre',null,['class'=>'form-control','id'=>'nombre','autofocus'])!!}
+                                {!!Form::textarea('nombre',null,['class'=>'form-control','rows' => 2, 'id'=>'nombre','autofocus'])!!}
                             </div>
                         </div>
 

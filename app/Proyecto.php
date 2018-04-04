@@ -4,9 +4,13 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
+use App\Traits\DatesTranslator;
+
+
 
 class Proyecto extends Model
 {
+  use DatesTranslator;
     protected $guarded = [];
     protected $dates = ['fecha_inicio','fecha_fin'];
 

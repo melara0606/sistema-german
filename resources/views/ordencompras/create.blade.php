@@ -5,7 +5,7 @@
         Rubro
     </h1>
     <ol class="breadcrumb">
-        <li><a href="{{ url('/cotizaciones') }}"><i class="fa fa-dashboard"></i> Cotizaciones</a></li>
+        <li><a href="{{ url('/ordencompras') }}"><i class="fa fa-dashboard"></i> Cotizaciones</a></li>
         <li class="active">Registro</li>      </ol>
 @endsection
 

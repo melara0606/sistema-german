@@ -2,7 +2,7 @@
 
 @section('migasdepan')
 <h1>
-      Editar datos generales del proyecto: <small> {{ $proyecto->nombre }} </small>
+      Editar datos generales del proyecto:
 </h1>
       <ol class="breadcrumb">
         <li><a href="{{ url('/home') }}"><i class="glyphicon glyphicon-home"></i> Inicio</a></li>

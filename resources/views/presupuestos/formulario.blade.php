@@ -5,7 +5,7 @@
                                 <select id="proyecto" class="form-control">
                                     <option value="">Seleccione un Proyecto...</option>
                                     @foreach($proyectos as $proyecto)
-                                      <option value="{{$proyecto->id}}">{{$proyecto->nombre}}</option>
+                                      <option data-monto="{{$proyecto->monto}}" value="{{$proyecto->id}}">{{$proyecto->nombre}}</option>
                                     @endforeach
                                 </select>
                               @else
@@ -85,7 +85,7 @@
                 </div>
                 <div class="panel-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                    <button type="button" id="agregaratabla" data-dismiss="modal" class="btn btn-success">Agregar</button>
+                    <button type="button" id="agregaratabla" class="btn btn-success">Agregar</button>
                 </div>
             </div>
         </div>

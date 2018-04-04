@@ -8,6 +8,7 @@ use App\Fondo;
 use App\Ordencompra;
 use App\Presupuesto;
 use Illuminate\Http\Request;
+use DB;
 
 
 class OrdencompraController extends Controller
@@ -71,16 +72,28 @@ class OrdencompraController extends Controller
     public function store(Request $request)
     {
         //dd($request->All());
-        Ordencompra::create([
-            'fecha_inicio' => $request->fecha_inicio,
-            'fecha_fin' => $request->fecha_fin,
-            'cotizacion_id' => $request->cotizacion_id,
-            'observaciones' => $request->observaciones,
-            'direccion_entrega' => $request->direccion_entrega,
-            'adminorden' => $request->adminorden,
-        ]);
-
-        return redirect('ordencompras')->with('mensaje','Orden de compra registrada con éxito');
+        DB::beginTransaction();
+        try{
+          Ordencompra::create([
+              'fecha_inicio' => $request->fecha_inicio,
+              'fecha_fin' => $request->fecha_fin,
+              'cotizacion_id' => $request->cotizacion_id,
+              'observaciones' => $request->observaciones,
+              'direccion_entrega' => $request->direccion_entrega,
+              'adminorden' => $request->adminorden,
+          ]);
+          $cotizacion = Cotizacion::findorFail($request->cotizacion_id);
+          $cotizacion->estado=3;
+          $cotizacion->save();
+          $proyecto=Proyecto::findorFail($cotizacion->presupuesto->proyecto->id);
+          $proyecto->estado=6;
+          $proyecto->save();
+          DB::commit();
+          return redirect('ordencompras')->with('mensaje','Orden de compra registrada con éxito');
+        }catch(\Excention $e){
+          DB::rollback();
+          return redirect('ordencompras/create')->with('error','ocurrió un error al guardar la orden de compras');
+        }
     }
 
     /**

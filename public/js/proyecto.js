@@ -1,86 +1,12 @@
 var contador_monto=0;
-var contador_org=0;
 var monto_total = 0.0;
-var monto_organizacion = 0.0;
 var monto = 0.0;
 $(document).ready(function(){
 
   cargarFondos();
-  cargarOrganizacion();
 
-	var button_org = '<button type="button" data-toggle="modal" data-target="#btn_orga" class="btn btn-primary" id="btn_org">Seleccione Organizacion</button>';
 
-	$( '#colaboradora' ).on( 'click', function() {
-    if( $(this).is(':checked') ){
-        // Hacer algo si el checkbox ha sido seleccionado
-        $("#cola").html(button_org);
-    } else {
-      swal({
-        title: '¿Está seguro?',
-        text: "Desea eliminar los datos de las oganizaciones",
-        type: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Si, ¡Borrar!',
-        cancelButtonText: 'No borrar!',
-        confirmButtonClass: 'btn btn-success',
-        cancelButtonClass: 'btn btn-danger',
-        buttonsStyling: false,
-        reverseButtons: true
-      }).then((result) => {
-        if (result.value) {
-          var auxi1=monto_organizacion;
-          monto_organizacion=0.0;
-          monto_total=monto_total-auxi1;
-          contador_org=0;
-          $("#contador_org").val(contador_org);
-          $("#monto").val(monto_total);
-          $("#cola").empty();
-          $("#cuerpo_org").empty();
-          //montosorg = [];
-          cargarOrganizacion();
-          swal(
-            '¡Eliminado!',
-            'Las organizaciones han sido removidas.',
-            'success'
-          )
-        } else if (result.dismiss === swal.DismissReason.cancel) {
-          $("#colaboradora").prop('checked', true);
-          swal(
-            'Cancelado',
-            'Los datos se mantienen :)',
-            'info'
-          )
-        }
-      })
-    }
-});
-
-	$('#guardarorganizacion').on("click", function(e){
-		var nombre_org = $("#nombre_org").val();
-    var direccion_org = $("#direccion_org").val();
-    var telefono_org = $("#telefono_org").val();
-    var representante_org = $("#representante_org").val();
-    var tel_representante_org = $("#tel_representante_org").val();
-    var ruta = "/"+carpeta()+"/public/proyectos/guardarorganizacion";
-    var token = $('meta[name="csrf-token"]').attr('content');
-    //alert(nombre);
-    $.ajax({
-      url: ruta,
-      headers: {'X-CSRF-TOKEN':token},
-      type:'POST',
-      dataType:'json',
-      data:{nombre_org,direccion_org,telefono_org,representante_org,tel_representante_org},
-
-      success: function(){
-        toastr.success('Proyecto creado éxitosamente');
-        cargarOrganizacion();
-      }
-    });
-	});
-
-    $('#btnAgregar').on("click", function(e){
+$('#btnAgregar').on("click", function(e){
     e.preventDefault();
     var id = $("#idp").val();
     var cat = $("#cat_id").val() || 0;
@@ -99,7 +25,7 @@ $(document).ready(function(){
                      "<td><button type='button' id='delete-btn' class='btn btn-danger'><span class='glyphicon glyphicon-trash'></button></td>" +
                  "</tr>"
              );
-      monto_total=monto+monto_organizacion;
+      monto_total=monto;
       $("#monto").val(onFixed(monto_total));
       $("#contador_fondos").val(contador_monto);
       $("#pie_monto #totalEnd").text(onFixed(monto));
@@ -131,10 +57,10 @@ $(document).ready(function(){
                  "<tr data-categoria='"+cat+"' data-monto='"+cant_monto+"'>"+
                      "<td>" + cat_nombre + "</td>" +
                      "<td>" + onFixed( parseFloat(cant_monto), 2 ) + "</td>" +
-                     "<td><button type='button' id='delete-btn' class='btn btn-danger'><span class='glyphicon glyphicon-trash'></button></td>" +
+                     "<td><button type='button' id='delete-btn' class='btn btn-danger btn-xs'><span class='glyphicon glyphicon-trash'></button></td>" +
                  "</tr>"
              );
-      monto_total=monto+monto_organizacion;
+      monto_total=monto;
       $("#monto").val(onFixed(monto_total));
       $("#contador_fondos").val(contador_monto);
       $("#pie_monto #totalEnd").text(onFixed(monto));
@@ -164,60 +90,23 @@ $(document).ready(function(){
                  "<tr data-categoria='"+data[i].id+"' data-monto='"+data[i].monto+"'>"+
                      "<td>" + data[i].fondocat.categoria + "</td>" +
                      "<td>" + data[i].monto + "</td>" +
-                     "<td class='btn-group'><button type='button' id='delete-from-base' class='btn btn-danger'><span class='glyphicon glyphicon-trash'></button>" +
-                     "<button data-data="+ dataJson +"  type='button' id='edit-form' class='btn btn-primary'><span class='glyphicon glyphicon-edit'></button></td>" +
+                     "<td class='btn-group'><button type='button' id='delete-from-base' class='btn btn-danger btn-xs'><span class='glyphicon glyphicon-trash'></button>" +
+                     "<button data-data="+ dataJson +"  type='button' id='edit-form' class='btn btn-primary btn-xs'><span class='glyphicon glyphicon-edit'></button></td>" +
                  "</tr>"
           );
     }
-    monto_total=monto+monto_organizacion;
+    monto_total=monto;
       $("#pie_monto #totalEnd").text(onFixed(parseFloat(monto),2));
-      //$(existe).css("display", "none"); 
+      //$(existe).css("display", "none");
     });
 
   });
 
-//Agrega los montos a la tabla de fondos organizacion y actualiza el monto total
-  $('#btnAgregarfondo_org').on("click", function(e){
-    e.preventDefault();
-    var org = $("#organizacion").val() || 0;
-    var org_nombre = $("#organizacion option:selected").text() || 0;
-    var cant_monto_org = $("#cant_monto_org").val() || 0;
-    var existe2 = $("#organizacion option:selected");
-
-    if(org && cant_monto_org){
-      contador_org++;
-      monto_organizacion+=parseFloat(cant_monto_org);
-      $(tbFondosorg).append(
-                 "<tr data-organizacion='"+org+"' data-montoorg='"+cant_monto_org+"'>"+
-                     "<td>" + org_nombre + "</td>" +
-                     "<td>" + onFixed( parseFloat(cant_monto_org), 2 ) + "</td>" +
-                     "<td>"+
-                     "<input type='hidden' name='categorias[]' value='"+org+"' />"+
-                     "<input type='hidden' name='montos[]' value='"+cant_monto_org+"' />"+
-                     "<button type='button' id='delete-monto_org' class='btn btn-danger'><span class='glyphicon glyphicon-trash'></button></td>" +
-                 "</tr>"
-             );
-      monto_total=monto+monto_organizacion;
-      //monto_total=monto_total+monto_organizacion;
-      $("#monto").val(onFixed(monto_total));
-      $("#contador_org").val(contador_org);
-      $("#pie_fondoorg #totalEndorg").text(onFixed(monto_organizacion));
-      $(existe2).css("display", "none");
-      $("#cant_monto_org").val("");
-      $("#organizacion").val("");
-      $("#organizacion").trigger('chosen:updated');
-    }else{
-       swal(
-              '¡Aviso!',
-              'Debe seleccionar una organización y digitar el monto',
-              'warning'
-            )
-    }
-  });
 
 //agrega nueva categoria de los montos para luego seleccionarla
     $('#guardarcategoria').on("click", function(e){
-    var categoria = $("#cate").val();
+    var cate = $("#cate").val();
+    var categoria = cate.toUpperCase();
     var ruta = "/"+carpeta()+"/public/proyectos/guardarcategoria";
     var token = $('meta[name="csrf-token"]').attr('content');
     //alert(nombre);
@@ -230,8 +119,10 @@ $(document).ready(function(){
 
       success: function(){
         toastr.success('categoria creado éxitosamente');
+        $("#cate").val("");
         cargarFondos();
         $("#cat_id").trigger('chosen:updated');
+        $("#btncategoria").modal("hide");
       },
       error : function(data){
           toastr.error(data.responseJSON.errors.categoria);
@@ -260,15 +151,6 @@ $(document).ready(function(){
         });
       }
     });
-    $(cuerpo_org).find("tr").each(function (index, element) {
-      if(element){
-        montosorg.push({
-          organizacion : $(element).attr("data-organizacion"),
-          montoorg : $(element).attr("data-montoorg")
-        });
-      }
-    });
-    console.log(montosorg);
     console.log(montos);
     $.ajax({
       url: ruta,
@@ -278,7 +160,7 @@ $(document).ready(function(){
       data:{nombre,monto,motivo,direccion,fecha_inicio,fecha_fin,beneficiarios,montos,montosorg},
 
       success: function(msj){
-        window.location.href = "/sisverapaz/public/proyectos";
+        window.location.href = "/"+carpeta()+"/public/proyectos";
         console.log(msj);
         toastr.success('Proyecto creado éxitosamente');
       },
@@ -325,47 +207,16 @@ $(document).ready(function(){
 
   $(document).on("click", "#edit-form", function (e) {
     var data = JSON.parse($(e.currentTarget).attr('data-data'));
-    console.log(data)
     $(document).find("#cat_id").val(data.id)
     $(document).find("#cant_monto").val(data.monto);
   });
 
-//elimina un elemento de la tabla temporal de fondos aportados por una organizacion y actualiza el monto total
-  $(document).on("click", "#delete-monto_org", function (e) {
-        var tr     = $(e.target).parents("tr"),
-            totaltotal  = $("#totalEndorg");
-        var totalFila=parseFloat($(this).parents('tr').find('td:eq(1)').text());
-        var auxiliar_org=0.0;
-        auxiliar_org=parseFloat(totalFila);
-        monto_organizacion = parseFloat(totaltotal.text()) - parseFloat(totalFila);
-        monto_total=monto_total-auxiliar_org;
-        quitar_mostrar_org($(tr).attr("data-organizacion"));
-        tr.remove();
-        $("#monto").val(onFixed(monto_total));
-        $("#pie_fondoorg #totalEndorg").text(onFixed(monto_organizacion));
-        //$("#pie_monto #totalEnd").text(onFixed(monto));
-        contador_org--;
-        $("#contador_org").val(contador_org);
-  });
 });
 
 //funcion que formatea los valores enteros a 2 decimales
 function onFixed (valor, maximum) {
   maximum = (!maximum) ? 2 : maximum;
   return valor.toFixed(maximum);
-}
-
-
-function cargarOrganizacion(){
-  $.get('/'+carpeta()+'/public/proyectos/listarorganizaciones', function (data){
-    var html_select = '<option value="">Seleccione una organizacion</option>';
-    for(var i=0;i<data.length;i++){
-      html_select +='<option value="'+data[i].id+'">'+data[i].nombre_org+'</option>'
-  		//console.log(data[i]);
-  		$("#organizacion").html(html_select);
-      //$("#organizacion").trigger('chosen:updated');
-    }
-  });
 }
 
 function cargarFondos(){
@@ -389,18 +240,10 @@ function quitar_mostrar (ID) {
     $("#cat_id").trigger('chosen:updated');
   }
 
-  function quitar_mostrar_org (ID) {
-      $("#organizacion option").each(function (index, element) {
-        if($(element).attr("value") == ID ){
-          $(element).css("display", "block");
-        }
-      });
-    }
-
   function deletebase(id)
   {
     $.ajax({
-      url: '/sisverapaz/public/proyectos/deleteMonto/'+id,
+      url: '/'+carpeta()+'/public/proyectos/deleteMonto/'+id,
       headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
       type:'DELETE',
       dataType:'json',
@@ -424,7 +267,7 @@ function quitar_mostrar (ID) {
   function addbase(id,cat,monto)
   {
     $.ajax({
-      url: '/sisverapaz/public/proyectos/addMonto',
+      url: '/'+carpeta()+'/public/proyectos/addMonto',
       headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
       type:'POST',
       dataType:'json',

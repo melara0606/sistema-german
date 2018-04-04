@@ -1,10 +1,11 @@
 var total=0.0;
 var contador = 0;
+var monto=0.0;
     $(document).ready(function(){
     var tbMaterial = $("#tbMaterial");
 
      $("#agregaratabla").on("click", function(e) {
-    // 
+    //
 
          e.preventDefault();
              categoria = $("#categoria option:selected").text()    || 0,
@@ -12,16 +13,17 @@ var contador = 0;
              catalogo = $("#descripcion").val() || 0,
              cantidad  = $("#cantidad").val() || 0,
              unidad = $("#descripcion option:selected").attr('data-unidad'),
+             monto = $("#proyecto option:selected").attr('data-monto'),
              existe = $("#descripcion option:selected");
              precio = $("#precio").val() || 0;
 
 
-         if(cantidad){
+         if(cantidad && precio && catalogo){
              var subtotal = parseFloat(precio) * parseFloat(cantidad);
              contador++;
              $(tbMaterial).append(
                  "<tr data-categoria='"+catalogo+"' data-cantidad='"+cantidad+"' data-precio='"+precio+"' >"+
-                     "<td>" + categoria + "</td>" + 
+                     "<td>" + categoria + "</td>" +
                      "<td>" + nombrecat + "</td>" +
                      "<td>" + unidad + "</td>" +
                      "<td>" + cantidad+ "</td>" +
@@ -41,6 +43,7 @@ var contador = 0;
 
              //total2=total;
              clearForm();
+             $("#btnagregatabla").modal("hide");
          }else{
            swal(
               '¡Aviso!',
@@ -52,42 +55,16 @@ var contador = 0;
 
     $("#btnsubmit").on("click", function (e) {
         ////// obtener todos los datos y convertirlos a json /////////////////////////////////////////////
-        var ruta = "/"+carpeta()+"/public/presupuestos";
-        var token = $('meta[name="csrf-token"]').attr('content');
-        var total = $("#total").val();
-        var proyecto_id = $("#proyecto").val();
-        var presupuestos = new Array();
-        $(cuerpo).find("tr").each(function (index, element) {
-            if(element){
-                presupuestos.push({
-                    categoria : $(element).attr("data-categoria"),
-                    cantidad :$(element).attr("data-cantidad"),
-                    precio : $(element).attr("data-precio")
-                });
-            }    
-        });
-        console.log(presupuestos);
+        if(total>monto){
+          swal(
+             '¡Aviso!',
+             'El total supera al monto del proyecto',
+             'warning'
+           )
+        }else{
+          guardar_presupuesto();
+        }
 
-
-/////////////////////////////////////////////////// funcion ajax para guardar ///////////////////////////////////////////////////////////////////
-        $.ajax({
-            url: ruta,
-            headers: {'X-CSRF-TOKEN':token},
-            type:'POST',
-            dataType:'json',
-            data: {proyecto_id,total,presupuestos},
-           success : function(msj){
-                //window.location.href = "/sisverapaz/public/proyectos";
-                console.log(msj);
-                toastr.success('Presupuesto registrado éxitosamente');
-            },
-            error: function(data, textStatus, errorThrown){
-                toastr.error('Ha ocurrido un '+textStatus+' en la solucitud');
-                $.each(data.responseJSON.errors, function( key, value ) {
-                    toastr.error(value);
-            });
-            }
-      });
     });
 
     $("#guardacat").on("click",function(e){
@@ -175,11 +152,11 @@ var contador = 0;
                 {
                     toastr.success('Categoría registrado éxitosamente');
                     $("#item2").val("");
-                    $("#categoria2").val(""); 
+                    $("#categoria2").val("");
                 }else{
                     toastr.error('Ocurrió un error al guardar');
                 }
-                
+
             },
             error: function(data, textStatus, errorThrown){
                 toastr.error('Ha ocurrido un '+textStatus+' en la solucitud');
@@ -211,12 +188,12 @@ var contador = 0;
                 {
                     toastr.success('Categoría registrado éxitosamente');
                     $("#categoria").trigger('chosen:updated');
-                    $("#nombre_descripcion").val(""); 
+                    $("#nombre_descripcion").val("");
                     $("#unidad_medida").val("");
                 }else{
                     toastr.error('Ocurrió un error al guardar');
                 }
-                
+
             },
             error: function(data, textStatus, errorThrown){
                 toastr.error('Ha ocurrido un '+textStatus+' en la solucitud');
@@ -241,9 +218,9 @@ var contador = 0;
                 //console.log(data[i]);
                 $("#categoria").html(html_select);
                 $("#categoria").trigger('chosen:updated');
-            }  
+            }
         }
-            
+
         });
     }
 
@@ -261,9 +238,9 @@ var contador = 0;
                 //console.log(data[i]);
                 $("#categoria3").html(html_select);
                 $("#categoria3").trigger('chosen:updated');
-            }  
+            }
         }
-            
+
         });
     }
 
@@ -281,8 +258,47 @@ var contador = 0;
                     //console.log(data[i]);
                     $("#descripcion").html(html_select);
                     $("#descripcion").trigger('chosen:updated');
-                }  
-            }   
+                }
+            }
         });
+    }
+
+    function guardar_presupuesto(){
+      var ruta = "/"+carpeta()+"/public/presupuestos";
+      var token = $('meta[name="csrf-token"]').attr('content');
+      var total = $("#total").val();
+      var proyecto_id = $("#proyecto").val();
+      var presupuestos = new Array();
+      $(cuerpo).find("tr").each(function (index, element) {
+          if(element){
+              presupuestos.push({
+                  categoria : $(element).attr("data-categoria"),
+                  cantidad :$(element).attr("data-cantidad"),
+                  precio : $(element).attr("data-precio")
+              });
+          }
+      });
+      console.log(presupuestos);
+
+
+/////////////////////////////////////////////////// funcion ajax para guardar ///////////////////////////////////////////////////////////////////
+        $.ajax({
+            url: ruta,
+            headers: {'X-CSRF-TOKEN':token},
+            type:'POST',
+            dataType:'json',
+            data: {proyecto_id,total,presupuestos},
+           success : function(msj){
+                //window.location.href = "/sisverapaz/public/proyectos";
+                console.log(msj);
+                toastr.success('Presupuesto registrado éxitosamente');
+            },
+            error: function(data, textStatus, errorThrown){
+                toastr.error('Ha ocurrido un '+textStatus+' en la solucitud');
+                $.each(data.responseJSON.errors, function( key, value ) {
+                    toastr.error(value);
+            });
+            }
+      });
     }
 });
