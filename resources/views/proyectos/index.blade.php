@@ -27,7 +27,7 @@
             <div class="box-body table-responsive">
               <table class="table table-striped table-bordered table-hover" id="example2">
                 <thead>
-                  <th with="5%">Id</th>
+                  <th with="5%">N°</th>
                   <th with="20%">Nombre Proyecto</th>
                   <th with="10%">Monto</th>
                   <th with="25%">Dirección</th>
@@ -35,11 +35,13 @@
                   <th with="10%">Fin</th>
                   <th with="10%">Estado</th>
                   <th with="10%">Accion</th>
+                  <?php $contador=0; ?>
                 </thead>
                 <tbody>
                   @foreach($proyectos as $proyecto)
                   <tr>
-                    <td>{{ $proyecto->id }}</td>
+                    <?php $contador++; ?>
+                    <td>{{ $contador }}</td>
                     <td>{{ $proyecto->nombre }}</td>
                     <td>${{ number_format($proyecto->monto,2) }}</td>
                     <td>{{ $proyecto->direccion }}</td>
@@ -63,6 +65,7 @@
                         {{ Form::open(['method' => 'POST', 'id' => 'baja', 'class' => 'form-horizontal'])}}
                         <div class="btn-group">
                           <a href="{{ url('proyectos/'.$proyecto->id) }}" class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-eye-open"></span></a>
+                          <a href="{{ url('presupuestos/crear/'.$proyecto->id) }}" class="btn btn-success btn-xs"><span class="fa fa-balance-scale"></span></a>
                           <a href="{{ url('proyectos/'.$proyecto->id.'/edit') }}" class="btn btn-warning btn-xs"><span class="glyphicon glyphicon-edit"></span></a>
                           <button class="btn btn-danger btn-xs" type="button" onclick={{ "baja(".$proyecto->id.",'proyectos')" }}><span class="glyphicon glyphicon-trash"></span></button>
                         </div>
@@ -78,14 +81,8 @@
                   @endforeach
                 </tbody>
               </table>
-
-              <div class="pull-right">
-
-              </div>
             </div>
-            <!-- /.box-body -->
           </div>
-          <!-- /.box -->
         </div>
 </div>
 @endsection

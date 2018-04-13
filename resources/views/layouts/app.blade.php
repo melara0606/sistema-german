@@ -380,8 +380,6 @@
           //Money Euro
           $("[data-mask]").inputmask();
 
-          //mascara dinero
-          $('.money').mask('000000000000000.00', {reverse: true});
           //Date picker
           $('.nacimiento').datepicker({
       	     selectOtherMonths: true,
@@ -393,16 +391,6 @@
 				     format: 'dd-mm-yyyy'
 		         });
 
-          /*$('#calendario').fullCalendar({
-            dayClick: function(fecha,jsEvent){
-              $("#exampleModal").modal("show");
-              $("#fecha").val(fecha.format());
-              //alert(fecha.format());
-
-            },
-            weekends: false,
-            lang:'es'
-          });*/
 
              $("#fecha_inicio").datepicker({
                selectOtherMonths: true,
@@ -510,9 +498,6 @@
                         }
   </script>
 
-  <script>
-//$('div.alert').not('.alert-important').delay(7000).fadeOut(350);
-</script>
 @yield('scripts')
 
 </body>

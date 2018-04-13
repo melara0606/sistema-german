@@ -33,15 +33,15 @@ class ProyectoController extends Controller
         $estado = $request->get('estado');
         //if($estado == "" )$estado=1;
         if($estado == ""){
-          $proyectos = Proyecto::all();
+          $proyectos = Proyecto::orderBy('id','asc')->get();
           return view('proyectos.index',compact('proyectos','estado'));
         }
         if ($estado == 1) {
-            $proyectos = Proyecto::where('estado',$estado)->get();
+            $proyectos = Proyecto::where('estado',$estado)->orderBy('id','asc')->get();
             return view('proyectos.index',compact('proyectos','estado'));
         }
         if ($estado == 2) {
-            $proyectos = Proyecto::where('estado',$estado)->get();
+            $proyectos = Proyecto::where('estado',$estado)->orderBy('id','asc')->get();
             return view('proyectos.index',compact('proyectos','estado'));
         }
     }
@@ -50,10 +50,17 @@ class ProyectoController extends Controller
     {
       if($request->ajax())
       {
-        Organizacion::create($request->All());
-        return response()->json([
-          'mensaje' => 'Organización creada exitosamente'
-        ]);
+        try{
+          Organizacion::create($request->All());
+          return response()->json([
+            'mensaje' => 'Organización creada exitosamente'
+          ]);
+        }catch(\Exception $e){
+          return response()->json([
+            'mensaje' => 'error'
+          ]);
+        }
+
       }
     }
 
@@ -61,10 +68,17 @@ class ProyectoController extends Controller
     {
       if($request->ajax())
       {
-        Fondocat::create($request->All());
-        return response()->json([
-          'mensaje' => 'Organización creada exitosamente'
-        ]);
+        try{
+          Fondocat::create($request->All());
+          return response()->json([
+            'mensaje' => 'Organización creada exitosamente'
+          ]);
+        }catch(\Exception $e){
+          return response()->json([
+            'mensaje' => 'error'
+          ]);
+        }
+
       }
     }
 
@@ -165,23 +179,7 @@ class ProyectoController extends Controller
             'proyecto_id' => $proyecto->id,
             'monto_inicial' => $request->monto,
           ]);
-
-
-/*          if(isset($montosorg))
-          {
-            foreach($montosorg as $montoorg)
-            {
-              Fondoorg::create([
-                'proyecto_id' => $proyecto->id,
-                'organizacion_id' => $montoorg['organizacion'],
-                'monto' => $montoorg['montoorg'],
-              ]);
-            }
-          }*/
-
-          //bitacora('Registró un proyecto');
-
-
+          bitacora('Registró un proyecto');
           DB::commit();
           return response()->json([
             'mensaje' => 'exito'
@@ -192,29 +190,8 @@ class ProyectoController extends Controller
           'mensaje' => $e->getMessage()
         ]);
         }
-
-
-
-
       }
-        //dd($request->all());
-        /*Proyecto::create([
-            'nombre' => $request->nombre,
-            'monto' => $request->monto,
-            'direccion' => $request->direccion,
-            'fecha_inicio' => $request->fecha_inicio,
-            'fecha_fin' => $request->fecha_fin,
-            'organizacion_id' => $request->organizacion_id,
-            'motivo' => $request->motivo
-        ]);
 
-        $presupuesto = Presupuesto::create([
-          'proyecto_id' => $proyecto->id,
-          'total' => 0,
-        ]);
-        bitacora('Registró un proyecto');
-        return redirect('proyectos')->with('mensaje','Registro almacenado con éxito');
-        */
     }
 
     /**
@@ -253,12 +230,22 @@ class ProyectoController extends Controller
 
     public function update(ProyectoRequest $request, $id)
     {
-      //dd($request->All());
+      try{
         $proyecto = Proyecto::findorFail($id);
-        $proyecto->fill($request->All());
+        //$proyecto->fill($request->All());
+        $proyecto->nombre=$request->nombre;
+        $proyecto->monto=$request->monto;
+        $proyecto->motivo=$request->motivo;
+        $proyecto->fecha_inicio=invertir_fecha($request->fecha_inicio);
+        $proyecto->fecha_fin=invertir_fecha($request->fecha_fin);
+        $proyecto->direccion=$request->direccion;
+        $proyecto->beneficiarios=$request->beneficiarios;
         $proyecto->save();
         bitacora('Modificó un Proyecto');
         return redirect('/proyectos')->with('mensaje','Registro modificado con éxito');
+      }catch(\Exception $e){
+        return redirect('proyectos/'.$id.'/edit')->with('error','Ocurrió un error. contacte al administrador');
+      }
     }
 
     /**
@@ -274,11 +261,10 @@ class ProyectoController extends Controller
 
     public function baja($cadena)
     {
-
+      try{
         $datos = explode("+", $cadena);
         $id=$datos[0];
         $motivo=$datos[1];
-        //dd($id);
         $proyecto = Proyecto::find($id);
         $proyecto->estadoanterior=$proyecto->estado;
         $proyecto->estado=2;
@@ -287,15 +273,14 @@ class ProyectoController extends Controller
         $proyecto->save();
         bitacora('Dió de baja a un proyecto');
         return redirect('/proyectos')->with('mensaje','Proyecto dado de baja');
+      }catch(\Exception $e){
+        return redirect('/proyectos')->with('error','Ocurrió un error, contacte al administrador');
+      }
+
     }
 
     public function alta($id)
     {
-
-        //$datos = explode("+", $cadena);
-        ////$id=$datos[0];
-        //$motivo=$datos[1];
-        //dd($id);
         $proyecto = Proyecto::find($id);
         $proyecto->estado=$proyecto->estadoanterior;
         $proyecto->motivobaja=null;

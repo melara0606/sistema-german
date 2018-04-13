@@ -26,16 +26,18 @@
             <div class="box-body table-responsive">
               <table class="table table-striped table-bordered table-hover" id="example2">
           <thead>
-                  <th>Id</th>
+                  <th>N°</th>
                   <th>Año</th>
                   <th>Proyecto</th>
                   <th>Monto</th>
                   <th>Accion</th>
+                  <?php $contador=0; ?>
                 </thead>
                 <tbody>
                   @foreach($presupuestos as $presupuesto)
                     <tr>
-                      <td>{{$presupuesto->id}}</td>
+                      <?php $contador++; ?>
+                      <td>{{$contador}}</td>
                       <td>{{$presupuesto->created_at->format('Y')}}</td>
                       <td>{{$presupuesto->proyecto->nombre}}</td>
                       <td>${{number_format($presupuesto->total,2)}}</td>
@@ -44,14 +46,8 @@
                   @endforeach
                 </tbody>
               </table>
-                
-              <div class="pull-right">
-
-              </div>
             </div>
-            <!-- /.box-body -->
           </div>
-          <!-- /.box -->
         </div>
 </div>
 @endsection

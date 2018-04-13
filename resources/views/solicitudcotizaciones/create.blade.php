@@ -2,10 +2,10 @@
 
 @section('migasdepan')
     <h1>
-        Rubro
+        Solicitudes de cotizacion
     </h1>
     <ol class="breadcrumb">
-        <li><a href="{{ url('/solicitudcotizaciones') }}"><i class="fa fa-dashboard"></i> Solicitudes</a></li>
+        <li><a href="{{ url('/solicitudcotizaciones') }}"><i class="fa fa-align-right"></i> Solicitudes</a></li>
         <li class="active">Registro</li>      </ol>
 @endsection
 
@@ -18,7 +18,7 @@
                 <div class="panel-body">
                     {{ Form::open(['action' => 'SolicitudcotizacionController@store','class' => 'form-horizontal','id' => 'solicitudcotizacion']) }}
                     @include('solicitudcotizaciones.formulario')
-                    
+
                     <div class="form-group">
                         <div class="col-md-6 col-md-offset-1">
                             <button type="submit" class="btn btn-success">

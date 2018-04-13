@@ -1,17 +1,15 @@
 @extends('layouts.app')
 
 @section('migasdepan')
-<h1>
-
+      <h1>
         <small>Ver cotizacion <b>{{ $cotizacion->nombre }}</b></small>
       </h1>
       <ol class="breadcrumb">
-        <li><a href="{{ url('/cotizaciones') }}"><i class="fa fa-dashboard"></i> Cotizaciones</a></li>
+        <li><a href="{{ url('/home') }}"><i class="glyphicon glyphicon-home"></i> Inicio</a></li>
+        <li><a href="{{ url('/cotizaciones') }}"><i class="fa fa-balance-scale"></i> Cotizaciones</a></li>
         <li class="active">Ver</li>
       </ol>
 @endsection
-
-
 
 @section('content')
 <div class="container">
@@ -20,37 +18,29 @@
             <div class="panel panel-primary">
                 <div class="panel-heading">Datos del Cotización </div>
                 <div class="panel-body">
-                        <div class="form-group{{ $errors->has('proyecto_id') ? ' has-error' : '' }}">
-                            <label for="proyecto_id" class="col-md-4 control-label">Nombre del Proyecto: </label>
-                            <label for="proyecto_id" class="col-md-8 control-label">{{$cotizacion->presupuesto->proyecto->nombre}}</label><br>
-
-                        </div>
-
-                         <div class="form-group{{ $errors->has('proveedor_id') ? ' has-error' : '' }}">
-                            <label for="proveedor_id" class="col-md-4 control-label">Proveedor: </label>
-                            <label for="proyecto_id" class="col-md-4 control-label">{{$cotizacion->proveedor->nombre}}</label><br>
-
-                        </div>
-
-                        <div class="form-group{{ $errors->has('descripcion') ? ' has-error' : '' }}">
-                            <label for="descripcion" class="col-md-4 control-label">Forma de pago: </label>
-                            <label for="proyecto_id" class="col-md-4 control-label">{{$cotizacion->descripcion}}</label><br>
-
-                        </div>
-
-                        <div class="form-group{{ $errors->has('descripcion') ? ' has-error' : '' }}">
-                            <label for="descripcion" class="col-md-4 control-label">Validez de la oferta: </label>
-                            <label for="proyecto_id" class="col-md-4 control-label"></label><br>
-
-                        </div>
-
-                        <div class="form-group{{ $errors->has('descripcion') ? ' has-error' : '' }}">
-                            <label for="descripcion" class="col-md-4 control-label">Plazo de entrega: </label>
-                            <label for="proyecto_id" class="col-md-4 control-label"></label><br>
-
-                        </div>
-
-                        <div style="overflow-x:auto;">
+                  <table class="table">
+                    <tr>
+                      <th>Nombre del proyecto</th>
+                      <th>{{$cotizacion->presupuesto->proyecto->nombre}}</th>
+                    </tr>
+                    <tr>
+                      <th>Nombre del proveedor</th>
+                      <th>{{$cotizacion->proveedor->nombre}}</th>
+                    </tr>
+                    <tr>
+                      <th>Forma de pago</th>
+                      <th>{{$cotizacion->descripcion}}</th>
+                    </tr>
+                    <tr>
+                      <th>Validez de la oferta</th>
+                      <th></th>
+                    </tr>
+                    <tr>
+                      <th>Plazo de entrega</th>
+                      <th></th>
+                    </tr>
+                  </table>
+                        <div class="table-responsive">
                           <table class="table table-bordered table-striped table-hover table-condensed">
                             <thead>
                               <tr>

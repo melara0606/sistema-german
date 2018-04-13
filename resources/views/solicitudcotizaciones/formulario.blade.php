@@ -1,7 +1,7 @@
-                    <div class="form-group">
+                  <div class="form-group">
                       <label for="" class="col-md-4 control-label">Seleccione una forma de pago: </label>
                       <div class="col-md-6">
-                        <select name="formapago" id="formapago" class="form-control">
+                        <select name="formapago" id="formapago" class="chosen-select-width">
                             <option value="">Seleccione una forma de pago...</option>
                             @foreach($formapagos as $formapago)
                             <option value="{{$formapago->id}}">{{$formapago->nombre}}</option>
@@ -12,7 +12,7 @@
                 <div class="form-group">
                     <label for="" class="col-md-4 control-label">Seleccione la unidad solicitante: </label>
                     <div class="col-md-6">
-                        <select name="unidad" id="unidad" class="form-control">
+                        <select name="unidad" id="unidad" class="chosen-select-width">
                             <option value="">Seleccione una unidad</option>
                             @foreach($unidades as $unidad)
                             <option>{{$unidad->nombre_unidad}}</option>
@@ -36,9 +36,9 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="" class="col-md-4 control-label">Seleccione el proceso proceso: </label>
+                    <label for="" class="col-md-4 control-label">Seleccione el proceso o proyecto: </label>
                     <div class="col-md-6">
-                        <select name="proyecto" id="proyecto" class="form-control">
+                        <select name="proyecto" id="proyecto" class="chosen-select-width">
                             <option value="">Seleccione una proceso o proyecto</option>
                             @foreach($proyectos as $proyecto)
                             <option value="{{$proyecto->id}}">{{$proyecto->nombre}}</option>

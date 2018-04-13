@@ -76,20 +76,18 @@ class PaacdetalleController extends Controller
         try{
         $detalle = Paacdetalle::findorFail($id);
         $total=$request->enero+$request->febrero+$request->marzo+$request->abril+$request->mayo+$request->junio+$request->julio+$request->agosto+$request->septiembre+$request->octubre+$request->noviembre+$request->diciembre;
-        $paac = Paac::findorFail($detalle->paac_id);
-        $totalp=$paac->total;
-        if($total > $detalle->subtotal)
-        {
-          $paac->total=$totalp+$total-$detalle->subtotal;
-          $paac->save();
-        }else{
-          $paac->total=$totalp-$total;
-          $paac->save();
-        }
-
         $detalle->fill($request->All());
         $detalle->subtotal=$total;
         $detalle->save();
+
+        $detalles = Paacdetalle::where('paac_id',$detalle->paac_id)->get();
+        $totalito=0;
+        foreach($detalles as $valor){
+          $totalito=$totalito+$valor->subtotal;
+        }
+        $paac = Paac::findorFail($detalle->paac_id);
+        $paac->total=$totalito;
+        $paac->save();
         DB::commit();
         return redirect('paacs/'.$paac->id)->with('mensaje','Actualizado con exito');
       }catch (\Exception $e){

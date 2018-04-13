@@ -10,7 +10,7 @@ class Catalogo extends Model
 
     public function categoria()
     {
-    	return $this->belongsTo('App\Categoria')->orderby('id','asc');
+    	return $this->belongsTo('App\Categoria')->orderBy('item');
     }
 
     public function presupuestodetalle()

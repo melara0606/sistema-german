@@ -10,6 +10,6 @@ class Categoria extends Model
 
     public function catalogo()
     {
-    	return $this->hasMany('App\Catalogo');
+    	return $this->hasMany('App\Catalogo')->orderBy('id');
     }
 }

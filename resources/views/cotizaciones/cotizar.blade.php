@@ -5,7 +5,8 @@
         <small>Proceso libre gestion <b>{{ $presupuesto->proyecto->nombre }}</b></small>
       </h1>
       <ol class="breadcrumb">
-        <li><a href="{{ url('/cotizaciones') }}"><i class="fa fa-dashboard"></i> Cotizaciones</a></li>
+        <li><a href="{{ url('/home') }}"><i class="glyphicon glyphicon-home"></i> Inicio</a></li>
+        <li><a href="{{ url('/cotizaciones') }}"><i class="fa fa-balance-scale"></i> Cotizaciones</a></li>
         <li class="active">Ver</li>
       </ol>
 @endsection
@@ -16,8 +17,7 @@
             <div class="panel panel-primary">
                 <div class="panel-heading">Cuadro comparativo de ofertas </div>
                 <div class="panel-body">
-
-                        <div style="overflow-x:auto;">
+                        <div class="table-responsive">
                           <table rules="all" class="table table-bordered table-striped table-hover table-condensed" width="100%">
                             <tr>
                               <td>

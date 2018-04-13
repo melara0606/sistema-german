@@ -27,12 +27,19 @@ class CotizacionController extends Controller
     public function index(Request $request)
     {
         $estado = $request->get('estado');
-        if($estado == "" )$estado=1;
+        if($estado == "" ){
+          $cotizaciones = Cotizacion::get();
+          return view ('cotizaciones.index',compact('cotizaciones','estado'));
+        }
         if ($estado == 1) {
             $cotizaciones = Cotizacion::where('estado',$estado)->get();
             return view('cotizaciones.index',compact('cotizaciones','estado'));
         }
         if ($estado == 2) {
+            $cotizaciones = Cotizacion::where('estado',$estado)->get();
+            return view('cotizaciones.index',compact('cotizaciones','estado'));
+        }
+        if ($estado == 3) {
             $cotizaciones = Cotizacion::where('estado',$estado)->get();
             return view('cotizaciones.index',compact('cotizaciones','estado'));
         }
@@ -101,15 +108,13 @@ class CotizacionController extends Controller
      */
     public function store(Request $request)
     {
-        //dd($request->All());
-
         DB::beginTransaction();
         try
         {
-          $presupuesto = Presupuesto::where('proyecto_id',$request->proyecto_id)->first();
+            $presupuesto = Presupuesto::where('proyecto_id',$request->proyecto_id)->first();
             $count = count($request->precios);
             $cotizacion = Cotizacion::create([
-                'proveedor_id' => $request->proveedor_id,
+                'proveedor_id' => $request->proveedor,
                 'presupuesto_id' => $presupuesto->id,
                 'descripcion' => $request->descripcion,
             ]);
@@ -126,10 +131,10 @@ class CotizacionController extends Controller
             }
             DB::commit();
             bitacora('Registró una cotización');
-            return redirect('/cotizaciones')->with('mensaje','Registro almacenado con éxito');
+            return redirect('cotizaciones')->with('mensaje','Registro almacenado con éxito');
         }catch (\Exception $e){
             DB::rollback();
-            return redirect('/cotizaciones/create')->with('error',$e->getMessage());
+            return redirect('cotizaciones/create')->with('error',$e->getMessage());
         }
     }
 
@@ -168,11 +173,16 @@ class CotizacionController extends Controller
 
     public function update(CotizacionRequest $request, $id)
     {
-        $cotizacion = Cotizacion::find($id);
+      try{
+        $cotizacion = Cotizacion::findorFail($id);
         $cotizacion->fill($request->All());
         $cotizacion->save();
         bitacora('Modificó una cotización');
         return redirect('/cotizaciones')->with('mensaje','Registro modificado con éxito');
+      }catch(\Exception $e){
+        return redirect('/cotizaciones/create')->with('error','Ocurrió un error, contacte al administrador');
+      }
+
     }
 
     /**
@@ -188,7 +198,7 @@ class CotizacionController extends Controller
 
     public function baja($cadena)
     {
-
+      try{
         $datos = explode("+", $cadena);
         $id=$datos[0];
         $motivo=$datos[1];
@@ -199,10 +209,15 @@ class CotizacionController extends Controller
         $cotizacion->save();
         bitacora('Dió de baja a un cotizacion');
         return redirect('/cotizaciones')->with('mensaje','Cotización dada de baja');
+      }catch(\Exception $e){
+        return redirect('/cotizaciones/create')->with('error','Ocurrió un error, contacte al administrador');
+      }
+
     }
 
     public function alta($id)
     {
+      try{
         $cotizacion = Cotizacion::find($id);
         $cotizacion->estado=1;
         $cotizacion->motivo=null;
@@ -210,5 +225,8 @@ class CotizacionController extends Controller
         $cotizacion->save();
         Bitacora::bitacora('Dió de alta a un cotizacion');
         return redirect('/cotizaciones')->with('mensaje','Cotización dada de alta');
+      }catch(\Exception $e){
+        return redirect('/cotizaciones/create')->with('error','Ocurrió un error, contacte al administrador');
+      }
     }
 }

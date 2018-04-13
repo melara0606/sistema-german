@@ -26,7 +26,7 @@ Ver detalle del plan anual
                         </div>
 
                          <div class="form-group{{ $errors->has('monto') ? ' has-error' : '' }}">
-                            <label for="monto" class="col-md-4 control-label">Descripción del plan anual: </label>
+                            <label for="monto" class="col-md-4 control-label">Nombre del proyecto o proceso: </label>
                             <label for="nombre" class="col-md-8 control-label">{{$presupuesto->proyecto->nombre}}</label><br>
                         </div>
 
@@ -37,10 +37,11 @@ Ver detalle del plan anual
 
 
 
-                        <div style="overflow-x:auto;">
+                        <div style="overflow-x:auto;" class="table-responsive">
                           <table class="table table-bordered table-striped table-hover table-condensed">
                             <thead>
                               <tr>
+                                <th>N°</th>
                                 <th>Item</th>
                                 <th>Categoría</th>
                                 <th>Descripción</th>
@@ -49,11 +50,14 @@ Ver detalle del plan anual
                                 <th>Precio unitario</th>
                                 <th>Subtotal</th>
                                 <th>Acción</th>
+                                <?php $contador=0; ?>
                               </tr>
                             </thead>
                             <tbody>
                               @foreach($detalles as $detalle)
                               <tr>
+                                <?php $contador++; ?>
+                                <td>{{$contador}}</td>
                                 <td>{{$detalle->catalogo->categoria->item}}</td>
                                 <td>{{$detalle->catalogo->categoria->nombre_categoria}}</td>
                                 <td>{{$detalle->catalogo->nombre}}</td>

@@ -9,7 +9,7 @@
                                     @endforeach
                                 </select>
                               @else
-                                {!!Form::hidden('proyecto',$proyecto->id)!!}
+                                {!!Form::hidden('',$proyecto->id,['id' => 'proyecto'])!!}
                                 {!!Form::text('nombpro',$proyecto->nombre,['class' => 'form-control','readonly'])!!}
                               @endif
                             </div>

@@ -38,13 +38,22 @@ class OrdencompraController extends Controller
     public function index(Request $request)
     {
       $estado = $request->get('estado');
-      if($estado == "" || $estado == 1)
+      if($estado == "")
       {
-        $estado=1;
+        $ordenes = Ordencompra::get();
+        return view('ordencompras.index',compact('ordenes','estado'));
+      }
+      if($estado == 1)
+      {
         $ordenes = Ordencompra::where('estado',$estado)->get();
         return view('ordencompras.index',compact('ordenes','estado'));
       }
-      if($estado==2)
+      if($estado == 2 )
+      {
+        $ordenes = Ordencompra::where('estado',$estado)->get();
+        return view('ordencompras.index',compact('ordenes','estado'));
+      }
+      if($estado == 3)
       {
         $ordenes = Ordencompra::where('estado',$estado)->get();
         return view('ordencompras.index',compact('ordenes','estado'));

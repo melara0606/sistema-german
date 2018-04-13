@@ -1,12 +1,14 @@
 @extends('layouts.app')
 
 @section('migasdepan')
-<h1>
+      <h1>
         Cotización
       </h1>
       <ol class="breadcrumb">
-        <li><a href="{{ url('/cotizaciones') }}"><i class="fa fa-dashboard"></i> Cotización</a></li>
-        <li class="active">Registro</li>      </ol>
+        <li><a href="{{ url('/home') }}"><i class="glyphicon glyphicon-home"></i> Inicio</a></li>
+        <li><a href="{{ url('/cotizaciones') }}"><i class="fa fa-balance-scale"></i> Cotizaciones</a></li>
+        <li class="active">Registro</li>
+      </ol>
 @endsection
 
 @section('content')

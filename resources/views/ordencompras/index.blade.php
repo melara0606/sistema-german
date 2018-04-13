@@ -17,38 +17,42 @@
     <div class="box-header">
       <h3 class="box-title">Listado</h3>
       <div class="btn-group pull-right">
-        <!---->
-        <a href="{{ url('/ordencompras/create') }}" class="btn btn-success">
-            <span class="glyphicon glyphicon-plus-sign"></span> Agregar
-        </a>
-        <a href="{{ url('/ordencompras?estado=1') }}" class="btn btn-primary">Activos</a>
-        <a href="{{ url('/ordencompras?estado=2') }}" class="btn btn-primary">Inactivo</a>
+        <a href="{{ url('/ordencompras/create') }}" class="btn btn-success"><span class="glyphicon glyphicon-plus-sign"></span></a>
+        <a href="{{ url('/ordencompras?estado=1') }}" class="btn btn-primary">Pendientes</a>
+        <a href="{{ url('/ordencompras?estado=3') }}" class="btn btn-primary">Recibido</a>
       </div>
     </div>
     <!-- /.box-header -->
     <div class="box-body table-responsive">
       <table class="table table-striped table-bordered table-hover" id="example2">
         <thead>
-          <th>Id</th>
+          <th>N°</th>
           <th>Número de orden</th>
           <th>Administrador de la orden</th>
           <th>Proveedor</th>
-          <th>Proyecto</th>
+          <th>Proyecto o proceso</th>
           <th>Accion</th>
+          <?php $contador=0 ?>
         </thead>
         <tbody>
           @foreach($ordenes as $orden)
             <tr>
-              <td>{{$orden->id}}</td>
+              @php
+                $contador++;
+              @endphp
+              <td>{{$contador}}</td>
               <td>{{$orden->numero_orden}}</td>
               <td>{{$orden->adminorden}}</td>
               <td>{{$orden->cotizacion->proveedor->nombre}}</td>
               <td>{{$orden->cotizacion->presupuesto->proyecto->nombre}}</td>
               @if($estado == 1)
-                <td>activo</td>
+                <td>Pendiente</td>
               @endif
               @if($estado == 2)
-                <td>inactivo</td>
+                <td>Inactivo</td>
+              @endif
+              @if($estado == 3)
+                <td>Finalizado</td>
               @endif
             </tr>
           @endforeach
