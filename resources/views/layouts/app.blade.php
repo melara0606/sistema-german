@@ -391,6 +391,15 @@
 				     format: 'dd-mm-yyyy'
 		         });
 
+             $('.unafecha').datepicker({
+         	     selectOtherMonths: true,
+                changeMonth: true,
+                changeYear: true,
+                dateFormat: 'dd-mm-yy',
+                minDate: start,
+   				     format: 'dd-mm-yyyy'
+   		         });
+
 
              $("#fecha_inicio").datepicker({
                selectOtherMonths: true,

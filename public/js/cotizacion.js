@@ -70,12 +70,31 @@ $('input[type="radio"]').on('click', function(e) {
 
 	});
 
-	$(document).on("keyup", ".precios", function (e) {
-		var cantidad=$(this).parents('tr').find('td:eq(2)').text();
-		var valor = $(this).val();
-		var total = parseFloat(cantidad * valor);
-		$(this).parents('tr').find('td:eq(5)').text("$"+total.toFixed(2));
-	});
+/*	$(document).on("keyup", ".precios", function (e) {
+		//var cantidad=$(this).parents('tr').find('td:eq(2)').text();
+	//	var valor = $(this).val();
+  var element = $(e.currentTarget),
+    cantidad   = $(element).attr('data-cantidad'),
+    subTotal =  $(element).val(),
+    parent  = element.parents("tr");
+    console.log(subTotal);
+		//var total = parseFloat(cantidad * valor);
+		//$(this).parents('tr').find('td:eq(5)').text("$"+total.toFixed(2));
+	});*/
+
+  $(".precios").keyup(function(e){
+    var element = $(e.currentTarget),
+      cantidad   = $(element).attr('data-cantidad'),
+      subTotal =  $(element).val(),
+      parent  = element.parents("tr");
+
+      if($.isNumeric($(element).val()) && $.trim($(element).val()))
+  			subTotal = ( $(element).val() * parseFloat(cantidad) );
+  		else
+  			subTotal = 0
+      //console.log(parent);
+      $(parent).find(".subtotal").text("$"+subTotal.toFixed(2));
+  });
 
   function seleccionar(id,idproy)
   {
@@ -92,7 +111,7 @@ $('input[type="radio"]').on('click', function(e) {
         if(data.mensaje === 'exito'){
           toastr.success('Proveedor seleccionado con éxito');
         }else{
-          toastr.error('Ha ocurrido un error en la solucitud');
+          toastr.error('Ha ocurrido un error en la solucitud contacte al administrador');
           console.log(data.mensaje);
         }
 

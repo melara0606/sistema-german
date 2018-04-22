@@ -20,6 +20,7 @@ class AddCatalogoIdToPresupuestodetalles extends Migration
             $table->dropColumn('unidad');
             $table->bigInteger('catalogo_id');
             $table->foreign('catalogo_id')->references('id')->on('catalogos');
+
         });
     }
 
@@ -31,10 +32,10 @@ class AddCatalogoIdToPresupuestodetalles extends Migration
     public function down()
     {
         Schema::table('presupuestodetalles', function (Blueprint $table) {
-            $table->string('material');
-            $table->integer('item');
-            $table->string('categoria');
-            $table->string('unidad');
+            $table->string('material')->nullable();
+            $table->integer('item')->nullable();
+            $table->string('categoria')->nullable();
+            $table->string('unidad')->nullable();
             $table->dropForeign('presupuestodetalles_catalogo_id_foreign');
             $table->dropColumn('catalogo_id');
         });

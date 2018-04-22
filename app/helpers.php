@@ -437,16 +437,16 @@ function numaletras($xcifra)
                     }
 
 					 if ($xcifra == 2 ) {
-					    $xcadena.= " DOLARES EXACTOS " ; //
+					    $xcadena.= " 00/100 " ; //
 //						return 0;
                     }
 
                     if ($xcifra > 2) {
 						if($xdecimales=="00"){
 						//$xdecimales1="CERO";
-					    $xcadena.= " DOLARES EXACTOS" ; //
+					    $xcadena.= " 00/100 DÓLARES" ; //
 						}else{
-						$xcadena.= " DOLARES CON $xdecimales1 CENTAVOS" ; //
+						$xcadena.= " $xdecimales/100 DÓLARES" ; //
 						}
 //						return 0;
                     }

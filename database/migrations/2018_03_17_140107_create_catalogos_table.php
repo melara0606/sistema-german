@@ -17,8 +17,6 @@ class CreateCatalogosTable extends Migration
             $table->increments('id');
             $table->string('nombre');
             $table->string('unidad_medida');
-            $table->bigInteger('categoria_id');
-            $table->foreign('categoria_id')->references('id')->on('categorias');
             $table->timestamps();
         });
     }

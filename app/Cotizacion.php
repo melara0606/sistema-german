@@ -22,7 +22,7 @@ class Cotizacion extends Model
     	if(trim($nombre != "")){
             return $query->where('nombre','iLIKE', '%'.$nombre.'%');
     	}
-    	
+
     }
 
     public function detallecotizacion()
@@ -30,9 +30,9 @@ class Cotizacion extends Model
         return $this->hasMany('App\Detallecotizacion')->orderby('id','asc');
     }
 
-    public function presupuesto()
+    public function presupuestosolicitud()
     {
-        return $this->belongsTo('App\Presupuesto');
+        return $this->belongsTo('App\PresupuestoSolicitud');
     }
 
     public function proveedor()

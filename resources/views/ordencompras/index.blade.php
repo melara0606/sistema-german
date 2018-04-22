@@ -31,6 +31,7 @@
           <th>Administrador de la orden</th>
           <th>Proveedor</th>
           <th>Proyecto o proceso</th>
+          <th>Estado</th>
           <th>Accion</th>
           <?php $contador=0 ?>
         </thead>
@@ -44,15 +45,20 @@
               <td>{{$orden->numero_orden}}</td>
               <td>{{$orden->adminorden}}</td>
               <td>{{$orden->cotizacion->proveedor->nombre}}</td>
-              <td>{{$orden->cotizacion->presupuesto->proyecto->nombre}}</td>
-              @if($estado == 1)
+              <td>{{$orden->cotizacion->presupuestosolicitud->presupuesto->proyecto->nombre}}</td>
+              @if($estado == 1 || $estado=="")
                 <td>Pendiente</td>
+                <td>
+                  <a class="btn btn-primary btn-xs" href="{{url('ordencompras/'.$orden->id)}}"><span class="glyphicon glyphicon-eye-open"></span></a>
+                </td>
               @endif
               @if($estado == 2)
                 <td>Inactivo</td>
+                <td></td>
               @endif
               @if($estado == 3)
                 <td>Finalizado</td>
+                <td></td>
               @endif
             </tr>
           @endforeach

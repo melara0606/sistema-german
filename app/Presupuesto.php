@@ -19,13 +19,15 @@ class Presupuesto extends Model
         return $this->hasMany('App\Presupuestodetalle');
     }
 
-    public function solicitudcotizacion()
+    public function presupuestosolicitud()
     {
-        return $this->hasOne('App\Solicitudcotizacion');
+        return $this->hasMany('App\PresupuestoSolicitud');
     }
 
-    public function cotizacion()
+    public function categoria()
     {
-        return $this->hasOne('App\Cotizacion');
+      return $this->belongsTo('App\Categoria');
     }
+
+
 }

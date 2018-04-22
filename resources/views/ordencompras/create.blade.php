@@ -2,11 +2,12 @@
 
 @section('migasdepan')
     <h1>
-        Rubro
+        Ordenes de compra
     </h1>
-    <ol class="breadcrumb">
+      <ol class="breadcrumb">
         <li><a href="{{ url('/ordencompras') }}"><i class="fa fa-dashboard"></i> Cotizaciones</a></li>
-        <li class="active">Registro</li>      </ol>
+        <li class="active">Registro</li>
+      </ol>
 @endsection
 
 @section('content')

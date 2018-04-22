@@ -7,6 +7,7 @@ use App\Proyecto;
 use App\Fondo;
 use App\Ordencompra;
 use App\Presupuesto;
+use App\PresupuestoSolicitud;
 use Illuminate\Http\Request;
 use DB;
 
@@ -27,7 +28,8 @@ class OrdencompraController extends Controller
      {
         $proyecto=Proyecto::findorFail($id);
         $presupuesto=Presupuesto::where('proyecto_id',$proyecto->id)->first();
-        return Cotizacion::where('presupuesto_id',$presupuesto->id)->where('seleccionado',true)->with('proveedor','detallecotizacion')->orderby('id','asc')->get();
+        $soli=PresupuestoSolicitud::where('presupuesto_id',$presupuesto->id)->first();
+        return Cotizacion::where('presupuestosolicitud_id',$soli->id)->where('seleccionado',true)->with('proveedor','detallecotizacion')->orderby('id','asc')->get();
      }
 
      public function getMonto($id)
@@ -37,6 +39,7 @@ class OrdencompraController extends Controller
 
     public function index(Request $request)
     {
+      //dd(Ordencompra::correlativo());
       $estado = $request->get('estado');
       if($estado == "")
       {
@@ -84,8 +87,9 @@ class OrdencompraController extends Controller
         DB::beginTransaction();
         try{
           Ordencompra::create([
-              'fecha_inicio' => $request->fecha_inicio,
-              'fecha_fin' => $request->fecha_fin,
+              'numero_orden' => Ordencompra::correlativo(),
+              'fecha_inicio' => invertir_fecha($request->fecha_inicio),
+              'fecha_fin' => invertir_fecha($request->fecha_fin),
               'cotizacion_id' => $request->cotizacion_id,
               'observaciones' => $request->observaciones,
               'direccion_entrega' => $request->direccion_entrega,
@@ -94,7 +98,7 @@ class OrdencompraController extends Controller
           $cotizacion = Cotizacion::findorFail($request->cotizacion_id);
           $cotizacion->estado=3;
           $cotizacion->save();
-          $proyecto=Proyecto::findorFail($cotizacion->presupuesto->proyecto->id);
+          $proyecto=Proyecto::findorFail($cotizacion->presupuestosolicitud->presupuesto->proyecto->id);
           $proyecto->estado=6;
           $proyecto->save();
           DB::commit();

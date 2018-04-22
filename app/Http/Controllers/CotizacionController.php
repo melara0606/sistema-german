@@ -9,6 +9,8 @@ use App\Cotizacion;
 use App\Detallecotizacion;
 use App\Bitacora;
 use App\Presupuesto;
+use App\Presupuestodetalle;
+use App\PresupuestoSolicitud;
 use DB;
 use App\Http\Requests\CotizacionRequest;
 
@@ -65,7 +67,7 @@ class CotizacionController extends Controller
           }catch(\Exception $e){
 
             return response()->json([
-              'mensaje' => 'error'
+              'mensaje' => $e->getMessage()
             ]);
           }
 
@@ -78,13 +80,25 @@ class CotizacionController extends Controller
         return view('cotizaciones.cuadros',compact('proyectos'));
     }
 
+    public function realizarCotizacion($id)
+    {
+        $proveedores = Proveedor::where('estado',1)->get();
+        $solicitud=PresupuestoSolicitud::findorFail($id);
+        $presu=Presupuesto::where('categoria_id',$solicitud->categoria_id)->firstorFail();
+        $presupuestos = Presupuestodetalle::where('presupuesto_id',$presu->id)->get();
+        //dd($presupuestos);
+      return view('cotizaciones.create',compact('proveedores','presupuestos','solicitud'));
+    }
+
     public function cotizar($id)
     {
         //return $cotizaciones = Cotizacion::where('proyecto_id',$id)->with('proveedor')->get();
         $proyecto = Proyecto::where('estado',3)->where('presupuesto',true)->findorFail($id);
-        $presupuesto = Presupuesto::where('proyecto_id',$proyecto->id)->with('presupuestodetalle')->first();
-        $cotizaciones = Cotizacion::where('presupuesto_id',$presupuesto->id)->with('detallecotizacion')->get();
-        return view('cotizaciones.cotizar',compact('presupuesto','cotizaciones'));
+        $presupuesto=Presupuesto::where('proyecto_id',$proyecto->id)->first();
+        $solicitud = PresupuestoSolicitud::where('presupuesto_id',$presupuesto->id)->first();
+        $detalles = Presupuestodetalle::where('presupuesto_id',$presupuesto->id)->where('categoria_id',$solicitud->categoria_id)->get();
+        $cotizaciones = Cotizacion::where('presupuestosolicitud_id',$solicitud->id)->with('detallecotizacion')->get();
+        return view('cotizaciones.cotizar',compact('presupuesto','cotizaciones','detalles'));
     }
 
     /**
@@ -108,6 +122,7 @@ class CotizacionController extends Controller
      */
     public function store(Request $request)
     {
+      //dd($request->All());
         DB::beginTransaction();
         try
         {
@@ -115,7 +130,7 @@ class CotizacionController extends Controller
             $count = count($request->precios);
             $cotizacion = Cotizacion::create([
                 'proveedor_id' => $request->proveedor,
-                'presupuesto_id' => $presupuesto->id,
+                'presupuestosolicitud_id' => $request->id,
                 'descripcion' => $request->descripcion,
             ]);
             for($i=0;$i<$count;$i++)

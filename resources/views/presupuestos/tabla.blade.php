@@ -1,6 +1,5 @@
 <table class="table table-striped table-bordered" id="tbMaterial">
       <thead>
-          <th width="15%">Categoría</th>
           <th width="35%">Descripción</th>
           <th width="10%">Unidad de medida</th>
           <th width="10%">Cantidad</th>

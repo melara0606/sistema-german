@@ -33,11 +33,11 @@
                                     </tr>
                                   </thead>
                                   <tbody>
-                                    @foreach($presupuesto->presupuestodetalle as $detalle)
+                                    @foreach($detalles as $detalle)
                                       <tr>
                                         <td><small>Adquisic</small></td>
                                         <td><small>{{$detalle->cantidad}}</small></td>
-                                        <td><small>{{$detalle->material}}</small></td>
+                                        <td><small>{{$detalle->catalogo->nombre}}</small></td>
                                       </tr>
                                     @endforeach
                                   </tbody>
