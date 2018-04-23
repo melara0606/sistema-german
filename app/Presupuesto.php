@@ -21,7 +21,7 @@ class Presupuesto extends Model
 
     public function presupuestosolicitud()
     {
-        return $this->hasMany('App\PresupuestoSolicitud');
+        return $this->hasOne('App\PresupuestoSolicitud');
     }
 
     public function categoria()

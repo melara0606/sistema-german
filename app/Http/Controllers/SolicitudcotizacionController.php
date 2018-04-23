@@ -57,6 +57,13 @@ class SolicitudcotizacionController extends Controller
       return $presupuesto=Presupuesto::where('proyecto_id',$proyecto->id)->where('estado',1)->with('categoria')->get();
     }
 
+    public function versolicitudes($id)
+    {
+      $proyecto=Proyecto::findorFail($id);
+      $presupuesto=Presupuesto::where('proyecto_id',$proyecto->id)->get();
+        return view('solicitudcotizaciones.porproyecto',compact('proyecto'));
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -64,7 +71,7 @@ class SolicitudcotizacionController extends Controller
      */
     public function create()
     {
-      $proyectos = Proyecto::where('estado',1)->where('presupuesto',true)->get();
+      $proyectos = Proyecto::where('estado',3)->where('pre',true)->get();
       $formapagos = Formapago::all();
       $unidades = Unidad::all();
       return view('solicitudcotizaciones.create',compact('formapagos','proyectos','unidades'));
@@ -81,7 +88,7 @@ class SolicitudcotizacionController extends Controller
         //dd($request->All());
         DB::beginTransaction();
         try{
-          $presupuesto = Presupuesto::where('proyecto_id',$request->proyecto)->first();
+          $presupuesto = Presupuesto::where('categoria_id',$request->categoria)->first();
           $solicitud=Solicitudcotizacion::create([
               "formapago_id" => $request->formapago,
               "unidad" => $request->unidad,
@@ -102,11 +109,13 @@ class SolicitudcotizacionController extends Controller
             'presupuesto_id' => $presupuesto->id,
             'categoria_id' => $request->categoria,
           ]);
-          //dd($pre);
 
-          $proyecto=Proyecto::findorFail($request->proyecto);
-          $proyecto->estado=3;
-          $proyecto->save();
+          $presuu=Presupuesto::where('estado',1)->count();
+          if($presuu==0){
+            $proyecto=Proyecto::findorFail($request->proyecto);
+            $proyecto->estado=4;
+            $proyecto->save();
+          }
           DB::commit();
           return redirect('solicitudcotizaciones')->with('mensaje','Solicitud registrada con éxito');
         }catch(\Exception $e){

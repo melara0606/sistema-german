@@ -96,6 +96,7 @@ Route::get('presupuestos/getcategorias','PresupuestoController@getCategorias');
 Route::post('presupuestos/guardarcategoria','PresupuestoController@guardarCategoria');
 Route::get('presupuestos/getcatalogo','PresupuestoController@getCatalogo');
 Route::post('presupuestos/guardardescripcion','PresupuestoController@guardarDescripcion');
+Route::post('presupuestos/cambiar','PresupuestoController@cambiar')->name('presupuestos.cambiar');
 Route::Resource('presupuestos','PresupuestoController');
 
 Route::get('cotizaciones/ver/cuadros','CotizacionController@cuadros');
@@ -119,6 +120,7 @@ Route::Resource('formapagos','FormapagoController');
 
 Route::post('solicitudcotizaciones/baja/{id}','SolicitudcotizacionController@baja')->name('solicitudcotizaciones.baja');
 Route::post('solicitudcotizaciones/alta/{id}','SolicitudcotizacionController@alta')->name('solicitudcotizaciones.alta');
+Route::get('solicitudcotizaciones/versolicitudes/{id}','SolicitudcotizacionController@versolicitudes');
 Route::get('solicitudcotizaciones/getcategorias/{id}','SolicitudcotizacionController@getCategorias');
 Route::get('solicitudcotizaciones/getpresupuesto/{id}','SolicitudcotizacionController@getPresupuesto');
 Route::Resource('solicitudcotizaciones','SolicitudcotizacionController');

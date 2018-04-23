@@ -100,16 +100,22 @@ function proyecto_estado($estado)
             return 'En proceso de cotización';
                 break;
         case '4':
-            return 'En proceso de adjudicación';
+            return 'Recibiendo cotizaciones';
             break;
         case '5':
+            return 'En proceso de adjudicación';
+            break;
+		case '6':
+			return 'En proceso de emisión de orden de compra';
+			break;
+        case '7':
+            return 'En marcha';
+            break;
+        case '8':
             return 'Inconcluso';
             break;
-				case '6':
-						return 'En ejecución';
-						break;
         default:
-						return 'Sin clasificar';
+				return 'Sin clasificar';
             break;
     }
 }

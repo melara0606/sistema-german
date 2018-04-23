@@ -44,9 +44,28 @@ class PresupuestoController extends Controller
       //$proyectos = \DB::select(\DB::raw($query));
 
       //$proyectos=DB::select('SELECT "id" FROM proyectos WHERE estado =1 EXCEPT SELECT proyecto_id FROM presupuestos');
-        $proyectos = Proyecto::where('estado',1)->where('presupuesto',false)->get();
+        $proyectos = Proyecto::where('estado',1)->where('pre',false)->get();
         $categorias = Categoria::all();
        return view('presupuestos.create',compact('proyectos','categorias'));
+    }
+
+    public function cambiar(Request $request)
+    {
+        if($request->ajax()){
+            try{
+                $proyecto=Proyecto::findorFail($request->id);
+                $proyecto->estado=3;
+                $proyecto->save();
+                return response()->json([
+                    'mensaje' => 'exito'
+                ]);
+            }catch(\Exception $e){
+                return response()->json([
+                'mensaje' => 'error'
+                ]);
+            }
+            
+        }
     }
 
     public function guardarCategoria(CategoriaRequest $request)
@@ -126,7 +145,7 @@ class PresupuestoController extends Controller
                     ]);
                   }
                   $proyecto = Proyecto::findorFail($request->proyecto_id);
-                  $proyecto->presupuesto=true;
+                  $proyecto->pre=true;
                   $proyecto->save();
                   DB::commit();
                   return response()->json([

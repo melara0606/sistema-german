@@ -144,9 +144,10 @@ class CotizacionController extends Controller
                     'precio_unitario' => $request->precios[$i],
                 ]);
             }
+            $solicitud=PresupuestoSolicitud::findorFail($request->id);
             DB::commit();
             bitacora('Registró una cotización');
-            return redirect('cotizaciones')->with('mensaje','Registro almacenado con éxito');
+            return redirect('solicitudcotizaciones/versolicitudes/'.$solicitud->presupuesto->proyecto->id)->with('mensaje','Registro almacenado con éxito');
         }catch (\Exception $e){
             DB::rollback();
             return redirect('cotizaciones/create')->with('error',$e->getMessage());

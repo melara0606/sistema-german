@@ -33,7 +33,7 @@ class Proyecto extends Model
 
     public function presupuesto()
     {
-      return $this->hasOne('App\Presupuesto');
+      return $this->hasMany('App\Presupuesto');
     }
 
     public function fondo()

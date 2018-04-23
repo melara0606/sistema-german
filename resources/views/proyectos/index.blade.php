@@ -57,8 +57,13 @@
                           <a href="{{ url('proyectos/'.$proyecto->id) }}" class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-eye-open"></span></a>
                           @if( $proyecto->estado == 1 )
                           <a href="{{ url('presupuestos/crear/'.$proyecto->id) }}" class="btn btn-success btn-xs"><span class="fa fa-balance-scale"></span></a>
+                              @if($proyecto->pre==true)
+                                  <button type="button" onclick="{{ "cambiar(".$proyecto->id.")" }}" class="btn btn-default btn-xs"><span class="fa fa-check"></span></button>
+                              @endif
                           @elseif( $proyecto->estado == 3)
                           <a href="{{ url('solicitudcotizaciones/create') }}" class="btn btn-success btn-xs"><span class="glyphicon glyphicon-align-right"></span></a>
+                          @elseif( $proyecto->estado == 4 )
+                            <a href="{{url('solicitudcotizaciones/versolicitudes/'.$proyecto->id)}}">ver</a>
                           @endif
                           <a href="{{ url('proyectos/'.$proyecto->id.'/edit') }}" class="btn btn-warning btn-xs"><span class="glyphicon glyphicon-edit"></span></a>
                           <button class="btn btn-danger btn-xs" type="button" onclick={{ "baja(".$proyecto->id.",'proyectos')" }}><span class="glyphicon glyphicon-trash"></span></button>
@@ -86,6 +91,45 @@
                   @endforeach
                 </tbody>
               </table>
+              <script>
+                function cambiar(id){
+                  swal({
+                    title: '¿Está seguro de enviar el proyecto a cotizar?',
+                    type: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'si, continuar!'
+                  }).then((result) => {
+                    if (result.value) {
+                      var token = $('meta[name="csrf-token"]').attr('content');
+                      var ruta ="/"+carpeta()+"/public/presupuestos/cambiar";
+                      $.ajax({
+                        type: "POST",
+                        dataType: "json",
+                        url: ruta,
+                        headers: {'X-CSRF-TOKEN':token},
+                        data:{id},
+                        success : function(msj){
+                          console.log(msj);
+                          if(msj.mensaje == "exito"){
+                            window.location.href = "/"+carpeta()+"/public/proyectos";
+                            console.log(msj);
+                            toastr.success('Proyecto listo para cotizar');
+                          }else{
+                            toastr.error('Ocurrió un error');
+                          }
+                          
+                        },
+                        error: function(){
+                          toastr.error('Ocurrió un error');
+                        }
+                      });
+                          
+                    }
+                  })
+                }
+              </script>
             </div>
           </div>
         </div>
