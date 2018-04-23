@@ -96,7 +96,7 @@ class CotizacionController extends Controller
         $proyecto = Proyecto::where('estado',3)->where('presupuesto',true)->findorFail($id);
         $presupuesto=Presupuesto::where('proyecto_id',$proyecto->id)->first();
         $solicitud = PresupuestoSolicitud::where('presupuesto_id',$presupuesto->id)->first();
-        $detalles = Presupuestodetalle::where('presupuesto_id',$presupuesto->id)->where('categoria_id',$solicitud->categoria_id)->get();
+        $detalles = Presupuestodetalle::where('presupuesto_id',$presupuesto->id)->get();
         $cotizaciones = Cotizacion::where('presupuestosolicitud_id',$solicitud->id)->with('detallecotizacion')->get();
         return view('cotizaciones.cotizar',compact('presupuesto','cotizaciones','detalles'));
     }

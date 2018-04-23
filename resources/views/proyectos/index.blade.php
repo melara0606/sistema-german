@@ -51,22 +51,22 @@
                       <span class="label-{{estilo_proyecto($proyecto->estado)}}">{{proyecto_estado($proyecto->estado)}}</span>
                     </td>
                     <td>
-                      @if($estado == "")
+                      @if( $estado == "" )
                         {{ Form::open(['method' => 'POST', 'id' => 'baja', 'class' => 'form-horizontal'])}}
                         <div class="btn-group">
                           <a href="{{ url('proyectos/'.$proyecto->id) }}" class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-eye-open"></span></a>
-                          @if($proyecto->estado == 1)
+                          @if( $proyecto->estado == 1 )
                           <a href="{{ url('presupuestos/crear/'.$proyecto->id) }}" class="btn btn-success btn-xs"><span class="fa fa-balance-scale"></span></a>
-                        @elseif($proyecto->estado==3)
+                          @elseif( $proyecto->estado == 3)
                           <a href="{{ url('solicitudcotizaciones/create') }}" class="btn btn-success btn-xs"><span class="glyphicon glyphicon-align-right"></span></a>
-                        @endif
+                          @endif
                           <a href="{{ url('proyectos/'.$proyecto->id.'/edit') }}" class="btn btn-warning btn-xs"><span class="glyphicon glyphicon-edit"></span></a>
                           <button class="btn btn-danger btn-xs" type="button" onclick={{ "baja(".$proyecto->id.",'proyectos')" }}><span class="glyphicon glyphicon-trash"></span></button>
                         </div>
                         {{ Form::close()}}
 
                       @endif
-                      @if($estado == 1)
+                      @if( $estado == 1 )
                         {{ Form::open(['method' => 'POST', 'id' => 'baja', 'class' => 'form-horizontal'])}}
                         <div class="btn-group">
                           <a href="{{ url('proyectos/'.$proyecto->id) }}" class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-eye-open"></span></a>
@@ -76,7 +76,7 @@
                         </div>
                         {{ Form::close()}}
                       @endif
-                      @if($estado==2)
+                      @if( $estado == 2 )
                         {{ Form::open(['method' => 'POST', 'id' => 'alta', 'class' => 'form-horizontal'])}}
                           <button class="btn btn-success btn-xs" type="button" onclick={{ "alta(".$proyecto->id.",'proyectos')" }}><span class="glyphicon glyphicon-trash"></span></button>
                         {{ Form::close()}}
