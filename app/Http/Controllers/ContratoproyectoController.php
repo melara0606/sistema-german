@@ -10,6 +10,7 @@ use App\Cargo;
 use App\Http\Requests\ContratoRequest;
 use App\Http\Requests\EmpleadoRequest;
 use App\Http\Requests\ProyectoRequest;
+use App\Http\Requests\ContratoproyectoRequest;
 use App\Http\Requests\CargoRequest;
 
 

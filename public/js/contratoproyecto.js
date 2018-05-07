@@ -54,12 +54,12 @@ $(document).ready(function(){
 			},error : function(data){
 				toastr.error(data.responseJSON.errors.nombre);
 			}
-		});		
+		});
 	});
 
 	$('#guardarcargo').on("click", function(e){
 		var cargo = $("#cargo_nombre").val();
-		var ruta = "/"+carpeta()+"/public/contratoproyectos/guardarcargo";
+		var ruta = "/"+carpeta()+"/public/contratos/guardarcargo";
 		var token = $('meta[name="csrf-token"]').attr('content');
 		$.ajax({
 			url: ruta,
