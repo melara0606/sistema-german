@@ -94,7 +94,7 @@ function proyecto_estado($estado)
             return 'Aprobado';
             break;
         case '2':
-            return 'Inactivo';
+            return 'Realizando el presupuesto';
             break;
         case '3':
             return 'En proceso de cotización';
@@ -105,17 +105,23 @@ function proyecto_estado($estado)
         case '5':
             return 'En proceso de adjudicación';
             break;
-		case '6':
-			return 'En proceso de emisión de orden de compra';
-			break;
-        case '7':
+				case '6':
+						return 'En proceso de emisión de orden de compra';
+						break;
+				case '7':
+						return 'Pendiente de recibir materiales';
+						break;
+        case '8':
             return 'En marcha';
             break;
-        case '8':
+        case '9':
             return 'Inconcluso';
             break;
+				case '10':
+						return 'Inactivo';
+						break;
         default:
-				return 'Sin clasificar';
+						return 'Sin clasificar';
             break;
     }
 }
@@ -127,19 +133,31 @@ function estilo_proyecto($estado)
 					return 'primary';
 					break;
 			case '2':
-					return 'danger';
+					return 'warning';
 					break;
 			case '3':
 					return 'warning';
-							break;
+					break;
 			case '4':
 					return 'warning';
 					break;
 			case '5':
-					return 'danger';
+					return 'warning';
 					break;
 			case '6':
 					return 'success';
+					break;
+			case '7':
+					return 'primary';
+					break;
+			case '8':
+					return 'success';
+					break;
+			case '9':
+					return 'danger';
+					break;
+			case '10':
+					return 'danger';
 					break;
 			default:
 					return 'default';

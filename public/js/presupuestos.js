@@ -2,7 +2,8 @@ var total=0.0;
 var contador = 0;
 var monto=0.0;
     $(document).ready(function(){
-      listaritems();
+      var proy=$("#proyecto").val();
+      listaritems(proy);
       listarcatalogo();
     var tbMaterial = $("#tbMaterial");
 
@@ -205,9 +206,9 @@ var monto=0.0;
         });
     }
 
-    function listaritems()
+    function listaritems(id)
     {
-        $.get('/'+carpeta()+'/public/presupuestos/getcategorias', function (data){
+        $.get('/'+carpeta()+'/public/presupuestos/getcategorias/'+id, function (data){
         var html_select = '<option value="">Seleccione un ítem</option>';
         //console.log(data.length);
         if(data.length < 1){

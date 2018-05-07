@@ -45,9 +45,10 @@ class SolicitudcotizacionController extends Controller
       }
     }
 
-    public function getPresupuesto($idp)
+    public function getPresupuesto($idc,$idp)
     {
-        $presupuesto = Presupuesto::where('categoria_id',$idp)->with('presupuestodetalle')->first();
+        $proyecto=Proyecto::findorFail($idp);
+        $presupuesto = Presupuesto::where('proyecto_id',$proyecto->id)->where('categoria_id',$idc)->with('presupuestodetalle')->first();
         return Presupuestodetalle::where('presupuesto_id',$presupuesto->id)->with('catalogo')->get();
     }
 
@@ -63,6 +64,30 @@ class SolicitudcotizacionController extends Controller
       $presupuesto=Presupuesto::where('proyecto_id',$proyecto->id)->get();
         return view('solicitudcotizaciones.porproyecto',compact('proyecto'));
     }
+
+
+      public function cambiar(Request $request)
+      {
+          if($request->ajax()){
+              try{
+                  $proyecto=Proyecto::findorFail($request->idp);
+                  $proyecto->estado=5;
+                  $proyecto->save();
+
+                  $solicitud=PresupuestoSolicitud::findorFail($request->idps);
+                  $solicitud->estado=2;
+                  $solicitud->save();
+                  return response()->json([
+                      'mensaje' => 'exito'
+                  ]);
+              }catch(\Exception $e){
+                  return response()->json([
+                  'mensaje' => $e
+                  ]);
+              }
+
+          }
+      }
 
     /**
      * Show the form for creating a new resource.
@@ -88,7 +113,7 @@ class SolicitudcotizacionController extends Controller
         //dd($request->All());
         DB::beginTransaction();
         try{
-          $presupuesto = Presupuesto::where('categoria_id',$request->categoria)->first();
+          $presupuesto = Presupuesto::where('categoria_id',$request->categoria)->where('proyecto_id',$request->proyecto)->first();
           $solicitud=Solicitudcotizacion::create([
               "formapago_id" => $request->formapago,
               "unidad" => $request->unidad,
@@ -117,7 +142,7 @@ class SolicitudcotizacionController extends Controller
             $proyecto->save();
           }
           DB::commit();
-          return redirect('solicitudcotizaciones')->with('mensaje','Solicitud registrada con éxito');
+          return redirect('solicitudcotizaciones/versolicitudes/'.$proyecto->id)->with('mensaje','Solicitud registrada con éxito');
         }catch(\Exception $e){
           dd($e);
           DB::rollback();

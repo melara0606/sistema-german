@@ -31,7 +31,7 @@
                           </tr>
                           <tr>
                             <td>NIT:</td>
-                            <td>Fecha: </td>
+                            <td>Fecha: <b>{{$orden->created_at->format('d-m-Y')}}</b> </td>
                           </tr>
                           <tr>
                             <td><b>{{$orden->cotizacion->proveedor->nit}}</b></td>

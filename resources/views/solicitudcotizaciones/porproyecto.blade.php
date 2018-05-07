@@ -20,7 +20,7 @@
             <div class="box-header">
               <h3 class="box-title"></h3>
               <div class="btn-group pull-right">
-            
+
               </div>
             </div>
             <!-- /.box-header -->
@@ -45,14 +45,61 @@
                       <td>{{$pre->presupuestosolicitud->solicitudcotizacion->numero_solicitud}}</td>
                       <td>{{ Categoria::categoria_nombre($pre->presupuestosolicitud->categoria_id)}}</td>
                      <td>
+                       @if($pre->presupuestosolicitud->estado==1)
                        <a href="{{ url('cotizaciones/realizarcotizacion/'.$pre->presupuestosolicitud->id) }}" class="btn btn-success btn-xs"><span class="fa fa-outdent"></span></a>
+                       <a onclick="{{ "cambiar(".$pre->proyecto->id.",".$pre->presupuestosolicitud->id.")" }}" class="btn btn-default btn-xs"><span class="fa fa-check"></span></a>
+                     @elseif($pre->presupuestosolicitud->estado==2)
+                       <a href="{{ url('cotizaciones/ver/'.$pre->presupuestosolicitud->id) }}" class="btn btn-success btn-xs"><span class="fa fa-outdent"></span></a>
+                     @elseif($pre->presupuestosolicitud->estado==3)
+                       <a href="{{url('ordencompras/realizarorden/'.$pre->presupuestosolicitud->id)}}">crear</a>
+                     @endif
                      </td>
                     </tr>
-                   
+
                      @endforeach
                 </tbody>
               </table>
+              <script>
+                function cambiar(idp,idps){
+                  alert(idps);
+                  swal({
+                    title: '¿Está seguro de enviar el proyecto a cotizar?',
+                    type: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'si, continuar!'
+                  }).then((result) => {
+                    if (result.value) {
+                      var token = $('meta[name="csrf-token"]').attr('content');
+                      var ruta ="/"+carpeta()+"/public/solicitudcotizaciones/cambiar";
+                      $.ajax({
+                        type: "POST",
+                        dataType: "json",
+                        url: ruta,
+                        headers: {'X-CSRF-TOKEN':token},
+                        data:{idp,idps},
+                        success : function(msj){
+                          console.log(msj);
+                          if(msj.mensaje == "exito"){
+                            window.location.href = "/"+carpeta()+"/public/proyectos";
+                            console.log(msj);
+                            toastr.success('Proyecto listo para cotizar');
+                          }else{
+                            toastr.error('Ocurrió un error');
+                          }
 
+                        },
+                        error: function(error){
+                          toastr.error('Ocurrió un error');
+                          console.log(error);
+                        }
+                      });
+
+                    }
+                  })
+                }
+              </script>
               <div class="pull-right">
 
               </div>

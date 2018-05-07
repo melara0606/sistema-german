@@ -64,7 +64,7 @@ class PresupuestoController extends Controller
                 'mensaje' => 'error'
                 ]);
             }
-            
+
         }
     }
 
@@ -102,9 +102,14 @@ class PresupuestoController extends Controller
         }
     }
 
-    public function getCategorias()
+    public function getCategorias($id)
     {
-        return Categoria::orderby('item','asc')->get();
+      return $categorias = DB::table('categorias')
+                ->whereNotExists(function ($query) use ($id) {
+                     $query->from('presupuestos')
+                        ->whereRaw('presupuestos.categoria_id = categorias.id')
+                        ->whereRaw('presupuestos.proyecto_id ='.$id);
+                    })->get();
     }
 
     public function getCatalogo()
@@ -146,6 +151,7 @@ class PresupuestoController extends Controller
                   }
                   $proyecto = Proyecto::findorFail($request->proyecto_id);
                   $proyecto->pre=true;
+                  $proyecto->estado=2;
                   $proyecto->save();
                   DB::commit();
                   return response()->json([

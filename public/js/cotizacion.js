@@ -108,8 +108,11 @@ $('input[type="radio"]').on('click', function(e) {
 			data:{idcot,idproy},
 
 			success: function(data){
+        console.log(data);
         if(data.mensaje === 'exito'){
           toastr.success('Proveedor seleccionado con éxito');
+          console.log(data);
+          window.location.href = "/"+carpeta()+"/public/solicitudcotizaciones/versolicitudes/"+data.id;
         }else{
           toastr.error('Ha ocurrido un error en la solucitud contacte al administrador');
           console.log(data.mensaje);

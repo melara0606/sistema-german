@@ -1,12 +1,12 @@
 $(document).ready(function (){
 	$("#proyecto").on("change", function(e){
 		var id = (this.value);
-    
+		console.log(id);
 		if(id > 0)
 		{
 			$.get('/'+carpeta()+'/public/ordencompras/cotizaciones/'+ id , function(data){
 			//$("#proveedor").val(data.descripcion);
-			
+
 			$(data).each(function(key, value){
 				$(cuerpo).empty();
 				var total=0.0;
@@ -33,7 +33,7 @@ $(document).ready(function (){
 				$("#pie #total").text("$"+total.toFixed(2));
 				$("#pie #letras").text(NumeroALetras(total.toFixed(2)));
 			});
-		});	
+		});
 		}else{
 			swal(
 			  'Debe seleccionar un proyecto!',
@@ -41,7 +41,7 @@ $(document).ready(function (){
 			  'info'
 			)
 		}
-		
+
 	});
 });
 
@@ -70,7 +70,7 @@ function Decenas(num){
 
   switch(decena)
   {
-    case 1:   
+    case 1:
       switch(unidad)
       {
         case 0: return "DIEZ";

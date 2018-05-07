@@ -19,10 +19,18 @@ class Ordencompra extends Model
     public static function correlativo()
     {
       $numero=Ordencompra::where('created_at','>=',date('Y'.'-1-1'))->where('created_at','<=',date('Y'.'-12-31'))->count();
-      if($numero>0){
-        return intval(($numero+1).date('Y'));
+      if($numero>0 && $numero<10){
+        return intval("00".($numero+1).date('Y'));
       }else{
-        return intval("1".date("Y"));
+        if($numero >=10 && $numero < 100){
+          return intval("0".($numero+1).date('Y'));
+        }else{
+          if($numero<=100){
+            return intval(($numero+1).date('Y'));
+          }else {
+            return intval("1".date("Y"));
+          }
+        }
       }
     }
 }

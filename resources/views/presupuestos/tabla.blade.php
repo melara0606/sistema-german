@@ -10,7 +10,7 @@
       <tbody id="cuerpo"></tbody>
       <tfoot id="pie">
           <tr>
-            <td class="text-left" colspan="5">Total $</td>
+            <td class="text-left" colspan="4">Total $</td>
             <td colspan="1" style="text-align:right;" id="totalEnd">0.00</td>
             <td></td>
           </tr>

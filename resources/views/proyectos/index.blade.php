@@ -56,16 +56,22 @@
                         <div class="btn-group">
                           <a href="{{ url('proyectos/'.$proyecto->id) }}" class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-eye-open"></span></a>
                           @if( $proyecto->estado == 1 )
-                          <a href="{{ url('presupuestos/crear/'.$proyecto->id) }}" class="btn btn-success btn-xs"><span class="fa fa-balance-scale"></span></a>
-                              @if($proyecto->pre==true)
-                                  <button type="button" onclick="{{ "cambiar(".$proyecto->id.")" }}" class="btn btn-default btn-xs"><span class="fa fa-check"></span></button>
-                              @endif
+                            <a href="{{ url('proyectos/'.$proyecto->id.'/edit') }}" class="btn btn-warning btn-xs"><span class="glyphicon glyphicon-edit"></span></a>
+                            <a href="{{ url('presupuestos/crear/'.$proyecto->id) }}" class="btn btn-success btn-xs"><span class="fa fa-balance-scale"></span></a>
+                          @elseif( $proyecto->estado == 2)
+                            <a href="{{ url('presupuestos/crear/'.$proyecto->id) }}" class="btn btn-success btn-xs"><span class="fa fa-balance-scale"></span></a>
+                            <a href="{{ url('proyectos/'.$proyecto->id.'/edit') }}" class="btn btn-warning btn-xs"><span class="glyphicon glyphicon-edit"></span></a>
+                            <button type="button" onclick="{{ "cambiar(".$proyecto->id.")" }}" class="btn btn-default btn-xs"><span class="fa fa-check"></span></button>
                           @elseif( $proyecto->estado == 3)
-                          <a href="{{ url('solicitudcotizaciones/create') }}" class="btn btn-success btn-xs"><span class="glyphicon glyphicon-align-right"></span></a>
-                          @elseif( $proyecto->estado == 4 )
+                                <a href="{{ url('solicitudcotizaciones/create') }}" class="btn btn-success btn-xs"><span class="glyphicon glyphicon-align-right"></span></a>
+                            <a href="{{ url('proyectos/'.$proyecto->id.'/edit') }}" class="btn btn-warning btn-xs"><span class="glyphicon glyphicon-edit"></span></a>
+                          @elseif( $proyecto->estado == 4 || $proyecto->estado==5 )
                             <a href="{{url('solicitudcotizaciones/versolicitudes/'.$proyecto->id)}}">ver</a>
+                          @elseif( $proyecto->estado == 6 )
+                            <a href="{{url('solicitudcotizaciones/versolicitudes/'.$proyecto->id)}}">ver orden</a>
+                          @elseif( $proyecto->estado == 8)
+                            <a href="{{url('inventarios?proyecto='.$proyecto->id)}}">Ver inventario</a>
                           @endif
-                          <a href="{{ url('proyectos/'.$proyecto->id.'/edit') }}" class="btn btn-warning btn-xs"><span class="glyphicon glyphicon-edit"></span></a>
                           <button class="btn btn-danger btn-xs" type="button" onclick={{ "baja(".$proyecto->id.",'proyectos')" }}><span class="glyphicon glyphicon-trash"></span></button>
                         </div>
                         {{ Form::close()}}
@@ -81,7 +87,7 @@
                         </div>
                         {{ Form::close()}}
                       @endif
-                      @if( $estado == 2 )
+                      @if( $estado == 9 )
                         {{ Form::open(['method' => 'POST', 'id' => 'alta', 'class' => 'form-horizontal'])}}
                           <button class="btn btn-success btn-xs" type="button" onclick={{ "alta(".$proyecto->id.",'proyectos')" }}><span class="glyphicon glyphicon-trash"></span></button>
                         {{ Form::close()}}
@@ -119,13 +125,13 @@
                           }else{
                             toastr.error('Ocurrió un error');
                           }
-                          
+
                         },
                         error: function(){
                           toastr.error('Ocurrió un error');
                         }
                       });
-                          
+
                     }
                   })
                 }

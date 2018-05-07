@@ -32,8 +32,8 @@ $(document).ready(function(){
 
 	$("#categoria").change(function(){
 		var idc = ( this.value );
-		//var idp = $("#proyecto").val();
-		$.get('/'+carpeta()+'/public/solicitudcotizaciones/getpresupuesto/'+idc , function(data){
+		var idp = $("#proyecto").val();
+		$.get('/'+carpeta()+'/public/solicitudcotizaciones/getpresupuesto/'+idc+'/'+idp , function(data){
 			//console.log(data);
 			$(cuerpo).empty();
 		 console.log(data);

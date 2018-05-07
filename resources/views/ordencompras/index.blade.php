@@ -17,7 +17,6 @@
     <div class="box-header">
       <h3 class="box-title">Listado</h3>
       <div class="btn-group pull-right">
-        <a href="{{ url('/ordencompras/create') }}" class="btn btn-success"><span class="glyphicon glyphicon-plus-sign"></span></a>
         <a href="{{ url('/ordencompras?estado=1') }}" class="btn btn-primary">Pendientes</a>
         <a href="{{ url('/ordencompras?estado=3') }}" class="btn btn-primary">Recibido</a>
       </div>
@@ -46,17 +45,32 @@
               <td>{{$orden->adminorden}}</td>
               <td>{{$orden->cotizacion->proveedor->nombre}}</td>
               <td>{{$orden->cotizacion->presupuestosolicitud->presupuesto->proyecto->nombre}}</td>
-              @if($estado == 1 || $estado=="")
+              @if($estado == "")
+                @if($orden->estado==1)
+                  <td>Pendiente</td>
+                  <td>
+                    <a class="btn btn-primary btn-xs" href="{{url('ordencompras/'.$orden->id)}}"><span class="glyphicon glyphicon-eye-open"></span></a>
+                    <a class="btn btn-primary btn-xs" href="{{url('ordencompras/verificar/'.$orden->id)}}"><span class="glyphicon glyphicon-eye-open"></span></a>
+                  </td>
+                @elseif ($orden->estado==2)
+                  <td>Inactivo</td>
+                  <td></td>
+                @else
+                  <td>Finalizado</td>
+                  <td>
+                    <a class="btn btn-primary btn-xs" href="{{url('ordencompras/'.$orden->id)}}"><span class="glyphicon glyphicon-eye-open"></span></a>
+                  </td>
+                @endif
+            @elseif($estado == 1)
                 <td>Pendiente</td>
                 <td>
                   <a class="btn btn-primary btn-xs" href="{{url('ordencompras/'.$orden->id)}}"><span class="glyphicon glyphicon-eye-open"></span></a>
+                  <a class="btn btn-primary btn-xs" href="{{url('ordencompras/verificar/'.$orden->id)}}"><span class="glyphicon glyphicon-eye-open"></span></a>
                 </td>
-              @endif
-              @if($estado == 2)
+              @elseif($estado == 2)
                 <td>Inactivo</td>
                 <td></td>
-              @endif
-              @if($estado == 3)
+              @elseif($estado == 3)
                 <td>Finalizado</td>
                 <td></td>
               @endif
