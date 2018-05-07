@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests\CargoRequest;
 use App\Cargo;
+use Carbon\Carbon;
+use App\Bitacora;
 
 class CargoController extends Controller
 {
@@ -78,9 +80,13 @@ class CargoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(CargoRequest $request, $id)
     {
-        //
+        $cargo = Cargo::find($id);
+        $cargo->fill($request->All());
+        $cargo->save();
+        bitacora('Modificó Cargo');
+        return redirect('/cargos')->with('mensaje','Registro modificado');
     }
 
     /**
@@ -92,5 +98,30 @@ class CargoController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function baja($cadena)
+    {
+        $datos = explode("+", $cadena);
+        $id = $datos[0];
+        $motivo = $datos[1];
+
+        $cargo = Cargo::find($id);
+        $cargo->estado = 2;
+        $cargo->motivo = $motivo;
+        $cargo->save();
+        bitacora('Dió de baja cargo');
+        return redirect('/cargos')->with('mensaje','Cargo dado de baja');
+    }
+
+    public function alta($id)
+    {
+        $cargo = Cargo::find($id);
+        $cargo->estado = 1;
+        $cargo->motivo = "";
+        $cargo->save();
+        Bitacora:bitacora('Dió de alta un cargo');
+
+        return redirect('/cargos')->with('mensaje', 'Cargo dado de alta');
     }
 }

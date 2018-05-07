@@ -12,4 +12,9 @@ class Cargo extends Model
     {
     	$this->hasMany('App\Contrato');
     }
+
+    public function contratoproyecto()
+    {
+    	$this->hasMany('App\Contratoproyecto');
+    }
 }

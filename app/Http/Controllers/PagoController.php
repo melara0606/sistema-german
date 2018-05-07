@@ -28,6 +28,22 @@ class PagoController extends Controller
         return view('pagos.index', compact('pagos'));
     }
 
+    public function guardarCuenta(Request $request)
+    {
+        if($request->ajax())
+        {
+            Cuentaproy::create($request->All());
+            return response()->json([
+                'mensaje' => 'Registro creado']
+            );
+        }
+    }
+
+    public function listarCuentas()
+    {
+        return Cuenta::where('estado',1)->get();
+    }
+
     /**
      * Show the form for creating a new resource.
      *

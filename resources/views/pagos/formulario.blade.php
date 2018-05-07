@@ -15,6 +15,21 @@
 	</div>
 </div>
 
+<div class="form-group">
+    <label for="" class="col-md-4 control-label">Tipo pago</label>
+    <div class="col-md-6">
+        <select name="tipopago_id" id="tipopago" class="form-control">
+            <option value="">Seleccione un pago</option>
+            @foreach($pagos as $pago)
+            <option value="{{$pago->id}}">{{$pago->nombre}}</option>
+            @endforeach
+        </select>
+    </div>
+    <div class="col-md-2">
+        <button class="btn btn-default" type="button" data-toggle="modal" data-target="#formpago"><span class="glyphicon glyphicon-plus"></span></button>
+    </div>
+</div>
+
 <div class="form-group{{ $errors->has('cuenta_id') ? ' has-error' : '' }}">
 	<label for="" class="col-md-4 control-label">Seleccione cuenta</label>
 	<div class="col-md-6">
@@ -57,4 +72,23 @@
 		</span>
 		@endif
 	</div>
+</div>
+
+<div class="modal fade" data-backdrop="static" data-keyboard="false" id="formcargo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="row">
+            <div class="panel panel-primary">
+                <div class="panel-heading">Registro de Cargo
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                </div>
+                <div class="panel-body">
+                    @include('cargos.formulario')
+                </div>
+                <div class="panel-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                    <button type="button" id="guardarcargo" data-dismiss="modal" class="btn btn-success">Agregar</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

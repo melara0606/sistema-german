@@ -22,7 +22,8 @@ class PlanillaController extends Controller
      
     public function index()
     {
-        //
+        $planillas = Planilla::all();
+        return view('planillas.index',compact('planillas'));
     }
 
     /**

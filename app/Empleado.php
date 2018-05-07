@@ -36,4 +36,9 @@ class Empleado extends Model
     {
       return $this->hasMany('App\Prestamo');
     }
+
+    public function contratoproyecto()
+    {
+        return $this->hasMany('App\Contratoproyecto');
+    }
 }
