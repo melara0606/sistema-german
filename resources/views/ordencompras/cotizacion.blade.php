@@ -4,20 +4,39 @@
             <tr>
                 <th width="5%">N°</th>
                 <th width="40%">Descripcion</th>
+                <th width="10%">Marca</th>
                 <th width="10%">Unidad de medida</th>
-                <th width="15%">Cantidad</th>
-                <th width="15%">Precio Unitario
-                <th width="15%">Subtotal</th> 
+                <th width="10%">Cantidad</th>
+                <th width="10%">Precio Unitario
+                <th width="15%">Subtotal</th>
             </tr>
+            @php
+              $total=0.0;
+              $correlativo=0;
+            @endphp
         </thead>
         <tbody id="cuerpo">
-
+          @foreach($cotizacion->detallecotizacion as $detalle)
+            @php
+              $correlativo++;
+              $total=$total+($detalle->cantidad*$detalle->precio_unitario)
+            @endphp
+            <tr>
+              <td>{{$correlativo}}</td>
+              <td>{{$detalle->descripcion}}</td>
+              <td>{{$detalle->marca}}</td>
+              <td>{{$detalle->unidad_medida}}</td>
+              <td>{{$detalle->cantidad}}</td>
+              <td>${{number_format($detalle->precio_unitario,2)}}</td>
+              <td>${{number_format($detalle->cantidad*$detalle->precio_unitario,2)}}</td>
+            </tr>
+          @endforeach
         </tbody>
         <tfoot id="pie">
             <tr>
               <th>Total en letras: </th>
-              <th id="letras" colspan="4"></th>
-              <th id="total"></th> 
+              <th id="letras" colspan="5">{{numaletras($total)}}</th>
+              <th id="total">${{number_format($total,2)}}</th>
             </tr>
         </tfoot>
     </table>

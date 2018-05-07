@@ -2,12 +2,7 @@
     <label for="nombre" class="col-md-4 control-label">Nombre del proyecto o proceso</label>
 
     <div class="col-md-6">
-        <select id="proyecto" class="form-control chosen-select">
-            <option value="">Seleccione un proyecto</option>
-           @foreach($proyectos as $proyecto)
-                <option value="{{$proyecto->id}}">{{$proyecto->nombre}}</option>
-           @endforeach
-        </select>
+        {!!Form::text('',$cotizacion->presupuestosolicitud->presupuesto->proyecto->nombre,['class' => 'form-control','readonly'])!!}
     </div>
 </div>
 
@@ -15,8 +10,8 @@
     <label for="nombre" class="col-md-4 control-label">Nombre del proveedor</label>
 
     <div class="col-md-6">
-        {!!Form::text('',null,['class'=>'form-control','id'=>'proveedor','autofocus','readonly'])!!}
-        {!!Form::hidden('cotizacion_id',null,['class'=>'form-control','id'=>'cotizacion_id','autofocus','readonly'])!!}
+        {!!Form::text('',$cotizacion->proveedor->nombre,['class'=>'form-control','id'=>'proveedor','autofocus','readonly'])!!}
+        {!!Form::hidden('cotizacion_id',$cotizacion->id,['class'=>'form-control','id'=>'cotizacion_id','autofocus','readonly'])!!}
     </div>
 </div>
 
@@ -24,7 +19,7 @@
     <label for="nombre" class="col-md-4 control-label">NIT del proveedor</label>
 
     <div class="col-md-6">
-        {!!Form::text('',null,['class'=>'form-control','id'=>'nit','autofocus','readonly'])!!}
+        {!!Form::text('',$cotizacion->proveedor->nit,['class'=>'form-control','id'=>'nit','autofocus','readonly'])!!}
     </div>
 </div>
 
@@ -32,7 +27,7 @@
     <label for="nombre" class="col-md-4 control-label">Condiciones de pago</label>
 
     <div class="col-md-6">
-        {!!Form::text('',null,['class'=>'form-control','id'=>'pago','autofocus','readonly'])!!}
+        {!!Form::text('',$cotizacion->descripcion,['class'=>'form-control','id'=>'pago','autofocus','readonly'])!!}
     </div>
 </div>
 

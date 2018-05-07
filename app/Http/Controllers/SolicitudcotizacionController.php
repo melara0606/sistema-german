@@ -5,12 +5,14 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Solicitudcotizacion;
 use App\Bitacora;
+use App\Categoria;
 use App\Http\Requests\SolicitudcotizacionRequest;
 use App\Formapago;
 use App\Proyecto;
 use App\Unidad;
 use App\Presupuesto;
 use App\Presupuestodetalle;
+use App\PresupuestoSolicitud;
 use DB;
 
 class SolicitudcotizacionController extends Controller
@@ -27,25 +29,65 @@ class SolicitudcotizacionController extends Controller
 
     public function index(Request $request)
     {
+      //dd(Solicitudcotizacion::correlativo());
+      //dd(Categoria::categoria_nombre(1));
       $estado = $request->get('estado');
       if($estado=="" || $estado==1){
         $estado=1;
-        $solicitudes = Solicitudcotizacion::with('presupuesto','formapago')->where('estado',$estado)->get();
+        $solicitudes = PresupuestoSolicitud::with('presupuesto')->where('estado',$estado)->get();
         return view('solicitudcotizaciones.index',compact('solicitudes','estado'));
       }else if($estado==2){
-        $solicitudes = Solicitudcotizacion::with('presupuesto','formapago')->where('estado',$estado)->get();
+        $solicitudes = PresupuestoSolicitud::with('presupuesto')->where('estado',$estado)->get();
         return view('solicitudcotizaciones.index',compact('solicitudes','estado'));
       }else if($estado==3){
-        $solicitudes = Solicitudcotizacion::with('presupuesto','formapago')->where('estado',$estado)->get();
+        $solicitudes = PresupuestoSolicitud::with('presupuesto')->where('estado',$estado)->get();
         return view('solicitudcotizaciones.index',compact('solicitudes','estado'));
       }
     }
 
-    public function getPresupuesto($id)
+    public function getPresupuesto($idc,$idp)
     {
-        $presupuesto = Presupuesto::where('proyecto_id',$id)->with('presupuestodetalle')->first();
+        $proyecto=Proyecto::findorFail($idp);
+        $presupuesto = Presupuesto::where('proyecto_id',$proyecto->id)->where('categoria_id',$idc)->with('presupuestodetalle')->first();
         return Presupuestodetalle::where('presupuesto_id',$presupuesto->id)->with('catalogo')->get();
     }
+
+    public function getCategorias($id)
+    {
+      $proyecto=Proyecto::findorFail($id);
+      return $presupuesto=Presupuesto::where('proyecto_id',$proyecto->id)->where('estado',1)->with('categoria')->get();
+    }
+
+    public function versolicitudes($id)
+    {
+      $proyecto=Proyecto::findorFail($id);
+      $presupuesto=Presupuesto::where('proyecto_id',$proyecto->id)->get();
+        return view('solicitudcotizaciones.porproyecto',compact('proyecto'));
+    }
+
+
+      public function cambiar(Request $request)
+      {
+          if($request->ajax()){
+              try{
+                  $proyecto=Proyecto::findorFail($request->idp);
+                  $proyecto->estado=5;
+                  $proyecto->save();
+
+                  $solicitud=PresupuestoSolicitud::findorFail($request->idps);
+                  $solicitud->estado=2;
+                  $solicitud->save();
+                  return response()->json([
+                      'mensaje' => 'exito'
+                  ]);
+              }catch(\Exception $e){
+                  return response()->json([
+                  'mensaje' => $e
+                  ]);
+              }
+
+          }
+      }
 
     /**
      * Show the form for creating a new resource.
@@ -54,10 +96,10 @@ class SolicitudcotizacionController extends Controller
      */
     public function create()
     {
-      $proyectos = Proyecto::where('estado',1)->where('presupuesto',true)->get();
+      $proyectos = Proyecto::where('estado',3)->where('pre',true)->get();
       $formapagos = Formapago::all();
       $unidades = Unidad::all();
-        return view('solicitudcotizaciones.create',compact('formapagos','proyectos','unidades'));
+      return view('solicitudcotizaciones.create',compact('formapagos','proyectos','unidades'));
     }
 
     /**
@@ -71,25 +113,40 @@ class SolicitudcotizacionController extends Controller
         //dd($request->All());
         DB::beginTransaction();
         try{
-          $presupuesto = Presupuesto::where('proyecto_id',$request->proyecto)->first();
-          Solicitudcotizacion::create([
+          $presupuesto = Presupuesto::where('categoria_id',$request->categoria)->where('proyecto_id',$request->proyecto)->first();
+          $solicitud=Solicitudcotizacion::create([
               "formapago_id" => $request->formapago,
               "unidad" => $request->unidad,
               "encargado" => $request->encargado,
               "cargo_encargado" => $request->cargo,
-              "presupuesto_id" => $presupuesto->id,
               "lugar_entrega" => $request->lugar_entrega,
-              "datos_contenido" => $request->datos_contenido,
+              "numero_solicitud" => Solicitudcotizacion::correlativo(),
+              'fecha_limite' => invertir_fecha($request->fecha_limite),
+              'tiempo_entrega' => $request->tiempo_entrega,
           ]);
 
-          $proyecto=Proyecto::findorFail($request->proyecto);
-          $proyecto->estado=3;
-          $proyecto->save();
+          $presupuesto->estado=2;
+          $presupuesto->save();
+
+
+          $pre=PresupuestoSolicitud::create([
+            'solicitudcotizacion_id' => $solicitud->id,
+            'presupuesto_id' => $presupuesto->id,
+            'categoria_id' => $request->categoria,
+          ]);
+
+          $presuu=Presupuesto::where('estado',1)->count();
+          if($presuu==0){
+            $proyecto=Proyecto::findorFail($request->proyecto);
+            $proyecto->estado=4;
+            $proyecto->save();
+          }
           DB::commit();
-          return redirect('solicitudcotizaciones')->with('mensaje','Solicitud registrada con éxito');
+          return redirect('solicitudcotizaciones/versolicitudes/'.$proyecto->id)->with('mensaje','Solicitud registrada con éxito');
         }catch(\Exception $e){
+          dd($e);
           DB::rollback();
-          return redirect('solicitudcotizaciones/create')->with('error','Solicitud no se pudo registrar');
+          return redirect('solicitudcotizaciones/create')->with('error','Ocurrió un error '.$e->getMessage());
         }
     }
 
@@ -101,9 +158,8 @@ class SolicitudcotizacionController extends Controller
      */
     public function show($id)
     {
-        $solicitud=Solicitudcotizacion::findorFail($id);
-        $presupuesto = Presupuesto::where('proyecto_id',$solicitud->presupuesto->proyecto->id)->with('presupuestodetalle')->first();
-        //dd($presupuesto);
+      $solicitud=PresupuestoSolicitud::findorFail($id);
+      $presupuesto = Presupuesto::where('categoria_id', $solicitud->categoria_id)->firstorFail();
         return view('solicitudcotizaciones.show',compact('solicitud','presupuesto'));
     }
 

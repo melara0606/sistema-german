@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class PresupuestoRequest extends FormRequest
+class CatalogoRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,10 +24,8 @@ class PresupuestoRequest extends FormRequest
     public function rules()
     {
         return [
-            'proyecto_id' => 'required',
-            'categoria_id' => 'required',
-            'presupuestos' => 'required',
-            'total' => 'required|numeric|min:1'
+            'nombre' => 'required|unique:catalogos',
+            'unidad_medida' => 'required',
         ];
     }
 }

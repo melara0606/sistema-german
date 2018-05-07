@@ -29,9 +29,9 @@ class UpdateSolicitudcotizacionsTableForeign extends Migration
     public function down()
     {
         Schema::table('solicitudcotizacions', function (Blueprint $table) {
-            $table->bigInteger('proyecto_id')->unsigned();
+            $table->bigInteger('proyecto_id')->nullable();
             $table->foreign('proyecto_id')->references('id')->on('proyectos');
-            $table->dropForeign('cotizacions_presupuesto_id_foreign');
+            $table->dropForeign('solicitudcotizacions_presupuesto_id_foreign');
             $table->dropColumn('presupuesto_id');
         });
     }

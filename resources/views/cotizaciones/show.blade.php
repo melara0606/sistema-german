@@ -21,7 +21,7 @@
                   <table class="table">
                     <tr>
                       <th>Nombre del proyecto</th>
-                      <th>{{$cotizacion->presupuesto->proyecto->nombre}}</th>
+                      <th>{{$cotizacion->presupuestosolicitud->presupuesto->proyecto->nombre}}</th>
                     </tr>
                     <tr>
                       <th>Nombre del proveedor</th>

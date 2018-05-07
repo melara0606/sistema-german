@@ -42,7 +42,7 @@
                   <tr>
                     <?php $contador++ ?>
                     <td>{{ $contador }}</td>
-                    <td>{{ $cotizacion->presupuesto->proyecto->nombre }}</td>
+                    <td>{{ $cotizacion->presupuestosolicitud->presupuesto->proyecto->nombre }}</td>
                     <td>{{ $cotizacion->proveedor->nombre }}</td>
                     <td>{{ $cotizacion->descripcion }}</td>
                     <td>

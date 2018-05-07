@@ -30,12 +30,12 @@
                   processing: "Búsqueda en curso...",
                   search: "Búscar:",
                   lengthMenu: "Mostrar _MENU_ Elementos",
-                  info: "Mostrando _START_ de _END_ de un total de _TOTAL_ Elementos",
-                  infoEmpty: "Visializando 0 de 0 de un total de 0 elementos",
+                  info: "Mostrando _START_ de _END_ de un total de _TOTAL_ elementos",
+                  infoEmpty: "Visualizando 0 de 0 de un total de 0 elementos",
                   infoFiltered: "(Filtrado de _MAX_ elementos en total)",
                   infoPostFix: "",
                   loadingRecords: "Carga de datos en proceso..",
-                  zeroRecords: "Elementos no encontrado",
+                  zeroRecords: "Elementos no encontrados",
                   emptyTable: "La tabla no contiene datos",
                   paginate: {
                       first: "Primero",
@@ -47,7 +47,7 @@
               "paging": true,
               "lengthChange": true,
               "searching": true,
-              "ordering": true,
+              "ordering": false,
               "info": true,
               "autoWidth": false
           });
@@ -390,6 +390,15 @@
              maxDate: "-18Y",
 				     format: 'dd-mm-yyyy'
 		         });
+
+             $('.unafecha').datepicker({
+         	     selectOtherMonths: true,
+                changeMonth: true,
+                changeYear: true,
+                dateFormat: 'dd-mm-yy',
+                minDate: start,
+   				     format: 'dd-mm-yyyy'
+   		         });
 
 
              $("#fecha_inicio").datepicker({

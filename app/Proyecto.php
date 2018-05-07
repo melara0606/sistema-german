@@ -31,9 +31,14 @@ class Proyecto extends Model
 
     }
 
+    public function presupuestoinventario()
+    {
+      return $this->hasMany('App\PresupuestoInventario');
+    }
+
     public function presupuesto()
     {
-      return $this->hasOne('App\Presupuesto');
+      return $this->hasMany('App\Presupuesto');
     }
 
     public function fondo()

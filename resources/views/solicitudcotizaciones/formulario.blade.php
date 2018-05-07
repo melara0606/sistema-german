@@ -47,6 +47,15 @@
                     </div>
                 </div>
 
+                <div class="form-group">
+                    <label for="" class="col-md-4 control-label">Seleccione una categoria: </label>
+                    <div class="col-md-6">
+                        <select name="categoria" id="categoria" class="chosen-select-width">
+                          <option value="">Seleccione una categoría</option>
+                        </select>
+                    </div>
+                </div>
+
                 <div class="form-group{{ $errors->has('lugar_entrega') ? ' has-error' : '' }}">
                     <label for="lugar_entrega" class="col-md-4 control-label">Lugar de entrega</label>
 
@@ -55,19 +64,28 @@
                     </div>
                 </div>
 
-                <div class="form-group{{ $errors->has('datos_contenido') ? ' has-error' : '' }}">
-                    <label for="datos_contenido" class="col-md-4 control-label">Datos del contenido</label>
-
-                    <div class="col-md-6">
-                        {!!Form::text('datos_contenido',null,['class'=>'form-control','id'=>'datos_contenido','autofocus'])!!}
-                    </div>
+                <div class="form-group">
+                  <label for="fecha_limite" class="col-md-4 control-label">Fecha limite para cotizar</label>
+                  <div class="col-md-6">
+                    {!!Form::text('fecha_limite',null,['class' => 'form-control unafecha'])!!}
+                  </div>
                 </div>
+
+                <div class="form-group">
+                  <label for="tiempo_entrega" class="col-md-4 control-label">Tiempo de entrega</label>
+                  <div class="col-md-6">
+                    {!!Form::text('tiempo_entrega',null,['class' => 'form-control'])!!}
+                  </div>
+                </div>
+
                 <table class="table table-striped" id="tabla" display="block;">
                     <thead>
                         <tr>
-                            <th width="78%">Descripción</th>
-                            <th width="10%">Unidad de medida</th>
-                            <th width="10%">Cantidad</th>
+                            <th width="60%">DESCRIPCIÓN</th>
+                            <th width="10%"><center>UNIDAD DE MEDIDA</center></th>
+                            <th width="10%"><center>CANTIDAD</center></th>
+                            <th width="10%"><center>PRECIO UNITARIO</center></th>
+                            <th width="10%">SUBTOTAL</th>
                         </tr>
                     </thead>
                     <tbody id="cuerpo"></tbody>

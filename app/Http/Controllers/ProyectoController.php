@@ -94,6 +94,12 @@ class ProyectoController extends Controller
 
     public function getMontos($id)
     {
+      /*return $categorias = DB::table('fondocats')
+                ->whereExists(function ($query) use ($id) {
+                     $query->from('fondos')
+                        ->whereRaw('fondos.fondocat_id = fondocats.id')
+                        ->whereRaw('fondos.proyecto_id ='.$id);
+                    })->get();*/
       return Fondo::where('proyecto_id',$id)->with('fondocat','proyecto')->get();
     }
 
@@ -232,7 +238,6 @@ class ProyectoController extends Controller
     {
       try{
         $proyecto = Proyecto::findorFail($id);
-        //$proyecto->fill($request->All());
         $proyecto->nombre=$request->nombre;
         $proyecto->monto=$request->monto;
         $proyecto->motivo=$request->motivo;
@@ -267,7 +272,7 @@ class ProyectoController extends Controller
         $motivo=$datos[1];
         $proyecto = Proyecto::find($id);
         $proyecto->estadoanterior=$proyecto->estado;
-        $proyecto->estado=2;
+        $proyecto->estado=10;
         $proyecto->motivobaja=$motivo;
         $proyecto->fechabaja=date('Y-m-d');
         $proyecto->save();
@@ -281,6 +286,7 @@ class ProyectoController extends Controller
 
     public function alta($id)
     {
+      try{
         $proyecto = Proyecto::find($id);
         $proyecto->estado=$proyecto->estadoanterior;
         $proyecto->motivobaja=null;
@@ -289,5 +295,9 @@ class ProyectoController extends Controller
         $proyecto->save();
         Bitacora::bitacora('Dió de alta a un proyecto');
         return redirect('/proyectos')->with('mensaje','Proyecto dado de alta');
+      }catch(\Exception $e){
+        return redirect('/proyectos')->with('error','Ocurrió un error, contacte al administrador');
+      }
+
     }
 }

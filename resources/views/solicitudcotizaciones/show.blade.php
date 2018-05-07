@@ -25,7 +25,7 @@ Ver detalle de la solicitud
                     </tr>
                     <tr>
                       <th>Forma de pago</th>
-                      <th>{{$solicitud->formapago->nombre}}</th>
+                      <th>{{$solicitud->solicitudcotizacion->formapago->nombre}}</th>
                     </tr>
                     <tr>
                       <th>Unidad solicitante</th>
@@ -57,7 +57,7 @@ Ver detalle de la solicitud
                             <tbody>
                               @foreach($presupuesto->presupuestodetalle as $detalle)
                               <tr>
-                                <td>{{$detalle->catalogo->categoria->item}}</td>
+                                <td>{{$presupuesto->categoria->item}} {{$presupuesto->categoria->nombre_categoria}}</td>
                                 <td>{{strtoupper($detalle->catalogo->nombre)}}</td>
                                 <td>{{$detalle->cantidad}}</td>
                                 <td>{{strtoupper($detalle->catalogo->unidad_medida)}}</td>

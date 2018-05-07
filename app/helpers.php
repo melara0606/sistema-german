@@ -94,19 +94,31 @@ function proyecto_estado($estado)
             return 'Aprobado';
             break;
         case '2':
-            return 'Inactivo';
+            return 'Realizando el presupuesto';
             break;
         case '3':
             return 'En proceso de cotización';
                 break;
         case '4':
-            return 'En proceso de adjudicación';
+            return 'Recibiendo cotizaciones';
             break;
         case '5':
-            return 'Inconcluso';
+            return 'En proceso de adjudicación';
             break;
 				case '6':
-						return 'En ejecución';
+						return 'En proceso de emisión de orden de compra';
+						break;
+				case '7':
+						return 'Pendiente de recibir materiales';
+						break;
+        case '8':
+            return 'En marcha';
+            break;
+        case '9':
+            return 'Inconcluso';
+            break;
+				case '10':
+						return 'Inactivo';
 						break;
         default:
 						return 'Sin clasificar';
@@ -121,19 +133,31 @@ function estilo_proyecto($estado)
 					return 'primary';
 					break;
 			case '2':
-					return 'danger';
+					return 'warning';
 					break;
 			case '3':
 					return 'warning';
-							break;
+					break;
 			case '4':
 					return 'warning';
 					break;
 			case '5':
-					return 'danger';
+					return 'warning';
 					break;
 			case '6':
 					return 'success';
+					break;
+			case '7':
+					return 'primary';
+					break;
+			case '8':
+					return 'success';
+					break;
+			case '9':
+					return 'danger';
+					break;
+			case '10':
+					return 'danger';
 					break;
 			default:
 					return 'default';
@@ -437,16 +461,16 @@ function numaletras($xcifra)
                     }
 
 					 if ($xcifra == 2 ) {
-					    $xcadena.= " DOLARES EXACTOS " ; //
+					    $xcadena.= " 00/100 " ; //
 //						return 0;
                     }
 
                     if ($xcifra > 2) {
 						if($xdecimales=="00"){
 						//$xdecimales1="CERO";
-					    $xcadena.= " DOLARES EXACTOS" ; //
+					    $xcadena.= " 00/100 DÓLARES" ; //
 						}else{
-						$xcadena.= " DOLARES CON $xdecimales1 CENTAVOS" ; //
+						$xcadena.= " $xdecimales/100 DÓLARES" ; //
 						}
 //						return 0;
                     }

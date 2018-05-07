@@ -8,8 +8,15 @@ class Categoria extends Model
 {
     protected $guarded = [];
 
-    public function catalogo()
+    public function Presupuestodetalle()
     {
-    	return $this->hasMany('App\Catalogo')->orderBy('id');
+    	return $this->hasMany('App\Presupuesto');
+    }
+
+    public static function categoria_nombre($id)
+    {
+      $categoria=Categoria::findorFail($id);
+      $nombre = $categoria->item." ".$categoria->nombre_categoria;
+      return $nombre;
     }
 }

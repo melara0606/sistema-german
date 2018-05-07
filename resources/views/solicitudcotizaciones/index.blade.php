@@ -1,3 +1,6 @@
+@php
+  use App\Categoria;
+@endphp
 @extends('layouts.app')
 
 @section('migasdepan')
@@ -31,7 +34,8 @@
                   <th>Proyecto o proceso</th>
                   <th>Forma de pago</th>
                   <th>Lugar de entrega</th>
-                  <th>Datos del contenido</th>
+                  <th>N° de solicitud</th>
+                  <th>Categoria</th>
                   <th>Estado</th>
                   <th>Accion</th>
                   <?php $contador=0; ?>
@@ -42,9 +46,10 @@
                     <?php $contador++; ?>
                     <td>{{ $contador }}</td>
                     <td>{{ $solicitud->presupuesto->proyecto->nombre}}</td>
-                    <td>{{ $solicitud->formapago->nombre }}</td>
-                    <td>{{ $solicitud->lugar_entrega }}</td>
-                    <td>{{ $solicitud->datos_contenido }}</td>
+                    <td>{{ $solicitud->solicitudcotizacion->formapago->nombre }}</td>
+                    <td>{{ $solicitud->solicitudcotizacion->lugar_entrega }}</td>
+                    <td>{{ $solicitud->solicitudcotizacion->numero_solicitud }}</td>
+                    <td>{{ Categoria::categoria_nombre($solicitud->categoria_id)}}</td>
                       @if($estado == "" || $estado == 1 )
                         <td>
                         <label for="" class="label-warning">Pendiente</label>
@@ -53,7 +58,7 @@
                         <div class="btn-group">
                           <a href="{{ url('solicitudcotizaciones/'.$solicitud->id) }}" class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-eye-open"></span></a>
                           <a href="{{url('solicitudcotizaciones/'.$solicitud->id.'/edit')}}" class="btn btn-warning btn-xs"><span class="glyphicon glyphicon-edit"></span></a>
-                          <a href="{{ url('cotizaciones/create') }}" class="btn btn-success btn-xs"><span class="fa fa-outdent"></span></a>
+                          <a href="{{ url('cotizaciones/realizarcotizacion/'.$solicitud->id) }}" class="btn btn-success btn-xs"><span class="fa fa-outdent"></span></a>
                         </div>
                       </td>
                       @elseif ($estado == 2)
