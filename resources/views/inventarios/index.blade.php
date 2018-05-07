@@ -76,7 +76,7 @@
                     });
 
                     $("#cerrar").on("click", function(e){
-                      $("#canti").val("");
+                      //$("#canti").val("");
                       $("#modaldescuento").modal("hide");
                     });
 
