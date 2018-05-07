@@ -5,7 +5,7 @@
         Proyectos
       </h1>
       <ol class="breadcrumb">
-        <li><a href="{{ url('/empleados') }}"><i class="fa fa-dashboard"></i> Proyectos</a></li>
+        <li><a href="{{ url('/proyectos') }}"><i class="fa fa-dashboard"></i> Proyectos</a></li>
         <li class="active">Inventario del proyecto</li>
       </ol>
 @endsection

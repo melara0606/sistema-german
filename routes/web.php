@@ -95,19 +95,24 @@ Route::post('ordencompras/baja/{id}','OrdencompraController@baja')->name('ordenc
 Route::post('ordencompras/alta/{id}','OrdencompraController@alta')->name('ordencompras.alta');
 Route::get('ordencompras/cotizaciones/{id}','OrdencompraController@getCotizacion');
 Route::get('ordencompras/montos/{id}','OrdencompraController@getMonto');
+Route::get('ordencompras/realizarorden/{id}','OrdencompraController@realizarorden');
+Route::get('ordencompras/verificar/{id}','OrdencompraController@verificar');
 Route::Resource('ordencompras','OrdencompraController');
 
 Route::get('presupuestos/crear/{id}','PresupuestoController@crear');
-Route::get('presupuestos/getcategorias/{item}','PresupuestoController@getCategorias');
+Route::get('presupuestos/getcategorias/{id}','PresupuestoController@getCategorias');
 Route::post('presupuestos/guardarcategoria','PresupuestoController@guardarCategoria');
-Route::get('presupuestos/getcatalogo/{id}','PresupuestoController@getCatalogo');
+Route::get('presupuestos/getcatalogo','PresupuestoController@getCatalogo');
 Route::post('presupuestos/guardardescripcion','PresupuestoController@guardarDescripcion');
+Route::post('presupuestos/cambiar','PresupuestoController@cambiar')->name('presupuestos.cambiar');
 Route::Resource('presupuestos','PresupuestoController');
 
 Route::get('cotizaciones/ver/cuadros','CotizacionController@cuadros');
 Route::get('cotizaciones/ver/{id}', 'CotizacionController@cotizar');
+Route::post('cotizaciones/seleccionar','CotizacionController@seleccionar');
 Route::post('cotizaciones/baja/{id}','CotizacionController@baja')->name('cotizaciones.baja');
 Route::post('cotizaciones/alta/{id}','CotizacionController@alta')->name('cotizaciones.alta');
+Route::get('cotizaciones/realizarcotizacion/{id}','CotizacionController@realizarCotizacion');
 Route::Resource('cotizaciones','CotizacionController');
 
 Route::get('paacs/crear','PaacController@crear');
@@ -123,7 +128,10 @@ Route::Resource('formapagos','FormapagoController');
 
 Route::post('solicitudcotizaciones/baja/{id}','SolicitudcotizacionController@baja')->name('solicitudcotizaciones.baja');
 Route::post('solicitudcotizaciones/alta/{id}','SolicitudcotizacionController@alta')->name('solicitudcotizaciones.alta');
-Route::get('solicitudcotizaciones/getpresupuesto/{id}','SolicitudcotizacionController@getPresupuesto');
+Route::get('solicitudcotizaciones/versolicitudes/{id}','SolicitudcotizacionController@versolicitudes');
+Route::get('solicitudcotizaciones/getcategorias/{id}','SolicitudcotizacionController@getCategorias');
+Route::get('solicitudcotizaciones/getpresupuesto/{id}/{idp}','SolicitudcotizacionController@getPresupuesto');
+Route::post('solicitudcotizaciones/cambiar','SolicitudcotizacionController@cambiar');
 Route::Resource('solicitudcotizaciones','SolicitudcotizacionController');
 
 Route::Resource('requisiciones','RequisicionController');
@@ -132,6 +140,8 @@ Route::Resource('requisiciondetalles','RequisiciondetalleController');
 
 Route::Resource('organizaciones','OrganizacionController');
 Route::Resource('calendarizaciones','CalendarizacionController');
+Route::get('inventarios/getmaterial/{id}','ProyectoInventarioController@getMaterial');
+Route::Resource('inventarios','ProyectoInventarioController');
 
 ////////////////triburario /////////////////////////////////////////////////////////////////////////
 Route::post('contribuyentes/baja/{id}','ContribuyenteController@baja')->name('contribuyentes.baja');
