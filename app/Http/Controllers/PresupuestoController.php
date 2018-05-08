@@ -117,6 +117,11 @@ class PresupuestoController extends Controller
         return Catalogo::orderby('nombre','asc')->get();
     }
 
+    public function getUnidadesMedida()
+    {
+      return \App\UnidadMedida::orderBy('nombre_medida')->get();
+    }
+
     public function crear($id)
     {
       $proyecto = Proyecto::findorFail($id);

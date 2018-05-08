@@ -40,8 +40,9 @@
                                     <tbody id="cuerpo_fondos"></tbody>
                                     <tfoot id="pie_monto">
                                         <tr>
-                                            <td class="text-left" colspan="2">Total $</td>
-                                            <td colspan="2" style="text-align:right;" id="totalEnd">0.00</td>
+                                            <td class="text-left" >Total $</td>
+                                            <td style="text-align:right;" id="totalEnd">0.00</td>
+                                            <td></td>
                                         </tr>
                                     </tfoot>
                                 </table>

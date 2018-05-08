@@ -5,11 +5,11 @@ var monto=0.0;
       var proy=$("#proyecto").val();
       listaritems(proy);
       listarcatalogo();
+      listarunidades();
     var tbMaterial = $("#tbMaterial");
 
      $("#agregaratabla").on("click", function(e) {
     //
-
          e.preventDefault();
              catalogo = $("#catalogo").val() || 0,
              descripcion =$("#catalogo option:selected").text(),
@@ -80,6 +80,10 @@ var monto=0.0;
 
     $("#guardarcatalogo").on("click",function(e){
         guardar_descripcion();
+    });
+
+    $("#guardarunidades").on("click",function(e){
+        guardarunidades();
     });
 
     $(document).on("click", "#delete-btn", function (e) {
@@ -206,6 +210,39 @@ var monto=0.0;
         });
     }
 
+    function guardarunidades(){
+      var unidad = $("#txtnombreunidades").val();
+      var nombre_medida = unidad.toUpperCase();
+      var token = $('meta[name="csrf-token"]').attr('content');
+      var ruta = '/'+carpeta()+'/public/unidadmedidas';
+      $.ajax({
+        url: ruta,
+        headers: {'X-CSRF-TOKEN':token},
+        type:'POST',
+        dataType:'json',
+        data: {nombre_medida},
+        success : function(msj){
+             //console.log(msj.mensaje);
+             if(msj.mensaje === "exito")
+             {
+                 toastr.success('Unidad de medida registrado éxitosamente');
+                 $("#txtnombreunidades").val("");
+                 listarunidades();
+                 $("#txtunidad").trigger('chosen:updated');
+             }else{
+                 toastr.error('Ocurrió un error al guardar');
+             }
+
+         },
+         error: function(data, textStatus, errorThrown){
+             toastr.error('Ha ocurrido un '+textStatus+' en la solucitud');
+             $.each(data.responseJSON.errors, function( key, value ) {
+                 toastr.error(value);
+             });
+         }
+      });
+    }
+
     function listaritems(id)
     {
         $.get('/'+carpeta()+'/public/presupuestos/getcategorias/'+id, function (data){
@@ -243,6 +280,18 @@ var monto=0.0;
                 }
             }
         });
+    }
+
+    function listarunidades(){
+      $.get('/'+carpeta()+'/public/presupuestos/getunidades', function(data){
+        var html_select = '<option value="">Seleccione una unidad de medida</option>';
+        for(var i=0;i<data.length;i++){
+            html_select +='<option value="'+data[i].nombre_medida+'">'+data[i].nombre_medida+'</option>'
+            //console.log(data[i]);
+            $("#txtunidad").html(html_select);
+            $("#txtunidad").trigger('chosen:updated');
+        }
+      });
     }
 
     function guardar_presupuesto(){

@@ -89,7 +89,7 @@ $('#btnAgregar').on("click", function(e){
         $(tbFondos).append(
                  "<tr data-categoria='"+data[i].id+"' data-monto='"+data[i].monto+"'>"+
                      "<td>" + data[i].fondocat.categoria + "</td>" +
-                     "<td>" + data[i].monto + "</td>" +
+                     "<td>" + onFixed(parseFloat(data[i].monto),2) + "</td>" +
                      "<td class='btn-group'><button type='button' id='delete-from-base' class='btn btn-danger btn-xs'><span class='glyphicon glyphicon-trash'></button>" +
                      "<button data-data="+ dataJson +"  type='button' id='edit-form' class='btn btn-primary btn-xs'><span class='glyphicon glyphicon-edit'></button></td>" +
                  "</tr>"

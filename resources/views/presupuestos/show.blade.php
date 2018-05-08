@@ -19,6 +19,7 @@ Ver detalle del presupuesto
                 <div class="panel-heading">Presupuesto </div>
                 <div class="panel-body">
                 <br>
+                <a class="btn btn-success" href="{{url('presupuestodetalles/create/'.$presupuesto->id)}}">agregar</a>
                   <table class="table">
                     <tbody>
                       <tr>
@@ -56,6 +57,7 @@ Ver detalle del presupuesto
                                 <th>Cantidad</th>
                                 <th>Precio unitario</th>
                                 <th>Subtotal</th>
+                                <td></td>
                                 <?php $contador=0; ?>
                               </tr>
                             </thead>
@@ -70,6 +72,14 @@ Ver detalle del presupuesto
                                 <td>{{$detalle->cantidad}}</td>
                                 <td>${{number_format($detalle->preciou,2)}}</td>
                                 <td>${{number_format($detalle->cantidad*$detalle->preciou,2)}}</td>
+                                <td>
+                                    {!! Form::open(['method' => 'DELETE', 'route' => ['presupuestodetalles.destroy', $detalle->id]]) !!}
+                                    <div class="btn-group">
+                                      <a class="btn btn-warning btn-xs" href="{{url('presupuestodetalles/'.$detalle->id.'/edit')}}"><span class="glyphicon glyphicon-edit"></span></a>
+                                      <button type="submit" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span></button>
+                                      </div>
+                                    {{ Form::close() }}
+                                </td>
                               </tr>
                               @endforeach
                             </tbody>
