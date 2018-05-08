@@ -57,6 +57,49 @@
                       <th>{{$proyecto->beneficiarios}}</th>
                     </tr>
                   </table>
+                  <br>
+                  <div class="table-responsive">
+                    <table class="table table-bordered table-striped table-hover table-condensed">
+                      <thead>
+                        <tr>
+                          <th>N°</th>
+                          <th>Descripción</th>
+                          <th>Unidad de medida</th>
+                          <th>Cantidad</th>
+                          <th>Precio unitario</th>
+                          <th>Subtotal</th>
+                          <td></td>
+                          <?php $contador=0; ?>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        @foreach($proyecto->presupuesto as $presupuesto)
+                          <tr>
+                            <td colspan="7">Ítem {{$presupuesto->categoria->item}} {{$presupuesto->categoria->nombre_categoria}}</td>
+                          </tr>
+                          @foreach($presupuesto->presupuestodetalle as $detalle)
+                        <tr>
+                          <?php $contador++; ?>
+                          <td>{{$contador}}</td>
+                          <td>{{$detalle->catalogo->nombre}}</td>
+                          <td>{{$detalle->catalogo->unidad_medida}}</td>
+                          <td>{{$detalle->cantidad}}</td>
+                          <td>${{number_format($detalle->preciou,2)}}</td>
+                          <td>${{number_format($detalle->cantidad*$detalle->preciou,2)}}</td>
+                          <td>
+                              {!! Form::open(['method' => 'DELETE', 'route' => ['presupuestodetalles.destroy', $detalle->id]]) !!}
+                              <div class="btn-group">
+                                <a class="btn btn-warning btn-xs" href="{{url('presupuestodetalles/'.$detalle->id.'/edit')}}"><span class="glyphicon glyphicon-edit"></span></a>
+                                <button type="submit" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span></button>
+                                </div>
+                              {{ Form::close() }}
+                          </td>
+                        </tr>
+                          @endforeach
+                        @endforeach
+                      </tbody>
+                    </table>
+                  </div>
                       <a href="{{ url('proyectos/'.$proyecto->id.'/edit') }}" class="btn btn-warning"><span class="glyphicon glyphicon-edit"></span></a>
                 </div>
             </div>

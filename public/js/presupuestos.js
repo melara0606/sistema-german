@@ -15,7 +15,7 @@ var monto=0.0;
              descripcion =$("#catalogo option:selected").text(),
              cantidad  = $("#cantidad").val() || 0,
              unidad = $("#catalogo option:selected").attr('data-unidad'),
-             monto = $("#proyecto option:selected").attr('data-monto'),
+             monto = $("#monto").val(),
              existe = $("#catalogo option:selected");
              precio = $("#precio").val() || 0;
 

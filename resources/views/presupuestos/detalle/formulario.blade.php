@@ -4,6 +4,8 @@
 
         {!!Form::text('nombpro',$presupuesto->proyecto->nombre,['class' => 'form-control','readonly'])!!}
         {!! Form::hidden('',$presupuesto->id,['id'=>'presuid']) !!}
+        {!! Form::hidden('',$proyecto->monto,['id' => 'monto']) !!}
+        
     </div>
 </div>
 

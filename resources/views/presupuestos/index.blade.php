@@ -6,6 +6,7 @@
       </h1>
       <ol class="breadcrumb">
         <li><a href="{{ url('/home') }}"><i class="glyphicon glyphicon-home"></i> Inicio</a></li>
+        <li><a href="{{ url('/proyectos') }}"><i class="fa fa-industry"></i> Proyectos</a></li>
         <li class="active">Presupuestos</li>
       </ol>
 @endsection
@@ -29,6 +30,7 @@
                   <th>N°</th>
                   <th>Año</th>
                   <th>Proyecto</th>
+                  <th>Ítem</th>
                   <th>Monto</th>
                   <th>Accion</th>
                   <?php $contador=0; ?>
@@ -40,6 +42,7 @@
                       <td>{{$contador}}</td>
                       <td>{{$presupuesto->created_at->format('Y')}}</td>
                       <td>{{$presupuesto->proyecto->nombre}}</td>
+                      <td>{{$presupuesto->categoria->item}} {{$presupuesto->categoria->nombre_categoria}}</td>
                       <td>${{number_format($presupuesto->total,2)}}</td>
                       <td><a href="{{url('presupuestos/'.$presupuesto->id)}}" class="btn btn-primary btn-sm">Ver</a></td>
                     </tr>

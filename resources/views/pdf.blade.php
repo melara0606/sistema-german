@@ -6,7 +6,7 @@
             <!-- /.box-header -->
             <div class="box-body table-responsive no-padding">
               <table class="table table-hover" id="example2">
-  				<thead>
+  				      <thead>
                   <th>ID</th>
                   <th>Nombre</th>
                   <th>Nombre de Usuario</th>
@@ -20,12 +20,12 @@
                 		<td>{{ usuario($user->empleado_id) }}</td>
                 		<td>{{ $user->username }}</td>
                 		<td>{{ $user->email }}</td>
-                        <td>{{ vercargo($user->cargo) }}</td>
+                    <td>{{ vercargo($user->cargo) }}</td>
                 	</tr>
                 	@endforeach
                 </tbody>
               </table>
-                
+
             </div>
             <!-- /.box-body -->
           </div>

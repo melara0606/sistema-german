@@ -1,5 +1,5 @@
                         <div class="form-group">
-                          <label for="" class="col-md-4">Seleccione un proyecto</label>
+                          <label for="" class="col-md-4">Proyecto</label>
                             <div class="col-md-6">
                               @if(isset($proyectos))
                                 <select id="proyecto" class="chosen-select-width">
@@ -10,7 +10,8 @@
                                 </select>
                               @else
                                 {!!Form::hidden('',$proyecto->id,['id' => 'proyecto'])!!}
-                                {!!Form::text('nombpro',$proyecto->nombre,['class' => 'form-control','readonly'])!!}
+                                {!! Form::hidden('',$proyecto->monto,['id' => 'monto']) !!}
+                                {!!Form::text('',$proyecto->nombre,['class' => 'form-control','readonly'])!!}
                               @endif
                             </div>
                         </div>

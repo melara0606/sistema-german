@@ -13,7 +13,7 @@ $(document).ready(function(){
           descripcion =$("#catalogo option:selected").text(),
           cantidad  = $("#cantidad").val() || 0,
           unidad = $("#catalogo option:selected").attr('data-unidad'),
-          monto = $("#proyecto option:selected").attr('data-monto'),
+          monto = $("#monto").val(),
           existe = $("#catalogo option:selected");
           precio = $("#precio").val() || 0;
 
@@ -45,8 +45,6 @@ $(document).ready(function(){
           $(existe).css("display", "none");
           $("#catalogo").val("");
           $("#catalogo").trigger('chosen:updated');
-
-          //total2=total;
           clearForm();
       }else{
         swal(
@@ -73,12 +71,10 @@ $(document).ready(function(){
   $(document).on("click","#edit-btn", function(e){
     //obtener los datos de un json y enviarlos al formulario
     var data = JSON.parse($(e.currentTarget).attr('data-data'));
-    console.log(data);
     $(document).find("#catalogo").val(data.catalogo);
     $(document).find("#cantidad").val(data.cantidad);
     $(document).find("#precio").val(data.precio);
     $("#catalogo").trigger('chosen:updated');
-    $("#item").trigger('chosen:updated');
     //quitar la fila de la tabla estableciendo el nuevo total temporal antes de la edición
     var tr     = $(e.target).parents("tr"),
     totaltotal  = $("#totalEnd");
