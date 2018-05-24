@@ -11,6 +11,7 @@ use App\Presupuesto;
 use App\Presupuestodetalle;
 use App\Categoria;
 use App\Catalogo;
+use App\BitacoraProyecto;
 use Session;
 use DB;
 use Validator;
@@ -27,10 +28,26 @@ class PresupuestoController extends Controller
          $this->middleware('auth');
      }
 
-    public function index()
+    public function index(Request $request)
     {
+      $proyecto=$request->get('proyecto');
+      if($proyecto=="")
+      {
+        $existe=true;
         $presupuestos = Presupuesto::all();
-        return view('presupuestos.index',compact('presupuestos'));
+        return view('presupuestos.index',compact('presupuestos','existe'));
+      }else{
+        $presupuestos = Presupuesto::where('proyecto_id',$proyecto)->get();
+        $count = count($presupuestos);
+        if($count==0){
+          $existe=false;
+          return view('presupuestos.index',compact('presupuestos','existe','proyecto'));
+        }else{
+          $existe=true;
+          return view('presupuestos.index',compact('presupuestos','existe'));
+        }
+
+      }
     }
 
     /**
@@ -56,6 +73,9 @@ class PresupuestoController extends Controller
                 $proyecto=Proyecto::findorFail($request->id);
                 $proyecto->estado=3;
                 $proyecto->save();
+
+                BitacoraProyecto::bitacora('El proyecto pasó a esperar la realización de la solicitud de cotizacion',$proyecto->id);
+
                 return response()->json([
                     'mensaje' => 'exito'
                 ]);
@@ -112,9 +132,9 @@ class PresupuestoController extends Controller
                     })->get();
     }
 
-    public function getCatalogo()
+    public function getCatalogo($id)
     {
-        return Catalogo::orderby('nombre','asc')->get();
+        return Catalogo::where('categoria_id',$id)->orderby('nombre','asc')->get();
     }
 
     public function getUnidadesMedida()
@@ -122,10 +142,21 @@ class PresupuestoController extends Controller
       return \App\UnidadMedida::orderBy('nombre_medida')->get();
     }
 
-    public function crear($id)
+    public function seleccionaritem($id)
     {
       $proyecto = Proyecto::findorFail($id);
-      return view('presupuestos.create',compact('proyecto'));
+      //dd($proyecto);
+      return view('presupuestos.seleccionaritem',compact('proyecto'));
+    }
+
+    public function crear(Request $request)
+    {
+    //  dd($request->All());
+      $proyecto = Proyecto::findorFail($request->proyecto_id);
+      $item1=Categoria::findorFail($request->item);
+
+      $items=Categoria::all();
+      return view('presupuestos.create',compact('proyecto','items','item1'));
     }
     /**
      * Store a newly created resource in storage.
@@ -158,6 +189,8 @@ class PresupuestoController extends Controller
                   $proyecto->pre=true;
                   $proyecto->estado=2;
                   $proyecto->save();
+
+                  BitacoraProyecto::bitacora('Registro el presupuesto de '.$presupuesto->categoria->nombre_categoria.' ',$proyecto->id);
                   DB::commit();
                   return response()->json([
                     'mensaje' => 'exito'
@@ -165,7 +198,8 @@ class PresupuestoController extends Controller
             }catch (\Exception $e){
                 DB::rollback();
                 return response()->json([
-                    'mensaje' => $e->getMessage()
+                    'mensaje' => 'error',
+                    'tipo' =>$e->getMessage()
                   ]);
             }
         }

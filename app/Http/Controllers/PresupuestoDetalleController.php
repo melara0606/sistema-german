@@ -19,13 +19,15 @@ class PresupuestoDetalleController extends Controller
         //
     }
 
-    public function getCatalogo($id)
+    public function getCatalogo($idp,$idc)
     {
+      //return $idc;
       return $categorias = DB::table('catalogos')
-                ->whereNotExists(function ($query) use ($id) {
+                ->where('categoria_id',$idc)
+                ->whereNotExists(function ($query) use ($idp) {
                      $query->from('presupuestodetalles')
                         ->whereRaw('presupuestodetalles.catalogo_id = catalogos.id')
-                        ->whereRaw('presupuestodetalles.presupuesto_id ='.$id);
+                        ->whereRaw('presupuestodetalles.presupuesto_id ='.$idp);
                     })->get();
     }
 

@@ -7,7 +7,7 @@
       </h1>
       <ol class="breadcrumb">
         <li><a href="{{ url('/home') }}"><i class="glyphicon glyphicon-home"></i> Inicio</a></li>
-        <li><a href="{{ url('/cotizaciones') }}"><i class="fa fa-balance-scale"></i> Cotizaciones</a></li>
+        <li><a href="{{ url('/proyectos') }}"><i class="fa fa-industry"></i> Proyectos</a></li>
         <li class="active">Listado de cotizaciones</li>
       </ol>
 @endsection
@@ -19,11 +19,7 @@
             <div class="box-header">
               <h3 class="box-title">Listado</h3>
               <div class="btn-group pull-right">
-                <a href="{{ url('/cotizaciones/create') }}" class="btn btn-success"><span class="glyphicon glyphicon-plus-sign"></span></a>
-                <a href="{{ url('/cotizaciones') }}" class="btn btn-primary">Todos</a>
-                <a href="{{ url('/cotizaciones?estado=1') }}" class="btn btn-primary">Pendientes</a>
-                <a href="{{ url('/cotizaciones?estado=3') }}" class="btn btn-primary">Finalizados</a>
-                <a href="{{ url('/cotizaciones?estado=2') }}" class="btn btn-primary">Deshabilitados</a>
+                <a href="{{ url('/solicitudcotizaciones/versolicitudes/'.$solicitud->presupuesto->proyecto->id) }}" class="btn btn-danger" title="Atras"><span class="glyphicon glyphicon-menu-left"></span></a>
               </div>
             </div>
             <!-- /.box-header -->

@@ -17,16 +17,13 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="" class="col-md-4">Ítem</label>
-                            <div class="col-md-6" id="select">
-                                <select name="" id="item" class="form-control chosen-select-width">
-                                    <option value="">Seleccione un ítem</option>
-                                </select>
-                            </div>
-                            <div class="col-md-2">
-                                <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#modalcategoria"><span class="glyphicon glyphicon-plus"></span></button>
-                            </div>
+                          <label for="" class="col-md-4">Ítem</label>
+                          <div class="col-md-6">
+                            {{Form::hidden('',$item1->id,['id' => 'itemid'])}}
+                            {{Form::text('',$item1->item .' '. $item1->nombre_categoria,['class' => 'form-control'])}}
+                          </div>
                         </div>
+
                         <div class="form-group">
                             <label for="" class="col-md-4">Descripción</label>
                             <div class="col-md-6">
@@ -41,13 +38,13 @@
                         <div class="form-group">
                             <label for="" class="col-md-4">Digite la cantidad que necesita</label>
                             <div class="col-md-6">
-                                <input type="text" id="cantidad" class="form-control">
+                                <input type="number" min="1" steps="1" id="cantidad" class="form-control">
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="" class="col-md-4">Digite el precio unitario</label>
                             <div class="col-md-6">
-                                <input type="text" id="precio" class="form-control">
+                                <input type="number" min="1" steps=".01" id="precio" class="form-control">
                             </div>
                         </div>
 
@@ -57,35 +54,6 @@
                             </div>
                         </div>
 
-<div class="modal fade" data-backdrop="static" data-keyboard="false" id="modalcategoria" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog" role="document">
-        <div class="row">
-            <div class="panel panel-primary">
-                <div class="panel-heading">Ingreso de ítem
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                </div>
-                <div class="panel-body">
-                    <div class="form-group">
-                        <label for="" class="col-md-4">Digite el ítem</label>
-                        <div class="col-md-6">
-                          {!!Form::text('',null,['class' => 'form-control','id'=>'txtitem'])!!}
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="" class="col-md-4">Digite la categoría</label>
-                        <div class="col-md-6">
-                            <input type="text" id="txtcategoria" class="form-control">
-                        </div>
-                    </div>
-                </div>
-                <div class="panel-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                    <button type="button" id="guardaritem" data-dismiss="modal" class="btn btn-success">Agregar</button>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 
 <div class="modal fade" data-backdrop="static" data-keyboard="false" id="modalcatalogo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
@@ -95,6 +63,17 @@
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 </div>
                 <div class="panel-body">
+                    <div class="form-group">
+                      <label for="" class="col-md-4">Ítem</label>
+                      <div class="col-md-6">
+                        <select class="chosen-select-width" id="categoria_id">
+                          <option value="">Seleccione un ítem</option>
+                          @foreach($items as $item)
+                            <option value="{{$item->id}}">{{$item->item}} {{$item->nombre_categoria}}</option>
+                          @endforeach
+                        </select>
+                      </div>
+                    </div>
                     <div class="form-group">
                         <label for="" class="col-md-4">Digite una opción</label>
                         <div class="col-md-6">

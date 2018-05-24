@@ -8,4 +8,9 @@ class Requisiciondetalle extends Model
 {
     protected $guarded=[];
     public $timestamps = false;
+
+    public function requisicion()
+    {
+      return $this->belongsTo('App\Requisicion');
+    }
 }

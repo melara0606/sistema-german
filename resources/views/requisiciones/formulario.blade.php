@@ -1,19 +1,20 @@
                       <div class="form-group">
-                        <label for="" class="col-md-4 control-label">Proyecto</label>
+                        <label for="" class="col-md-4 control-label">Actividad</label>
                         <div class="col-md-6">
-                          <select id="proyecto" class="form-control">
-                            <option value="">Seleccione un proyecto</option>
-                            @foreach($proyectos as $proyecto)
-                              <option value="{{$proyecto->id}}">{{$proyecto->nombre}}</option>
+                          {!! Form::textarea('actividad',null,['class' => 'form-control','placeholder'=>'Digite la actividad a realizar','rows'=>3]) !!}
+                        </div>
+                      </div>
+                      
+                      <div class="form-group">
+                        <label for="" class="col-md-4 control-label">Unidad administrativa</label>
+                        <div class="col-md-6">
+                          <select name="unidad_admin" class="chosen-select-width">
+                            <option value="">Seleccione la unidad administrativa</option>
+                            @foreach($unidades as $unidad)
+                              <option value="{{$unidad->id}}">{{$unidad->nombre_unidad}}</option>
                             @endforeach
                           </select>
                         </div>
-                      </div>
-                      <div class="form-group">
-                          <label for="" class="col-md-4 control-label">Unidad administrativa</label>
-                            <div class="col-md-6">
-                                {!!Form::text('unidad_admin',null,['class' => 'form-control','id'=>'unidad_admin'])!!}
-                            </div>
                       </div>
 
                         <div class="form-group">
@@ -31,6 +32,6 @@
                         <div class="form-group">
                           <label for="" class="col-md-4 control-label">Justificación</label>
                             <div class="col-md-6">
-                              {!!Form::text('justificacion',null,['class' => 'form-control','id'=>'justificacion'])!!}
+                              {!!Form::textarea('justificacion',null,['class' => 'form-control','rows' => 3,'id'=>'justificacion'])!!}
                             </div>
                         </div>

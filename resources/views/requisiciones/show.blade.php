@@ -46,41 +46,41 @@
                         <div>
                           <table class="table">
                             <thead>
-                              <th>Código</th>
                               <th>Cantidad</th>
                               <th>Unidad de medida</th>
                               <th>Descripción</th>
                               <th>Acción</th>
                             </thead>
                             <tbody>
-                              @foreach($detalles as $detalle)
+                              @foreach($requisicion->requisiciondetalle as $detalle)
                               <tr>
-                                <td>{{$detalle->codigo}}</td>
                                 <td>{{$detalle->cantidad}}</td>
                                 <td>{{$detalle->unidad_medida}}</td>
                                 <td>{{$detalle->descripcion}}</td>
                                 <td>
                                   {{ Form::open(['route' => ['requisiciondetalles.destroy', $detalle->id ], 'method' => 'DELETE', 'class' => 'form-horizontal'])}}
-                                  <a href="{{url('requisiciondetalles/'.$detalle->id.'/edit')}}" class="btn btn-warning"><span class="glyphicon glyphicon-text-size"></span></a>
-                                    <button class="btn btn-danger" type="button" onclick="
-                                    return swal({
-                                      title: 'Eliminar requisicion',
-                                      text: '¿Está seguro de eliminar requisicion?',
-                                      type: 'question',
-                                      showCancelButton: true,
-                                      confirmButtonText: 'Si, Eliminar',
-                                      cancelButtonText: 'No, Mantener',
-                                      confirmButtonClass: 'btn btn-danger',
-                                      cancelButtonClass: 'btn btn-default',
-                                      buttonsStyling: false
-                                    }).then(function(){
-                                      submit();
-                                      swal('Hecho', 'El registro a sido eliminado','success')
-                                    }, function(dismiss){
-                                      if(dismiss == 'cancel'){
-                                        swal('Cancelado', 'El registro se mantiene','info')
-                                      }
-                                    })";><span class="glyphicon glyphicon-trash"></span></button>
+                                    <div class="btn-group">
+                                      <a href="{{url('requisiciondetalles/'.$detalle->id.'/edit')}}" class="btn btn-warning btn-xs"><span class="glyphicon glyphicon-text-size"></span></a>
+                                        <button class="btn btn-danger btn-xs" type="button" onclick="
+                                        return swal({
+                                          title: 'Eliminar requisicion',
+                                          text: '¿Está seguro de eliminar requisicion?',
+                                          type: 'question',
+                                          showCancelButton: true,
+                                          confirmButtonText: 'Si, Eliminar',
+                                          cancelButtonText: 'No, Mantener',
+                                          confirmButtonClass: 'btn btn-danger',
+                                          cancelButtonClass: 'btn btn-default',
+                                          buttonsStyling: false
+                                        }).then(function(){
+                                          submit();
+                                          swal('Hecho', 'El registro a sido eliminado','success')
+                                        }, function(dismiss){
+                                          if(dismiss == 'cancel'){
+                                            swal('Cancelado', 'El registro se mantiene','info')
+                                          }
+                                        })";><span class="glyphicon glyphicon-trash"></span></button>
+                                    </div>
                                   {{ Form::close()}}
                                 </td>
                               </tr>

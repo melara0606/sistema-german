@@ -21,6 +21,6 @@ class Presupuestodetalle extends Model
 
     public function categoria()
     {
-      return $this->belongsTo('App\Categoria')->orderBy('item','asc');
+      return $this->belongsTo('App\Categoria')->orderBy('nombre');
     }
 }

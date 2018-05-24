@@ -10,6 +10,8 @@ use App\Ordencompra;
 use App\Presupuesto;
 use App\PresupuestoSolicitud;
 use App\ProyectoInventario;
+use App\Proveedor;
+use App\Requisicion;
 use Illuminate\Http\Request;
 use DB;
 
@@ -125,8 +127,10 @@ class OrdencompraController extends Controller
      */
     public function create()
     {
-        $proyectos = Proyecto::where('estado',6)->get();
-        return view('ordencompras.create',compact('proyectos'));
+        $requisiciones = Requisicion::where('estado',1)->get();
+        dd($requisiciones);
+        $proveedores = Proveedor::where('estado',1)->get();
+        return view('ordencompras.guardar',compact('proveedores'));
     }
 
     /**

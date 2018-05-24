@@ -24,10 +24,9 @@ class RequisiciondetalleRequest extends FormRequest
     public function rules()
     {
         return [
-            'codigo' => 'required|numeric|unique:requisiciondetalles',
             'unidad_medida' => 'required',
             'cantidad' => 'required|numeric',
-            'descripcion' => 'required',
+            'descripcion' => 'required|unique:requisiciondetalles',
 
         ];
     }

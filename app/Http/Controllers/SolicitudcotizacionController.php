@@ -61,8 +61,8 @@ class SolicitudcotizacionController extends Controller
     public function versolicitudes($id)
     {
       $proyecto=Proyecto::findorFail($id);
-      $presupuesto=Presupuesto::where('proyecto_id',$proyecto->id)->get();
-        return view('solicitudcotizaciones.porproyecto',compact('proyecto'));
+      //$presupuesto=Presupuesto::where('proyecto_id',$proyecto->id)->get();
+      return view('solicitudcotizaciones.porproyecto',compact('proyecto'));
     }
 
 
@@ -94,12 +94,12 @@ class SolicitudcotizacionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($id)
     {
-      $proyectos = Proyecto::where('estado',3)->where('pre',true)->get();
+      $proyecto = Proyecto::findorFail($id);
       $formapagos = Formapago::all();
       $unidades = Unidad::all();
-      return view('solicitudcotizaciones.create',compact('formapagos','proyectos','unidades'));
+      return view('solicitudcotizaciones.create',compact('formapagos','proyecto','unidades'));
     }
 
     /**
@@ -140,9 +140,11 @@ class SolicitudcotizacionController extends Controller
             $proyecto=Proyecto::findorFail($request->proyecto);
             $proyecto->estado=4;
             $proyecto->save();
+            DB::commit();
+            return redirect('solicitudcotizaciones/versolicitudes/'.$proyecto->id)->with('mensaje','Solicitud registrada con éxito');
           }
           DB::commit();
-          return redirect('solicitudcotizaciones/versolicitudes/'.$proyecto->id)->with('mensaje','Solicitud registrada con éxito');
+          return redirect('proyectos')->with('mensaje','Solicitud registrada con éxito');
         }catch(\Exception $e){
           dd($e);
           DB::rollback();

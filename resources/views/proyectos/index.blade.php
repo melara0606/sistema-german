@@ -54,25 +54,25 @@
                       @if( $estado == "" )
                         {{ Form::open(['method' => 'POST', 'id' => 'baja', 'class' => 'form-horizontal'])}}
                         <div class="btn-group">
-                          <a href="{{ url('proyectos/'.$proyecto->id) }}" class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-eye-open"></span></a>
+                          <a title="Ver información del proyecto" href="{{ url('proyectos/'.$proyecto->id) }}" class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-eye-open"></span></a>
                           @if( $proyecto->estado == 1 )
                             <a href="{{ url('proyectos/'.$proyecto->id.'/edit') }}" class="btn btn-warning btn-xs"><span class="glyphicon glyphicon-edit"></span></a>
-                            <a href="{{ url('presupuestos/crear/'.$proyecto->id) }}" class="btn btn-success btn-xs"><span class="fa fa-balance-scale"></span></a>
+                            <a title="Ver y registar el presupuesto para este proyecto" href="{{ url('presupuestos?proyecto='.$proyecto->id) }}" class="btn btn-success btn-xs"><span class="fa fa-balance-scale"></span></a>
                           @elseif( $proyecto->estado == 2)
-                            <a href="{{ url('presupuestos/crear/'.$proyecto->id) }}" class="btn btn-success btn-xs"><span class="fa fa-balance-scale"></span></a>
+                            <a title="Ver y registar el presupuesto para este proyecto" href="{{ url('presupuestos?proyecto='.$proyecto->id) }}" class="btn btn-success btn-xs"><span class="fa fa-balance-scale"></span></a>
                             <a href="{{ url('proyectos/'.$proyecto->id.'/edit') }}" class="btn btn-warning btn-xs"><span class="glyphicon glyphicon-edit"></span></a>
-                            <button type="button" onclick="{{ "cambiar(".$proyecto->id.")" }}" class="btn btn-default btn-xs"><span class="fa fa-check"></span></button>
+                            <button title="Finalizar el registro de los presupuestos" type="button" onclick="{{ "cambiar(".$proyecto->id.")" }}" class="btn btn-default btn-xs"><span class="fa fa-check"></span></button>
                           @elseif( $proyecto->estado == 3)
-                                <a href="{{ url('solicitudcotizaciones/create') }}" class="btn btn-success btn-xs"><span class="glyphicon glyphicon-align-right"></span></a>
+                            <a title="Ver y registrar las cotizaciones" href="{{ url('solicitudcotizaciones/create/'.$proyecto->id) }}" class="btn btn-success btn-xs"><span class="glyphicon glyphicon-align-right"></span></a>
                             <a href="{{ url('proyectos/'.$proyecto->id.'/edit') }}" class="btn btn-warning btn-xs"><span class="glyphicon glyphicon-edit"></span></a>
                           @elseif( $proyecto->estado == 4 || $proyecto->estado==5 )
-                            <a href="{{url('solicitudcotizaciones/versolicitudes/'.$proyecto->id)}}">ver</a>
+                            <a title="Ver las solicitudes realizadas para este proyecto" href="{{url('solicitudcotizaciones/versolicitudes/'.$proyecto->id)}}" class="btn btn-success btn-xs"><span class="fa fa-list"></span></a>
                           @elseif( $proyecto->estado == 6 )
                             <a href="{{url('solicitudcotizaciones/versolicitudes/'.$proyecto->id)}}">ver orden</a>
                           @elseif( $proyecto->estado == 8)
                             <a href="{{url('inventarios?proyecto='.$proyecto->id)}}">Ver inventario</a>
                           @endif
-                          <button class="btn btn-danger btn-xs" type="button" onclick={{ "baja(".$proyecto->id.",'proyectos')" }}><span class="glyphicon glyphicon-trash"></span></button>
+                          <button title="Dar de baja al proyecto" class="btn btn-danger btn-xs" type="button" onclick={{ "baja(".$proyecto->id.",'proyectos')" }}><span class="glyphicon glyphicon-trash"></span></button>
                         </div>
                         {{ Form::close()}}
 

@@ -20,7 +20,7 @@
             <div class="box-header">
               <h3 class="box-title"></h3>
               <div class="btn-group pull-right">
-
+                <a href="{{ url('proyectos') }}" class="btn btn-danger" title="Atras"><span class="glyphicon glyphicon-menu-left"></span></a>
               </div>
             </div>
             <!-- /.box-header -->
@@ -43,15 +43,19 @@
                       <td>{{$correlativo}}</td>
                       <td>{{$pre->proyecto->nombre}}</td>
                       <td>{{$pre->presupuestosolicitud->solicitudcotizacion->numero_solicitud}}</td>
-                      <td>{{ Categoria::categoria_nombre($pre->presupuestosolicitud->categoria_id)}}</td>
+                      <td>{{ Categoria::categoria_nombre($pre->presupuestosolicitud->categoria_id)}} </td>
                      <td>
                        @if($pre->presupuestosolicitud->estado==1)
-                       <a href="{{ url('cotizaciones/realizarcotizacion/'.$pre->presupuestosolicitud->id) }}" class="btn btn-success btn-xs"><span class="fa fa-outdent"></span></a>
-                       <a onclick="{{ "cambiar(".$pre->proyecto->id.",".$pre->presupuestosolicitud->id.")" }}" class="btn btn-default btn-xs"><span class="fa fa-check"></span></a>
+                        @if(now()->format('Y-m-d') <= $pre->presupuestosolicitud->solicitudcotizacion->fecha_limite)
+                          <a title="Registrar cotización" href="{{ url('cotizaciones/realizarcotizacion/'.$pre->presupuestosolicitud->id) }}" class="btn btn-success btn-xs"><span class="fa fa-outdent"></span></a>
+                          <a href="{{url('cotizaciones?solicitud='.$pre->presupuestosolicitud->id)}}">ver</a>
+                        @else
+                          <a title="Finalizar las cotizaciones" onclick="{{ "cambiar(".$pre->proyecto->id.",".$pre->presupuestosolicitud->id.")" }}" class="btn btn-default btn-xs"><span class="fa fa-check"></span></a>
+                        @endif
                      @elseif($pre->presupuestosolicitud->estado==2)
-                       <a href="{{ url('cotizaciones/ver/'.$pre->presupuestosolicitud->id) }}" class="btn btn-success btn-xs"><span class="fa fa-outdent"></span></a>
+                       <a title="Ver cuadro comparativo" href="{{ url('cotizaciones/ver/'.$pre->presupuestosolicitud->id) }}" class="btn btn-success btn-xs"><span class="fa fa-outdent"></span></a>
                      @elseif($pre->presupuestosolicitud->estado==3)
-                       <a href="{{url('ordencompras/realizarorden/'.$pre->presupuestosolicitud->id)}}">crear</a>
+                       <a title="Registrar orden de compra" href="{{url('ordencompras/realizarorden/'.$pre->presupuestosolicitud->id)}}">crear</a>
                      @endif
                      </td>
                     </tr>

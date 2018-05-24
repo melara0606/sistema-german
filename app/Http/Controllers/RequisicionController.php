@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Requisicion;
 use App\Requisiciondetalle;
-use App\Proyecto;
+use App\Unidad;
+use App\UnidadMedida;
 
 class RequisicionController extends Controller
 {
@@ -18,7 +19,7 @@ class RequisicionController extends Controller
      {
          $this->middleware('auth');
      }
-     
+
     public function index()
     {
         $requisiciones = Requisicion::where('estado',1)->get();
@@ -32,8 +33,9 @@ class RequisicionController extends Controller
      */
     public function create()
     {
-        $proyectos = Proyecto::where('estado',1)->where('presupuesto',true)->get();
-        return view('requisiciones.create',compact('proyectos'));
+      $unidades=Unidad::all();
+      $medidas = UnidadMedida::all();
+        return view('requisiciones.create',compact('unidades','medidas'));
     }
 
     /**
@@ -50,6 +52,7 @@ class RequisicionController extends Controller
         $count = $request->contador;
 
         $requisicion = Requisicion::create([
+            'actividad' => $request->actividad,
             'unidad_admin' => $request->unidad_admin,
             'linea_trabajo' => $request->linea_trabajo,
             'fuente_financiamiento' => $request->fuente_financiamiento,
@@ -58,7 +61,6 @@ class RequisicionController extends Controller
           for($i = 0; $i<$count;$i++){
             Requisiciondetalle::create([
               'requisicion_id' => $requisicion->id,
-              'codigo' => $request->codigos[$i],
               'cantidad' => $request->cantidades[$i],
               'unidad_medida' => $request->unidades[$i],
               'descripcion' => $request->descripciones[$i],
@@ -81,9 +83,9 @@ class RequisicionController extends Controller
     public function show($id)
     {
         $requisicion = Requisicion::findorFail($id);
-        $detalles = Requisiciondetalle::where('requisicion_id',$requisicion->id)->get();
+        //$detalles = Requisiciondetalle::where('requisicion_id',$requisicion->id)->get();
         //dd($requisicion);
-        return view('requisiciones.show',compact('requisicion','detalles'));
+        return view('requisiciones.show',compact('requisicion'));
     }
 
     /**
@@ -94,7 +96,9 @@ class RequisicionController extends Controller
      */
     public function edit(Requisicion $requisicione)
     {
-        return view('requisiciones.edit',compact('requisicione'));
+      $unidades=Unidad::all();
+      $medidas = UnidadMedida::all();
+        return view('requisiciones.edit',compact('requisicione','medidas','unidades'));
     }
 
     /**

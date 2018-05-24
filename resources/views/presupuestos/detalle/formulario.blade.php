@@ -2,17 +2,18 @@
   <label for="" class="col-md-4">Proyecto</label>
     <div class="col-md-6">
 
-        {!!Form::text('nombpro',$presupuesto->proyecto->nombre,['class' => 'form-control','readonly'])!!}
+        {!!Form::textarea('nombpro',$presupuesto->proyecto->nombre,['class' => 'form-control','readonly','rows' => 3])!!}
         {!! Form::hidden('',$presupuesto->id,['id'=>'presuid']) !!}
-        {!! Form::hidden('',$proyecto->monto,['id' => 'monto']) !!}
-        
+        {!! Form::hidden('',$presupuesto->proyecto->monto,['id' => 'monto']) !!}
+
     </div>
 </div>
 
 <div class="form-group">
     <label for="" class="col-md-4">Ítem</label>
     <div class="col-md-6" id="select">
-      {!!Form::text('nombpro',$presupuesto->categoria->item .' '.$presupuesto->categoria->nombre_categoria,['class' => 'form-control','readonly'])!!}
+      {{Form::hidden('',$presupuesto->categoria->id,['id' => 'itemid'])}}
+      {!!Form::text('',$presupuesto->categoria->item .' '.$presupuesto->categoria->nombre_categoria,['class' => 'form-control','readonly'])!!}
     </div>
 
 </div>
@@ -55,23 +56,30 @@
 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 </div>
 <div class="panel-body">
-<div class="form-group">
-<label for="" class="col-md-4">Digite una opción</label>
-<div class="col-md-6">
+  <div class="form-group">
+    <label for="" class="col-md-4">Categoria</label>
+    <div class="col-md-6">
+      <input type="hidden" id="categoria_id" value="{{$presupuesto->categoria->id}}">
+      <input type="text" readonly value="{{$presupuesto->categoria->item .' '.$presupuesto->categoria->nombre_categoria}}" id="" class="form-control">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="" class="col-md-4">Digite una opción</label>
+    <div class="col-md-6">
         <input type="text" id="txtdescripcion" class="form-control">
-</div>
-</div>
-<div class="form-group">
-<label for="" class="col-md-4">Unidad de medida</label>
-<div class="col-md-6">
-    <select class="chosen-select-width" id="txtunidad">
-      <option value="">Seleccione una unidad de medida</option>
-    </select>
-</div>
-<div class="col-md-2">
-  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalUnidades"><span class="glyphicon glyphicon-plus"></span></button>
-</div>
-</div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="" class="col-md-4">Unidad de medida</label>
+    <div class="col-md-6">
+      <select class="chosen-select-width" id="txtunidad">
+        <option value="">Seleccione una unidad de medida</option>
+      </select>
+    </div>
+    <div class="col-md-2">
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalUnidades"><span class="glyphicon glyphicon-plus"></span></button>
+    </div>
+  </div>
 </div>
 <div class="panel-footer">
 <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>

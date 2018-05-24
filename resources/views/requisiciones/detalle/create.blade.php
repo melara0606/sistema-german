@@ -20,6 +20,7 @@
                     {{ Form::open(['action' => 'RequisiciondetalleController@store','class' => 'form-horizontal','id' => 'requisicion']) }}
                     {!!Form::hidden('requisicion_id',$id)!!}
                     @include('requisiciones.detalle.formulario')
+                    @include('errors.validacion')
                     <div class="form-group">
                         <div class="col-md-6 col-md-offset-1">
                             <button type="submit" class="btn btn-success">

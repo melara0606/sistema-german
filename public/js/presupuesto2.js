@@ -4,8 +4,10 @@ $(document).ready(function(){
   var monto=0.0;
   var idpresupuesto = $("#presuid").val();
   console.log(idpresupuesto);
-  listarcatalogo(idpresupuesto);
 
+  var it=$("#itemid").val();
+  listarcatalogo(idpresupuesto,it);
+  listarunidades();
   $("#agregaratabla").on("click", function(e) {
  //
       e.preventDefault();
@@ -99,11 +101,18 @@ $(document).ready(function(){
 
   });
 
+  $("#guardarunidades").on("click",function(e){
+      guardarunidades();
+  });
+
+  $("#guardarcatalogo").on("click",function(e){
+      guardar_descripcion();
+  });
 
 });
 
-function listarcatalogo(id){
-  $.get('/'+carpeta()+'/public/presupuestodetalles/getcatalogo/'+id, function (data){
+function listarcatalogo(idp,idc){
+  $.get('/'+carpeta()+'/public/presupuestodetalles/getcatalogo/'+idp+'/'+idc, function (data){
   var html_select = '<option value="">Seleccione un catalogo</option>';
   //console.log(data.length);
 
@@ -116,6 +125,92 @@ function listarcatalogo(id){
 
   });
 }
+
+function listarunidades(){
+  $.get('/'+carpeta()+'/public/presupuestos/getunidades', function(data){
+    var html_select = '<option value="">Seleccione una unidad de medida</option>';
+    for(var i=0;i<data.length;i++){
+        html_select +='<option value="'+data[i].nombre_medida+'">'+data[i].nombre_medida+'</option>'
+        //console.log(data[i]);
+        $("#txtunidad").html(html_select);
+        $("#txtunidad").trigger('chosen:updated');
+    }
+  });
+}
+
+function guardar_descripcion()
+{
+    var nombre_descripcion = $("#txtdescripcion").val();
+    var unidad_medida = $("#txtunidad").val();
+    var categoria_id = $("#categoria_id").val();
+    var nombre = nombre_descripcion.toUpperCase();
+    var idpresupuesto = $("#presuid").val();
+    var it=$("#itemid").val();
+    var token = $('meta[name="csrf-token"]').attr('content');
+    var ruta = '/'+carpeta()+'/public/presupuestos/guardardescripcion';
+    $.ajax({
+        url: ruta,
+        headers: {'X-CSRF-TOKEN':token},
+        type:'POST',
+        dataType:'json',
+        data: {nombre,unidad_medida,categoria_id},
+       success : function(msj){
+            //window.location.href = "/sisverapaz/public/proyectos";
+            console.log(msj.mensaje);
+            if(msj.mensaje === "exito")
+            {
+                toastr.success('Catalogo registrado éxitosamente');
+                $("#txtdescripcion").val("");
+                $("#txtunidad").val("");
+                listarcatalogo(idpresupuesto,it);
+            }else{
+                toastr.error('Ocurrió un error al guardar');
+            }
+
+        },
+        error: function(data, textStatus, errorThrown){
+            toastr.error('Ha ocurrido un '+textStatus+' en la solucitud');
+            $.each(data.responseJSON.errors, function( key, value ) {
+                toastr.error(value);
+            });
+        }
+    });
+}
+
+
+function guardarunidades(){
+  var unidad = $("#txtnombreunidades").val();
+  var nombre_medida = unidad.toUpperCase();
+  var token = $('meta[name="csrf-token"]').attr('content');
+  var ruta = '/'+carpeta()+'/public/unidadmedidas';
+  $.ajax({
+    url: ruta,
+    headers: {'X-CSRF-TOKEN':token},
+    type:'POST',
+    dataType:'json',
+    data: {nombre_medida},
+    success : function(msj){
+         //console.log(msj.mensaje);
+         if(msj.mensaje === "exito")
+         {
+             toastr.success('Unidad de medida registrado éxitosamente');
+             $("#txtnombreunidades").val("");
+             listarunidades();
+             $("#txtunidad").trigger('chosen:updated');
+         }else{
+             toastr.error('Ocurrió un error al guardar');
+         }
+
+     },
+     error: function(data, textStatus, errorThrown){
+         toastr.error('Ha ocurrido un '+textStatus+' en la solucitud');
+         $.each(data.responseJSON.errors, function( key, value ) {
+             toastr.error(value);
+         });
+     }
+  });
+}
+
 
 function onFixed (valor, maximum) {
     maximum = (!maximum) ? 2 : maximum;

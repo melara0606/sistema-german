@@ -113,7 +113,7 @@
                               @if($orden->fecha_fin == "")
                               {{$orden->fecha_inicio->format('d-m-Y')}}
                             @else
-                              del {{$orden->fecha_inicio->format('l d, F Y')}} al {{$orden->fecha_fin->format('l d, F Y')}}
+                              del {{$orden->fecha_inicio->format('l d')}} de {{$orden->fecha_inicio->format('F Y')}} al {{$orden->fecha_fin->format('l d')}} de {{$orden->fecha_fin->format('F Y')}}
                             @endif
                             </td>
                           </tr>

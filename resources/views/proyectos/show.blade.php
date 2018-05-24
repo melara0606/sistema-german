@@ -46,11 +46,11 @@
                     </tr>
                     <tr>
                       <th>Fecha de inicio</th>
-                      <th>{{$proyecto->fecha_inicio->format('l d, F Y')}}</th>
+                      <th>{{$proyecto->fecha_inicio->format('l d')}} de {{$proyecto->fecha_inicio->format('F Y')}}</th>
                     </tr>
                     <tr>
                       <th>Fecha de finalización</th>
-                      <th>{{$proyecto->fecha_fin->format('l d, F Y')}}</th>
+                      <th>{{$proyecto->fecha_fin->format('l d')}} de {{$proyecto->fecha_fin->format('F Y')}}</th>
                     </tr>
                     <tr>
                       <th>Beneficiarios</th>
@@ -58,28 +58,30 @@
                     </tr>
                   </table>
                   <br>
+                  @if($proyecto->pre)
                   <div class="table-responsive">
                     <table class="table table-bordered table-striped table-hover table-condensed">
                       <thead>
                         <tr>
                           <th>N°</th>
-                          <th>Descripción</th>
-                          <th>Unidad de medida</th>
-                          <th>Cantidad</th>
-                          <th>Precio unitario</th>
-                          <th>Subtotal</th>
+                          <th>DESCRIPCIÓN</th>
+                          <th>UNIDAD DE MEDIDA</th>
+                          <th>CANTIDAD</th>
+                          <th>PRECIO UNITARIO</th>
+                          <th>SUBTOTAL</th>
                           <td></td>
-                          <?php $contador=0; ?>
+                          <?php $contador=0; $total=0.0 ?>
                         </tr>
                       </thead>
                       <tbody>
                         @foreach($proyecto->presupuesto as $presupuesto)
                           <tr>
-                            <td colspan="7">Ítem {{$presupuesto->categoria->item}} {{$presupuesto->categoria->nombre_categoria}}</td>
+                            <td colspan="7">ÍTEM {{$presupuesto->categoria->item}} {{$presupuesto->categoria->nombre_categoria}}</td>
                           </tr>
                           @foreach($presupuesto->presupuestodetalle as $detalle)
                         <tr>
-                          <?php $contador++; ?>
+                          <?php $contador++;
+                            $total=$total+$detalle->cantidad*$detalle->preciou;?>
                           <td>{{$contador}}</td>
                           <td>{{$detalle->catalogo->nombre}}</td>
                           <td>{{$detalle->catalogo->unidad_medida}}</td>
@@ -98,8 +100,16 @@
                           @endforeach
                         @endforeach
                       </tbody>
+                      <tfoot>
+                        <tr>
+                          <th colspan="5">TOTAL</th>
+                          <th>${{number_format($total,2)}}</th>
+                          <th></th>
+                        </tr>
+                      </tfoot>
                     </table>
                   </div>
+                @endif
                       <a href="{{ url('proyectos/'.$proyecto->id.'/edit') }}" class="btn btn-warning"><span class="glyphicon glyphicon-edit"></span></a>
                 </div>
             </div>
