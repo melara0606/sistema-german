@@ -18,7 +18,7 @@ class CreateBitacoraProyectosTable extends Migration
             $table->time('hora');
             $table->date('fecha');
             $table->string('accion');
-            $table->bigInteger('proyecto_id');
+            $table->bigInteger('proyecto_id')->unsigned();
             $table->foreign('proyecto_id')->references('id')->on('proyectos');
             $table->timestamps();
         });

@@ -12,4 +12,9 @@ class Requisicion extends Model
     {
       return $this->hasMany('App\Requisiciondetalle');
     }
+
+    public function unidad()
+    {
+      return $this->belongsTo('App\Unidad');
+    }
 }

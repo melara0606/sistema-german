@@ -13,7 +13,7 @@ class CreateProcedimientoPaac extends Migration
      */
     public function up()
     {
-      $sql = <<<FinSP
+      /*$sql = <<<FinSP
       CREATE OR REPLACE FUNCTION public.paac(
         anioo integer,
         totall real,
@@ -38,7 +38,7 @@ class CreateProcedimientoPaac extends Migration
     ALTER FUNCTION public.paac(integer, real, character varying)
       OWNER TO postgres;
 FinSP;
-DB::connection()->getPdo()->exec($sql);
+DB::connection()->getPdo()->exec($sql);*/
     }
 
     /**
@@ -48,7 +48,7 @@ DB::connection()->getPdo()->exec($sql);
      */
     public function down()
     {
-      $sql = "DROP FUNCTION public.paac(integer, real, character varying);";
-          DB::connection()->getPdo()->exec($sql);
+      /*$sql = "DROP FUNCTION public.paac(integer, real, character varying);";
+          DB::connection()->getPdo()->exec($sql);*/
     }
 }

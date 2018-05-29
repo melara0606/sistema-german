@@ -12,4 +12,9 @@ class Unidad extends Model
     {
     	return $this->hasMany('App\Presupuestounidad');
     }
+
+    public function requisicion(){
+      return $this->hasMany('App\Requisicion');
+    }
+
 }

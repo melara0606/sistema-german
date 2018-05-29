@@ -35,7 +35,7 @@ class AddNumeroSolicitudASolicitudcotizaciones extends Migration
             $table->dropColumn('numero_solicitud');
             $table->dropColumn('fecha_limite');
             $table->dropColumn('tiempo_entrega');
-            $table->bigInteger('presupuesto_id');
+            $table->bigInteger('presupuesto_id')->unsigned();
             $table->foreign('presupuesto_id')->references('id')->on('presupuestos');
         });
     }

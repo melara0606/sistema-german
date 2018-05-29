@@ -17,7 +17,7 @@ class CreateProyectoInventariosTable extends Migration
             $table->bigIncrements('id');
             $table->string('descripcion');
             $table->integer('cantidad');
-            $table->bigInteger('proyecto_id');
+            $table->bigInteger('proyecto_id')->unsigned();
             $table->timestamps();
             $table->foreign('proyecto_id')->references('id')->on('proyectos');
         });

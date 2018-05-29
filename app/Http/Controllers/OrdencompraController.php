@@ -14,6 +14,7 @@ use App\Proveedor;
 use App\Requisicion;
 use Illuminate\Http\Request;
 use DB;
+use App\Formapago;
 
 
 class OrdencompraController extends Controller
@@ -128,9 +129,9 @@ class OrdencompraController extends Controller
     public function create()
     {
         $requisiciones = Requisicion::where('estado',1)->get();
-        dd($requisiciones);
+        $formapagos = Formapago::all();
         $proveedores = Proveedor::where('estado',1)->get();
-        return view('ordencompras.guardar',compact('proveedores'));
+        return view('ordencompras.guardar',compact('proveedores','formapagos'));
     }
 
     /**

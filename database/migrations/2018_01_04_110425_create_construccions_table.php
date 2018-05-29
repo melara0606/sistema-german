@@ -15,10 +15,10 @@ class CreateConstruccionsTable extends Migration
     {
         Schema::create('construccions', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('contribuyente_id');
+            $table->bigInteger('contribuyente_id')->unsigned();
             $table->string('direccion_construccion');
             $table->double('presupuesto',8,2);
-            $table->bigInteger('impuesto_id');
+            $table->bigInteger('impuesto_id')->unsigned();
             $table->foreign('contribuyente_id')->references('id')->on('contribuyentes');
             $table->foreign('impuesto_id')->references('id')->on('impuestos');
             $table->timestamps();

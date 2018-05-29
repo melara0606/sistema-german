@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AgregarCategoriaIdACatalogosTable extends Migration
+class AgregarActividadARequisicion extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,9 @@ class AgregarCategoriaIdACatalogosTable extends Migration
      */
     public function up()
     {
-        Schema::table('catalogos', function (Blueprint $table) {
-            $table->bigInteger('categoria_id');
+        Schema::table('requisicions', function (Blueprint $table) {
+            $table->dropColumn('unidad_admin');
+            $table->bigInteger('unidad_id')->unsigned();
         });
     }
 
@@ -25,8 +26,9 @@ class AgregarCategoriaIdACatalogosTable extends Migration
      */
     public function down()
     {
-        Schema::table('catalogos', function (Blueprint $table) {
-            $table->dropColumn('categoria_id');
+        Schema::table('requisicions', function (Blueprint $table) {
+            $table->string('unidad_admin');
+            $table->dropColumn('unidad_id');
         });
     }
 }

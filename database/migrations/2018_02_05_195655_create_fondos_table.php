@@ -14,7 +14,7 @@ class CreateFondosTable extends Migration
     public function up()
     {
         Schema::create('fondos', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->bigInteger('proyecto_id')->unsigned();
             $table->bigInteger('fondocat_id')->unsigned();
             $table->double('monto',8,2)->nullable();

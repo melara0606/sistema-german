@@ -14,7 +14,7 @@ class CreateFondocatsTable extends Migration
     public function up()
     {
         Schema::create('fondocats', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->string('categoria');
             $table->timestamps();
         });

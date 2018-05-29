@@ -14,7 +14,7 @@ class CreateCatalogosTable extends Migration
     public function up()
     {
         Schema::create('catalogos', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->string('nombre');
             $table->string('unidad_medida');
             $table->timestamps();

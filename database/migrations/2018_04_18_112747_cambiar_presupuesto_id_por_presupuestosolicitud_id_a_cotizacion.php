@@ -16,7 +16,7 @@ class CambiarPresupuestoIdPorPresupuestosolicitudIdACotizacion extends Migration
         Schema::table('cotizacions', function (Blueprint $table) {
             $table->dropForeign('cotizacions_presupuesto_id_foreign');
             $table->dropColumn('presupuesto_id');
-            $table->bigInteger('presupuestosolicitud_id');
+            $table->bigInteger('presupuestosolicitud_id')->unsigned();
             $table->foreign('presupuestosolicitud_id')->references('id')->on('presupuesto_solicituds');
         });
     }
@@ -31,7 +31,7 @@ class CambiarPresupuestoIdPorPresupuestosolicitudIdACotizacion extends Migration
         Schema::table('cotizacions', function (Blueprint $table) {
             $table->dropForeign('cotizacions_presupuestosolicitud_id_foreign');
             $table->dropColumn('presupuestosolicitud_id');
-            $table->bigInteger('presupuesto_id');
+            $table->bigInteger('presupuesto_id')->unsigned();
             $table->foreign('presupuesto_id')->references('id')->on('presupuestos');
         });
     }

@@ -7,6 +7,8 @@ use App\Requisicion;
 use App\Requisiciondetalle;
 use App\Unidad;
 use App\UnidadMedida;
+use DB;
+use App\Http\Requests\RequisicionRequest;
 
 class RequisicionController extends Controller
 {
@@ -33,7 +35,7 @@ class RequisicionController extends Controller
      */
     public function create()
     {
-      $unidades=Unidad::all();
+      $unidades=Unidad::pluck('nombre_unidad', 'id');
       $medidas = UnidadMedida::all();
         return view('requisiciones.create',compact('unidades','medidas'));
     }
@@ -44,34 +46,41 @@ class RequisicionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(RequisicionRequest $request)
     {
         //dd($request->All());
-        \DB::beginTransaction();
-      try{
-        $count = $request->contador;
+        if($request->ajax())
+        {
+          DB::beginTransaction();
+        try{
+          $requisiciones = $request->requisiciones;
 
-        $requisicion = Requisicion::create([
-            'actividad' => $request->actividad,
-            'unidad_admin' => $request->unidad_admin,
-            'linea_trabajo' => $request->linea_trabajo,
-            'fuente_financiamiento' => $request->fuente_financiamiento,
-            'justificacion' => $request->justificacion,
+          $requisicion = Requisicion::create([
+              'actividad' => $request->actividad,
+              'unidad_id' => $request->unidad_admin,
+              'linea_trabajo' => $request->linea_trabajo,
+              'fuente_financiamiento' => $request->fuente_financiamiento,
+              'justificacion' => $request->justificacion,
+              ]);
+            foreach($requisiciones as $requi){
+              Requisiciondetalle::create([
+                'requisicion_id' => $requisicion->id,
+                'cantidad' => $requi['cantidad'],
+                'unidad_medida' => $requi['unidad'],
+                'descripcion' => $requi['descripcion'],
+              ]);
+            }
+            DB::commit();
+            return response()->json([
+              'mensaje' => 'exito'
             ]);
-          for($i = 0; $i<$count;$i++){
-            Requisiciondetalle::create([
-              'requisicion_id' => $requisicion->id,
-              'cantidad' => $request->cantidades[$i],
-              'unidad_medida' => $request->unidades[$i],
-              'descripcion' => $request->descripciones[$i],
-            ]);
-          }
-          \DB::commit();
-          return redirect('/requisiciones')->with('mensaje','Requisición registrada con éxito');
-      }catch (\Exception $e){
-        \DB::rollback();
-        return redirect('/requisiciones/create')->with('error','Requisición con error'.$e->getMessage());
-      }
+            //return redirect('/requisiciones')->with('mensaje','Requisición registrada con éxito');
+        }catch (\Exception $e){
+          DB::rollback();
+          //return redirect('/requisiciones/create')->with('error','Requisición con error'.$e->getMessage());
+        }
+        }
+
     }
 
     /**
@@ -94,11 +103,13 @@ class RequisicionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Requisicion $requisicione)
+    public function edit($id)
     {
-      $unidades=Unidad::all();
+      $requisicion=Requisicion::findorFail($id);
+      $unidades=Unidad::pluck('nombre_unidad', 'id');
+      //dd($unidades);
       $medidas = UnidadMedida::all();
-        return view('requisiciones.edit',compact('requisicione','medidas','unidades'));
+        return view('requisiciones.edit',compact('requisicion','medidas','unidades'));
     }
 
     /**

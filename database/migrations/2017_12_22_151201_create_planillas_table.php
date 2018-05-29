@@ -14,7 +14,7 @@ class CreatePlanillasTable extends Migration
     public function up()
     {
         Schema::create('planillas', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->bigInteger('empleado_id')->unsigned();
             $table->integer('mes');
             $table->integer('anio');

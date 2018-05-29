@@ -5,5 +5,5 @@
           <th>Unidad de medida</th>
           <th>Acción</th>
       </thead>
-      <tbody></tbody>
+      <tbody id="cuerpo"></tbody>
 </table>

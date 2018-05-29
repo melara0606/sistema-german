@@ -29,7 +29,7 @@
                     <input type="hidden" name="contador" id="contador" readonly>
                     <div class="form-group">
                         <div class="col-md-6 col-md-offset-1">
-                            <button type="submit" class="btn btn-success">
+                            <button id="btnguardar" type="button" class="btn btn-success">
                                 <span class="glyphicon glyphicon-floppy-disk"></span>    Registrar
                             </button>
                         </div>

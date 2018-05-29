@@ -28,7 +28,7 @@ class BorrarProyectoIdRequisiciones extends Migration
     public function down()
     {
         Schema::table('requisicions', function (Blueprint $table) {
-            $table->integer('proyecto_id');
+            $table->bigInteger('proyecto_id')->unsigned();
             $table->foreign('proyecto_id')->references('id')->on('proyectos');
             $table->dropColumn('actividad');
         });

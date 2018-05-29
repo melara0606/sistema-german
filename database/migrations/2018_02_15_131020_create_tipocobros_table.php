@@ -14,7 +14,7 @@ class CreateTipocobrosTable extends Migration
     public function up()
     {
         Schema::create('tipocobros', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->string('nombre_cobro');
             $table->double('monto',8,2);
             $table->timestamps();

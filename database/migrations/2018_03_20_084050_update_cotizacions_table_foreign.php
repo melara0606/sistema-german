@@ -29,7 +29,7 @@ class UpdateCotizacionsTableForeign extends Migration
     public function down()
     {
         Schema::table('cotizacions', function (Blueprint $table) {
-            $table->bigInteger('proyecto_id')->nullable();
+            $table->bigInteger('proyecto_id')->unsigned();
             $table->foreign('proyecto_id')->references('id')->on('proyectos');
             $table->dropForeign('cotizacions_presupuesto_id_foreign');
             $table->dropColumn('presupuesto_id');
