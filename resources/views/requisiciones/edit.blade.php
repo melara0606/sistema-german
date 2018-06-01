@@ -2,7 +2,7 @@
 
 @section('migasdepan')
 <h1>
-Editar <small>{{$requisicione->descripcion}}</small>
+Editar <small>{{$requisicion->descripcion}}</small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="{{ url('/home') }}"><i class="glyphicon glyphicon-home"></i> Inicio</a></li>
@@ -14,9 +14,10 @@ Editar <small>{{$requisicione->descripcion}}</small>
 @section('content')
 <div class="container">
     <div class="row">
-        <div class="panel panel-default">
+        <div class="panel panel-primary">
+          <div class="panel-heading">Edicion de requisicion</div>
             <div class="panel-body">
-                {{ Form::model($requisicione, array('method' => 'put', 'class' => 'form-horizontal' , 'route' => array('requisiciones.update', $requisicione->id))) }}
+                {{ Form::model($requisicion, array('method' => 'put', 'class' => 'form-horizontal' , 'route' => array('requisiciones.update', $requisicion->id))) }}
                 @include('requisiciones.formulario')
 
 

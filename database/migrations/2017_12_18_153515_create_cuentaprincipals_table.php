@@ -14,7 +14,7 @@ class CreateCuentaprincipalsTable extends Migration
     public function up()
     {
         Schema::create('cuentaprincipals', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->integer('numero_de_cuenta');
             $table->string('banco');
             $table->integer('anio');

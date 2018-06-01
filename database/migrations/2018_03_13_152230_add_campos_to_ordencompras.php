@@ -18,7 +18,7 @@ class AddCamposToOrdencompras extends Migration
             $table->integer('numero_orden')->nullable();
             $table->string('observaciones');
             $table->date('fecha_inicio');
-            $table->date('fecha_fin');
+            $table->date('fecha_fin')->nullable();
             $table->string('direccion_entrega');
             $table->string('adminorden');
             $table->foreign('cotizacion_id')->references('id')->on('cotizacions');

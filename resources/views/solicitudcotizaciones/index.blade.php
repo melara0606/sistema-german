@@ -20,7 +20,6 @@
             <div class="box-header">
               <h3 class="box-title"></h3>
               <div class="btn-group pull-right">
-                <a href="{{ url('solicitudcotizaciones/create') }}" class="btn btn-success"><span class="glyphicon glyphicon-plus-sign"></span></a>
                 <a href="{{ url('solicitudcotizaciones?estado=1')}}" class="btn btn-primary">Pendientes</a>
                 <a href="{{ url('solicitudcotizaciones?estado=3')}}" class="btn btn-primary">Finalizado</a>
                 <a href="{{ url('solicitudcotizaciones?estado=2')}}" class="btn btn-primary">Inactivados</a>

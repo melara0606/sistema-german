@@ -14,7 +14,7 @@ class CreateRetencionsTable extends Migration
     public function up()
     {
         Schema::create('retencions', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->double('isss',8,2);
             $table->double('afp',8,2);
             $table->double('insaforp',8,2);

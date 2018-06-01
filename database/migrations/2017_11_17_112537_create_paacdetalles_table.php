@@ -16,7 +16,7 @@ class CreatePaacdetallesTable extends Migration
         Schema::create('paacdetalles', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('obra');
-            $table->biginteger('paac_id')->unsigned();
+            $table->bigInteger('paac_id')->unsigned();
             $table->double('enero',8,2);
             $table->double('febrero',8,2);
             $table->double('marzo',8,2);

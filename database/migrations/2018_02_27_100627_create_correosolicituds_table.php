@@ -14,7 +14,7 @@ class CreateCorreosolicitudsTable extends Migration
     public function up()
     {
         Schema::create('correosolicituds', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->bigInteger('solicitudcotizacion_id')->unsigned();
             $table->string('correo');
             $table->foreign('solicitudcotizacion_id')->references('id')->on('solicitudcotizacions');

@@ -7,7 +7,7 @@
     <ol class="breadcrumb">
       <li><a href="{{ url('/home') }}"><i class="glyphicon glyphicon-home"></i> Inicio</a></li>
       <li><a href="{{ url('/requisiciones') }}"><i class="fa fa-balance-scale"></i> Requisiciones</a></li>
-      <li class="active">Registro</li>    
+      <li class="active">Registro</li>
       </ol>
 @endsection
 
@@ -29,7 +29,7 @@
                     <input type="hidden" name="contador" id="contador" readonly>
                     <div class="form-group">
                         <div class="col-md-6 col-md-offset-1">
-                            <button type="submit" class="btn btn-success">
+                            <button id="btnguardar" type="button" class="btn btn-success">
                                 <span class="glyphicon glyphicon-floppy-disk"></span>    Registrar
                             </button>
                         </div>
@@ -47,7 +47,7 @@
                       </div>
                       <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                        <button type="button" id="agregar" data-dismiss="modal" class="btn btn-success">Agregar</button>
+                        <button type="button" id="agregar" class="btn btn-success">Agregar</button>
                       </div>
                     </div>
                     </div>

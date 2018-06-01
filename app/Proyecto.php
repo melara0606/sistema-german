@@ -60,4 +60,9 @@ class Proyecto extends Model
     {
       return $this->hasOne('App\Cuenta');
     }
+
+    public function bitacoraproyecto()
+    {
+      return $this->hasMany('App\BitacoraProyecto');
+    }
 }

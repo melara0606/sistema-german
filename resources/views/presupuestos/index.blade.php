@@ -18,7 +18,9 @@
             <div class="box-header">
               <h3 class="box-title">Listado</h3>
               <div class="btn-group pull-right">
-                <a href="{{ url('/presupuestos/create') }}" class="btn btn-success"><span class="glyphicon glyphicon-plus-sign"></span> Agregar</a>
+                @if($existe==false)
+                  <a title="Registar el presupuesto para este proyecto" href="{{ url('presupuestos/seleccionaritem/'.$proyecto) }}" class="btn btn-success"><span class="fa fa-balance-scale"></span></a>
+                @endif
                 <a href="{{ url('/presupuestos?estado=1') }}" class="btn btn-primary">Activos</a>
                 <a href="{{ url('/presupuestos?estado=2') }}" class="btn btn-primary">Papelera</a>
               </div>
@@ -44,7 +46,12 @@
                       <td>{{$presupuesto->proyecto->nombre}}</td>
                       <td>{{$presupuesto->categoria->item}} {{$presupuesto->categoria->nombre_categoria}}</td>
                       <td>${{number_format($presupuesto->total,2)}}</td>
-                      <td><a href="{{url('presupuestos/'.$presupuesto->id)}}" class="btn btn-primary btn-sm">Ver</a></td>
+                      <td>
+                        <div class="btn-group">
+                          <a href="{{url('presupuestos/'.$presupuesto->id)}}" class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-eye-open"></span></a>
+                          <a title="Agregar elementos al presupuesto" class="btn btn-success btn-xs" href="{{url('presupuestodetalles/create/'.$presupuesto->id)}}"><span class="glyphicon glyphicon-plus"></span></a>
+                        </div>
+                      </td>
                     </tr>
                   @endforeach
                 </tbody>

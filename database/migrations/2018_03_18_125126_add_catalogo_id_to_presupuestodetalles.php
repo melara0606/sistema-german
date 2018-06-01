@@ -18,7 +18,7 @@ class AddCatalogoIdToPresupuestodetalles extends Migration
             $table->dropColumn('item');
             $table->dropColumn('categoria');
             $table->dropColumn('unidad');
-            $table->bigInteger('catalogo_id');
+            $table->bigInteger('catalogo_id')->unsigned();
             $table->foreign('catalogo_id')->references('id')->on('catalogos');
 
         });

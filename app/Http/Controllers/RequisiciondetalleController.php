@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Requisiciondetalle;
+use App\UnidadMedida;
 use App\Http\Requests\RequisiciondetalleRequest;
 
 class RequisiciondetalleController extends Controller
@@ -17,7 +18,7 @@ class RequisiciondetalleController extends Controller
      {
          $this->middleware('auth');
      }
-     
+
     public function index()
     {
         //
@@ -30,7 +31,8 @@ class RequisiciondetalleController extends Controller
      */
     public function create($id)
     {
-        return view('requisiciones.detalle.create',compact('id'));
+      $medidas=UnidadMedida::all();
+        return view('requisiciones.detalle.create',compact('id','medidas'));
     }
 
     /**
@@ -70,7 +72,9 @@ class RequisiciondetalleController extends Controller
     public function edit($id)
     {
         $requisicion=Requisiciondetalle::findorFail($id);
-        return view('requisiciones.detalle.edit',compact('requisicion'));
+
+        $medidas=UnidadMedida::all();
+        return view('requisiciones.detalle.edit',compact('requisicion','medidas'));
     }
 
     /**
@@ -80,11 +84,12 @@ class RequisiciondetalleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(RequisiciondetalleRequest $request, Requisiciondetalle $requisiciondetalle)
+    public function update(RequisiciondetalleRequest $request,$id)
     {
+        $requisiciondetalle=Requisiciondetalle::findorFail($id);
         $requisiciondetalle->fill($request->All());
         $requisiciondetalle->save();
-        return redirect('requisiciones')->with('mensaje','Se modifico con exito');
+        return redirect('requisiciones/'.$request->requisicion_id)->with('mensaje','Se modifico con exito');
     }
 
     /**

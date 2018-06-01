@@ -15,9 +15,9 @@ class CreateContratosTable extends Migration
     {
         Schema::create('contratos', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('empleado_id');
-            $table->bigInteger('tipocontrato_id');
-            $table->bigInteger('cargo_id');
+            $table->bigInteger('empleado_id')->unsigned();
+            $table->bigInteger('tipocontrato_id')->unsigned();
+            $table->bigInteger('cargo_id')->unsigned();
             $table->double('salario',8,2);
             $table->text('funciones');
             $table->string('motivo_contratacion')->nullable();

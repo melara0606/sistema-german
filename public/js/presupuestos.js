@@ -3,8 +3,9 @@ var contador = 0;
 var monto=0.0;
     $(document).ready(function(){
       var proy=$("#proyecto").val();
+      var it=$("#itemid").val();
       listaritems(proy);
-      listarcatalogo();
+      listarcatalogo(it);
       listarunidades();
     var tbMaterial = $("#tbMaterial");
 
@@ -178,6 +179,7 @@ var monto=0.0;
     {
         var nombre_descripcion = $("#txtdescripcion").val();
         var unidad_medida = $("#txtunidad").val();
+        var categoria_id = $("#categoria_id").val();
         var nombre = nombre_descripcion.toUpperCase();
         var token = $('meta[name="csrf-token"]').attr('content');
         var ruta = '/'+carpeta()+'/public/presupuestos/guardardescripcion';
@@ -186,16 +188,16 @@ var monto=0.0;
             headers: {'X-CSRF-TOKEN':token},
             type:'POST',
             dataType:'json',
-            data: {nombre,unidad_medida},
+            data: {nombre,unidad_medida,categoria_id},
            success : function(msj){
                 //window.location.href = "/sisverapaz/public/proyectos";
                 console.log(msj.mensaje);
                 if(msj.mensaje === "exito")
                 {
-                    toastr.success('Categoría registrado éxitosamente');
+                    toastr.success('Catalogo registrado éxitosamente');
                     $("#txtdescripcion").val("");
                     $("#txtunidad").val("");
-                    listarcatalogo();
+                    listarcatalogo(it);
                 }else{
                     toastr.error('Ocurrió un error al guardar');
                 }
@@ -263,9 +265,9 @@ var monto=0.0;
         });
     }
 
-    function listarcatalogo()
+    function listarcatalogo(id)
     {
-        $.get('/'+carpeta()+'/public/presupuestos/getcatalogo', function (data){
+        $.get('/'+carpeta()+'/public/presupuestos/getcatalogo/'+id, function (data){
             var html_select = '<option value="">Seleccione una descripción</option>';
             //console.log(data.length);
             if(data.length < 1){
@@ -299,7 +301,7 @@ var monto=0.0;
       var token = $('meta[name="csrf-token"]').attr('content');
       var total = $("#total").val();
       var proyecto_id = $("#proyecto").val();
-      var categoria_id = $("#item").val();
+      var categoria_id = $("#itemid").val();
       var presupuestos = new Array();
       $(cuerpo).find("tr").each(function (index, element) {
           if(element){
@@ -321,9 +323,14 @@ var monto=0.0;
             dataType:'json',
             data: {proyecto_id,categoria_id,total,presupuestos},
            success : function(msj){
+              if(msj.mensaje == 'exito'){
                 window.location.href = "/"+carpeta()+"/public/proyectos";
                 console.log(msj);
                 toastr.success('Presupuesto registrado éxitosamente');
+              }else{
+                console.log(msj);
+              }
+
             },
             error: function(data, textStatus, errorThrown){
                 toastr.error('Ha ocurrido un '+textStatus+' en la solucitud');

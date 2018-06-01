@@ -1,54 +1,27 @@
-                  <div class="form-group">
-                      <label for="" class="col-md-4 control-label">Seleccione una forma de pago: </label>
-                      <div class="col-md-6">
-                        <select name="formapago" id="formapago" class="chosen-select-width">
-                            <option value="">Seleccione una forma de pago...</option>
-                            @foreach($formapagos as $formapago)
-                            <option value="{{$formapago->id}}">{{$formapago->nombre}}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="" class="col-md-4 control-label">Seleccione la unidad solicitante: </label>
-                    <div class="col-md-6">
-                        <select name="unidad" id="unidad" class="chosen-select-width">
-                            <option value="">Seleccione una unidad</option>
-                            @foreach($unidades as $unidad)
-                            <option>{{$unidad->nombre_unidad}}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                </div>
-
                 <div class="form-group">
                     <label for="" class="col-md-4 control-label">Encargado\a del proceso: </label>
                     <div class="col-md-6">
-                        {{Form::text('encargado',null,['class' => 'form-control', 'id' => 'encargado'])}}
+                        {{Form::text('encargado',usuario(Auth()->user()->empleado_id),['readonly','class' => 'form-control', 'id' => 'encargado'])}}
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label for="" class="col-md-4 control-label">Cargo: </label>
                     <div class="col-md-6">
-                        {{Form::text('cargo',null,['class' => 'form-control', 'id' => 'cargo'])}}
+                        {{Form::text('cargo',vercargo(Auth()->user()->cargo),['readonly','class' => 'form-control', 'id' => 'cargo'])}}
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label for="" class="col-md-4 control-label">Seleccione el proceso o proyecto: </label>
+                    <label for="" class="col-md-4 control-label">Proceso o proyecto: </label>
                     <div class="col-md-6">
-                        <select name="proyecto" id="proyecto" class="chosen-select-width">
-                            <option value="">Seleccione una proceso o proyecto</option>
-                            @foreach($proyectos as $proyecto)
-                            <option value="{{$proyecto->id}}">{{$proyecto->nombre}}</option>
-                            @endforeach
-                        </select>
+                        {{Form::text('',$proyecto->nombre,['class' => 'form-control'])}}
+                        {{Form::hidden('proyecto',$proyecto->id,['class' => 'form-control','id' => 'proyecto'])}}
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label for="" class="col-md-4 control-label">Seleccione una categoria: </label>
+                    <label for="" class="col-md-4 control-label">Categoria: </label>
                     <div class="col-md-6">
                         <select name="categoria" id="categoria" class="chosen-select-width">
                           <option value="">Seleccione una categoría</option>
@@ -56,11 +29,34 @@
                     </div>
                 </div>
 
+                <div class="form-group">
+                    <label for="" class="col-md-4 control-label">Forma de pago: </label>
+                    <div class="col-md-6">
+                      <select name="formapago" id="formapago" class="chosen-select-width">
+                          <option value="">Seleccione una forma de pago...</option>
+                          @foreach($formapagos as $formapago)
+                          <option value="{{$formapago->id}}">{{$formapago->nombre}}</option>
+                          @endforeach
+                      </select>
+                  </div>
+              </div>
+              <div class="form-group">
+                  <label for="" class="col-md-4 control-label">Unidad solicitante: </label>
+                  <div class="col-md-6">
+                      <select name="unidad" id="unidad" class="chosen-select-width">
+                          <option value="">Seleccione una unidad</option>
+                          @foreach($unidades as $unidad)
+                          <option>{{$unidad->nombre_unidad}}</option>
+                          @endforeach
+                      </select>
+                  </div>
+              </div>
+
                 <div class="form-group{{ $errors->has('lugar_entrega') ? ' has-error' : '' }}">
-                    <label for="lugar_entrega" class="col-md-4 control-label">Lugar de entrega</label>
+                    <label for="lugar_entrega" class="col-md-4 control-label">Lugar de entrega de los suministros</label>
 
                     <div class="col-md-6">
-                        {!!Form::text('lugar_entrega',null,['class'=>'form-control','id'=>'lugar_entrega','autofocus'])!!}
+                        {!!Form::textarea('lugar_entrega',null,['class'=>'form-control','id'=>'lugar_entrega','rows'=>2])!!}
                     </div>
                 </div>
 

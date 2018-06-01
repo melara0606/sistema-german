@@ -14,7 +14,7 @@ class CreatePrestamosTable extends Migration
     public function up()
     {
         Schema::create('prestamos', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->bigInteger('empleado_id')->unsigned();
             $table->string('banco');
             $table->integer('numero_de_cuenta');

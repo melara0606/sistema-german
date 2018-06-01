@@ -14,7 +14,7 @@ class CreateCalendarizacionsTable extends Migration
     public function up()
     {
         Schema::create('calendarizacions', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->string('evento');
             $table->string('descripcion');
             $table->timestamps();

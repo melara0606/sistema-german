@@ -17,42 +17,45 @@
           <div class="box">
             <div class="box-header">
               <h3 class="box-title">Listado</h3>
+              <div class="btn-group pull-right">
                 <a href="{{ url('/requisiciones/create') }}" class="btn btn-success"><span class="glyphicon glyphicon-plus-sign"></span> Agregar</a>
                 <a href="{{ url('/requisiciones?estado=1') }}" class="btn btn-primary">Activos</a>
                 <a href="{{ url('/requisiciones?estado=2') }}" class="btn btn-primary">Papelera</a>
-            </div>
+              </div>
+          </div>
             <!-- /.box-header -->
             <div class="box-body table-responsive">
               <table class="table table-striped table-bordered table-hover" id="example2">
-          <thead>
-                  <th>Id</th>
+                <thead>
+                  <th>N°</th>
+                  <th>Actividad</th>
                   <th>Unidad</th>
-                  <th>Descripción</th>
+                  <th>Justificación</th>
                   <th>Linea de trabajo</th>
                   <th>Fuente de financiamiento</th>
                   <th>Accion</th>
+                  <?php $contador=0;?>
                 </thead>
                 <tbody>
                   @foreach($requisiciones as $requisicion)
+                    <?php $contador++;?>
                   <tr>
-                    <td>{{ $requisicion->id }}</td>
-                    <td>{{ $requisicion->justificacion}}</td>
-                    <td>{{ $requisicion->unidad_admin }}</td>
+                    <td>{{ $contador }}</td>
+                    <td>{{$requisicion->actividad}}</td>
+                    <td>{{ $requisicion->unidad->nombre_unidad}}</td>
+                    <td>{{ $requisicion->justificacion }}</td>
                     <td>{{ $requisicion->linea_trabajo }}</td>
                     <td>{{ $requisicion->fuente_financiamiento }}</td>
                     <td>
-                      <a href="{{url('requisiciones/'.$requisicion->id)}}" class="btn btn-primary"><span class="glyphicon glyphicon-eye-open"></span></a>
-                      <a href="{{url('requisiciones/'.$requisicion->id.'/edit')}}" class="btn btn-warning"><span class="glyphicon glyphicon-text-size"></span></a>
-
-                        </td>
+                      <div class="btn-group">
+                        <a href="{{url('requisiciones/'.$requisicion->id)}}" class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-eye-open"></span></a>
+                        <a href="{{url('requisiciones/'.$requisicion->id.'/edit')}}" class="btn btn-warning btn-xs"><span class="glyphicon glyphicon-edit"></span></a>
+                      </div>
+                    </td>
                   </tr>
                   @endforeach
                 </tbody>
               </table>
-                
-              <div class="pull-right">
-
-              </div>
             </div>
             <!-- /.box-body -->
           </div>

@@ -29,9 +29,11 @@ class CotizacionController extends Controller
     public function index(Request $request)
     {
         $estado = $request->get('estado');
+        $soli=$request->get('solicitud');
         if($estado == "" ){
-          $cotizaciones = Cotizacion::get();
-          return view ('cotizaciones.index',compact('cotizaciones','estado'));
+          $solicitud=PresupuestoSolicitud::findorFail($soli);
+          $cotizaciones = Cotizacion::where('presupuestosolicitud_id',$solicitud->id)->get();
+          return view ('cotizaciones.index',compact('cotizaciones','estado','solicitud'));
         }
         if ($estado == 1) {
             $cotizaciones = Cotizacion::where('estado',$estado)->get();

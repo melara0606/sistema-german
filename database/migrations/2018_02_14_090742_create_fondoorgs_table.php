@@ -14,7 +14,7 @@ class CreateFondoorgsTable extends Migration
     public function up()
     {
         Schema::create('fondoorgs', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->bigInteger('proyecto_id')->unsigned();
             $table->bigInteger('organizacion_id')->unsigned();
             $table->double('monto',8,2);
