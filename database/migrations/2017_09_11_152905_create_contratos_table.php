@@ -19,6 +19,8 @@ class CreateContratosTable extends Migration
             $table->bigInteger('tipocontrato_id');
             $table->bigInteger('cargo_id');
             $table->double('salario',8,2);
+            $table->text('funciones');
+            $table->string('motivo_contratacion')->nullable();
             $table->string('motivo')->nullable();
             $table->integer('estado')->default(1);
             $table->foreign('tipocontrato_id')->references('id')->on('tipocontratos');

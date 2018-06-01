@@ -27,6 +27,8 @@ class CreateContratoproyectosTable extends Migration
             $table->date('fin_contrato');
             $table->time('hora_entrada');
             $table->time('hora_salida');
+            $table->date('fecha_aprobacion');
+            $table->date('fecha_revision');
             $table->foreign('proyecto_id')->references('id')->on('proyectos');
             $table->foreign('empleado_id')->references('id')->on('empleados');
             $table->foreign('cargo_id')->references('id')->on('cargos');

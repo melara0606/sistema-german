@@ -14,7 +14,6 @@ class AddCamposToContratos extends Migration
     public function up()
     {
         Schema::table('contratos', function (Blueprint $table) {
-            //$table->string('representante');
             $table->date('inicio_contrato');
             $table->date('fin_contrato');
             $table->time('hora_entrada');
@@ -32,7 +31,6 @@ class AddCamposToContratos extends Migration
     public function down()
     {
         Schema::table('contratos', function (Blueprint $table) {
-            $table->dropColumn('representante');
             $table->dropColumn('inicio_contrato');
             $table->dropColumn('fin_contrato');
             $table->dropColumn('hora_entrada');

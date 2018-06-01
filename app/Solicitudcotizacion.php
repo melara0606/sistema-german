@@ -3,10 +3,16 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
+use App\Traits\DatesTranslator;
 
 class Solicitudcotizacion extends Model
 {
+
+  use DatesTranslator;
     protected $guarded =[];
+
+    public $dates = ['fecha_limite'];
 
     public function presupuesto()
     {

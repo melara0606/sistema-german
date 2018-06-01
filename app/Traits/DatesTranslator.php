@@ -20,4 +20,9 @@ trait DatesTranslator
   {
     return new Date($fecha_fin);
   }
+
+  public function getFechaLimiteAttribute($fecha_limite)
+  {
+    return new Date($fecha_limite);
+  }
 }

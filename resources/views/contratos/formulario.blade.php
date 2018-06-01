@@ -57,7 +57,79 @@
     </div>
 </div>
 
+<div class="form-group{{ $errors->has('funciones') ? ' has-error' : '' }}">
+    <label for="funciones" class="col-md-4 control-label">Funciones del cargo</label>
 
+    <div class="col-md-6">
+        {{ Form::textarea('funciones', null,['class'=>'form-control']) }}
+        @if ($errors->has('funciones'))
+        <span class="help-block">
+            <strong>{{ $errors->first('funciones') }}</strong>
+        </span>
+        @endif
+    </div>
+</div>
+
+<div class="form-group{{ $errors->has('motivo_contratacion') ? ' has-error' : '' }}">
+    <label for="motivo_contratacion" class="col-md-4 control-label">Motivo de contratación</label>
+
+    <div class="col-md-6">
+        {{ Form::text('motivo_contratacion', null,['class'=>'form-control']) }}
+        @if ($errors->has('motivo_contratacion'))
+        <span class="help-block">
+            <strong>{{ $errors->first('motivo_contratacion') }}</strong>
+        </span>
+        @endif
+    </div>
+</div>
+
+<div class="form-group{{ $errors->has('inicio_contrato') ? ' has-error' : '' }}">
+
+    <label for="" class="col-md-4 control-label">Fecha de inicio</label>
+    <div class="col-md-4">
+        {{Form::date('inicio_contrato',null,['class'=>'form-control','id'=>'inicio_contrato','autofocus'])}}
+    </div>
+</div>
+
+<div class="form-group{{ $errors->has('fin_contrato') ? ' has-error' : '' }}">
+    <label for="fin_contrato" class="col-md-4 control-label">Fecha finalización</label>
+    <div class="col-md-4">
+        {{Form::date('fin_contrato', null,['class' => 'form-control','id'=>'fin_contrato','autofocus'])}}
+    </div>
+</div>
+
+<div class="form-group{{ $errors->has('hora_entrada') ? ' has-error' : '' }}">
+    <label for="" class="col-md-4 control-label">Hora de entrada</label>
+    <div class="col-md-6">
+        {{Form::time('hora_entrada', null, ['class'=>'form-control','id'=>'hora_entrada','autofocus'])}}
+        
+    </div>
+</div>
+
+
+<div class="form-group{{ $errors->has('hora_salida') ? ' has-error' : '' }}">
+    <label for="" class="col-md-4 control-label">Hora de salida</label>
+    <div class="col-md-6">
+        {{Form::time('hora_salida', null, ['class'=>'form-control','id'=>'hora_salida','autofocus'])}}
+        
+    </div>
+</div>
+
+<div class="form-group{{ $errors->has('fecha_aprobacion') ? ' has-error' : '' }}">
+
+    <label for="" class="col-md-4 control-label">Fecha de aprobación</label>
+    <div class="col-md-6">
+        {{Form::date('fecha_aprobacion',null,['class'=>'form-control','id'=>'fecha_aprobacion','autofocus'])}}
+    </div>
+</div>
+
+<div class="form-group{{ $errors->has('fecha_revision') ? ' has-error' : '' }}">
+
+    <label for="" class="col-md-4 control-label">Fecha de revisión</label>
+    <div class="col-md-6">
+        {{Form::date('fecha_revision',null,['class'=>'form-control','id'=>'fecha_revision','autofocus'])}}
+    </div>
+</div>
 
 <!-- Modal -->
 <div class="modal fade" data-backdrop="static" data-keyboard="false" id="btnempleado" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
