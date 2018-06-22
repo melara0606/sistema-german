@@ -2,8 +2,8 @@
 
 @section('migasdepan')
 <h1>
-        Contrato
-        <small>Control de Contrato</small>
+        Generalidades del contrato del proyecto
+
       </h1>
       <ol class="breadcrumb">
         <li><a href="{{ url('/contratoproyectos') }}"><i class="fa fa-dashboard"></i> Contrato</a></li>
@@ -13,7 +13,7 @@
 @section('content')
 <div class="container">
     <div class="row">
-        <div class="col-md-10 col-md-offset-1">
+        <div class="col-md-11">
             <div class="panel panel-primary">
                 <div class="panel-heading">Registro de contrato</div>
                 <div class="panel-body">

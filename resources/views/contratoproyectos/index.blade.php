@@ -17,30 +17,35 @@
           <div class="box">
             <div class="box-header">
               <h3 class="box-title">Listado</h3>
+              <div class="btn-group pull-right">
                 <a href="{{ url('/contratoproyectos/create') }}" class="btn btn-success"><span class="glyphicon glyphicon-plus-sign"></span> Agregar</a>
                 <a href="{{ url('/contratoproyectos?estado=1') }}" class="btn btn-primary">Activos</a>
                 <a href="{{ url('/contratoproyectos?estado=2') }}" class="btn btn-primary">Papelera</a>
+              </div>
             </div>
             <!-- /.box-header -->
             <div class="box-body table-responsive">
               <table class="table table-striped table-bordered table-hover" id="example2">
           <thead>
                   <th>Id</th>
-                  <th>Empleado</th>
                   <th>Proyecto</th>
-                  <th>Cargo</th>
                   <th>Salario</th>
+                  <th>Inicio del contrato</th>
+                  <th>Fin del contrato</th>
+                  <th>Hora de entrada</th>
+                  <th>Hora de salida</th>
                   <th>Accion</th>
                 </thead>
                 <tbody>
-                  @foreach($contratoproyectos as $contratoproyecto)
+                  @foreach($contratoproyectos as $key => $contratoproyecto)
                   <tr>
-                    <td>{{ $contratoproyecto->id }}</td>
-                    <td>{{ $contratoproyecto->empleado_id->nombre }}</td>
-                    <td>{{ $contratoproyecto->proyecto_id->nombre }}</td>
-                    <td>{{ $contratoproyecto->cargo_id->nombre }}</td>
-                    <td>{{ $contratoproyecto->salario }}</td>
-                    
+                    <td>{{ $key+1}}</td>
+                    <td>{{ $contratoproyecto->proyecto->nombre }}</td>
+                    <td>${{ number_format($contratoproyecto->salario,2) }}</td>
+                    <td>{{fechaCastellano($contratoproyecto->inicio_contrato)}}</td>
+                    <td>{{fechaCastellano($contratoproyecto->fin_contrato)}}</td>
+                    <td>{{ $contratoproyecto->hora_entrada}}</td>
+                    <td>{{ $contratoproyecto->hora_salida}}</td>
                     <td>
                       @if($estado == 1 || $estado == "")
                         {{ Form::open(['method' => 'POST', 'id' => 'baja', 'class' => 'form-horizontal'])}}
@@ -58,7 +63,7 @@
                   @endforeach
                 </tbody>
               </table>
-                
+
               <div class="pull-right">
 
               </div>

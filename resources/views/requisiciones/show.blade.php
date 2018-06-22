@@ -18,29 +18,29 @@
             <div class="panel panel-primary">
                 <div class="panel-heading">Datos de la requisición </div>
                 <div class="panel-body">
-                        <div class="form-group{{ $errors->has('nombre') ? ' has-error' : '' }}">
-                            <label for="nombre" class="col-md-4 control-label">Unidad administrativa: </label>
-                            <label for="nombre" class="col-md-4 control-label">{{$requisicion->unidad_admin}}</label><br>
-
-                        </div>
-
-                         <div class="form-group{{ $errors->has('monto') ? ' has-error' : '' }}">
-                            <label for="monto" class="col-md-4 control-label">Linea de trabajo: </label>
-                            <label for="nombre" class="col-md-4 control-label">{{$requisicion->linea_trabajo}}</label><br>
-
-                        </div>
-
-                        <div class="form-group{{ $errors->has('fuente_financiamiento') ? ' has-error' : '' }}">
-                            <label for="direccion" class="col-md-4 control-label">Fuente de financiamiento: </label>
-                            <label for="nombre" class="col-md-4 control-label">{{$requisicion->fuente_financiamiento}}</label><br>
-
-                        </div>
-
-                        <div class="form-group{{ $errors->has('fecha_inicio') ? ' has-error' : '' }}">
-                            <label for="fecha_inicio" class="col-md-4 control-label">Justificación: </label>
-                            <label for="nombre" class="col-md-4 control-label">{{$requisicion->justificacion}}</label><br>
-
-                        </div>
+                    <table class="table">
+                      <tr>
+                        <th>Unidad administrativa</th>
+                        <td>{{$requisicion->unidad->nombre_unidad}}</td>
+                      </tr>
+                      <tr>
+                        <th>Actividad</th>
+                        <td>{{$requisicion->actividad}}</td>
+                      </tr>
+                      <tr>
+                        <th>Línea de trabajo</th>
+                        <td>{{$requisicion->linea_trabajo}}</td>
+                      </tr>
+                      <tr>
+                        <th>FUente de financiamiento</th>
+                        <td>{{$requisicion->fuente_financiamiento}}</td>
+                      </tr>
+                      <tr>
+                        <th>Justificación</th>
+                        <td>{{$requisicion->justificacion}}</td>
+                      </tr>
+                    </table>
+                        
                         <br>
                         <a class="btn btn-success" href="{{url('requisiciondetalles/create/'.$requisicion->id)}}">Agregar Necesidad</a>
                         <div>

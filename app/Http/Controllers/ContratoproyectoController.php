@@ -3,16 +3,15 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Contratoproyecto;
+use App\ContratoProyecto;
 use App\Empleado;
 use App\Proyecto;
 use App\Cargo;
 use App\Http\Requests\ContratoRequest;
 use App\Http\Requests\EmpleadoRequest;
-use App\Http\Requests\ProyectoRequest;
 use App\Http\Requests\ContratoproyectoRequest;
 use App\Http\Requests\CargoRequest;
-
+use DB;
 
 class ContratoproyectoController extends Controller
 {
@@ -48,44 +47,13 @@ class ContratoproyectoController extends Controller
      */
     public function create()
     {
-        $empleados = Empleado::all();
-        //dd($empleados);
-        $proyectos = Proyecto::all();
-        $cargos = Cargo::all();
-        $contratoproyectos = Contratoproyecto::all();
-        return view('contratoproyectos.create',compact('empleados','proyectos','cargos','contratoproyectos'));
-    }
+        $proyectos = DB::table('proyectos')
+                  ->whereNotExists(function ($query) {
+                       $query->from('contrato_proyectos')
+                          ->whereRaw('contrato_proyectos.proyecto_id = proyectos.id');
+                      })->get();
 
-    public function listarEmpleados()
-    {
-        return Empleado::where('estado',1)->get();
-    }
-
-    public function listarCargos()
-    {
-        return Cargo::get();
-    }
-
-    public function guargarCargo(Request $request)
-    {
-        if($request->ajax())
-        {
-            Cargo::create($request->All());
-            return response()->json([
-                'mensaje' => 'Cargo creado'
-            ]);
-        }
-    }
-
-    public function guardarEmpleado(Request $request)
-    {
-        if($request->ajax())
-        {
-            Empleado::create($request->All());
-            return response()->json([
-                'mensaje' => 'Empleado agregado'
-            ]);
-        }
+        return view('contratoproyectos.create',compact('proyectos'));
     }
 
     /**
@@ -96,13 +64,16 @@ class ContratoproyectoController extends Controller
      */
     public function store(ContratoproyectoRequest $request)
     {
-        Contratoproyecto::create([
-            'empleado_id' => $request->empleado_id,
-            'cargo_id' => $request->cargo_id,
+        ContratoProyecto::create([
+            'proyecto_id' => $request->proyecto,
             'salario' => $request->salario,
-            'motivo' => $request->motivo,
+            'motivo_contratacion' => $request->motivo_contratacion,
+            'inicio_contrato' => invertir_fecha($request->inicio_contrato),
+            'fin_contrato' => invertir_fecha($request->fin_contrato),
+            'hora_entrada' => $request->hora_entrada,
+            'hora_salida' => $request->hora_salida,
         ]);
-        return redirect('/contratoproyectos')->with('mensaje','Contrato registrado');
+        return redirect('contratoproyectos')->with('mensaje','Contrato registrado');
     }
 
     /**
@@ -113,7 +84,7 @@ class ContratoproyectoController extends Controller
      */
     public function show($id)
     {
-        $contratoproyecto = Contratoproyecto::findorFail($id);
+        $contratoproyecto = ContratoProyecto::findorFail($id);
         return redirect('contratoproyectos.show',compact('contratoproyecto'));
     }
 

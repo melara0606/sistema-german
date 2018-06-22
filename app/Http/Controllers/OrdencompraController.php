@@ -12,6 +12,7 @@ use App\PresupuestoSolicitud;
 use App\ProyectoInventario;
 use App\Proveedor;
 use App\Requisicion;
+use App\Requisiciondetalle;
 use Illuminate\Http\Request;
 use DB;
 use App\Formapago;
@@ -40,6 +41,11 @@ class OrdencompraController extends Controller
      public function getMonto($id)
      {
         return Fondo::where('proyecto_id',$id)->with('fondocat')->get();
+     }
+
+     public function requisiciones($id)
+     {
+       return Requisiciondetalle::where('requisicion_id',$id)->get();
      }
 
      public function realizarorden($id)
@@ -131,7 +137,7 @@ class OrdencompraController extends Controller
         $requisiciones = Requisicion::where('estado',1)->get();
         $formapagos = Formapago::all();
         $proveedores = Proveedor::where('estado',1)->get();
-        return view('ordencompras.guardar',compact('proveedores','formapagos'));
+        return view('ordencompras.guardar',compact('proveedores','formapagos','requisiciones'));
     }
 
     /**

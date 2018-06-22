@@ -24,8 +24,13 @@ class ContratoproyectoRequest extends FormRequest
      public function rules()
      {
          return [
-             'empleado_id'=>'required',
-             'cargo_id'=>'required',
+             'proyecto' => 'required',
+             'salario' => 'required|numeric',
+             'motivo_contratacion' => 'required',
+             'inicio_contrato' => 'required',
+             'fin_contrato' => 'required',
+             'hora_entrada' => 'required',
+             'hora_salida' => 'required',
          ];
      }
 }

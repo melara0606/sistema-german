@@ -43,7 +43,7 @@
     <label for="nombre" class="col-md-4 control-label">Direccion de entrega</label>
 
     <div class="col-md-6">
-        {!!Form::text('direccion_entrega',null,['class'=>'form-control','id'=>'direccion','autofocus'])!!}
+        {!!Form::text('direccion_entrega',$cotizacion->presupuestosolicitud->presupuesto->proyecto->direccion,['class'=>'form-control','id'=>'direccion','autofocus'])!!}
     </div>
 </div>
 

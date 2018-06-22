@@ -1,45 +1,31 @@
 $(document).ready(function (){
-	$("#proyecto").on("change", function(e){
-		var id = (this.value);
-		console.log(id);
-		if(id > 0)
-		{
-			$.get('/'+carpeta()+'/public/ordencompras/cotizaciones/'+ id , function(data){
-			//$("#proveedor").val(data.descripcion);
 
-			$(data).each(function(key, value){
-				$(cuerpo).empty();
-				var total=0.0;
-        var contador=0;
-				console.log(value);
-				$("#proveedor").val(value.proveedor.nombre);
-				$("#nit").val(value.proveedor.nit);
-        $("#pago").val(value.descripcion);
-        $("#cotizacion_id").val(value.id);
-				$(value.detallecotizacion).each(function(key,value2){
-          contador++;
-					$(cuerpo).append(
+	$("#actividad").on("change", function(e){
+		var idrequisicion = (this.value);
+		if(idrequisicion != ""){
+			$.get("/"+carpeta()+"/public/ordencompras/requisiciones/"+idrequisicion, function(data){
+				$(data).each(function(key,value){
+					$(requi).empty();
+					$(requi).append(
 		                "<tr>"+
-		                    "<td>" + contador + "</td>" +
-		                    "<td>" + value2.descripcion + "</td>" +
-		                    "<td>" + value2.unidad_medida + "</td>" +
-		                    "<td>" + value2.cantidad + "</td>" +
-		                    "<td> $" + parseFloat(value2.precio_unitario).toFixed(2) + "</td>" +
-		                    "<td> $" + parseFloat(value2.precio_unitario * value2.cantidad).toFixed(2) + "</td>" +
+		                    "<td>" + value.descripcion + "</td>" +
+		                    "<td>" + value.unidad_medida + "</td>" +
+												"<td>" + value.cantidad + "</td>"+
+												"<td>"+
+												"<div class='btn-group'>"+
+												"<button class='btn btn-primary btn-xs'><i class='glyphicon glyphicon-ok'></i></button>"+
+												"<button class='btn btn-warning btn-xs'><i class='glyphicon glyphicon-edit'></i></button>"+
+												"</div>"+
+												"</td>"+
 		                "</tr>"
 		          	);
-		          	total+=value2.cantidad*value2.precio_unitario;
 				});
-				$("#pie #total").text("$"+total.toFixed(2));
-				$("#pie #letras").text(NumeroALetras(total.toFixed(2)));
 			});
-		});
 		}else{
-			swal(
-			  'Debe seleccionar un proyecto!',
-			  '',
-			  'info'
-			)
+			$(requi).empty();
+			swal('¡Aviso!',
+            'Debe seleccionar una actividad',
+            'warning');
 		}
 
 	});

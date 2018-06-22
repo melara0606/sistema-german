@@ -13,6 +13,7 @@
 
 
   {!! Html::script('js/sisverapaz.js') !!}
+  {!! Html::script('js/funcionesgenerales.js') !!}
 
   <script>
     function carpeta()

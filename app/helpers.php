@@ -17,7 +17,6 @@ function tamaniohumano($size, $precision = 2)
             $size = (int) $size;
             $base = log($size) / log(1024);
             $suffixes = array(' bytes', ' KB', ' MB', ' GB', ' TB');
-
             return round(pow(1024, $base - floor($base)), $precision) . $suffixes[floor($base)];
         } else {
             return $size;
@@ -127,7 +126,7 @@ function proyecto_estado($estado)
             break;
         case '3':
             return 'En proceso de cotización';
-                break;
+            break;
         case '4':
             return 'Recibiendo cotizaciones';
             break;
