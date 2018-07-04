@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Empleado extends Model
 {
     protected $guarded = [];
-    protected $dates = ['fecha_contrato'];
+    protected $dates = ['fecha_contrato','fecha_nacimiento'];
 
     public static function Buscar($nombre,$estado)
     {

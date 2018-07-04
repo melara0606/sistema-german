@@ -55,9 +55,11 @@ class EPContratacionController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function index()
+    public function index(Request $request)
     {
-
+        $id = $request->get('id');
+        $contrataciones = ContratacionProyecto::where('contratoproyecto_id',$id)->get();
+        return view('contratacionproyectos.index',compact('contrataciones'));
     }
 
     /**

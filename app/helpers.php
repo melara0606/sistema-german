@@ -23,6 +23,114 @@ function tamaniohumano($size, $precision = 2)
         }
     }
 
+    function duicero($dui)
+    {
+        $cantidad = strlen((int)$dui);
+        switch ($cantidad) {
+            case 7:
+                return 'CERO';
+                break;
+
+                case 6:
+                return 'CERO CERO';
+                break;
+
+                case 5:
+                return 'CERO CERO CERO';
+                break;
+
+                case 4:
+                return 'CERO CERO CERO CERO';
+                break;
+            
+            default:
+                # code...
+                break;
+        }
+        
+    }
+
+    function duinitultimo($numero)
+    {
+        switch ($numero) {
+            case '0':
+                return 'CERO';
+                break;
+
+                case '1':
+                return 'UNO';
+                break;
+
+                case '2':
+                return 'DOS';
+                break;
+
+                case '3':
+                return 'TRES';
+                break;
+
+                case '4':
+                return 'CUATRO';
+                break;
+
+                case '5':
+                return 'CINCO';
+                break;
+
+                case '6':
+                return 'SEIS';
+                break;
+
+                case '7':
+                return 'SIETE';
+                break;
+
+                case '8':
+                return 'OCHO';
+                break;
+
+                case '9':
+                return 'NUEVE';
+                break;
+            
+            default:
+                # code...
+                break;
+        }
+    }
+
+    function nitprimero($nit)
+    {
+        $cantidad = strlen((int)$nit);
+        if ($cantidad == 3)
+        {
+            return 'CERO';
+        }
+    }
+
+    function nitsegundo($nit)
+    {
+        $cantidad = strlen((int)$nit);
+        if ($cantidad == 5)
+        {
+            return 'CERO';
+        }
+    }
+
+    function nittercero($nit)
+    {
+        $cantidad = strlen((int)$nit);
+        if ($cantidad == 1)
+        {
+            return 'CERO CERO';
+        }
+        if($cantidad == 2)
+        {
+            return 'CERO';
+        }
+    }
+
+
 function fechaCastellano ($fecha)
 {
   $fecha = substr($fecha, 0, 10);
