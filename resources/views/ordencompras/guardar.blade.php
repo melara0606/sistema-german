@@ -63,7 +63,7 @@
                     </div>
 
                     <div class="form-group{{ $errors->has('direccion') ? ' has-error' : '' }}">
-                        <label for="nombre" class="col-md-4 control-label">Direccion de entrega</label>
+                        <label for="nombre" class="col-md-4 control-label">Dirección de entrega</label>
 
                         <div class="col-md-6">
                             {!!Form::textarea('direccion_entrega',null,['rows' => 3,'class'=>'form-control','id'=>'direccion','placeholder'=>'Digite la direccion de entrega de los materiales'])!!}
@@ -88,6 +88,9 @@
                         <div class="col-md-6">
                             {!!Form::textarea('observaciones',null,['rows'=>2,'class'=>'form-control','placeholder'=>'Digite las observaciones (si las hay)'])!!}
                         </div>
+                    </div>
+                    <div class="form-group">
+                      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#agregarequi" title="">Agregar requisiciones</button>
                     </div>
 
 
@@ -133,6 +136,53 @@
                 </div>
             </div>
         </div>
+        </div>
+    </div>
+
+    <div class="modal fade" data-backdrop="static" data-keyboard="false" id="agregarequi" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="row">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">Registro de Empleado
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    </div>
+                    <div class="panel-body">
+                      <div class="form-group">
+                        <label for="" class="col-md-4 control-label">Actividad</label>
+                        <div class="col-md-6">
+                          <select class="chosen-select-width" id="actividad">
+                            <option value="">Seleccione una actividad</option>
+                            @foreach($requisiciones as $requisicion)
+                              <option value="{{$requisicion->id}}">{{$requisicion->actividad}}</option>
+                            @endforeach
+                          </select>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <table class="table">
+                          <thead>
+                            <tr>
+                              <th>Descripción</th>
+                              <th>Cantidad</th>
+                              <th>Unidad de medida</th>
+                              <th>Acciones</th>
+                            </tr>
+                          </thead>
+                          <tbody id="requi">
+
+                          </tbody>
+                        </table>
+                      </div>
+                        <div class="form-group">
+                          <button class="btn btn-default" type="button" id="comprar"><i class="glyphicon glyphicon-plus-sign"></i></button>
+                        </div>
+                    </div>
+                    <div class="panel-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                        <button type="button" id="guardarempleado" data-dismiss="modal" class="btn btn-success">Guardar</button>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 @endsection

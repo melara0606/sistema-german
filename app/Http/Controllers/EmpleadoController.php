@@ -54,8 +54,52 @@ class EmpleadoController extends Controller
      */
     public function store(EmpleadoRequest $request)
     {
-        Empleado::create($request->All());
-        return redirect('/empleados')->with('mensaje', 'Empleado registrado');
+      if($request->ajax())
+      {
+        try{
+          Empleado::create([
+            'nombre' => $request->nombre,
+            'dui' => $request->dui,
+            'nit' => $request->nit,
+            'sexo' => $request->sexo,
+            'telefono_fijo' => $request->telefono_fijo,
+            'celular' => $request->celular,
+            'direccion' => $request->direccion,
+            'fecha_nacimiento' => invertir_fecha($request->fecha_nacimiento),
+            'num_contribuyente' => $request->num_contribuyente,
+            'num_seguro_social' => $request->num_seguro_social,
+            'num_afp' => $request->num_afp,
+          ]);
+          return response()->json([
+            'mensaje' => 'exito'
+          ]);
+        }catch(\Exception $e)
+        {
+          return response()->json([
+            'mensaje' => 'error'
+          ]);
+        }
+      }else{
+        try{
+          Empleado::create([
+            'nombre' => $request->nombre,
+            'dui' => $request->dui,
+            'nit' => $request->nit,
+            'sexo' => $request->sexo,
+            'telefono_fijo' => $request->telefono_fijo,
+            'celular' => $request->celular,
+            'direccion' => $request->direccion,
+            'fecha_nacimiento' => invertir_fecha($request->fecha_nacimiento),
+            'num_contribuyente' => $request->num_contribuyente,
+            'num_seguro_social' => $request->num_seguro_social,
+            'num_afp' => $request->num_afp,
+          ]);
+          return redirect('/empleados')->with('mensaje', 'Empleado registrado exitosamente');
+        }catch(\Exception $e){
+          return redirect('empleados/create')->with('error','Ocurrió un error, contacte al administrador');
+        }
+      }
+
     }
 
     /**
@@ -95,7 +139,7 @@ class EmpleadoController extends Controller
         $empleado->fill($request->All());
         $empleado->save();
         bitacora('Modificó un registro');
-        return redirect('/empleados')->with('mensaje','Registro modificado con éxito');
+        return redirect('empleados')->with('mensaje','Registro modificado con éxito');
     }
 
     /**

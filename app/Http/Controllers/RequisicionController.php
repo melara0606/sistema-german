@@ -48,7 +48,6 @@ class RequisicionController extends Controller
      */
     public function store(RequisicionRequest $request)
     {
-        //dd($request->All());
         if($request->ajax())
         {
           DB::beginTransaction();
@@ -74,10 +73,11 @@ class RequisicionController extends Controller
             return response()->json([
               'mensaje' => 'exito'
             ]);
-            //return redirect('/requisiciones')->with('mensaje','Requisición registrada con éxito');
         }catch (\Exception $e){
           DB::rollback();
-          //return redirect('/requisiciones/create')->with('error','Requisición con error'.$e->getMessage());
+          return response()->json([
+            'mensaje' => 'error'
+          ]);
         }
         }
 
@@ -107,7 +107,6 @@ class RequisicionController extends Controller
     {
       $requisicion=Requisicion::findorFail($id);
       $unidades=Unidad::pluck('nombre_unidad', 'id');
-      //dd($unidades);
       $medidas = UnidadMedida::all();
         return view('requisiciones.edit',compact('requisicion','medidas','unidades'));
     }

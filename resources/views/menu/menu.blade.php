@@ -24,6 +24,17 @@
             <li><a href="{{ url('/usuarios') }}"><i class="fa fa-circle-o"></i> Listado de Usuarios</a></li>
           </ul>
         </li>
+        <li class="treeview">
+          <a href="#">
+            <i class="glyphicon glyphicon-hdd"></i><span>Respaldos</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li class="activo"><a href="{{ url('/backups') }}"><i class="fa fa-circle-o"></i> Ver Respaldos</a></li>
+          </ul>
+        </li>
         @endif
         @if(Auth::user()->cargo == 2)
         @include('menu.uaci')

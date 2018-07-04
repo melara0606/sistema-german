@@ -7,7 +7,7 @@
               <div class="box-header">
                 <h3 class="box-title">Respaldos</h3>
                 <div class="btn-group pull-right">
-                  <a id="create-new-backup-button" href="{{ route('backup.create') }}" class="btn btn-primary pull-right"><i
+                  <a href="{{ route('backup.create') }}" class="btn btn-primary pull-right"><i
                     class="fa fa-plus"></i> Crear nuevo respaldo
                   </a>
                 </div>
@@ -30,7 +30,7 @@
                     <tbody>
                       @foreach ($respaldos as $key => $respaldo)
                         <tr>
-                          <td>{{$key++}}</td>
+                          <td>{{$key+1}}</td>
                           <td>{{$respaldo['directorio']}}</td>
                           <td>{{$respaldo['nombre']}}</td>
                           <td>{{tamaniohumano($respaldo['tamanio'])}}</td>
