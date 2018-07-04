@@ -25,7 +25,6 @@ class ContratoproyectoRequest extends FormRequest
      {
          return [
              'proyecto' => 'required',
-             'salario' => 'required|numeric',
              'motivo_contratacion' => 'required',
              'inicio_contrato' => 'required',
              'fin_contrato' => 'required',

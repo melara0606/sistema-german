@@ -15,22 +15,37 @@ class EPContratacionController extends Controller
     */
     public function listadeempleados($id)
     {
-      return $empleados = DB::table('empleados')
+      $empleados = DB::table('empleados')
                 ->whereNotExists(function ($query) use ($id) {
                      $query->from('contratacion_proyectos')
                         ->whereRaw('contratacion_proyectos.empleado_id = empleados.id')
                         ->whereRaw('contratacion_proyectos.contratoproyecto_id = '.$id);
                     })->get();
-
-
+      return base64_encode($empleados);
     }
 
     /*
-
+    se listan todos las contrataciones en consulta ajax
     */
     public function todosloscontratos()
     {
-      return ContratacionProyecto::with('empleado','contratoproyecto')->get();
+      return base64_encode(ContratacionProyecto::with('empleado','contratoproyecto')->get());
+    }
+
+    //ver la informacion relevante de la persona contratada
+
+    public function vercontratado($id)
+    {
+      return base64_encode($contratado = ContratacionProyecto::with('empleado','ContratoProyecto','epfuncione')->find($id));
+      /*return $contratacion = DB::table('contratacion_proyectos AS cps')
+            ->with('epfuncione')
+            ->select('emp.nombre AS nomemp','pro.nombre AS nompro','pro.direccion')
+            ->join('empleados as emp', 'cps.empleado_id', '=', 'emp.id')
+            ->join('contrato_proyectos AS cp', 'cps.contratoproyecto_id', '=','cp.id')
+            ->join('proyectos AS pro','cp.proyecto_id','=','pro.id')
+            ->where('cps.id', $id)
+            ->get();*/
+      //return $e = select * from contratacion_proyectos INNER JOIN empleados INNER JOIN contrato_proyectos INNER JOIN proyectos WHERE contratacion_proyectos.empleado_id=empleados.id AND contratacion_proyectos.id=8
     }
 
 
@@ -39,6 +54,12 @@ class EPContratacionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function getContratos()
+    {
+      $contratos=ContratacionProyecto::all();
+      return response()->json($contratos);
+    }
 
     public function index()
     {
@@ -50,11 +71,12 @@ class EPContratacionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($id)
     {
-      $proyectos = ContratoProyecto::where('estado',1)->get();
-      //dd($proyectos);
-        return view('contratacionproyectos.create',compact('proyectos'));
+      $proyecto = ContratoProyecto::findorFail($id);
+
+      //dd($proyecto->proyecto->nombre);
+        return view('contratacionproyectos.create',compact('proyecto'));
     }
 
     /**
@@ -72,24 +94,27 @@ class EPContratacionController extends Controller
             $contrato = ContratacionProyecto::create([
               'contratoproyecto_id' => $request->proyecto,
               'empleado_id' => $request->empleado,
+              'cargo' => $request->cargo,
+              'salario' => $request->salario,
               'fecha_revision' => $request->fecharevision,
               'fecha_contratacion' => date('Y-m-d'),
             ]);
 
             foreach($request->funciones as $funcion){
               EPFuncione::create([
-                'funcion' => $funcion['funcion'],
                 'contratacionproyecto_id' => $contrato->id,
+                'funcion' => $funcion['funcion'],
               ]);
             }
             DB::commit();
             return response()->json([
-              'mensaje' => 'exito'
+              'mensaje' => 'exito',
             ]);
           }catch(\Exception $e){
             DB::rollback();
             return response()->json([
-              'mensaje' => 'error'
+              'mensaje' => 'error',
+              'codigo' => $e->getMessage(),
             ]);
           }
 

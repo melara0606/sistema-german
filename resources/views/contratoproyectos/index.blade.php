@@ -27,9 +27,8 @@
             <div class="box-body table-responsive">
               <table class="table table-striped table-bordered table-hover" id="example2">
           <thead>
-                  <th>Id</th>
+                  <th>N°</th>
                   <th>Proyecto</th>
-                  <th>Salario</th>
                   <th>Inicio del contrato</th>
                   <th>Fin del contrato</th>
                   <th>Hora de entrada</th>
@@ -41,7 +40,6 @@
                   <tr>
                     <td>{{ $key+1}}</td>
                     <td>{{ $contratoproyecto->proyecto->nombre }}</td>
-                    <td>${{ number_format($contratoproyecto->salario,2) }}</td>
                     <td>{{fechaCastellano($contratoproyecto->inicio_contrato)}}</td>
                     <td>{{fechaCastellano($contratoproyecto->fin_contrato)}}</td>
                     <td>{{ $contratoproyecto->hora_entrada}}</td>

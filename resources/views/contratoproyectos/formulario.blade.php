@@ -13,16 +13,6 @@
     </div>
 </div>
 
-<div class="form-group{{ $errors->has('salario') ? ' has-error' : '' }}">
-    <label for="salario" class="col-md-4 control-label">Salario</label>
-
-    <div class="col-md-6">
-        {{ Form::text('salario', null,['class' => 'form-control']) }}
-    </div>
-</div>
-
-
-
 <div class="form-group{{ $errors->has('motivo_contratacion') ? ' has-error' : '' }}">
     <label for="motivo_contratacion" class="col-md-4 control-label">Motivo de contratación</label>
 

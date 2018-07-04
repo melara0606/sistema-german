@@ -1,13 +1,13 @@
 @extends('layouts.app')
 
 @section('migasdepan')
-<h1>
+      <h1>
         Registrar empleado para el proyecto
-
       </h1>
       <ol class="breadcrumb">
         <li><a href="{{ url('/contratoproyectos') }}"><i class="fa fa-dashboard"></i> Contrato</a></li>
-        <li class="active">Registro</li>      </ol>
+        <li class="active">Registro</li>
+      </ol>
 @endsection
 
 @section('content')
@@ -21,21 +21,15 @@
                         @include('errors.validacion')
                         @include('contratacionproyectos.formulario')
 
-                        <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
-                                <button type="button" id="guardar" class="btn btn-primary">
-                                    <span class="glyphicon glyphicon-floppy-disk"></span>    Guardar
-                                </button>
-                            </div>
-                        </div>
-
                         <div class="col-md-11">
                           <table class="table" >
                             <thead>
                               <tr>
                                 <th>N°</th>
                                 <th>Empleado</th>
+                                <th>Cargo</th>
                                 <th>Salario</th>
+                                <th>Acción</th>
                               </tr>
                             </thead>
                             <tbody id="cuerpo">
@@ -43,7 +37,14 @@
                             </tbody>
                           </table>
                         </div>
-                    </form>
+                        <div class="form-group">
+                            <div class="col-md-6 col-md-offset-2">
+                                <button type="button" id="guardar" class="btn btn-primary">
+                                    <span class="glyphicon glyphicon-floppy-disk"></span>    Guardar
+                                </button>
+                            </div>
+                        </div>
+                    {{Form::close()}}
                 </div>
             </div>
         </div>

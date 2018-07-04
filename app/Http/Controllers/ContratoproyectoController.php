@@ -66,7 +66,6 @@ class ContratoproyectoController extends Controller
     {
         ContratoProyecto::create([
             'proyecto_id' => $request->proyecto,
-            'salario' => $request->salario,
             'motivo_contratacion' => $request->motivo_contratacion,
             'inicio_contrato' => invertir_fecha($request->inicio_contrato),
             'fin_contrato' => invertir_fecha($request->fin_contrato),
@@ -85,7 +84,7 @@ class ContratoproyectoController extends Controller
     public function show($id)
     {
         $contratoproyecto = ContratoProyecto::findorFail($id);
-        return redirect('contratoproyectos.show',compact('contratoproyecto'));
+        return view('contratoproyectos.show',compact('contratoproyecto'));
     }
 
     /**

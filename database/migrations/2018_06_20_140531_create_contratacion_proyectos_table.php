@@ -17,6 +17,8 @@ class CreateContratacionProyectosTable extends Migration
           $table->bigIncrements('id');
           $table->bigInteger('empleado_id')->unsigned();
           $table->bigInteger('contratoproyecto_id')->unsigned();
+          $table->string('cargo');
+          $table->double('salario',8,2);
           $table->date('fecha_contratacion');
           $table->date('fecha_revision')->nullable();
           $table->foreign('empleado_id')->references('id')->on('empleados');

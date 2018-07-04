@@ -10,7 +10,7 @@ class ContratacionProyecto extends Model
 
     public function epfuncione()
     {
-      return $this->hasMany('App\EPFuncione');
+      return $this->hasMany('App\EPFuncione','contratacionproyecto_id');
     }
 
     public function empleado()
