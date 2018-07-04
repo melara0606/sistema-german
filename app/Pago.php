@@ -17,4 +17,9 @@ class Pago extends Model
     {
     	return $this->belongsTo('App\Cuentaproy', 'cuenta_id');
     }
+
+    public function contribuyente()
+    {
+    	return $this->belongsTo('App\Contribuyente');
+    }
 }

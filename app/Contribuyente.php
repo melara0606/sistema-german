@@ -40,4 +40,9 @@ class Contribuyente extends Model
     {
         return $this->hasMany('App\Construccion');
     }
+
+    public function pago()
+    {
+        return $this->hasMany('App\Pago');
+    }
 }

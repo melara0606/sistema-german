@@ -20,6 +20,7 @@ class CreateConfiguracionsTable extends Migration
             $table->string('telefono');
             $table->string('fax');
             $table->string('email');
+            $table->text('escudo');
             $table->timestamps();
         });
     }

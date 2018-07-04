@@ -1,5 +1,22 @@
+<div class="form-group{{ $errors->has('contribuyente_id') ? ' has-error' : '' }}">
+	<label for="" class="col-md-4 control-label">Contribuyente</label>
+	<div class="col-md-6">
+		<select name="contribuyente_id" id="contribuyente" class="form-control">
+			<option value="">Seleccione</option>
+			@foreach($contribuyentes as $contribuyente)
+			<option value="{{$contribuyente->id}}">{{$contribuyente->nombre}}</option>
+			@endforeach
+		</select>
+		@if ($errors->has('contribuyente_id'))
+		<span class="help-block">
+			<strong>{{ $errors->first('contribuyente_id') }}</strong>
+		</span>
+		@endif
+	</div>
+</div>
+
 <div class="form-group{{ $errors->has('tipopago_id') ? ' has-error' : '' }}">
-	<label for="" class="col-md-4 control-label">Seleccione pago</label>
+	<label for="" class="col-md-4 control-label">Tipo de pago</label>
 	<div class="col-md-6">
 		<select name="tipopago_id" id="tipopago" class="form-control">
 			<option value="">Seleccione tipo de pago</option>
@@ -15,23 +32,8 @@
 	</div>
 </div>
 
-<div class="form-group">
-    <label for="" class="col-md-4 control-label">Tipo pago</label>
-    <div class="col-md-6">
-        <select name="tipopago_id" id="tipopago" class="form-control">
-            <option value="">Seleccione un pago</option>
-            @foreach($pagos as $pago)
-            <option value="{{$pago->id}}">{{$pago->nombre}}</option>
-            @endforeach
-        </select>
-    </div>
-    <div class="col-md-2">
-        <button class="btn btn-default" type="button" data-toggle="modal" data-target="#formpago"><span class="glyphicon glyphicon-plus"></span></button>
-    </div>
-</div>
-
 <div class="form-group{{ $errors->has('cuenta_id') ? ' has-error' : '' }}">
-	<label for="" class="col-md-4 control-label">Seleccione cuenta</label>
+	<label for="" class="col-md-4 control-label">Cuenta a abonar</label>
 	<div class="col-md-6">
 		<select name="cuenta_id" id="cuenta" class="form-control">
 			<option value="">Seleccione cuenta</option>

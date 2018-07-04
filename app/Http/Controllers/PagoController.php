@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Tipopago;
 use App\Cuenta;
 use App\Cuentaproy;
+use App\Contribuyente;
 use App\Pago;
 use App\Bitacora;
 use App\Http\Requests\ContratoRequest;
@@ -22,7 +23,7 @@ class PagoController extends Controller
         $this->middleware('auth');
     }
 
-    public function index()
+    public function index(Request $request)
     {
         $pagos = Pago::all();
         return view('pagos.index', compact('pagos'));
@@ -51,10 +52,11 @@ class PagoController extends Controller
      */
     public function create()
     {
-        $tipopagos = Tipopago::all();
+        $tipopagos = Tipopago::where('estado',1);
         $cuentas = Cuentaproy::all();
-        $pagos = Pago::all();
-        return view('pagos.create',compact('tipopagos','cuentas','pagos'));
+        $contribuyentes = Contribuyente::where('estado',1);
+        $pagos = Pago::where('estado',1)->get();
+        return view('pagos.create',compact('tipopagos','cuentas','contribuyentes','pagos'));
     }
 
     /**

@@ -34,8 +34,8 @@ class CuentaController extends Controller
      */
     public function create()
     {
-        $proyectos=Proyecto::all();
-        return view('cuentas.create',compact('proyectos'));
+        /*$proyectos=Proyecto::all();
+        return view('cuentas.create',compact('proyectos'));*/
     }
 
     /**
