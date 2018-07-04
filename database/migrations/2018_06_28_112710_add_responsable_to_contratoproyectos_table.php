@@ -13,7 +13,7 @@ class AddResponsableToContratoproyectosTable extends Migration
      */
     public function up()
     {
-        Schema::table('contratoproyectos', function (Blueprint $table) {
+        Schema::table('contrato_proyectos', function (Blueprint $table) {
             $table->string('admin_contrato')->nullable();
             $table->double('monto_garantia')->nullable();
         });
@@ -26,7 +26,7 @@ class AddResponsableToContratoproyectosTable extends Migration
      */
     public function down()
     {
-        Schema::table('contratoproyectos', function (Blueprint $table) {
+        Schema::table('contrato_proyectos', function (Blueprint $table) {
             $table->dropColumn('admin_contrato');
             $table->dropColumn('monto_garantia');
         });

@@ -20,7 +20,7 @@ Route::get('/', function () {
 });
 
 Route::get('pdf',function(){
-	$usuarios = \App\Proveedor::where('estado',1)->get();
+  $usuarios = \App\Proveedor::where('estado',1)->get();
   $unidad = "Unidad de Adquicisiones Institucionales";
   $pdf = \PDF::loadView('pdf.pdf',compact('usuarios','unidad'));
   $pdf->setPaper('letter', 'portrait');
@@ -118,6 +118,18 @@ Route::get('presupuestodetalles/create/{id}','PresupuestoDetalleController@creat
 Route::get('presupuestodetalles/getcatalogo/{idp}/{idc}','PresupuestoDetalleController@getCatalogo');
 Route::Resource('presupuestodetalles','PresupuestoDetalleController');
 
+Route::get('catalogos/create','CatalogoController@create');
+route::post('catalogos/guardar','CatalogoController@guardar');
+Route::Resource('catalogos','CatalogoController');
+Route::post('catalogos/baja/{id}','CatalogoController@baja')->name('catalogos.baja');
+Route::post('catalogos/alta/{id}','CatalogoController@alta')->name('catalogos.alta');
+
+Route::get('categorias/create','CategoriaController@create');
+route::post('categorias/guardar','CatalogoController@guardar');
+Route::Resource('categorias','CategoriaController');
+Route::post('categorias/baja/{id}','CategoriaController@baja')->name('categorias.baja');
+Route::post('categorias/alta/{id}','CategoriaController@alta')->name('categorias.alta');
+
 Route::Resource('unidadmedidas','UnidadMedidaController');
 
 Route::get('cotizaciones/ver/cuadros','CotizacionController@cuadros');
@@ -198,6 +210,25 @@ Route::Resource('tipopagos','TipopagoController');
 Route::Resource('pagos','PagoController');
 
 Route::Resource('tipopagos', 'TipopagoController');
+
+
+
+//Rutas de Reportes UACI
+Route::get('reportesuaci/proyectos','ReportesUaciController@proyectos');
+
+Route::get('reportesuaci/proveedores','ReportesUaciController@proveedor');
+
+Route::get('reportesuaci/solicitud/{id}','ReportesUaciController@solicitud');
+
+Route::get('reportesuaci/ordencompra/{id}','ReportesUaciController@ordencompra');
+
+Route::get('reportesuaci/cuadrocomparativo/{id}','ReportesUaciController@cuadrocomparativo');
+
+Route::get('reportesuaci/contratoproyecto/{id}','ReportesUaciController@contratoproyecto');
+
+//Reportes Tesoreria
+Route::get('reportestesoreria/pagos/{id}','ReportesTesoreriaController@pagos');
+
 
 
 

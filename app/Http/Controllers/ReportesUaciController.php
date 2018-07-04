@@ -58,19 +58,10 @@ class ReportesUaciController extends Controller
     	return $pdf->stream('cuadrocomparativo.pdf');
     }
 
-    public function contratoproyecto()
+    public function contratoproyecto($id)
     {
-        $contratoproyecto = \App\Contrato::where('estado',1)->get();
+        $contratoproyecto = \App\Contratoproyecto::findorFail($id);
         $tipo = "REPORTE CONTRATOS DE PROYECTOS";
-        $pdf = \PDF::loadView('pdf.uaci.contratoproyecto',compact('contratoproyecto','tipo'));
-        $pdf->setPaper('letter','portrait');
-        return $pdf->stream('contratoproyecto.pdf');
-    }
-
-    public function contratoproveedor()
-    {
-        $contratoproveedor = \App\Contratoproycto::where('estado',1)->get();
-        $tipo = "CONTRATO DE PROVEEDOR";
         $pdf = \PDF::loadView('pdf.uaci.contratoproyecto',compact('contratoproyecto','tipo'));
         $pdf->setPaper('letter','portrait');
         return $pdf->stream('contratoproyecto.pdf');
