@@ -9,6 +9,7 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+
 Route::get('/', function () {
     $users=\App\User::all()->count();
         if($users==0){
@@ -29,6 +30,7 @@ Route::get('pdf',function(){
   return $pdf->stream('reporte.pdf');
 });
 
+///////////  RUTAS DE RESPALDO Y RESTAURAR BASE DE DATOS
 Route::get('backups','BackupController@index');
 Route::get('backups/create','BackupController@create')->name('backup.create');
 Route::get('backups/descargar/{file_name}','BackupController@descargar');
@@ -71,13 +73,16 @@ Route::get('contratos/listartipos','ContratoController@listarTipos');
 Route::get('contratos/listarcargos','ContratoController@listarCargos');
 Route::post('contratos/guardartipo','ContratoController@guardarTipo');
 Route::post('contratos/guardarcargo','ContratoController@guardarCargo');
-Route::post('contratos/guardarempleado','ContratoController@guardarEmpleado');
 Route::Resource('contratos','ContratoController');
+
+Route::get('contratacionproyectos/listadeempleados/{id}','EPContratacionController@listadeempleados');
+Route::get('contratacionproyectos/todos','EPContratacionController@todosloscontratos');
+Route::get('contratacionproyectos/create/{id}','EPContratacionController@create');
+Route::get('contratacionproyectos/vercontratado/{id}','EPContratacionController@vercontratado');
+Route::Resource('contratacionproyectos','EPContratacionController');
 
 Route::post('contratoproyectos/baja/{id}','ContratoproyectoController@baja')->name('contratoproyectos.baja');
 Route::post('contratoproyectos/alta/{id}','ContratoproyectoController@alta')->name('contratoproyectos.alta');
-Route::get('contratoproyectos/listarempleados','ContratoproyectoController@listarEmpleados');
-Route::get('contratoproyectos/listarcargos','ContratoproyectoController@listarCargos');
 Route::Resource('contratoproyectos','ContratoproyectoController');
 
 Route::post('proyectos/baja/{id}','ProyectoController@baja')->name('proyectos.baja');
@@ -102,6 +107,7 @@ Route::get('ordencompras/montos/{id}','OrdencompraController@getMonto');
 Route::get('ordencompras/realizarorden/{id}','OrdencompraController@realizarorden');
 Route::get('ordencompras/verificar/{id}','OrdencompraController@verificar');
 Route::post('ordencompras/guardar','OrdencompraController@guardar');
+Route::get('ordencompras/requisiciones/{id}','OrdencompraController@requisiciones');
 Route::Resource('ordencompras','OrdencompraController');
 
 Route::post('presupuestos/crear','PresupuestoController@crear');

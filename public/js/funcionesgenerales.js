@@ -68,7 +68,7 @@ function fecha_espaniol(fechita){
 function decodificar(data){
   //decodifica la información
   var datadecodificada = window.atob(data);
-  //convertir los datos decodificados a un formato JSON
+  //convertir los datos decodificados a formato JSON
   var datos = JSON.parse(datadecodificada);
   return datos;
 }

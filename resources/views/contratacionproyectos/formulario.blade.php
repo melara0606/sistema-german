@@ -1,7 +1,7 @@
 <div class="form-group">
   <label for="" class="col-md-4">Proyecto</label>
   <div class="col-md-6">
-    {{Form::text('',$proyecto->proyecto->nombre,['class' => 'form-control','readonly'])}}
+    {{Form::textarea('',$proyecto->proyecto->nombre,['rows'=> 2,'class' => 'form-control','readonly'])}}
     {{Form::hidden('',$proyecto->id,['id'=>'proyecto'])}}
   </div>
 </div>
@@ -112,7 +112,10 @@
 
                       <td>
                         <label for="">Funciones que desempeñará</label>
-                        <table class="table">
+                      </td>
+                      <td>
+                        <div class="table-responsive">
+                        <table class="table table-responsive">
                           <thead>
                             <tr>
                               <th>N°</th>
@@ -123,8 +126,9 @@
 
                           </tbody>
                         </table>
+                        </div>
                       </td>
-                      <td></td>
+
                     </tr>
                     <tr>
                       <th>Fecha de revision</th>
