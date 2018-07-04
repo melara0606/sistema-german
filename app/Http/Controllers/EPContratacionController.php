@@ -55,12 +55,6 @@ class EPContratacionController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function getContratos()
-    {
-      $contratos=ContratacionProyecto::all();
-      return response()->json($contratos);
-    }
-
     public function index()
     {
 

@@ -13,6 +13,7 @@
     </div>
 </div>
 
+
 <div class="form-group{{ $errors->has('motivo_contratacion') ? ' has-error' : '' }}">
     <label for="motivo_contratacion" class="col-md-4 control-label">Motivo de contratación</label>
 

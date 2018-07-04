@@ -47,9 +47,12 @@
                     <td>
                       @if($estado == 1 || $estado == "")
                         {{ Form::open(['method' => 'POST', 'id' => 'baja', 'class' => 'form-horizontal'])}}
-                          <a href="{{ url('contratoproyectos/'.$contratoproyecto->id) }}" class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-eye-open"></span></a>
-                          <a href="{{ url('contratoproyectos/'.$contratoproyecto->id.'/edit') }}" class="btn btn-warning btn-xs"><span class="glyphicon glyphicon-text-size"></span></a>
-                          <button class="btn btn-danger btn-xs" type="button" onclick={{ "baja(".$contratoproyecto->id.",'contratoproyectos')" }}><span class="glyphicon glyphicon-trash"></span></button>
+                          <div class="btn-group">
+                            <a href="{{ url('contratoproyectos/'.$contratoproyecto->id) }}" class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-eye-open"></span></a>
+                            <a href="{{ url('contratoproyectos/'.$contratoproyecto->id.'/edit') }}" class="btn btn-warning btn-xs"><span class="glyphicon glyphicon-text-size"></span></a>
+                            <a href="{{url('contratacionproyectos/create/'.$contratoproyecto->id)}}" class="btn btn-success btn-xs"><i class="glyphicon glyphicon-plus"></i></a>
+                            <button class="btn btn-danger btn-xs" type="button" onclick={{ "baja(".$contratoproyecto->id.",'contratoproyectos')" }}><span class="glyphicon glyphicon-trash"></span></button>
+                          </div>
                         {{ Form::close()}}
                       @else
                         {{ Form::open(['method' => 'POST', 'id' => 'alta', 'class' => 'form-horizontal'])}}
@@ -61,10 +64,6 @@
                   @endforeach
                 </tbody>
               </table>
-
-              <div class="pull-right">
-
-              </div>
             </div>
             <!-- /.box-body -->
           </div>
