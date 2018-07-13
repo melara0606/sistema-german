@@ -14,13 +14,13 @@ class CreateConfiguracionsTable extends Migration
     public function up()
     {
         Schema::create('configuracions', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('nom_alcalde');
-            $table->string('direccion');
-            $table->string('telefono');
-            $table->string('fax');
-            $table->string('email');
-            $table->text('escudo');
+            $table->bigIncrements('id');
+            $table->string('direccion_alcaldia')->nullable();
+            $table->string('telefono_alcaldia')->nullable();
+            $table->string('fax_alcaldia')->nullable();
+            $table->string('email_alcaldia')->nullable();
+            $table->string('nit_alcaldia')->nullable();
+            $table->text('escudo_alcaldia')->nullable();
             $table->timestamps();
         });
     }

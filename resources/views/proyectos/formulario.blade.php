@@ -36,11 +36,11 @@
 
                             <div class="col-md-3">
                                 <label for="fecha_inicio" class="control-label">Fecha de inicio</label>
-                                {!!Form::text('fecha_inicio',null,['class'=>'fecha form-control','id'=>'fecha_inicio','autofocus'])!!}
+                                {!!Form::text('fecha_inicio',null,['class'=>'fecha form-control','id'=>'fecha_inicio'])!!}
                             </div>
                             <div class="col-md-3">
                               <label for="fecha_fin" class="control-label">Fecha de finalización</label>
-                                {!!Form::text('fecha_fin',null,['class'=>'fecha form-control','id'=>'fecha_fin','autofocus'])!!}
+                                {!!Form::text('fecha_fin',null,['class'=>'fecha form-control','id'=>'fecha_fin'])!!}
                             </div>
                         </div>
 

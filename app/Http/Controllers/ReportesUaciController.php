@@ -60,9 +60,10 @@ class ReportesUaciController extends Controller
 
     public function contratoproyecto($id)
     {
+        $alcaldia=\App\Configuracion::first();
         $contratacionproyecto = \App\ContratacionProyecto::findorFail($id);
         $tipo = "CONTRATO DE EMPLEADO";
-        $pdf = \PDF::loadView('pdf.uaci.contratacionproyecto',compact('contratacionproyecto','tipo'));
+        $pdf = \PDF::loadView('pdf.uaci.contratacionproyecto',compact('contratacionproyecto','tipo','alcaldia'));
         $pdf->setPaper('letter','portrait');
         return $pdf->stream('contratacionproyecto.pdf');
     }

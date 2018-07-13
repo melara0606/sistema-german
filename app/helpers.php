@@ -42,12 +42,12 @@ function tamaniohumano($size, $precision = 2)
                 case 4:
                 return 'CERO CERO CERO CERO';
                 break;
-            
+
             default:
                 # code...
                 break;
         }
-        
+
     }
 
     function duinitultimo($numero)
@@ -92,7 +92,7 @@ function tamaniohumano($size, $precision = 2)
                 case '9':
                 return 'NUEVE';
                 break;
-            
+
             default:
                 # code...
                 break;
@@ -145,6 +145,49 @@ $meses_ES = array("Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio"
   $meses_EN = array("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December");
   $nombreMes = str_replace($meses_EN, $meses_ES, $mes);
   return $nombredia." ".$numeroDia." de ".$nombreMes." de ".$anio;
+}
+
+function periododetiempo($fechaInicio,$fechaFin)
+{
+    $fecha1 = new DateTime($fechaInicio);
+    $fecha2 = new DateTime($fechaFin);
+    $fecha = $fecha1->diff($fecha2);
+    $tiempo = "";
+
+    //años
+    if($fecha->y > 0)
+    {
+        $tiempo .= $fecha->y;
+
+        if($fecha->y == 1)
+            $tiempo .= " año, ";
+        else
+            $tiempo .= " años, ";
+    }
+
+    //meses
+    if($fecha->m > 0)
+    {
+        $tiempo .= $fecha->m;
+
+        if($fecha->m == 1)
+            $tiempo .= " mes, ";
+        else
+            $tiempo .= " meses, ";
+    }
+
+    //dias
+    if($fecha->d > 0)
+    {
+        $tiempo .= $fecha->d;
+
+        if($fecha->d == 1)
+            $tiempo .= " día, ";
+        else
+            $tiempo .= " días, ";
+    }
+
+    return $tiempo;
 }
 
 function cantprov()

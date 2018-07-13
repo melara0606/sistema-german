@@ -14,14 +14,14 @@ class AddDuiToConfiguracionsTable extends Migration
     public function up()
     {
         Schema::table('configuracions', function (Blueprint $table) {
-            $table->integer('edad_alcalde');
-            $table->string('oficio');
-            $table->string('domicilio_alcalde');
-            $table->string('dui');
-            $table->string('nit');
-            $table->string('nit_alcaldia');
-            $table->date('inicio_periodo');
-            $table->date('fin_periodo');
+            $table->string('nombre_alcalde')->nullable();
+            $table->date('nacimiento_alcalde')->nullable();
+            $table->string('oficio_alcalde')->nullable();
+            $table->string('domicilio_alcalde')->nullable();
+            $table->string('dui_alcalde')->nullable();
+            $table->string('nit_alcalde')->nullable();
+            $table->date('inicio_periodo')->nullable();
+            $table->date('fin_periodo')->nullable();
         });
     }
 
@@ -33,12 +33,12 @@ class AddDuiToConfiguracionsTable extends Migration
     public function down()
     {
         Schema::table('configuracions', function (Blueprint $table) {
-            $table->dropColumn('edad_alcalde');
-            $table->dropColumn('oficio');
+            $table->dropColumn('nombre_alcalde');
+            $table->dropColumn('nacimiento_alcalde');
+            $table->dropColumn('oficio_alcalde');
             $table->dropColumn('domicilio_alcalde');
-            $table->dropColumn('dui');
-            $table->dropColumn('nit');
-            $table->dropColumn('nit_alcaldia');
+            $table->dropColumn('dui_alcalde');
+            $table->dropColumn('nit_alcalde');
             $table->dropColumn('inicio_periodo');
             $table->dropColumn('fin_periodo');
         });

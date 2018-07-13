@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html><head><meta http-equiv="Content-Type">
+<html lang="{{ app()->getLocale() }}">
+<meta charset="utf-8">
+<head><meta http-equiv="Content-Type">
   <style>
 
     @page { margin: 180px 50px; }

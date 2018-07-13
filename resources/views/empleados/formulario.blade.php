@@ -3,12 +3,6 @@
 
                             <div class="col-md-6">
                                 {{ Form::text('nombre', null,['id'=>'nom_empleado','class' => 'form-control']) }}
-
-                                @if ($errors->has('nombre'))
-                                <span class="help-block">
-                                    <strong>{{ $errors->first('nombre') }}</strong>
-                                </span>
-                                @endif
                             </div>
                         </div>
 
@@ -17,12 +11,6 @@
 
                             <div class="col-md-6">
                                 {{ Form::text('dui', null,['id' => 'dui_empleado','class' => 'form-control','data-inputmask' => '"mask": "99999999-9"','data-mask']) }}
-
-                                @if ($errors->has('dui'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('dui') }}</strong>
-                                    </span>
-                                @endif
                             </div>
                         </div>
 
@@ -31,12 +19,6 @@
 
                             <div class="col-md-6">
                                 {{ Form::text('nit', null,['id'=>'nit_empleado','class' => 'form-control','data-inputmask' => '"mask": "9999-999999-999-9"','data-mask']) }}
-
-                                @if ($errors->has('nit'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('nit') }}</strong>
-                                    </span>
-                                @endif
                             </div>
                         </div>
 
@@ -48,11 +30,7 @@
                                 {{ Form::radio('sexo', 'Másculino', false,['id' => 'masculino']) }}
                                 Femenino
                                 {{ Form::radio('sexo', 'Femenino',false,['id' => 'femenino']) }}
-                                @if ($errors->has('sexo'))
-                                <span class="help-block">
-                                    <strong>{{ $errors->first('sexo') }}</strong>
-                                </span>
-                                @endif
+
                             </div>
                         </div>
 
@@ -61,11 +39,7 @@
 
                             <div class="col-md-6">
                                 {{ Form::text('telefono_fijo', null,['id' => 'fijo_empleado','class' => 'form-control','data-inputmask' => '"mask": "9999-9999"','data-mask']) }}
-                                @if ($errors->has('telefono_fijo'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('telefono_fijo') }}</strong>
-                                    </span>
-                                @endif
+
                             </div>
                         </div>
 
@@ -74,11 +48,7 @@
 
                             <div class="col-md-6">
                                 {{ Form::text('celular', null,['id'=>'cel_empleado','class' => 'form-control','data-inputmask' => '"mask": "9999-9999"','data-mask']) }}
-                                @if ($errors->has('celular'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('celular') }}</strong>
-                                    </span>
-                                @endif
+
                             </div>
                         </div>
 
@@ -88,20 +58,46 @@
                             <div class="col-md-6">
                                 {{ Form::textarea('direccion', null,['id'=> 'dir_empleado','class' => 'form-control','rows' => 3]) }}
 
-                                @if ($errors->has('direccion'))
-                                <span class="help-block">
-                                    <strong>{{ $errors->first('direccion') }}</strong>
-                                </span>
-                                @endif
                             </div>
                         </div>
-<div class="form-group{{ $errors->has('fecha_nacimiento') ? ' has-error' : '' }}">
-    <label for="fecha_nacimiento" class="col-md-4 control-label">Fecha de Nacimiento</label>
 
-    <div class="col-md-6">
-        {{ Form::text('fecha_nacimiento', null,['class' => 'nacimiento form-control', 'id' => 'fecha_nacimiento']) }}
-    </div>
-</div>
+                        <div class="form-group">
+							      		    <label class="col-md-4 control-label{{ $errors->has('departamento') ? ' has-error' : '' }}">Departamento</label>
+										        <div class="col-md-2">
+											         <select class="chosen-select-width" name="departamento" id="departamento" onChange="SelectSubCat(departamento, municipio);">
+											  	        <option value="0">Seleccione...</option>
+												          <option value="Ahuachapán">Ahuachapán</option>
+												          <option value="Cabañas">Cabañas</option>
+												          <option value="Chalatenango">Chalatenango</option>
+												          <option value="Cuscatlán">Cuscatlán</option>
+												          <option value="La Libertad">La Libertad</option>
+												          <option value="La Paz">La Paz</option>
+												          <option value="La Unión">La Unión</option>
+												          <option value="Morazán">Morazán</option>
+												          <option value="San Miguel">San Miguel</option>
+												          <option value="San Salvador">San Salvador</option>
+												          <option value="San Vicente">San Vicente</option>
+												          <option value="Santa Ana">Santa Ana</option>
+												          <option value="Sonsonate">Sonsonate</option>
+												          <option value="Usulután">Usulután</option>
+											        </select>
+										       </div>
+										       <label class="col-md-1 control-label{{ $errors->has('municipio') ? ' has-error' : '' }}">Municipio</label>
+										          <div class="col-md-3">
+											           <select class="chosen-select-width" id="municipio" name="municipio">
+											  	       <option value="">Seleccione...</option>
+											        </select>
+										    </div>
+							     </div>
+
+
+                   <div class="form-group{{ $errors->has('fecha_nacimiento') ? ' has-error' : '' }}">
+                     <label for="fecha_nacimiento" class="col-md-4 control-label">Fecha de Nacimiento</label>
+
+                     <div class="col-md-6">
+                       {{ Form::text('fecha_nacimiento', null,['class' => 'nacimiento form-control', 'id' => 'fecha_nacimiento']) }}
+                     </div>
+                   </div>
 
 
                         <div class="form-group{{ $errors->has('num_cuenta') ? ' has-error' : '' }}">
@@ -109,11 +105,7 @@
 
                             <div class="col-md-6">
                                 {{ Form::text('num_cuenta', null,['id'=>'cuenta_empleado','class' => 'form-control','data-inputmask' => '"mask": "999999999999"','data-mask']) }}
-                                @if ($errors->has('num_cuenta'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('num_cuenta') }}</strong>
-                                    </span>
-                                @endif
+
                             </div>
                         </div>
 
@@ -122,11 +114,7 @@
 
                             <div class="col-md-6">
                                 {{ Form::text('num_contribuyente', null,['id'=>'contri_empleado','class' => 'form-control','data-inputmask' => '"mask": "999-9"','data-mask']) }}
-                                @if ($errors->has('num_contribuyente'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('num_contribuyente') }}</strong>
-                                    </span>
-                                @endif
+
                             </div>
                         </div>
 
@@ -136,11 +124,6 @@
                             <div class="col-md-6">
                                 {{ Form::text('num_seguro_social', null,['id'=>'seguro_empleado','class' => 'form-control','data-inputmask' => '"mask": "999999999"','data-mask']) }}
 
-                                @if ($errors->has('num_seguro_social'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('num_seguro_social') }}</strong>
-                                    </span>
-                                @endif
                             </div>
                         </div>
 
@@ -149,10 +132,6 @@
 
                             <div class="col-md-6">
                                 {{ Form::text('num_afp', null,['id'=>'afp_empleado','class' => 'form-control','data-inputmask' => '"mask": "999999999999"','data-mask']) }}
-                                @if ($errors->has('num_afp'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('num_afp') }}</strong>
-                                    </span>
-                                @endif
+
                             </div>
                         </div>

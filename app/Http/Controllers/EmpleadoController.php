@@ -54,6 +54,7 @@ class EmpleadoController extends Controller
      */
     public function store(EmpleadoRequest $request)
     {
+      
       if($request->ajax())
       {
         try{

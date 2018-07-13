@@ -15,8 +15,8 @@ class BitacoraController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-    } 
-    
+    }
+
     public function index()
     {
         //$bitacoras = Bitacora::join('users','bitacoras.idusuario','=','users.id')->paginate(10);
@@ -29,10 +29,32 @@ class BitacoraController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function general()
+    public function general(Request $request)
     {
-        $bitacoras = Bitacora::all();
-        return view('bitacoras.general', compact('bitacoras'));
+        if($request->get('dia'))
+        {
+          $dia=invertir_fecha($request->get('dia'));
+          $bitacoras = Bitacora::where('registro',$dia)->get();
+          //dd($bitacoras);
+        }else{
+          if($request->get('usuario')){
+            $usuario=$request->get('usuario');
+            $bitacoras = Bitacora::where('user_id',$usuario)->get();
+            //dd($bitacoras);
+          }else{
+            if($request->get('inicio') && $request->get('fin')){
+              $inicio=invertir_fecha($request->get('inicio'));
+              $fin=invertir_fecha($request->get('fin'));
+              $bitacoras = Bitacora::where('registro','>=',$inicio)->where('registro','<=',$fin)->get();
+            }else{
+              $bitacoras = Bitacora::all();
+            }
+          }
+        }
+        //$dia=invertir_fecha($request->get('dia'));
+        $usuarios = \App\User::where('estado',1)->get();
+        $ultimo=Bitacora::orderBy('id', 'asc')->first();
+        return view('bitacoras.general', compact('bitacoras','usuarios','ultimo'));
     }
 
     /**

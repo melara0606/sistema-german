@@ -16,7 +16,7 @@
             <div class="panel panel-primary">
                 <div class="panel-heading">Registro de empleados</div>
                 <div class="panel-body">
-                    {{ Form::open(['action'=> 'EmpleadoController@store', 'class' => 'form-horizontal']) }}
+                    {{ Form::open(['action'=> 'EmpleadoController@store', 'class' => 'form-horizontal','id'=>'empleado']) }}
                     @include('errors.validacion')
                     @include('empleados.formulario')
 
