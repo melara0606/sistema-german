@@ -14,6 +14,7 @@
 
   {!! Html::script('js/sisverapaz.js') !!}
   {!! Html::script('js/funcionesgenerales.js') !!}
+  {!! Html::script('js/municipios.js') !!}
 
   <script>
     function carpeta()
@@ -506,6 +507,15 @@
                                 })
                             })
                         }
+
+                        $("#form-configuracion").steps({
+                          headerTag: "h3",
+                          bodyTag: "section",
+                          transitionEffect: "slideLeft",
+                          stepsOrientation: "vertical",
+                          enableAllSteps: true,
+                          enablePagination: false
+                        });
   </script>
 
 @yield('scripts')

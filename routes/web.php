@@ -37,6 +37,13 @@ Route::get('backups/descargar/{file_name}','BackupController@descargar');
 Route::get('backups/eliminar/{file_name}', 'BackupController@eliminar');
 Route::get('backups/restaurar/{file_name}', 'BackupController@restaurar');
 
+//CONFIGURACIONES DE LA ALCALDIA
+Route::get('configuraciones','ConfiguracionController@create');
+Route::post('configuraciones/alcaldia','ConfiguracionController@alcaldia')->name('configuraciones.alcaldia');
+Route::put('configuraciones/ualcaldia/{configuracione}','ConfiguracionController@ualcaldia')->name('configuraciones.ualcaldia');
+Route::post('configuraciones/alcalde','ConfiguracionController@alcalde')->name('configuraciones.alcalde');
+Route::put('configuraciones/ualcalde/{configuracione}','ConfiguracionController@ualcalde')->name('configuraciones.ualcalde');
+Route::post('configuraciones/logo','ConfiguracionController@logo')->name('configuraciones.logo');
 Auth::routes();
 
 Route::post('authenticate','Auth\loginController@authenticate')->name('authenticate');

@@ -44,17 +44,17 @@
                     <td>{{ $contratacion->salario }}</td>
 
                     <td>
-                      
+
                         {{ Form::open(['method' => 'POST', 'id' => 'baja', 'class' => 'form-horizontal'])}}
                           <div class="btn-group">
                             <a href="{{ url('contratacion/'.$contratacion->id) }}" class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-eye-open"></span></a>
                             <a href="{{ url('contratacion/'.$contratacion->id.'/edit') }}" class="btn btn-warning btn-xs"><span class="glyphicon glyphicon-text-size"></span></a>
-                            
-                            <a class="btn btn-primary btn-xs" href="{{ url('reportesuaci/contratoproyecto/'.$contratacion->id) }}"><i class="fa fa-file-pdf-o"></i></a>
+
+                            <a class="btn btn-primary btn-xs" target="_blank" href="{{ url('reportesuaci/contratoproyecto/'.$contratacion->id) }}"><i class="fa fa-file-pdf-o"></i></a>
                             <button class="btn btn-danger btn-xs" type="button" onclick={{ "baja(".$contratacion->id.",'contratacion')" }}><span class="glyphicon glyphicon-trash"></span></button>
                           </div>
                         {{ Form::close()}}
-                      
+
                     </td>
                   </tr>
                   @endforeach

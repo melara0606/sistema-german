@@ -25,13 +25,15 @@ class EmpleadoRequest extends FormRequest
     {
         return [
             'nombre'=>'required|min:3|max:150',
-            'dui'=>'required|unique:empleados',
-            'nit'=>'required|unique:empleados',
+            'dui'=>'required|unique:empleados|min:10',
+            'nit'=>'required|unique:empleados|min:17',
             'direccion'=>'required|max:255',
+            'departamento' => 'required',
+            'municipio' => 'required',
             'fecha_nacimiento' => 'required|date',
             'sexo'=>'required',
             'num_cuenta'=>'unique:empleados',
-            'celular' => 'required',
+            'celular' => 'required|min:9',
             'num_contribuyente' => 'unique:empleados',
             'num_seguro_social' => 'unique:empleados',
             'num_afp' => 'unique:empleados',

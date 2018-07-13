@@ -20,12 +20,6 @@ class Bitacora extends Model
         $bitacora->save();
     }
 
-   public static function vernombre($id)
-    {
-    	$nombre = User::find($id);
-    	return $nombre->name;
-    }
-
     public function user()
     {
         return $this->belongsTo('App\User');

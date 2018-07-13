@@ -2,12 +2,12 @@
 
 @section('migasdepan')
 <h1>
-        Dashboard
-        <small>Control panel administrador</small>
+        Panel de inicio
+        <small>Administrador</small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="{{ url('/home') }}"><i class="glyphicon glyphicon-home"></i> Inicio</a></li>
-        <li class="active">Dashboard</li>
+        <li class="active">Panel de inicio</li>
       </ol>
 @endsection
 @section('content')
@@ -26,7 +26,7 @@
             <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
-        
+
         <!-- ./col -->
         <div class="col-lg-3 col-xs-6">
           <!-- small box -->

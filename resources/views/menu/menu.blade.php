@@ -9,7 +9,7 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li class="active"><a href="{{ url('/bitacoras') }}"><i class="fa fa-circle-o"></i> Ver Bitácora</a></li>
+            <li class="active"><a href="{{ url('/bitacoras/general') }}"><i class="fa fa-circle-o"></i> Ver Bitácora</a></li>
           </ul>
         </li>
         <li class="treeview">
@@ -33,6 +33,17 @@
           </a>
           <ul class="treeview-menu">
             <li class="activo"><a href="{{ url('/backups') }}"><i class="fa fa-circle-o"></i> Ver Respaldos</a></li>
+          </ul>
+        </li>
+        <li class="treeview">
+          <a href="#">
+            <i class="glyphicon glyphicon-cog"></i><span>Configuraciones</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li class="activo"><a href="{{ url('configuraciones') }}"><i class="fa fa-circle-o"></i> Ver Respaldos</a></li>
           </ul>
         </li>
         @endif
