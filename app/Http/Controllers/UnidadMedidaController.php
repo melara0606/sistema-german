@@ -15,7 +15,8 @@ class UnidadMedidaController extends Controller
      */
     public function index()
     {
-        //
+        $unidadmedidas = UnidadMedida::all();
+        return view('unidadmedidas.index',compact('unidadmedidas'));
     }
 
     /**
@@ -25,7 +26,8 @@ class UnidadMedidaController extends Controller
      */
     public function create()
     {
-        //
+        $unidadmedidas = UnidadMedida::all();
+        return view('unidadmedidas.create',compact('unidadmedidas'));
     }
 
     /**
@@ -39,11 +41,14 @@ class UnidadMedidaController extends Controller
         if($request->ajax()){
           UnidadMedida::create($request->All());
           return response()->json([
-            'mensaje' => 'exito'
+            'mensaje' => 'éxito'
           ]);
         }else{
 
         }
+
+        UnidadMedida::create($request->All());
+        return redirect('unidadmedidas')->with('mensaje','Unidad medidas creado');
     }
 
     /**

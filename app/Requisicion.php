@@ -17,4 +17,9 @@ class Requisicion extends Model
     {
       return $this->belongsTo('App\Unidad');
     }
+
+    public function contratosuministro()
+    {
+        return $this->hasMany('App\Contratosuministro');
+    }
 }

@@ -9,7 +9,7 @@
   <label for="" class="col-md-4 control-label">Unidad de medida</label>
   <div class="col-md-6">
     <select name="unidad_medida" id="unidad_medida" class="chosen-select-width">
-      <option value="">Seleccione una unidad administrativa</option>
+      <option value="">Seleccione</option>
       @foreach($medidas as $medida)
         <option>{{$medida->nombre_medida}}</option>
       @endforeach

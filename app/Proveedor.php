@@ -25,4 +25,9 @@ class Proveedor extends Model
     {
         return $this->hasMany('App\Cotizacion');
     }
+
+    public function contratosuministro()
+    {
+        return $this->hasMany('App\Contratosuministro');
+    }
 }

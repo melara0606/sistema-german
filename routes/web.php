@@ -85,6 +85,10 @@ Route::post('contratoproyectos/baja/{id}','ContratoproyectoController@baja')->na
 Route::post('contratoproyectos/alta/{id}','ContratoproyectoController@alta')->name('contratoproyectos.alta');
 Route::Resource('contratoproyectos','ContratoproyectoController');
 
+Route::post('contratosuministros/baja{id}','ContratoSuministroController@baja')->name('contratosuministros.baja');
+Route::post('contratosuministros/alta/{id}','ContratoSuministroController@alta')->name('contratosuministros.alta');
+Route::Resource('contratosuministros','ContratoSuministroController');
+
 Route::post('proyectos/baja/{id}','ProyectoController@baja')->name('proyectos.baja');
 Route::post('proyectos/alta/{id}','ProyectoController@alta')->name('proyectos.alta');
 Route::get('proyectos/listarorganizaciones','ProyectoController@listarOrganizaciones');
@@ -136,7 +140,11 @@ Route::Resource('categorias','CategoriaController');
 Route::post('categorias/baja/{id}','CategoriaController@baja')->name('categorias.baja');
 Route::post('categorias/alta/{id}','CategoriaController@alta')->name('categorias.alta');
 
+Route::get('unidadmedidas/create','UnidadMedidaController@create');
+route::post('unidadmedidas/guardar','UnidadMedidaController@guardar');
 Route::Resource('unidadmedidas','UnidadMedidaController');
+//Route::Resource('unidadmedidas/baja/{id}','UnidadMedidaController@baja')->name('unidadmedidas.baja');
+//Route::Resource('unidadmedidas/alta/{id}','UnidadMedidaController@alta')->name('unidadmedidas.alta');
 
 Route::get('cotizaciones/ver/cuadros','CotizacionController@cuadros');
 Route::get('cotizaciones/ver/{id}', 'CotizacionController@cotizar');

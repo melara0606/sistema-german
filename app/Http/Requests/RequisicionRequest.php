@@ -25,7 +25,7 @@ class RequisicionRequest extends FormRequest
     {
         return [
             'actividad' => 'required',
-            'unidad_admin' => 'required',
+            //'unidad_admin' => 'required',
             'fuente_financiamiento' => 'required',
             'justificacion' => 'required',
             'requisiciones' => 'required',
