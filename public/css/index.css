@@ -1,0 +1,27 @@
+@import "bootstrap.min.css";
+@import "dataTables.bootstrap.min.css";
+@import "AdminLTE.min.css";
+
+@import "skins/_all-skins.min.css";
+@import "angular-toastr.min.css";
+
+/* Para los iconos */
+@import "font-awesome.css";
+
+.modal-noventa {
+ width: 96% !important;
+ height: 90% !important;
+}
+
+.modal-dialog .modal-content {
+ height: 100% !important;
+}
+.center-maps{
+ height: 100% !important;
+}
+
+.btn-google-geolocation {
+  top: 10px;
+  right: 10px;
+  position: absolute;
+}

@@ -36,6 +36,11 @@ class Contribuyente extends Model
         return $this->hasMany('App\Inmueble');
     }
 
+    public function inmuebles()
+    {
+        return $this->hasMany('App\Inmueble');
+    }
+
     public function construccion()
     {
         return $this->hasMany('App\Construccion');

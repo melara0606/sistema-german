@@ -16,6 +16,9 @@ class CreateTiposerviciosTable extends Migration
         Schema::create('tiposervicios', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('nombre');
+            $table->float('costo', 5, 2);
+            $table->tinyInteger('estado');
+            $table->tinyInteger('isObligatorio');
             $table->timestamps();
         });
     }

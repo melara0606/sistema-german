@@ -249,19 +249,11 @@
           <!-- User Account: style can be found in dropdown.less -->
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <img src="{{ asset('avatars/'.Auth::user()->avatar) }}" class="user-image" alt="User Image">
-              <span class="hidden-xs">{{usuario(Auth()->user()->empleado_id) }} </span>
+              <span class="hidden-xs">Usuarios</span>
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->
-              <li class="user-header">
-                <img src="{{ asset('avatars/'.Auth::user()->avatar) }}" class="user-image" alt="User Image">
-
-                <p>
-                  {{ vercargo(Auth::user()->cargo) }}
-                  <small>Miembro {{Auth::user()->created_at->diffForHumans()}} </small>
-                </p>
-              </li>
+              
               <!-- Menu Body -->
               <li class="user-body">
 
@@ -298,10 +290,10 @@
       <!-- Sidebar user panel -->
       <div class="user-panel">
         <div class="pull-left image">
-          <img src="{{ asset('avatars/'.Auth::user()->avatar) }}" class="user-image" alt="User Image">
+          
         </div>
         <div class="pull-left info">
-          <p>{{ usuario(Auth()->user()->empleado_id) }} </p>
+          <p>Usuario</p>
           <a href="#"><i class="fa fa-circle text-success"></i> En línea</a>
         </div>
       </div>

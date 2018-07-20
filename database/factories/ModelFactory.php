@@ -25,8 +25,8 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
 
 $factory->define(App\Contribuyente::class,function (Faker\generator $faker){
     return [
-        'nombre' => $faker->name,
-        'dui' => random_int(0,99999999).'-'.random_int(0,1),
+        'nombre' => $faker->name('male').' '.$faker->lastName,
+        'dui' => '00'.random_int(0,999999).'-'.random_int(0,9),
         'nit' => random_int(0,9999).'-'.random_int(0,999999).'-'.random_int(0,999).'-'.random_int(0,1),
         'nacimiento' => $faker->date($format = 'Y-m-d', $max = '2000-01-01'),
         'direccion' => $faker->address,
