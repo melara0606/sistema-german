@@ -3,4 +3,8 @@ var app6 = new Vue({
   data: {
     message: ''
   }
-})
+});
+
+Vue.component('cargos-list',{
+
+});

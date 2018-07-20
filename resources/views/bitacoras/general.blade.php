@@ -22,29 +22,29 @@
                   <label for="" class="cmbusuario control-label col-md-3">Empleado</label>
                   <label for="" class="txtdia control-label col-md-4">Fecha</label>
                   <div class="col-md-5">
-                    <select class="cmbusuario form-control"  name="usuario">
+                    <select class="cmbusuario form-control" id="cmbusuario"  name="usuario">
                       <option value="">Seleccione un usuario</option>
                       @foreach($usuarios as $usuario)
                         <option value="{{$usuario->id}}">{{$usuario->empleado->nombre}}</option>
                       @endforeach
                     </select>
-                    <input type="text" name="dia" class="txtdia form-control">
+                    <input type="text" id="txtdia" name="dia" class="txtdia form-control">
                   </div>
 
 
                   <div class="col-md-3">
                       <label for="fecha_inicio" class="txtinicio control-label">Fecha de inicio</label>
-                      {!!Form::text('inicio',null,['class'=>'txtinicio form-control'])!!}
+                      {!!Form::text('inicio',null,['class'=>'txtinicio form-control','id'=>'txtinicio'])!!}
                   </div>
                   <div class="col-md-3">
                     <label for="fecha_fin" class="txtfin control-label">Fecha de finalización</label>
-                      {!!Form::text('fin',null,['class'=>'txtfin form-control'])!!}
+                      {!!Form::text('fin',null,['class'=>'txtfin form-control','id'=>'txtfin'])!!}
                   </div>
                 </div>
 
 
               <div class="col-md-1">
-                <button class="btn btn-primary" id="consultar" type="submit">Consultar</button>
+                <button class="btn btn-primary" id="consultar" type="button">Consultar</button>
               </div>
 
               <div class="btn-group col-md-3 pull-right">
@@ -57,7 +57,7 @@
               </div>
 
               <div class="panel-body">
-                <table class="table table-hover" id="example2">
+                <table class="table table-hover" id="bitaco">
                    <thead>
                     <th>N°</th>
                     <th>Fecha de actividad</th>
@@ -66,7 +66,7 @@
                     <th>Usuario</th>
                     <th>Opción</th>
                   </thead>
-                  <tbody>
+                  <tbody id="bita">
                     @foreach($bitacoras as $key => $bitacora)
                     <tr>
                       <td>{{ $key+1 }}</td>

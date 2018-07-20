@@ -31,6 +31,32 @@ class BitacoraController extends Controller
      */
     public function general(Request $request)
     {
+      if($request->ajax())
+      {
+        if($request->get('dia'))
+        {
+          $dia=invertir_fecha($request->get('dia'));
+          $bitacoras = Bitacora::where('registro',$dia)->with('user')->get();
+          //dd($bitacoras);
+        }else{
+          if($request->get('usuario')){
+            $usuario=$request->get('usuario');
+            $bitacoras = Bitacora::where('user_id',$usuario)->with('user')->get();
+            //dd($bitacoras);
+          }else{
+            if($request->get('inicio') && $request->get('fin')){
+              $inicio=invertir_fecha($request->get('inicio'));
+              $fin=invertir_fecha($request->get('fin'));
+              $bitacoras = Bitacora::where('registro','>=',$inicio)->where('registro','<=',$fin)->with('user')->get();
+            }else{
+              $bitacoras = Bitacora::all()->with('user');
+            }
+          }
+        }
+        return response()->json([
+          "mensaje" => $bitacoras,
+        ]);
+      }else{
         if($request->get('dia'))
         {
           $dia=invertir_fecha($request->get('dia'));
@@ -55,6 +81,9 @@ class BitacoraController extends Controller
         $usuarios = \App\User::where('estado',1)->get();
         $ultimo=Bitacora::orderBy('id', 'asc')->first();
         return view('bitacoras.general', compact('bitacoras','usuarios','ultimo'));
+      }
+
+
     }
 
     /**

@@ -13,7 +13,7 @@ const { mix } = require('laravel-mix');
 
  mix.scripts([
  	'resources/assets/js/jquery.js',
-  'resources/assets/js/bootstrap.js',
+  //'resources/assets/js/bootstrap.js',
  	'resources/assets/js/jquery.mask.min.js',
  	'resources/assets/js/icheck.js',
  	'resources/assets/js/botones.dataTables.min.js',

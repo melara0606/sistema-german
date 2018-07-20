@@ -13,6 +13,7 @@
 
 
   {!! Html::script('js/sisverapaz.js') !!}
+  {!! Html::script('js/pruebasvue.js') !!}
   {!! Html::script('js/funcionesgenerales.js') !!}
   {!! Html::script('js/municipios.js') !!}
 
@@ -352,8 +353,6 @@
 </div>
 <!-- ./wrapper -->
 
-
-{!! Html::script('js/pruebasvue.js') !!}
 
   <script>
   $.datepicker.regional['es'] = {
