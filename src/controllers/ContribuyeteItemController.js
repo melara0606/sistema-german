@@ -75,11 +75,21 @@ module.exports =  ["$scope", 'people', 'Restangular', '$uibModal', 'toastr', fun
 
     $scope.onSaveEditContribuyente = () => {
       let { people } = $scope
-      Restangular.all('contribuyente').customPOST({
+      Restangular.all('contribuyentes').customPOST({
         people, 
-      }, 'update')      
+      }, 'update').then(json => {
+        if(json.response){
+          toastr.success(json.message, 'Exito')
+          $uibModalInstance.close({  response: true, data: json.data })
+        }
+      })
     } 
    }
+  })
+
+  open.result.then(response => {
+    people = Object.assign(people, response.data)
+    people.nacimiento = new Date(people.nacimiento)
   })
  }
  

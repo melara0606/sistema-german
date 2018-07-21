@@ -115,8 +115,31 @@ class ContribuyenteApiController extends Controller
     }
 
     public function onUpdateContribuyente(Request $request){
-        $parameters = $request->all();
-        return $parameters;
+      $parameters = $request->all()['people'];
+      //$parameters = $parameters['people'];
+      
+      $result = Contribuyente::find($parameters['id'])->update([
+        "nombre"      => $parameters['nombre'],
+        "dui"         => $parameters['dui'],
+        "nit"         => $parameters['nit'],
+        "telefono"    => $parameters['telefono'],
+        "nacimiento"  => $parameters['fechabaja'],
+        "direccion"   => $parameters['direccion']
+      ]);
+      
+      if($result){
+        return array(
+          "data"      => Contribuyente::find($parameters['id']),
+          "message"   => 'Hemos actualizado al contribuyente con exito',
+          "response"  => true
+        );
+      }else{
+        return array(
+          "message"   => 'Tenemos problema con el servidor por le momento. intenta mas tarde',
+          "response"  => false
+        );
+      }
+        
     }
 
     public function darBajaContribuyente(Request $request) {

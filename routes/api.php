@@ -21,7 +21,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::resource('contribuyentes', 'ContribuyenteApiController');
 Route::post('contribuyentes/updateLatLng', 'ContribuyenteApiController@onUpdateContribuyenteInmueble');
 Route::post('contribuyentes/darBajaContribuyente', 'ContribuyenteApiController@darBajaContribuyente');
-
 Route::post('contribuyentes/update', 'ContribuyenteApiController@onUpdateContribuyente');
 
 // Inmuebles
