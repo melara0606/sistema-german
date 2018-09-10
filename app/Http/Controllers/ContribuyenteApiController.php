@@ -16,7 +16,7 @@ class ContribuyenteApiController extends Controller
     public function index()
     {
         return Contribuyente::select('id', 'nombre', 'telefono', 'dui', 'nit', 'estado')
-            ->orderBy('updated_at', 'desc')
+            ->orderBy('id', 'asc')
             ->get();
     }
 
@@ -38,7 +38,29 @@ class ContribuyenteApiController extends Controller
      */
     public function store(Request $request)
     {
-        return "['Todo Correcto']";
+        $all = $request->all();
+        $contribuyente = new Contribuyente();
+
+        $contribuyente->dui = $all['object']['dui'];
+        $contribuyente->nit = $all['object']['nit'];
+        $contribuyente->sexo = $all['object']['sexo'];
+        $contribuyente->nombre = $all['object']['nombre'];
+        $contribuyente->telefono = $all['object']['telefono'];
+        $contribuyente->direccion = $all['object']['direccion'];
+        $contribuyente->nacimiento =  date("Y-m-d", strtotime($all['object']['nacimiento']));
+
+        if($contribuyente->save()){
+          return array(
+            "response"  => true,
+            "data"      => $contribuyente,
+            "message"   => 'Hemos agregado con exito al nuevo contribuyente',
+          );
+        }else{
+          return array(
+            "response"  => false,
+            "message"   => 'Tenemos problema con el servidor por le momento. intenta mas tarde'
+          );
+        }
     }
 
     /**
@@ -123,9 +145,11 @@ class ContribuyenteApiController extends Controller
         "dui"         => $parameters['dui'],
         "nit"         => $parameters['nit'],
         "telefono"    => $parameters['telefono'],
-        "nacimiento"  => $parameters['fechabaja'],
-        "direccion"   => $parameters['direccion']
+        "direccion"   => $parameters['direccion'],
+        "nacimiento"  => date("Y-m-d", strtotime($parameters['nacimiento']))
       ]);
+
+      //$contribuyente->nacimiento =  ;
       
       if($result){
         return array(

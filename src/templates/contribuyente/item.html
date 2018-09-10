@@ -22,7 +22,7 @@
           <button class="btn btn-primary" ng-click="onViewCreateEditInmueble(false, people);" tooltip-placement='bottom' uib-tooltip='Editar contribuyente'>
             <i class="fa fa-pencil"></i>
           </button>
-          <button class="btn btn-primary" tooltip-placement='left' uib-tooltip='Agregar inmueble'>
+          <button class="btn btn-primary" ng-click='onViewCreateEditInmuebleController(false, people)' tooltip-placement='left' uib-tooltip='Agregar inmueble'>
             <i class="fa fa-plus-circle"></i>
           </button>
         </div>
@@ -80,7 +80,7 @@
             </td>
             <td class="text-center">
               <div class="btn-group text-align">
-                <button class="btn btn-warning">
+                <button class="btn btn-warning" ng-click='onViewCreateEditInmuebleController(true, item, $index)'>
                   <i class="fa fa-edit"></i>
                 </button>
                 <button class="btn btn-success" ng-click="onViewTipoServicio(item.id);">

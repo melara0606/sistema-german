@@ -1,4 +1,4 @@
-module.exports =  ["$scope", '$compile', 'DTOptionsBuilder', 'DTColumnBuilder', 'Restangular', function ($scope, $compile, DTOptionsBuilder, DTColumnBuilder, Restangular) {
+module.exports =  ["$scope", '$compile', 'DTOptionsBuilder', 'DTColumnBuilder', 'Restangular', '$uibModal', 'toastr', function ($scope, $compile, DTOptionsBuilder, DTColumnBuilder, Restangular, $uibModal, toastr) {
   $scope.dtOptions = DTOptionsBuilder
    .fromSource('api/contribuyentes')
    .withOption('createdRow', createdRow)
@@ -26,18 +26,45 @@ module.exports =  ["$scope", '$compile', 'DTOptionsBuilder', 'DTColumnBuilder', 
   })
  }
 
- function actionsHtml(data, type, full, meta) {
-  return `
-   <div class='btn-group text-align'>
-    <a ui-sref="app.contribuyenteitem({ id: ${data.id} })" class='btn btn-warning'><i class="fa fa-eye"></i></a>
-   </div>
-  `;
- }
-}]
+  function actionsHtml(data, type, full, meta) {
+    return `
+     <div class='btn-group text-align'>
+      <a ui-sref="app.contribuyenteitem({ id: ${data.id} })" class='btn btn-warning'><i class="fa fa-eye"></i></a>
+     </div>
+    `;
+  }
 
-/**
-  <button class='btn btn-success'><i class="fa fa-edit"></i></button>
-  <button class='btn btn-danger' ng-click='DarBajaStudent(${data.id}, ${data.estado})'>
-    <i class="fa fa-trash-o"></i>
-  </button>
-*/
+  // para la creacion del nuevo contribuyente
+  $scope.openModalContribuyente = () => {
+    let open = $uibModal.open({
+      template: require('html-loader!../templates/contribuyente/modalCreateAddContribuyente.html'),
+      controller: function ($scope, $uibModalInstance) {
+        $scope.people = {};
+        $scope.cerrar = () => $uibModalInstance.close({ })
+
+        $scope.onSaveContribuyente = () => {
+          Restangular.all('contribuyentes').customPOST({
+            object: $scope.people
+          }).then(j => {
+            if(j.response){
+              $uibModalInstance.close({
+                obj: j.data,
+                resp: j.response
+              })
+              toastr.success(j.message, 'Exito')              
+            }else{
+              toastr.error(j.message, 'Error')
+              $uibModalInstance.close({ resp: false })
+            }
+          })
+        }
+      }
+    })
+
+    open.result.then(obj => {
+      if(obj.resp){
+        
+      }
+    })
+  }
+}]

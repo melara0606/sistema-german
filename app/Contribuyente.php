@@ -8,9 +8,16 @@ use Carbon\Carbon;
 class Contribuyente extends Model
 {
     //protected $dates = ['deleted_at'];
-    protected $dates = ['created_at','updated_at','fechabaja','nacimiento'];
+    protected $dates = ['created_at','updated_at','fechabaja'];
 	
     protected $guarded = [];
+    protected $fillable = ['nombre', 'dui', 'nit', 'nacimiento', 'direccion', 'telefono', 'sexo'];
+
+    /*public function setNacimientoAttribute($value)
+    {
+        $this->attributes['nacimiento'] = Carbon::createFromFormat('d/m/Y', $value);
+        var_dump($this->attributes['nacimiento']);
+    }*/
 
     public static function Buscar($nombre,$estado)
     {

@@ -64,34 +64,118 @@ module.exports =  ["$scope", 'people', 'Restangular', '$uibModal', 'toastr', fun
   })
  }
 
- // Modal para agregar o editar un inmueble
- $scope.onViewCreateEditInmueble = (isNew = true, people) => {
-  let open = $uibModal.open({
-   template: require('html-loader!../templates/contribuyente/modalCreateEditInmueble.html'),
-   controller: ($scope, $uibModalInstance, Restangular) => {
-    $scope.people = people
-    $scope.people.nacimiento = new Date(people.nacimiento)
-    $scope.cerrar = () => { cerrarModal($uibModalInstance) }
+ // Modal para agregar o editar un contribuyente
+  $scope.onViewCreateEditInmueble = (isNew = true, people) => {
+    let open = $uibModal.open({
+     template: require('html-loader!../templates/contribuyente/modalCreateEditInmueble.html'),
+     controller: ($scope, $uibModalInstance, Restangular) => {
+      $scope.people = people
+      $scope.people.nacimiento = new Date(people.nacimiento)
+      $scope.cerrar = () => { cerrarModal($uibModalInstance) }
 
-    $scope.onSaveEditContribuyente = () => {
-      let { people } = $scope
-      Restangular.all('contribuyentes').customPOST({
-        people, 
-      }, 'update').then(json => {
-        if(json.response){
-          toastr.success(json.message, 'Exito')
-          $uibModalInstance.close({  response: true, data: json.data })
+      $scope.onSaveEditContribuyente = () => {
+        let { people } = $scope
+        Restangular.all('contribuyentes').customPOST({
+          people, 
+        }, 'update').then(json => {
+          if(json.response){
+            toastr.success(json.message, 'Exito')
+            $uibModalInstance.close({  response: true, data: json.data })
+          }
+        })
+      } 
+     }
+    })
+
+    open.result.then(response => {
+      people = Object.assign(people, response.data)
+      people.nacimiento = new Date(people.nacimiento)
+    })
+  }
+
+  // Modal para agregar o editar un inmueble
+  $scope.onViewCreateEditInmuebleController = (isNew = true, item, $index) => {
+    let open = $uibModal.open({
+      size: 'lg',
+      template: require('html-loader!../templates/contribuyente/modalCreateEditInmuebleController.html'),
+      controller: function ($scope, $uibModalInstance, isNew, item) {        
+        $scope.inmueble ={}
+        $scope.isNew = isNew
+        $scope.position = { lat:13.644366, lng:-88.870235 }
+
+        if(isNew){
+          $scope.inmueble = item;
         }
-      })
-    } 
-   }
-  })
 
-  open.result.then(response => {
-    people = Object.assign(people, response.data)
-    people.nacimiento = new Date(people.nacimiento)
-  })
- }
+        $scope.cerrar = () => cerrarModal($uibModalInstance)
+        $scope.updateMarkerPoints = (event) => {
+          let { latLng } = event
+          $scope.position = {
+            lat: latLng.lat(), lng: latLng.lng()
+          }
+        }
+
+        $scope.onSaveEditInmuble = () => {
+          $scope.inmueble.longitude = $scope.position.lng
+          $scope.inmueble.latitude  = $scope.position.lat
+
+          if(isNew){
+            Restangular.all('inmuebles').customPUT({
+              object: $scope.inmueble,
+              contribuyente: people.id
+            }, $scope.inmueble.id).then(j => {
+              if(j.response){
+                toastr.success('Hemos realizado con exito la peticion.', 'Exito')
+                $uibModalInstance.close({
+                  obj: j.inmueble,
+                  response : j.response,
+                  update: true
+                }) 
+              }else{
+                toastr.error(j.message, 'Error')
+                $uibModalInstance.close({
+                  response: false
+                })
+              }
+            })
+          }else{
+            Restangular.all('inmuebles').customPOST({
+              object: $scope.inmueble,
+              contribuyente: people.id
+            }).then(j => {
+              if(j.response){
+                toastr.success('Hemos realizado con exito la peticion.', 'Exito')
+                $uibModalInstance.close({
+                  obj: j.inmueble,
+                  response : j.response
+                })              
+              }else{
+                toastr.error(j.message, 'Error')
+                $uibModalInstance.close({
+                  response: false
+                })
+              }
+            })            
+          }
+
+        }
+      },
+      resolve: {
+        isNew  : () => isNew,
+        item   : () => item
+      }
+    })
+
+    open.result.then(resp =>{
+      if(resp.response){
+        if(resp.update){
+          $scope.people.inmuebles[$index] = resp.obj
+        }else{
+          $scope.people.inmuebles.push(resp.obj)
+        }
+      }
+    })
+  }
  
  // Modal para presentar los tipos de servicio
  $scope.onViewTipoServicio = (id) => {

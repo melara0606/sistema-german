@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 class InmuebleController extends Controller
 {
+
     public function removeTipoServicioInmueble(Request $request)
     {
         $parameters = $request->all();
@@ -61,7 +62,7 @@ class InmuebleController extends Controller
      */
     public function create()
     {
-        //
+        
     }
 
     /**
@@ -72,7 +73,32 @@ class InmuebleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $all  = $request->all();
+        $contribuyente = \App\Contribuyente::find($all['contribuyente']);
+        
+        $inmueble    = new Inmueble();
+        $inmueble->estado = 1;
+        $inmueble->latitude            = $all['object']['latitude'];
+        $inmueble->longitude           = $all['object']['longitude'];
+        $inmueble->metros_acera        = $all['object']['metros_acera'];
+        $inmueble->medida_inmueble     = $all['object']['medida_inmueble'];
+        $inmueble->numero_escritura    = $all['object']['numero_escritura'];
+        $inmueble->numero_catastral    = $all['object']['numero_catastral'];
+        $inmueble->direccion_inmueble  = $all['object']['direccion_inmueble'];
+        $inmueble->contribuyente_id    = $all['contribuyente'];
+        $isTrueOrFalse = $contribuyente->inmuebles()->save($inmueble);
+
+        if($isTrueOrFalse) {
+          return array(
+            'response' => true,
+            "inmueble" => $inmueble
+          );
+        }else{
+          return array(
+            'response' => false,
+            'message' => 'Lo sentimos pero no puedes agregar dos veces el mismo impuesto'
+          );
+        }
     }
 
     /**
@@ -106,7 +132,25 @@ class InmuebleController extends Controller
      */
     public function update(Request $request, Inmueble $inmueble)
     {
-        //
+      $all = $request->all();
+
+      $inmueble->metros_acera = $all['object']['metros_acera'];
+      $inmueble->medida_inmueble = $all['object']['medida_inmueble'];
+      $inmueble->numero_catastral = $all['object']['numero_catastral'];
+      $inmueble->numero_escritura = $all['object']['numero_escritura'];
+      $inmueble->direccion_inmueble = $all['object']['direccion_inmueble'];
+      
+      if($inmueble->save()) {
+          return array(
+            'response' => true,
+            "inmueble" => $inmueble
+          );
+        }else{
+          return array(
+            'response' => false,
+            'message' => 'Lo sentimos pero no puedes agregar dos veces el mismo impuesto'
+          );
+        }
     }
 
     /**
